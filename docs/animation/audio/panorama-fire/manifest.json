@@ -1,0 +1,3343 @@
+{
+  "provider": "fireredtts3-local",
+  "voice": "FireRedTTS 3 · 云希参考音色",
+  "model": "FireRedTTS 3 Base",
+  "codeRepository": "https://github.com/FireRedTeam/FireRedTTS3",
+  "codeCommit": "7a1f3a7282ff184cc1c7f070556baaf5f08b5216",
+  "weights": [
+    {
+      "repo": "FireRedTeam/FireRedTTS3",
+      "revision": "dcf1bdcd1b8b25b382fa84c3e34eb82e3054a610",
+      "files": [
+        {
+          "path": "campp/campplus_voxceleb.bin",
+          "size": 29357703,
+          "lfs": {
+            "oid": "5b1a88b6f8d85826fabef804779c3372b42f3af21457fa48bd5c097c0686b2de",
+            "size": 29357703,
+            "pointerSize": 133
+          }
+        },
+        {
+          "path": "fireredtts3_base/config.json",
+          "size": 420
+        },
+        {
+          "path": "fireredtts3_base/model.safetensors",
+          "size": 8482608484,
+          "lfs": {
+            "oid": "d6ceed109a04207ef48bc669fb68248d3a44d990fcf2b9641990a6134d2ebb8a",
+            "size": 8482608484,
+            "pointerSize": 135
+          }
+        },
+        {
+          "path": "redae/config.json",
+          "size": 853
+        },
+        {
+          "path": "redae/model.safetensors",
+          "size": 3775160672,
+          "lfs": {
+            "oid": "0723e87fdaf46d377f01aa32ce56b43f43f9b249415bc8b8f81040eaa8b14abe",
+            "size": 3775160672,
+            "pointerSize": 135
+          }
+        },
+        {
+          "path": "text_tokenizer/tokenizer.json",
+          "size": 11422654,
+          "lfs": {
+            "oid": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+            "size": 11422654,
+            "pointerSize": 133
+          }
+        },
+        {
+          "path": "text_tokenizer/tokenizer_config.json",
+          "size": 9732
+        },
+        {
+          "path": "text_tokenizer/vocab.json",
+          "size": 2776833
+        }
+      ]
+    }
+  ],
+  "referenceSource": "D:\\Work\\os-learn\\docs\\animation\\audio\\panorama-yunxi\\power-off-5a4c129a87737867.mp3",
+  "referenceSourceSha256": "2f23a317e00548444a3392c148b89c8e5c01770d5de564502fdc4059bebb3d27",
+  "referenceText": "上电前：硬件处于断电状态。断电时寄存器和 RAM 失去可靠的逻辑值。",
+  "referenceSeconds": 6.7,
+  "attentionBackend": "sdpa",
+  "dtype": "bfloat16",
+  "seed": 20261018,
+  "nTimesteps": 10,
+  "inferenceCfg": 2.0,
+  "stopThreshold": 0.5,
+  "speed": 1.0,
+  "sampleRate": 24000,
+  "maxSpokenChars": 80,
+  "normalize": false,
+  "pronunciationVersion": 1,
+  "segmentationVersion": 1,
+  "renderRate": 1.0,
+  "device": "NVIDIA GeForce RTX 5070 Ti",
+  "entries": [
+    {
+      "id": "power-off",
+      "sourceText": "上电前：硬件处于断电状态。断电时寄存器和 RAM 失去可靠的逻辑值。CPU、RAM、ROM、总线和设备是同时存在的硬件。寄存器与 DRAM 在无电时没有可供 CPU 可靠读取的逻辑值；DRAM 数据随供电中断失去保持。上电后的 DRAM 内容由硬件初始化过程确定。ROM/Flash 和磁盘则能断电保存。\n本实验从 QEMU 已完成复位的状态开始：新建客户机的 RAM 通常由宿主零填充内存提供，固件映像由 QEMU 映射进物理地址空间。客户机 CPU 随后从映射的 ROM 取指。",
+      "file": "fire-power-off-07b84e0e3a1fd5e2.mp3",
+      "duration": 42.419,
+      "sha256": "07b84e0e3a1fd5e296131d68c2a7b6e44b5037a58204daed1946f9c98ad950ea",
+      "spokenText": [
+        "上电前：硬件处于断电状态。",
+        "断电时寄存器和 R A M 失去可靠的逻辑值。",
+        "C P U、R A M、R O M、总线和设备是同时存在的硬件。",
+        "寄存器与 D R A M 在无电时没有可供 C P U 可靠读取的逻辑值；。",
+        "D R A M 数据随供电中断失去保持。",
+        "上电后的 D R A M 内容由硬件初始化过程确定。",
+        "R O M/Flash 和磁盘则能断电保存。",
+        "本实验从 Q E M U 已完成复位的状态开始：新建客户机的 R A M 通常由宿主零填充内存提供，固件映像由 Q E M U 映射进物理地址空间。",
+        "客户机 C P U 随后从映射的 R O M 取指。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.85,
+        6.514,
+        11.558,
+        16.878,
+        20.224,
+        24.19,
+        27.372,
+        30.949,
+        35.036,
+        38.733
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 13,
+          "time": 0.0,
+          "duration": 2.730166666666667
+        },
+        {
+          "start": 13,
+          "end": 34,
+          "time": 2.8501666666666665,
+          "duration": 3.5435
+        },
+        {
+          "start": 34,
+          "end": 60,
+          "time": 6.5136666666666665,
+          "duration": 4.9242083333333335
+        },
+        {
+          "start": 60,
+          "end": 92,
+          "time": 11.557875,
+          "duration": 5.2005
+        },
+        {
+          "start": 92,
+          "end": 109,
+          "time": 16.878375,
+          "duration": 3.226125
+        },
+        {
+          "start": 109,
+          "end": 132,
+          "time": 20.2245,
+          "duration": 3.845083333333333
+        },
+        {
+          "start": 132,
+          "end": 153,
+          "time": 24.189583333333335,
+          "duration": 3.0624166666666666
+        },
+        {
+          "start": 153,
+          "end": 219,
+          "time": 27.372,
+          "duration": 11.241083333333334
+        },
+        {
+          "start": 219,
+          "end": 241,
+          "time": 38.73308333333333,
+          "duration": 3.58725
+        }
+      ]
+    },
+    {
+      "id": "reset-vector",
+      "sourceText": "复位：CPU 从哪里取第一条指令。复位机制在第一条指令执行前建立寄存器初值。寄存器是 CPU 内的存储电路，复位信号能把指定状态强制为初值。QEMU 用 CPU 模型的复位函数模拟这一过程；下表展示第一条客户机指令执行前的初始状态。\nCS 选择子为 0xf000，隐藏基址为 0xffff0000，IP=0xfff0，按隐藏基址加偏移得到取指地址 0xfffffff0。下表列出本次真实复位帧的初值；架构规定与 CPU 模型初始化分别注明，未采样字段保留未知。\n复位让 CPU 准备好取指，引导器、Linux 和 initramfs 随后由固件与 GRUB 装入 RAM。此刻 ROM 的指令字节已经存在；表中 RAM 窗口的 00 来自本次 QEMU 初始样本，窗口外未采样。",
+      "file": "fire-reset-vector-8b0ab1090f7c09f7.mp3",
+      "duration": 61.228,
+      "sha256": "8b0ab1090f7c09f76f2b883843d5f6e395dc597188f4f972f12661ed01c86f8d",
+      "spokenText": [
+        "复位：C P U 从哪里取第一条指令。",
+        "复位机制在第一条指令执行前建立寄存器初值。",
+        "寄存器是 C P U 内的存储电路，复位信号能把指定状态强制为初值。",
+        "Q E M U 用 C P U 模型的复位函数模拟这一过程；。",
+        "下表展示第一条客户机指令执行前的初始状态。",
+        "C S 选择子为 十六进制 F 零 零 零，隐藏基址为 十六进制 F F F F 零 零 零 零，I P等于十六进制 F F F 零，。",
+        "按隐藏基址加偏移得到取指地址 十六进制 F F F F F F F 零。",
+        "下表列出本次真实复位帧的初值；。",
+        "架构规定与 C P U 模型初始化分别注明，未采样字段保留未知。",
+        "复位让 C P U 准备好取指，引导器、Linux 和 init ram F S 随后由固件与 G R U B 装入 R A M。",
+        "此刻 R O M 的指令字节已经存在；。",
+        "表中 R A M 窗口的 00 来自本次 Q E M U 初始样本，窗口外未采样。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.077,
+        7.055,
+        12.909,
+        16.923,
+        20.728,
+        28.438,
+        36.855,
+        39.722,
+        45.155,
+        47.083,
+        52.851,
+        55.547
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 17,
+          "time": 0.0,
+          "duration": 2.957
+        },
+        {
+          "start": 17,
+          "end": 38,
+          "time": 3.077,
+          "duration": 3.8578333333333332
+        },
+        {
+          "start": 38,
+          "end": 70,
+          "time": 7.054833333333334,
+          "duration": 5.734541666666667
+        },
+        {
+          "start": 70,
+          "end": 95,
+          "time": 12.909375,
+          "duration": 3.893625
+        },
+        {
+          "start": 95,
+          "end": 117,
+          "time": 16.923,
+          "duration": 3.6846666666666668
+        },
+        {
+          "start": 117,
+          "end": 159,
+          "time": 20.727666666666668,
+          "duration": 10.120041666666667
+        },
+        {
+          "start": 159,
+          "end": 185,
+          "time": 30.967708333333334,
+          "duration": 5.767791666666667
+        },
+        {
+          "start": 185,
+          "end": 200,
+          "time": 36.8555,
+          "duration": 2.746958333333333
+        },
+        {
+          "start": 200,
+          "end": 231,
+          "time": 39.722458333333336,
+          "duration": 5.312083333333334
+        },
+        {
+          "start": 231,
+          "end": 286,
+          "time": 45.15454166666667,
+          "duration": 7.576375
+        },
+        {
+          "start": 286,
+          "end": 303,
+          "time": 52.85091666666667,
+          "duration": 2.576
+        },
+        {
+          "start": 303,
+          "end": 339,
+          "time": 55.54691666666667,
+          "duration": 5.582416666666667
+        }
+      ]
+    },
+    {
+      "id": "far-jump",
+      "sourceText": "远跳转刷新 CS 缓存。复位向量中的 FAR JMP 进入 SeaBIOS 入口。捕获的前 5 字节为 ea 5b e0 00 f0，按 16 位远跳转解释为 F000:E05B。这个跳转改变 CS 隐藏基址和指令偏移，下一次取指落到低于 1 MiB 的固件窗口。",
+      "file": "fire-far-jump-b6ea8ca5a60ab4a6.mp3",
+      "duration": 21.7749,
+      "sha256": "b6ea8ca5a60ab4a63c446e6e36279de95eeeb2d914f9babc476838aed1b6891c",
+      "spokenText": [
+        "远跳转刷新 C S 缓存。",
+        "复位向量中的 F A R J M P 进入 Sea B I O S 入口。",
+        "捕获的前 5 字节为 ea 5b e0 00 f0，按 16 位远跳转解释为 F000:E05B。",
+        "这个跳转改变 C S 隐藏基址和指令偏移，下一次取指落到低于 1 Mi B 的固件窗口。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.485,
+        6.758,
+        15.054,
+        18.207
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 12,
+          "time": 0.0,
+          "duration": 2.3645416666666668
+        },
+        {
+          "start": 12,
+          "end": 41,
+          "time": 2.484541666666667,
+          "duration": 4.153875
+        },
+        {
+          "start": 41,
+          "end": 90,
+          "time": 6.758416666666666,
+          "duration": 8.1755
+        },
+        {
+          "start": 90,
+          "end": 132,
+          "time": 15.053916666666666,
+          "duration": 6.6222916666666665
+        }
+      ]
+    },
+    {
+      "id": "bios-stack",
+      "sourceText": "固件建立工作环境。先有栈与临时数据，固件才能调用更复杂的初始化。这是 CPU 复位之后执行的固件代码。实体机器的固件还需初始化内存控制器和 DRAM；QEMU 的客户机 RAM 在机器创建时由宿主内存提供。固件设置工作栈，把初始化代码搬到 RAM，并写临时结构。SeaBIOS 也会进入 32 位模式完成部分初始化，再回到 16 位 BIOS 服务；栈、段和 CR0 的具体中间值未逐条捕获。Linux 由后续 GRUB 阶段装载。",
+      "file": "fire-bios-stack-5bb55239cfabd0cf.mp3",
+      "duration": 36.6718,
+      "sha256": "5bb55239cfabd0cf765b9bc70e6eb28b37d21515fafaa9ecfdbd349c3d72a32c",
+      "spokenText": [
+        "固件建立工作环境。",
+        "先有栈与临时数据，固件才能调用更复杂的初始化。",
+        "这是 C P U 复位之后执行的固件代码。",
+        "实体机器的固件还需初始化内存控制器和 D R A M；。",
+        "Q E M U 的客户机 R A M 在机器创建时由宿主内存提供。",
+        "固件设置工作栈，把初始化代码搬到 R A M，并写临时结构。",
+        "Sea B I O S 也会进入 32 位模式完成部分初始化，再回到 16 位 B I O S 服务；。",
+        "栈、段和 C R 零 的具体中间值未逐条捕获。",
+        "Linux 由后续 G R U B 阶段装载。"
+      ],
+      "cueStarts": [
+        0.0,
+        1.67,
+        5.897,
+        8.962,
+        13.431,
+        18.164,
+        23.097,
+        29.767,
+        33.718
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 9,
+          "time": 0.0,
+          "duration": 1.5504583333333333
+        },
+        {
+          "start": 9,
+          "end": 32,
+          "time": 1.6704583333333334,
+          "duration": 4.106875
+        },
+        {
+          "start": 32,
+          "end": 51,
+          "time": 5.897333333333333,
+          "duration": 2.944916666666667
+        },
+        {
+          "start": 51,
+          "end": 75,
+          "time": 8.96225,
+          "duration": 4.349208333333333
+        },
+        {
+          "start": 75,
+          "end": 103,
+          "time": 13.431458333333333,
+          "duration": 4.612375
+        },
+        {
+          "start": 103,
+          "end": 131,
+          "time": 18.163833333333333,
+          "duration": 4.8129583333333334
+        },
+        {
+          "start": 131,
+          "end": 175,
+          "time": 23.096791666666668,
+          "duration": 6.5499583333333335
+        },
+        {
+          "start": 175,
+          "end": 196,
+          "time": 29.76675,
+          "duration": 3.8317083333333333
+        },
+        {
+          "start": 196,
+          "end": 216,
+          "time": 33.71845833333333,
+          "duration": 2.8547083333333334
+        }
+      ]
+    },
+    {
+      "id": "bios-tables",
+      "sourceText": "建立 IVT 与 BIOS 数据区。低地址 0x0000 与 0x0400 开始获得具体用途。IVT 的每个入口保存实模式中断服务的段:偏移；BDA 记录固件使用的设备参数。后来的 64 位 IDT 使用门描述符。内存总览持续标注这些区域的用途。",
+      "file": "fire-bios-tables-6649c1cd3919dcf1.mp3",
+      "duration": 22.0627,
+      "sha256": "6649c1cd3919dcf1d00f573e05f4710d87f71a6eb6882dd4ad45bbb3ce790903",
+      "spokenText": [
+        "建立 I V T 与 B I O S 数据区。",
+        "低地址 十六进制 零 零 零 零 与 十六进制 零 四 零 零 开始获得具体用途。",
+        "I V T 的每个入口保存实模式中断服务的段:偏移；。",
+        "B D A 记录固件使用的设备参数。",
+        "后来的 64 位 I D T 使用门描述符。",
+        "内存总览持续标注这些区域的用途。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.114,
+        8.784,
+        13.227,
+        15.988,
+        19.206
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 18,
+          "time": 0.0,
+          "duration": 2.993916666666667
+        },
+        {
+          "start": 18,
+          "end": 47,
+          "time": 3.113916666666667,
+          "duration": 5.55025
+        },
+        {
+          "start": 47,
+          "end": 71,
+          "time": 8.784166666666666,
+          "duration": 4.32325
+        },
+        {
+          "start": 71,
+          "end": 87,
+          "time": 13.227416666666667,
+          "duration": 2.640791666666667
+        },
+        {
+          "start": 87,
+          "end": 107,
+          "time": 15.988208333333333,
+          "duration": 3.0980416666666666
+        },
+        {
+          "start": 107,
+          "end": 123,
+          "time": 19.20625,
+          "duration": 2.757791666666667
+        }
+      ]
+    },
+    {
+      "id": "bios-devices",
+      "sourceText": "固件探测设备并运行 VGA ROM。CPU 在执行固件代码，设备经总线被初始化。maininit 顺序建立接口、平台与设备，运行 VGA option ROM，启用控制台并准备启动顺序。此刻显示的是固件输出；后续 GRUB 装载 Linux，早期用户空间再挂载根文件系统。",
+      "file": "fire-bios-devices-07f53da9290aa3a0.mp3",
+      "duration": 22.5008,
+      "sha256": "07f53da9290aa3a014f098980b51b71279fd04b378c4391fdf8b85c1e4e3afdc",
+      "spokenText": [
+        "固件探测设备并运行 V G A R O M。",
+        "C P U 在执行固件代码，设备经总线被初始化。",
+        "maininit 顺序建立接口、平台与设备，运行 V G A option R O M，启用控制台并准备启动顺序。",
+        "此刻显示的是固件输出；。",
+        "后续 G R U B 装载 Linux，早期用户空间再挂载根文件系统。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.181,
+        7.348,
+        10.561,
+        15.208,
+        17.34
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 18,
+          "time": 0.0,
+          "duration": 3.0607083333333334
+        },
+        {
+          "start": 18,
+          "end": 40,
+          "time": 3.1807083333333335,
+          "duration": 4.046833333333334
+        },
+        {
+          "start": 40,
+          "end": 93,
+          "time": 7.347541666666666,
+          "duration": 7.740708333333333
+        },
+        {
+          "start": 93,
+          "end": 104,
+          "time": 15.20825,
+          "duration": 2.01125
+        },
+        {
+          "start": 104,
+          "end": 136,
+          "time": 17.3395,
+          "duration": 5.062583333333333
+        }
+      ]
+    },
+    {
+      "id": "boot-image",
+      "sourceText": "把引导镜像送到 0x7c00。本实验从光盘 ISO 启动；这是实际的第一段引导代码停点。SeaBIOS 的 boot_cdrom 读取 El Torito 启动镜像并调用其入口。真实帧在 0x7c00 停住，IF=1、CR0.PE=0；读取来源是 boot.iso，/dev/vda 留作后续 ext2 根盘。",
+      "file": "fire-boot-image-990f2221ff140ded.mp3",
+      "duration": 25.7805,
+      "sha256": "990f2221ff140ded80728c833b8acc8571a04bcecb0de8e8e1b92872432a0cfc",
+      "spokenText": [
+        "把引导镜像送到 十六进制 七 C 零 零。",
+        "本实验从光盘 I S O 启动；。",
+        "这是实际的第一段引导代码停点。",
+        "Sea B I O S 的 boot cdrom 读取 El Torito 启动镜像并调用其入口。",
+        "真实帧在 十六进制 七 C 零 零 停住，I F等于1、C R 零 的 P E 标志等于0；。",
+        "读取来源是 boot.iso，/dev/vda 留作后续 ext2 根盘。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.098,
+        5.583,
+        8.055,
+        13.579,
+        20.078
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 15,
+          "time": 0.0,
+          "duration": 2.9776666666666665
+        },
+        {
+          "start": 15,
+          "end": 29,
+          "time": 3.0976666666666666,
+          "duration": 2.3658333333333332
+        },
+        {
+          "start": 29,
+          "end": 44,
+          "time": 5.5835,
+          "duration": 2.3514166666666667
+        },
+        {
+          "start": 44,
+          "end": 89,
+          "time": 8.054916666666667,
+          "duration": 5.404333333333334
+        },
+        {
+          "start": 89,
+          "end": 118,
+          "time": 13.57925,
+          "duration": 6.379125
+        },
+        {
+          "start": 118,
+          "end": 155,
+          "time": 20.078375,
+          "duration": 5.6035
+        }
+      ]
+    },
+    {
+      "id": "grub-core",
+      "sourceText": "引导代码继续装入 GRUB。分阶段加载的目的是突破最初引导窗口的大小限制。GRUB 在 RAM 中执行、通过固件与设备访问 ISO 文件。它会使用保护模式完成工作。此阶段的 GRUB 核心寄存器值未独立采样，数值栏按来源保留最近停点。",
+      "file": "fire-grub-core-0b04137fd5d4f037.mp3",
+      "duration": 20.3923,
+      "sha256": "0b04137fd5d4f0379c6553cf89e4af83dbd4a63c775e3f463820285312005e92",
+      "spokenText": [
+        "引导代码继续装入 G R U B。",
+        "分阶段加载的目的是突破最初引导窗口的大小限制。",
+        "G R U B 在 R A M 中执行、通过固件与设备访问 I S O 文件。",
+        "它会使用保护模式完成工作。",
+        "此阶段的 G R U B 核心寄存器值未独立采样，数值栏按来源保留最近停点。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.515,
+        6.714,
+        11.711,
+        13.985
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 14,
+          "time": 0.0,
+          "duration": 2.395
+        },
+        {
+          "start": 14,
+          "end": 37,
+          "time": 2.515,
+          "duration": 4.079458333333333
+        },
+        {
+          "start": 37,
+          "end": 69,
+          "time": 6.714458333333333,
+          "duration": 4.877041666666667
+        },
+        {
+          "start": 69,
+          "end": 82,
+          "time": 11.7115,
+          "duration": 2.1534166666666668
+        },
+        {
+          "start": 82,
+          "end": 117,
+          "time": 13.984916666666667,
+          "duration": 6.308666666666666
+        }
+      ]
+    },
+    {
+      "id": "grub-kernel",
+      "sourceText": "linux16 装载 bzImage。磁盘中的内核文件被读入物理内存。grub.cfg 使用 linux16。bzImage 同时包含启动协议头、低位 setup 和高位压缩内核。传给内核的命令行关闭随机布局，启用 VGA 与串口控制台。",
+      "file": "fire-grub-kernel-0a9b1428a103545f.mp3",
+      "duration": 18.9324,
+      "sha256": "0a9b1428a103545fdc4d8db445ca402c90c39b8210b61d242221565a2009ace7",
+      "spokenText": [
+        "linux16 装载 B Z image。",
+        "磁盘中的内核文件被读入物理内存。",
+        "grub.cfg 使用 linux16。",
+        "B Z image 同时包含启动协议头、低位 setup 和高位压缩内核。",
+        "传给内核的命令行关闭随机布局，启用 V G A 与串口控制台。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.664,
+        5.638,
+        8.514,
+        13.563
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 19,
+          "time": 0.0,
+          "duration": 2.5436666666666667
+        },
+        {
+          "start": 19,
+          "end": 35,
+          "time": 2.663666666666667,
+          "duration": 2.854
+        },
+        {
+          "start": 35,
+          "end": 55,
+          "time": 5.637666666666667,
+          "duration": 2.756291666666667
+        },
+        {
+          "start": 55,
+          "end": 90,
+          "time": 8.513958333333333,
+          "duration": 4.9286666666666665
+        },
+        {
+          "start": 90,
+          "end": 119,
+          "time": 13.562625,
+          "duration": 5.271083333333333
+        }
+      ]
+    },
+    {
+      "id": "grub-initrd",
+      "sourceText": "initrd16 装载早期用户空间。initramfs 以压缩归档形式保存在 RAM 中。GRUB 将 initramfs.cpio.gz 放到可用 RAM，并在引导参数中记录起点和长度。归档里有 /init、BusyBox、挂载点等。装载文件与内核解包归档是两个不同动作。",
+      "file": "fire-grub-initrd-d6104cd9e52ff0dc.mp3",
+      "duration": 21.79,
+      "sha256": "d6104cd9e52ff0dcacac18443d203dc640f16d7679666ac94c7b92cfd9c98cec",
+      "spokenText": [
+        "initrd16 装载早期用户空间。",
+        "init ram F S 以压缩归档形式保存在 R A M 中。",
+        "G R U B 将 init ram F S.cpio.gz 放到可用 R A M，并在引导参数中记录起点和长度。",
+        "归档里有 /init、Busy Box、挂载点等。",
+        "装载文件与内核解包归档是两个不同动作。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.961,
+        7.162,
+        12.648,
+        15.188,
+        18.325
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 18,
+          "time": 0.0,
+          "duration": 2.8405833333333335
+        },
+        {
+          "start": 18,
+          "end": 45,
+          "time": 2.960583333333333,
+          "duration": 4.081666666666667
+        },
+        {
+          "start": 45,
+          "end": 94,
+          "time": 7.16225,
+          "duration": 7.905708333333333
+        },
+        {
+          "start": 94,
+          "end": 118,
+          "time": 15.187958333333333,
+          "duration": 3.0170416666666666
+        },
+        {
+          "start": 118,
+          "end": 137,
+          "time": 18.325,
+          "duration": 3.366375
+        }
+      ]
+    },
+    {
+      "id": "boot-params",
+      "sourceText": "交接清单：boot_params。内存地图、命令行和 initrd 位置必须一起交给内核。boot_params 是 4096 字节引导参数结构。引导器按 Linux 启动协议准备 CPU 模式、段、栈和交接数据，再跳到入口。源码中 setup 还会补充 BIOS 查询结果。",
+      "file": "fire-boot-params-8fa5ab37306acfd8.mp3",
+      "duration": 20.567,
+      "sha256": "8fa5ab37306acfd80f2625dba23e8f60e81146352195b41116ccb771c783a33e",
+      "spokenText": [
+        "交接清单：boot params。",
+        "内存地图、命令行和 init R D 位置必须一起交给内核。",
+        "boot params 是 4096 字节引导参数结构。",
+        "引导器按 Linux 启动协议准备 C P U 模式、段、栈和交接数据，再跳到入口。",
+        "源码中 setup 还会补充 B I O S 查询结果。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.196,
+        6.75,
+        10.673,
+        17.108
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 17,
+          "time": 0.0,
+          "duration": 2.0761666666666665
+        },
+        {
+          "start": 17,
+          "end": 45,
+          "time": 2.1961666666666666,
+          "duration": 4.433375
+        },
+        {
+          "start": 45,
+          "end": 73,
+          "time": 6.7495416666666666,
+          "duration": 3.803
+        },
+        {
+          "start": 73,
+          "end": 113,
+          "time": 10.672541666666667,
+          "duration": 6.31525
+        },
+        {
+          "start": 113,
+          "end": 138,
+          "time": 17.107791666666667,
+          "duration": 3.3605
+        }
+      ]
+    },
+    {
+      "id": "setup-main",
+      "sourceText": "setup.main 收集硬件信息。最后利用 BIOS 服务获得内核需要的启动信息。main 负责复制参数、检查 CPU、检测内存并配置视频。本机实际停点位于 0x91171，CS 隐藏基址为 0x90000，CR0.PE=0；地址和指令字节已与当前构建的 setup ELF 核对。这里采到的是函数入口，后续步骤再观察初始化结果。",
+      "file": "fire-setup-main-0fb3528e8e16d1c9.mp3",
+      "duration": 29.906,
+      "sha256": "0fb3528e8e16d1c9bb2b240255e68bf99f21e7256b6486280be18a72feba4f7f",
+      "spokenText": [
+        "setup.main 收集硬件信息。",
+        "最后利用 B I O S 服务获得内核需要的启动信息。",
+        "main 负责复制参数、检查 C P U、检测内存并配置视频。",
+        "本机实际停点位于 十六进制 九 一 一 七 一，C S 隐藏基址为 十六进制 九 零 零 零 零，C R 零 的 P E 标志等于0；。",
+        "地址和指令字节已与当前构建的 setup E L F 核对。",
+        "这里采到的是函数入口，后续步骤再观察初始化结果。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.654,
+        6.333,
+        11.484,
+        21.094,
+        25.419
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 18,
+          "time": 0.0,
+          "duration": 2.533625
+        },
+        {
+          "start": 18,
+          "end": 42,
+          "time": 2.653625,
+          "duration": 3.5592083333333333
+        },
+        {
+          "start": 42,
+          "end": 71,
+          "time": 6.332833333333333,
+          "duration": 5.031541666666667
+        },
+        {
+          "start": 71,
+          "end": 114,
+          "time": 11.484375,
+          "duration": 9.48975
+        },
+        {
+          "start": 114,
+          "end": 142,
+          "time": 21.094125,
+          "duration": 4.20525
+        },
+        {
+          "start": 142,
+          "end": 166,
+          "time": 25.419375,
+          "duration": 4.38775
+        }
+      ]
+    },
+    {
+      "id": "setup-e820",
+      "sourceText": "探测 e820：哪些地址是真 RAM。e820 区分可分配 RAM 与固件、设备保留区。内存地图把可用 RAM、固件保留区、ACPI 等区间区分开。低位 VGA/ROM 窗口属于设备和固件映射。网格按源码标注物理范围与用途，实测字节另见采样窗口。",
+      "file": "fire-setup-e820-5fbd109217cc097d.mp3",
+      "duration": 22.3397,
+      "sha256": "5fbd109217cc097d936b49a760ace9f7fcbd62db702af60a640744bb4326d7d2",
+      "spokenText": [
+        "探测 e820：哪些地址是真 R A M。",
+        "e820 区分可分配 R A M 与固件、设备保留区。",
+        "内存地图把可用 R A M、固件保留区、A C P I 等区间区分开。",
+        "低位 V G A/R O M 窗口属于设备和固件映射。",
+        "网格按源码标注物理范围与用途，实测字节另见采样窗口。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.503,
+        8.211,
+        13.505,
+        17.448
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 19,
+          "time": 0.0,
+          "duration": 3.3834583333333335
+        },
+        {
+          "start": 19,
+          "end": 44,
+          "time": 3.503458333333333,
+          "duration": 4.587083333333333
+        },
+        {
+          "start": 44,
+          "end": 74,
+          "time": 8.210541666666666,
+          "duration": 5.174291666666667
+        },
+        {
+          "start": 74,
+          "end": 97,
+          "time": 13.504833333333334,
+          "duration": 3.8230833333333334
+        },
+        {
+          "start": 97,
+          "end": 123,
+          "time": 17.447916666666668,
+          "duration": 4.793083333333334
+        }
+      ]
+    },
+    {
+      "id": "setup-a20",
+      "sourceText": "关闭中断，确保 A20 可用。离开 BIOS 环境前，先屏蔽实模式中断入口。go_to_protected_mode 调用实模式切换钩子、使能 A20、复位协处理器并屏蔽 PIC。A20 使地址线第 20 位参与寻址，允许访问超过 1 MiB 的地址；保护模式由 CR0.PE 控制。",
+      "file": "fire-setup-a20-2eecbce23b6b4f74.mp3",
+      "duration": 22.4637,
+      "sha256": "2eecbce23b6b4f7426fbb9fdd5b8e5b2706f7321fa3e5da8d1fa542089bf56e0",
+      "spokenText": [
+        "关闭中断，确保 A20 可用。",
+        "离开 B I O S 环境前，先屏蔽实模式中断入口。",
+        "go to protected mode 调用实模式切换钩子、使能 A20、复位协处理器并屏蔽 P I C。",
+        "A20 使地址线第 20 位参与寻址，允许访问超过 1 Mi B 的地址；。",
+        "保护模式由 C R 零 的 P E 标志 控制。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.713,
+        6.912,
+        13.922,
+        19.26
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 15,
+          "time": 0.0,
+          "duration": 2.5932916666666666
+        },
+        {
+          "start": 15,
+          "end": 38,
+          "time": 2.7132916666666667,
+          "duration": 4.078833333333334
+        },
+        {
+          "start": 38,
+          "end": 90,
+          "time": 6.912125,
+          "duration": 6.890291666666666
+        },
+        {
+          "start": 90,
+          "end": 126,
+          "time": 13.922416666666667,
+          "duration": 5.2175
+        },
+        {
+          "start": 126,
+          "end": 142,
+          "time": 19.259916666666665,
+          "duration": 3.1050833333333334
+        }
+      ]
+    },
+    {
+      "id": "setup-gdt",
+      "sourceText": "装入 GDT，准备新的代码段。保护模式的 CS/DS 是描述符选择子。GDT 内有 32 位代码段、数据段与用于兼容性的 TSS 描述符。LGDT 装入表地址与界限；后续段装载和远跳转刷新对应段缓存。setup 还临时装入空 IDT。",
+      "file": "fire-setup-gdt-a8293959a71534a6.mp3",
+      "duration": 20.3963,
+      "sha256": "a8293959a71534a60af195cb509aeb030bef9ef30394a23ba827feca670be67c",
+      "spokenText": [
+        "装入 G D T，准备新的代码段。",
+        "保护模式的 C S/D S 是描述符选择子。",
+        "G D T 内有 32 位代码段、数据段与用于兼容性的 T S S 描述符。",
+        "L G D T 装入表地址与界限；。",
+        "后续段装载和远跳转刷新对应段缓存。",
+        "setup 还临时装入空 I D T。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.683,
+        6.098,
+        11.975,
+        14.574,
+        17.833
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 15,
+          "time": 0.0,
+          "duration": 2.562708333333333
+        },
+        {
+          "start": 15,
+          "end": 35,
+          "time": 2.6827083333333333,
+          "duration": 3.2954583333333334
+        },
+        {
+          "start": 35,
+          "end": 69,
+          "time": 6.098166666666667,
+          "duration": 5.756958333333333
+        },
+        {
+          "start": 69,
+          "end": 83,
+          "time": 11.975125,
+          "duration": 2.4785
+        },
+        {
+          "start": 83,
+          "end": 100,
+          "time": 14.573625,
+          "duration": 3.1397916666666665
+        },
+        {
+          "start": 100,
+          "end": 117,
+          "time": 17.83341666666667,
+          "duration": 2.46425
+        }
+      ]
+    },
+    {
+      "id": "set-pe",
+      "sourceText": "CR0.PE 置 1。模式切换由具体控制位和远跳转共同完成。protected_mode_jump 置 CR0.PE，再通过远跳转装入 32 位代码段，随后装载数据段与栈。此时 CR0.PG=0，线性地址直接用于物理寻址。",
+      "file": "fire-set-pe-d3880cd09f53717c.mp3",
+      "duration": 19.4783,
+      "sha256": "d3880cd09f53717ce970f3c72e0af4d233b27f9695dd514f391df3be278fa2b9",
+      "spokenText": [
+        "C R 零 的 P E 标志 置 1。",
+        "模式切换由具体控制位和远跳转共同完成。",
+        "protected mode jump 置 C R 零 的 P E 标志，再通过远跳转装入 32 位代码段，随后装载数据段与栈。",
+        "此时 C R 零 的 P G 标志等于0，线性地址直接用于物理寻址。"
+      ],
+      "cueStarts": [
+        0.0,
+        6.146,
+        10.332,
+        14.35
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 11,
+          "time": 0.0,
+          "duration": 2.1936666666666667
+        },
+        {
+          "start": 11,
+          "end": 30,
+          "time": 2.3136666666666668,
+          "duration": 3.712
+        },
+        {
+          "start": 30,
+          "end": 86,
+          "time": 6.145666666666667,
+          "duration": 8.084208333333333
+        },
+        {
+          "start": 86,
+          "end": 111,
+          "time": 14.349875,
+          "duration": 5.02975
+        }
+      ]
+    },
+    {
+      "id": "startup32",
+      "sourceText": "到达压缩内核 startup_32。真实停点：物理地址 0x100000，PE=1、PG=0。CPU 此时运行解压器，后续跳入主内核。抓到的 CS=0x10、DS/SS=0x18，CR3=0，EFER=0。ESI 传递 boot_params，栈供解压器使用。所有一般寄存器可在全景中逐个检查。",
+      "file": "fire-startup32-61067d3241c5f419.mp3",
+      "duration": 28.6936,
+      "sha256": "61067d3241c5f419418ab7a30237989afeff2698dfedfe51ddd7f92d073a00ac",
+      "spokenText": [
+        "到达压缩内核 startup 32。",
+        "真实停点：物理地址 十六进制 一 零 零 零 零 零，P E等于1、P G等于0。",
+        "C P U 此时运行解压器，后续跳入主内核。",
+        "抓到的 C S等于十六进制 一 零、D S/S S等于十六进制 一 八，C R 三等于0，E F E R等于0。",
+        "E S I 传递 boot params，栈供解压器使用。",
+        "所有一般寄存器可在全景中逐个检查。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.112,
+        9.332,
+        13.128,
+        21.75,
+        25.393
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 18,
+          "time": 0.0,
+          "duration": 1.9915833333333333
+        },
+        {
+          "start": 18,
+          "end": 47,
+          "time": 2.1115833333333334,
+          "duration": 7.1005416666666665
+        },
+        {
+          "start": 47,
+          "end": 67,
+          "time": 9.332125,
+          "duration": 3.6762083333333333
+        },
+        {
+          "start": 67,
+          "end": 103,
+          "time": 13.128333333333334,
+          "duration": 8.501291666666667
+        },
+        {
+          "start": 103,
+          "end": 130,
+          "time": 21.749625,
+          "duration": 3.5235
+        },
+        {
+          "start": 130,
+          "end": 147,
+          "time": 25.393125,
+          "duration": 3.201791666666667
+        }
+      ]
+    },
+    {
+      "id": "decompress-placement",
+      "sourceText": "计算搬移与解压的目标位置。输入压缩包、解压器与输出内核分别占用安全的工作区。代码依据内核对齐值、加载物理地址与 init_size 计算解压器搬移位置。寄存器承担地址与长度计算，具体地址由本次构建和装载结果确定。",
+      "file": "fire-decompress-placement-aad86a3b67c43e1a.mp3",
+      "duration": 18.5392,
+      "sha256": "aad86a3b67c43e1adc2d2440f3bdc5585d17340c7b04ad97347f13849bcc6676",
+      "spokenText": [
+        "计算搬移与解压的目标位置。",
+        "输入压缩包、解压器与输出内核分别占用安全的工作区。",
+        "代码依据内核对齐值、加载物理地址与 init size 计算解压器搬移位置。",
+        "寄存器承担地址与长度计算，具体地址由本次构建和装载结果确定。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.396,
+        7.034,
+        12.74
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 13,
+          "time": 0.0,
+          "duration": 2.276291666666667
+        },
+        {
+          "start": 13,
+          "end": 38,
+          "time": 2.3962916666666665,
+          "duration": 4.5175
+        },
+        {
+          "start": 38,
+          "end": 76,
+          "time": 7.033791666666667,
+          "duration": 5.58625
+        },
+        {
+          "start": 76,
+          "end": 106,
+          "time": 12.740041666666666,
+          "duration": 5.700458333333334
+        }
+      ]
+    },
+    {
+      "id": "enable-pae",
+      "sourceText": "第一步：CR4.PAE = 1。先允许长模式需要的分页结构。startup_32 从 CR4 读出原值，仅 OR 上 PAE 位再写回。此刻 CR0.PG=0，CPU 继续执行 32 位保护模式代码。",
+      "file": "fire-enable-pae-ff296ca50864aca7.mp3",
+      "duration": 17.4213,
+      "sha256": "ff296ca50864aca70a0124bc4ce75e4a5b66bfbc361311e0fc9ff846e5339b6f",
+      "spokenText": [
+        "第一步：C R 四 的 P A E 标志 等于 1。",
+        "先允许long mode需要的分页结构。",
+        "startup 32 从 C R 四 读出原值，仅 O R 上 P A E 位再写回。",
+        "此刻 C R 零 的 P G 标志等于0，C P U 继续执行 32 位保护模式代码。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.391,
+        5.981,
+        11.463
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 16,
+          "time": 0.0,
+          "duration": 3.2714583333333334
+        },
+        {
+          "start": 16,
+          "end": 30,
+          "time": 3.3914583333333335,
+          "duration": 2.4695833333333335
+        },
+        {
+          "start": 30,
+          "end": 68,
+          "time": 5.981041666666667,
+          "duration": 5.361625
+        },
+        {
+          "start": 68,
+          "end": 100,
+          "time": 11.462666666666667,
+          "duration": 5.859958333333333
+        }
+      ]
+    },
+    {
+      "id": "identity-pages",
+      "sourceText": "第二步：在 RAM 建临时页表。最初的映射让地址切换后仍能找到同一段代码。源码清空启动页表并建立覆盖早期 4 GiB 的恒等映射。本路径使用 2 MiB 大页，地址沿 PML4 → PDPT → PD 翻译，PD 大页表项直接给出物理页基址。映射覆盖范围与实际 RAM 容量分别由页表和机器配置确定。",
+      "file": "fire-identity-pages-366c294b51ede8c4.mp3",
+      "duration": 25.5142,
+      "sha256": "366c294b51ede8c44f4c431dd38c0a2519a2f51e6192882107a4524fa526e686",
+      "spokenText": [
+        "第二步：在 R A M 建临时页表。",
+        "最初的映射让地址切换后仍能找到同一段代码。",
+        "源码清空启动页表并建立覆盖早期 4 Gi B 的恒等映射。",
+        "本路径使用 2 Mi B 大页，地址沿 P M L 四 ，到 P D P T ，到 P D 翻译，P D 大页表项直接给出物理页基址。",
+        "映射覆盖范围与实际 R A M 容量分别由页表和机器配置确定。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.709,
+        6.593,
+        11.362,
+        17.589,
+        20.424
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 16,
+          "time": 0.0,
+          "duration": 2.5889166666666665
+        },
+        {
+          "start": 16,
+          "end": 37,
+          "time": 2.7089166666666666,
+          "duration": 3.7644583333333332
+        },
+        {
+          "start": 37,
+          "end": 65,
+          "time": 6.593375,
+          "duration": 4.648666666666666
+        },
+        {
+          "start": 65,
+          "end": 121,
+          "time": 11.362041666666666,
+          "duration": 8.941625
+        },
+        {
+          "start": 121,
+          "end": 150,
+          "time": 20.423666666666666,
+          "duration": 4.991833333333333
+        }
+      ]
+    },
+    {
+      "id": "load-cr3",
+      "sourceText": "第三步：CR3 指向页表根。页表放在 RAM；CR3 保存根的物理地址。写入 CR3 后，PG 仍然为 0，当前线性地址直接用于物理寻址。页表根、页表项和最终数据页面分别记录与观察。",
+      "file": "fire-load-cr3-5517ef2e331d4060.mp3",
+      "duration": 16.7821,
+      "sha256": "5517ef2e331d4060dd3ab1e9af1957836b9324d25ff148888f366b82b659502e",
+      "spokenText": [
+        "第三步：C R 三 指向页表根。",
+        "页表放在 R A M；。",
+        "C R 三 保存根的物理地址。",
+        "写入 C R 三 后，P G 仍然为 0，当前线性地址直接用于物理寻址。",
+        "页表根、页表项和最终数据页面分别记录与观察。"
+      ],
+      "cueStarts": [
+        0.0,
+        4.517,
+        6.779,
+        12.503
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 14,
+          "time": 0.0,
+          "duration": 2.7085833333333333
+        },
+        {
+          "start": 14,
+          "end": 23,
+          "time": 2.8285833333333334,
+          "duration": 1.5688333333333333
+        },
+        {
+          "start": 23,
+          "end": 36,
+          "time": 4.517416666666667,
+          "duration": 2.141583333333333
+        },
+        {
+          "start": 36,
+          "end": 69,
+          "time": 6.779,
+          "duration": 5.6040833333333335
+        },
+        {
+          "start": 69,
+          "end": 91,
+          "time": 12.503083333333333,
+          "duration": 4.180375
+        }
+      ]
+    },
+    {
+      "id": "enable-lme",
+      "sourceText": "第四步：EFER.LME = 1。设置长模式允许位，等待分页激活。ECX 选择 EFER MSR，RDMSR 读出后设置 LME，再 WRMSR 写回。此刻 LME=1、LMA=0、PG=0；LMA 由后续硬件激活过程更新，CS.L 由代码段装载更新。",
+      "file": "fire-enable-lme-3d532a0d20c378aa.mp3",
+      "duration": 25.2384,
+      "sha256": "3d532a0d20c378aa11f53a5ee24be8ec941a8c11b764660a5be914d466aeed30",
+      "spokenText": [
+        "第四步：E F E R 的 L M E 标志 等于 1。",
+        "设置long mode允许位，等待分页激活。",
+        "E C X 选择 E F E R M S R，R D M S R 读出后设置 L M E，再 W R M S R 写回。",
+        "此刻 L M E等于1、L M A等于0、P G等于0；。",
+        "L M A 由后续硬件激活过程更新，C S.L 由代码段装载更新。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.677,
+        6.934,
+        14.679,
+        19.469
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 17,
+          "time": 0.0,
+          "duration": 3.5574583333333334
+        },
+        {
+          "start": 17,
+          "end": 33,
+          "time": 3.6774583333333335,
+          "duration": 3.13625
+        },
+        {
+          "start": 33,
+          "end": 76,
+          "time": 6.933708333333334,
+          "duration": 7.625333333333334
+        },
+        {
+          "start": 76,
+          "end": 96,
+          "time": 14.679041666666667,
+          "duration": 4.669583333333334
+        },
+        {
+          "start": 96,
+          "end": 126,
+          "time": 19.468625,
+          "duration": 5.671083333333334
+        }
+      ]
+    },
+    {
+      "id": "enable-paging",
+      "sourceText": "第五步：CR0.PG = 1。分页生效，硬件激活长模式环境。满足 PE、PAE、LME 条件后写 CR0_STATE。此时硬件报告 EFER.LMA=1，当前 CS 属性仍可以选择 32 位兼容子模式；后续装载 L=1 的代码段进入 64 位执行。",
+      "file": "fire-enable-paging-263cb176d37656ba.mp3",
+      "duration": 22.49,
+      "sha256": "263cb176d37656bae4271d825d75e08abaaf6afe770e8d871408f699bcdf0c6f",
+      "spokenText": [
+        "第五步：C R 零 的 P G 标志 等于 1。",
+        "分页生效，硬件激活long mode环境。",
+        "满足 P E、P A E、L M E 条件后写 C R 零 S T A T E。",
+        "此时硬件报告 E F E R 的 L M A 标志等于1，当前 C S 属性仍可以选择 32 位兼容子模式；。",
+        "后续装载 L等于1 的代码段进入 64 位执行。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.2,
+        6.325,
+        11.188,
+        18.767
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 15,
+          "time": 0.0,
+          "duration": 3.0797916666666665
+        },
+        {
+          "start": 15,
+          "end": 30,
+          "time": 3.1997916666666666,
+          "duration": 3.0055
+        },
+        {
+          "start": 30,
+          "end": 59,
+          "time": 6.325291666666667,
+          "duration": 4.743083333333334
+        },
+        {
+          "start": 59,
+          "end": 101,
+          "time": 11.188375,
+          "duration": 7.459083333333333
+        },
+        {
+          "start": 101,
+          "end": 124,
+          "time": 18.767458333333334,
+          "duration": 3.6238333333333332
+        }
+      ]
+    },
+    {
+      "id": "startup64",
+      "sourceText": "第六步：远返回进入 64 位代码。真实停点：startup_64 = 0x100200。LRET 装入 CS.L=1 的代码段。这个帧证明 PE=1、PG=1、PAE=1、LME=1、LMA=1，同时给出本次真实页表根地址。名称 startup_64 既存在于解压器也存在于主内核；此处仍是解压器。",
+      "file": "fire-startup64-7c3246b7ebd94e71.mp3",
+      "duration": 27.6184,
+      "sha256": "7c3246b7ebd94e7149662022a51aae33cce05cea8d861e2e872f3d8cce99d3f9",
+      "spokenText": [
+        "第六步：远返回进入 64 位代码。",
+        "真实停点：startup 64 等于 十六进制 一 零 零 二 零 零。",
+        "L R E T 装入 C S.L等于1 的代码段。",
+        "这个帧证明 P E等于1、P G等于1、P A E等于1、L M E等于1、L M A等于1，同时给出本次真实页表根地址。",
+        "名称 startup 64 既存在于解压器也存在于主内核；。",
+        "此处仍是解压器。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.066,
+        7.837,
+        11.375,
+        18.078,
+        20.957,
+        25.904
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 17,
+          "time": 0.0,
+          "duration": 2.9462083333333333
+        },
+        {
+          "start": 17,
+          "end": 44,
+          "time": 3.0662083333333334,
+          "duration": 4.650291666666667
+        },
+        {
+          "start": 44,
+          "end": 64,
+          "time": 7.8365,
+          "duration": 3.418625
+        },
+        {
+          "start": 64,
+          "end": 112,
+          "time": 11.375125,
+          "duration": 9.462333333333333
+        },
+        {
+          "start": 112,
+          "end": 141,
+          "time": 20.957458333333335,
+          "duration": 4.826125
+        },
+        {
+          "start": 141,
+          "end": 149,
+          "time": 25.903583333333334,
+          "duration": 1.616125
+        }
+      ]
+    },
+    {
+      "id": "relocate",
+      "sourceText": "搬移解压器，保留输出空间。从高地址向低地址复制，保持待搬移数据完整。解压器建立自己的栈、校正 GDT 指针并搬移代码。源码中 STD 和 REP MOVSQ 让复制地址递减，随后 CLD 恢复递增方向。DF 的改变由指令语义推导；这一瞬间的完整寄存器值未采样。",
+      "file": "fire-relocate-6a4faa1068431525.mp3",
+      "duration": 22.8574,
+      "sha256": "6a4faa1068431525571b986ef5c6afd5aedc269ff0b16b0b9b7fd355fde9665d",
+      "spokenText": [
+        "搬移解压器，保留输出空间。",
+        "从高地址向低地址复制，保持待搬移数据完整。",
+        "解压器建立自己的栈、校正 G D T 指针并搬移代码。",
+        "源码中 S T D 和 R E P M O V S Q 让复制地址递减，随后 C L D 恢复递增方向。",
+        "D F 的改变由指令语义推导；。",
+        "这一瞬间的完整寄存器值未采样。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.56,
+        6.655,
+        10.862,
+        17.829,
+        20.334
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 13,
+          "time": 0.0,
+          "duration": 2.4397083333333334
+        },
+        {
+          "start": 13,
+          "end": 34,
+          "time": 2.5597083333333335,
+          "duration": 3.9755
+        },
+        {
+          "start": 34,
+          "end": 59,
+          "time": 6.655208333333333,
+          "duration": 4.086666666666667
+        },
+        {
+          "start": 59,
+          "end": 101,
+          "time": 10.861875,
+          "duration": 6.846958333333333
+        },
+        {
+          "start": 101,
+          "end": 115,
+          "time": 17.828833333333332,
+          "duration": 2.3855
+        },
+        {
+          "start": 115,
+          "end": 130,
+          "time": 20.334333333333333,
+          "duration": 2.424375
+        }
+      ]
+    },
+    {
+      "id": "extract-kernel",
+      "sourceText": "清 BSS，解压到最终物理地址。压缩文件变成 CPU 可直接执行的内核段。先清空解压器 BSS，建立身份映射和异常处理，再调用 extract_kernel。输出包含代码、只读数据、可写数据等，并为 BSS 建立零初始化。内存占用按 ELF 装载段及运行期分配确定。",
+      "file": "fire-extract-kernel-f158d18cd11aea6b.mp3",
+      "duration": 22.9234,
+      "sha256": "f158d18cd11aea6b971f24a4ff9a13fb09a14e9491e5ea264cdb73e24b69c170",
+      "spokenText": [
+        "清 B S S，解压到最终物理地址。",
+        "压缩文件变成 C P U 可直接执行的内核段。",
+        "先清空解压器 B S S，建立身份映射和异常处理，再调用 extract kernel。",
+        "输出包含代码、只读数据、可写数据等，并为 B S S 建立零初始化。",
+        "内存占用按 E L F 装载段及运行期分配确定。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.019,
+        6.548,
+        12.841,
+        18.669
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 16,
+          "time": 0.0,
+          "duration": 2.8987083333333334
+        },
+        {
+          "start": 16,
+          "end": 37,
+          "time": 3.0187083333333335,
+          "duration": 3.4088333333333334
+        },
+        {
+          "start": 37,
+          "end": 79,
+          "time": 6.547541666666667,
+          "duration": 6.1730833333333335
+        },
+        {
+          "start": 79,
+          "end": 111,
+          "time": 12.840625,
+          "duration": 5.708125
+        },
+        {
+          "start": 111,
+          "end": 133,
+          "time": 18.66875,
+          "duration": 4.155958333333333
+        }
+      ]
+    },
+    {
+      "id": "jump-kernel",
+      "sourceText": "跳入主内核 startup_64。控制权离开解压器；RSI 继续交接 boot_params。extract_kernel 返回入口地址放在 RAX，汇编恢复 RSI 并间接跳转。两个 startup_64 同名但位于不同可执行体，分别引用解压器与主内核的源码位置。",
+      "file": "fire-jump-kernel-27c0825139cdecbc.mp3",
+      "duration": 19.9359,
+      "sha256": "27c0825139cdecbccfcced6ffb6b27457866c8f8ebfbad007c3b274c10850edf",
+      "spokenText": [
+        "跳入主内核 startup 64。",
+        "控制权离开解压器；。",
+        "R S I 继续交接 boot params。",
+        "extract kernel 返回入口地址放在 R A X，汇编恢复 R S I 并间接跳转。",
+        "两个 startup 64 同名但位于不同可执行体，分别引用解压器与主内核的源码位置。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.367,
+        5.128,
+        7.615,
+        13.342,
+        17.269
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 17,
+          "time": 0.0,
+          "duration": 3.247125
+        },
+        {
+          "start": 17,
+          "end": 26,
+          "time": 3.367125,
+          "duration": 1.640625
+        },
+        {
+          "start": 26,
+          "end": 47,
+          "time": 5.12775,
+          "duration": 2.3670833333333334
+        },
+        {
+          "start": 47,
+          "end": 90,
+          "time": 7.614833333333333,
+          "duration": 5.6074166666666665
+        },
+        {
+          "start": 90,
+          "end": 133,
+          "time": 13.34225,
+          "duration": 6.495
+        }
+      ]
+    },
+    {
+      "id": "kernel-tables",
+      "sourceText": "主内核建立自己的页表与栈。临时身份映射逐步让位于内核地址布局。head_64.S 设置 GDT/IDT、校正早期页表并写 CR3；代码随后转入高地址映射。CPU 的虚拟 RIP 通过页表指向内核物理页，RSP 指向内核栈。",
+      "file": "fire-kernel-tables-01420a964a440a81.mp3",
+      "duration": 18.7157,
+      "sha256": "01420a964a440a81cd2db1e1f2f925381adb879cd5a48f9aba327d46752d8dc9",
+      "spokenText": [
+        "主内核建立自己的页表与栈。",
+        "临时身份映射逐步让位于内核地址布局。",
+        "head 64.S 设置 G D T/I D T、校正早期页表并写 C R 三；。",
+        "代码随后转入高地址映射。",
+        "C P U 的虚拟 R I P 通过页表指向内核物理页，R S P 指向内核栈。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.207,
+        5.524,
+        10.909,
+        13.163
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 13,
+          "time": 0.0,
+          "duration": 2.087083333333333
+        },
+        {
+          "start": 13,
+          "end": 31,
+          "time": 2.2070833333333333,
+          "duration": 3.196625
+        },
+        {
+          "start": 31,
+          "end": 65,
+          "time": 5.523708333333333,
+          "duration": 5.265041666666667
+        },
+        {
+          "start": 65,
+          "end": 77,
+          "time": 10.90875,
+          "duration": 2.1340416666666666
+        },
+        {
+          "start": 77,
+          "end": 111,
+          "time": 13.162791666666667,
+          "duration": 5.45425
+        }
+      ]
+    },
+    {
+      "id": "kernel-gs",
+      "sourceText": "GS、系统调用与异常环境准备。GS.base 为每 CPU 数据提供快速入口。主内核入口设置段寄存器与 GS 基址，随后初始化 EFER 的 SYSCALL 与 NX 等能力。GS 选择子可以为 0，而隐藏基址有有效地址；全景分别展示选择子和隐藏基址。具体打开的位依 CPU 与内核配置。",
+      "file": "fire-kernel-gs-2a2c86d018c526ed.mp3",
+      "duration": 24.2108,
+      "sha256": "2a2c86d018c526ed0336193887fd2a2a8970626c5cabbd93923938d496206004",
+      "spokenText": [
+        "G S、系统调用与异常环境准备。",
+        "G S.base 为每 C P U 数据提供快速入口。",
+        "主内核入口设置段寄存器与 G S 基址，随后初始化 E F E R 的 S Y S C A L L 与 N X 等能力。",
+        "G S 选择子可以为 0，而隐藏基址有有效地址；。",
+        "全景分别展示选择子和隐藏基址。",
+        "具体打开的位依 C P U 与内核配置。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.73,
+        6.46,
+        9.459,
+        14.315,
+        18.227,
+        21.267
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 15,
+          "time": 0.0,
+          "duration": 2.61
+        },
+        {
+          "start": 15,
+          "end": 39,
+          "time": 2.73,
+          "duration": 3.6095
+        },
+        {
+          "start": 39,
+          "end": 88,
+          "time": 6.4595,
+          "duration": 7.735666666666667
+        },
+        {
+          "start": 88,
+          "end": 111,
+          "time": 14.315166666666666,
+          "duration": 3.7915833333333335
+        },
+        {
+          "start": 111,
+          "end": 126,
+          "time": 18.22675,
+          "duration": 2.9206666666666665
+        },
+        {
+          "start": 126,
+          "end": 144,
+          "time": 21.267416666666666,
+          "duration": 2.8446666666666665
+        }
+      ]
+    },
+    {
+      "id": "copy-bootdata",
+      "sourceText": "进入 C 代码，复制引导数据。早期临时位置的数据需要保存到内核拥有的结构里。x86_64_start_kernel 清 BSS、建立早期映射和异常处理，把 boot_params 与命令行复制到内核结构，之后进入 x86_64_start_reservations。C 执行环境已建立，进程、内存分配器和设备体系由后续初始化建设。",
+      "file": "fire-copy-bootdata-f3c0eed3d4d37c38.mp3",
+      "duration": 25.3102,
+      "sha256": "f3c0eed3d4d37c38778950792739e2a722c1c776abba078c004ea76bc4d47b3f",
+      "spokenText": [
+        "进入 C 代码，复制引导数据。",
+        "早期临时位置的数据需要保存到内核拥有的结构里。",
+        "x86 64 start kernel 清 B S S、建立早期映射和异常处理，把 boot params 与命令行复制到内核结构，。",
+        "之后进入 x86 64 start reservations。",
+        "C 执行环境已建立，进程、内存分配器和设备体系由后续初始化建设。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.651,
+        6.451,
+        11.792,
+        15.566,
+        19.034
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 15,
+          "time": 0.0,
+          "duration": 2.531
+        },
+        {
+          "start": 15,
+          "end": 38,
+          "time": 2.651,
+          "duration": 3.6801666666666666
+        },
+        {
+          "start": 38,
+          "end": 102,
+          "time": 6.4511666666666665,
+          "duration": 8.994416666666666
+        },
+        {
+          "start": 102,
+          "end": 133,
+          "time": 15.565583333333333,
+          "duration": 3.347958333333333
+        },
+        {
+          "start": 133,
+          "end": 165,
+          "time": 19.033541666666668,
+          "duration": 6.178041666666667
+        }
+      ]
+    },
+    {
+      "id": "start-kernel",
+      "sourceText": "真实停点：start_kernel。通用初始化总入口；当前任务仍为 PID 0。这里采集到的 RIP 与源码 init/main.c 对应。CR3、CR4、EFER 记录此停点的页表与功能配置，任务信息按当前帧展示；后续 rest_init 创建 PID 1 和 PID 2。",
+      "file": "fire-start-kernel-79a3f14a0cb294dc.mp3",
+      "duration": 20.8278,
+      "sha256": "79a3f14a0cb294dc0a22a4b6a78def7025bd6a3869ff2d0077cec43555b3221f",
+      "spokenText": [
+        "真实停点：start kernel。",
+        "通用初始化总入口；。",
+        "当前任务仍为 P I D 0。",
+        "这里采集到的 R I P 与源码 init/main.c 对应。",
+        "C R 三、C R 四、E F E R 记录此停点的页表与功能配置，任务信息按当前帧展示；。",
+        "后续 rest init 创建 P I D 1 和 P I D 2。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.126,
+        3.914,
+        6.109,
+        10.0,
+        17.276
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 18,
+          "time": 0.0,
+          "duration": 2.006291666666667
+        },
+        {
+          "start": 18,
+          "end": 27,
+          "time": 2.1262916666666665,
+          "duration": 1.6679166666666667
+        },
+        {
+          "start": 27,
+          "end": 40,
+          "time": 3.9142083333333333,
+          "duration": 2.07525
+        },
+        {
+          "start": 40,
+          "end": 70,
+          "time": 6.109458333333333,
+          "duration": 3.770166666666667
+        },
+        {
+          "start": 70,
+          "end": 108,
+          "time": 9.999625,
+          "duration": 7.156041666666667
+        },
+        {
+          "start": 108,
+          "end": 138,
+          "time": 17.275666666666666,
+          "duration": 3.4535
+        }
+      ]
+    },
+    {
+      "id": "irq-disable",
+      "sourceText": "保持 IF=0，先建设再接收中断。先建立中断处理设施，再开放可屏蔽中断。start_kernel 显式 local_irq_disable 并记录 early_boot_irqs_disabled。IF=0 屏蔽外部可屏蔽中断；同步异常独立触发，早期缺页处理仍参与启动。",
+      "file": "fire-irq-disable-5611f54e28101922.mp3",
+      "duration": 20.6325,
+      "sha256": "5611f54e281019220ec5a3647f2122c75cb3fd4c9d136d6d3fe826d4f91bd834",
+      "spokenText": [
+        "保持 I F等于0，先建设再接收中断。",
+        "先建立中断处理设施，再开放可屏蔽中断。",
+        "start kernel 显式 local irq disable 并记录 early boot irqs disabled。",
+        "I F等于0 屏蔽外部可屏蔽中断；。",
+        "同步异常独立触发，早期缺页处理仍参与启动。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.65,
+        7.473,
+        13.381,
+        16.541
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 17,
+          "time": 0.0,
+          "duration": 3.529875
+        },
+        {
+          "start": 17,
+          "end": 36,
+          "time": 3.649875,
+          "duration": 3.7030416666666666
+        },
+        {
+          "start": 36,
+          "end": 99,
+          "time": 7.472916666666666,
+          "duration": 5.7885
+        },
+        {
+          "start": 99,
+          "end": 114,
+          "time": 13.381416666666667,
+          "duration": 3.039625
+        },
+        {
+          "start": 114,
+          "end": 135,
+          "time": 16.54104166666667,
+          "duration": 3.9928333333333335
+        }
+      ]
+    },
+    {
+      "id": "memblock",
+      "sourceText": "setup_arch：登记可用与保留内存。从固件清单，变成 Linux 的内存账本。setup_arch 解析引导参数与 e820，把可用区间交给 memblock，并保留内核、initrd、页表和固件等占用。memblock 维护早期可用与保留区间，后续伙伴系统管理页面分配。",
+      "file": "fire-memblock-c6c832de8345c010.mp3",
+      "duration": 21.3722,
+      "sha256": "c6c832de8345c0106b6353bb33f18201be82e03758a5d3bfb914b87972687ae9",
+      "spokenText": [
+        "setup arch：登记可用与保留内存。",
+        "从固件清单，变成 Linux 的内存账本。",
+        "setup arch 解析引导参数与 e820，把可用区间交给 memblock，并保留内核、init R D、页表和固件等占用。",
+        "memblock 维护早期可用与保留区间，后续伙伴系统管理页面分配。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.271,
+        6.66,
+        10.176,
+        16.01
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 21,
+          "time": 0.0,
+          "duration": 3.1514166666666665
+        },
+        {
+          "start": 21,
+          "end": 42,
+          "time": 3.2714166666666666,
+          "duration": 3.268375
+        },
+        {
+          "start": 42,
+          "end": 105,
+          "time": 6.659791666666667,
+          "duration": 9.230125
+        },
+        {
+          "start": 105,
+          "end": 139,
+          "time": 16.009916666666665,
+          "duration": 5.263583333333333
+        }
+      ]
+    },
+    {
+      "id": "memory-allocators",
+      "sourceText": "mm_core_init：从区间走向页分配。struct page、伙伴系统和 slab 支持后续对象分配。内核逐步建立页描述符、页分配与对象缓存体系。随后创建进程、文件对象或页表都会申请内存。全局网格按源码标注这些 RAM 用途，具体页面变化由采样窗口另列。",
+      "file": "fire-memory-allocators-79a787233b02840c.mp3",
+      "duration": 22.4303,
+      "sha256": "79a787233b02840c7380ba72677e97638e9ee987dc303c75c053a84fa0cfe29b",
+      "spokenText": [
+        "mm core init：从区间走向页分配。",
+        "struct page、伙伴系统和 slab 支持后续对象分配。",
+        "内核逐步建立页描述符、页分配与对象缓存体系。",
+        "随后创建进程、文件对象或页表都会申请内存。",
+        "全局网格按源码标注这些 R A M 用途，具体页面变化由采样窗口另列。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.31,
+        7.649,
+        11.782,
+        16.218
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 22,
+          "time": 0.0,
+          "duration": 3.1900416666666667
+        },
+        {
+          "start": 22,
+          "end": 54,
+          "time": 3.3100416666666668,
+          "duration": 4.218833333333333
+        },
+        {
+          "start": 54,
+          "end": 76,
+          "time": 7.648875,
+          "duration": 4.01275
+        },
+        {
+          "start": 76,
+          "end": 97,
+          "time": 11.781625,
+          "duration": 4.316375
+        },
+        {
+          "start": 97,
+          "end": 130,
+          "time": 16.218,
+          "duration": 6.113583333333334
+        }
+      ]
+    },
+    {
+      "id": "scheduler",
+      "sourceText": "sched_init：有了可调度任务的基础。调度器先建立，定时中断稍后才能安全驱动它。初始任务 PID 0 来自静态 init_task。sched_init 建立运行队列等结构；本实验单 vCPU，任意瞬间只执行一个任务。",
+      "file": "fire-scheduler-d338c0e69f4c1633.mp3",
+      "duration": 16.874,
+      "sha256": "d338c0e69f4c16334da57f1f83d9d481965e63e6907b910a5d8724adda984622",
+      "spokenText": [
+        "sched init：有了可调度任务的基础。",
+        "调度器先建立，定时中断稍后才能安全驱动它。",
+        "初始任务 P I D 0 来自静态 init task。",
+        "sched init 建立运行队列等结构；。",
+        "本实验单 v C P U，任意瞬间只执行一个任务。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.616,
+        6.788,
+        10.442,
+        13.055
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 22,
+          "time": 0.0,
+          "duration": 2.4955416666666665
+        },
+        {
+          "start": 22,
+          "end": 43,
+          "time": 2.6155416666666667,
+          "duration": 4.052
+        },
+        {
+          "start": 43,
+          "end": 69,
+          "time": 6.787541666666667,
+          "duration": 3.534666666666667
+        },
+        {
+          "start": 69,
+          "end": 90,
+          "time": 10.442208333333333,
+          "duration": 2.4930833333333333
+        },
+        {
+          "start": 90,
+          "end": 112,
+          "time": 13.055291666666667,
+          "duration": 3.7197916666666666
+        }
+      ]
+    },
+    {
+      "id": "irq-timers",
+      "sourceText": "建立 IRQ、时钟与定时器。中断门、控制器与计时设施需要协同就绪。init_IRQ、tick_init、init_timers、hrtimers_init 与 time_init 建立中断和时钟基础。IDT 保存处理入口，PIC/APIC 交付外部中断；客户机时钟由计时硬件和内核维护，网页计时器控制教学节奏。",
+      "file": "fire-irq-timers-3d4e223925411591.mp3",
+      "duration": 24.222,
+      "sha256": "3d4e2239254115917f914be368fd0ca8a4e1d64b63ced74fc7b33ef90926708a",
+      "spokenText": [
+        "建立 I R Q、时钟与定时器。",
+        "中断门、控制器与计时设施需要协同就绪。",
+        "init I R Q、tick init、init timers、hrtimers init 与 time init 建立中断和时钟基础。",
+        "I D T 保存处理入口，P I C/A P I C 交付外部中断；。",
+        "客户机时钟由计时硬件和内核维护，网页计时器控制教学节奏。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.719,
+        6.749,
+        13.917,
+        18.857
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 14,
+          "time": 0.0,
+          "duration": 2.5991666666666666
+        },
+        {
+          "start": 14,
+          "end": 33,
+          "time": 2.7191666666666667,
+          "duration": 3.9097916666666666
+        },
+        {
+          "start": 33,
+          "end": 100,
+          "time": 6.748958333333333,
+          "duration": 7.047791666666667
+        },
+        {
+          "start": 100,
+          "end": 127,
+          "time": 13.91675,
+          "duration": 4.820041666666667
+        },
+        {
+          "start": 127,
+          "end": 155,
+          "time": 18.856791666666666,
+          "duration": 5.2665
+        }
+      ]
+    },
+    {
+      "id": "irq-enable",
+      "sourceText": "开中断：RFLAGS.IF 变为 1。具备必要设施后，才允许外部可屏蔽中断进入。start_kernel 在 time_init 等工作之后 local_irq_enable。IF=1 允许响应可屏蔽中断；实际交付取决于中断控制器、优先级、屏蔽和待处理事件。",
+      "file": "fire-irq-enable-d62b64047a4bde5e.mp3",
+      "duration": 21.1742,
+      "sha256": "d62b64047a4bde5e353d272acbdc97215b4485d513001d8c0e8997ff483e7a1b",
+      "spokenText": [
+        "开中断：R F L A G S 的 I F 标志 变为 1。",
+        "具备必要设施后，才允许外部可屏蔽中断进入。",
+        "start kernel 在 time init 等工作之后 local irq enable。",
+        "I F等于1 允许响应可屏蔽中断；。",
+        "实际交付取决于中断控制器、优先级、屏蔽和待处理事件。"
+      ],
+      "cueStarts": [
+        0.0,
+        4.227,
+        8.067,
+        12.602,
+        15.995
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 19,
+          "time": 0.0,
+          "duration": 4.106916666666667
+        },
+        {
+          "start": 19,
+          "end": 40,
+          "time": 4.226916666666667,
+          "duration": 3.7197916666666666
+        },
+        {
+          "start": 40,
+          "end": 88,
+          "time": 8.066708333333333,
+          "duration": 4.41575
+        },
+        {
+          "start": 88,
+          "end": 103,
+          "time": 12.602458333333333,
+          "duration": 3.272125
+        },
+        {
+          "start": 103,
+          "end": 129,
+          "time": 15.994583333333333,
+          "duration": 5.080916666666667
+        }
+      ]
+    },
+    {
+      "id": "vfs-process-core",
+      "sourceText": "进程、VFS 与缓存准备完成。为创建 PID 1 和访问文件做准备。fork_init、proc_caches_init、vfs_caches_init、pagecache_init、signals_init 等建立进程、文件与信号的基础。文件系统模块、设备探测和根盘挂载还有后续 initcall 与早期用户空间工作。",
+      "file": "fire-vfs-process-core-a7d56b315045932d.mp3",
+      "duration": 22.1322,
+      "sha256": "a7d56b315045932d7b42b1cd007c0f549cda85df7aeeefd712c7a406ed27b864",
+      "spokenText": [
+        "进程、V F S 与缓存准备完成。",
+        "为创建 P I D 1 和访问文件做准备。",
+        "fork init、proc caches init、vfs caches init、pagecache init、signals init 等建立进程、。",
+        "文件与信号的基础。",
+        "文件系统模块、设备探测和根盘挂载还有后续 init call 与早期用户空间工作。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.355,
+        6.376,
+        10.576,
+        15.653
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 15,
+          "time": 0.0,
+          "duration": 3.2347083333333333
+        },
+        {
+          "start": 15,
+          "end": 34,
+          "time": 3.3547083333333334,
+          "duration": 2.90125
+        },
+        {
+          "start": 34,
+          "end": 111,
+          "time": 6.375958333333333,
+          "duration": 7.521333333333334
+        },
+        {
+          "start": 111,
+          "end": 120,
+          "time": 14.017291666666667,
+          "duration": 1.5155
+        },
+        {
+          "start": 120,
+          "end": 160,
+          "time": 15.652791666666667,
+          "duration": 6.380791666666667
+        }
+      ]
+    },
+    {
+      "id": "spawn-init",
+      "sourceText": "rest_init 创建第一个可运行的 init 任务。PID 1 先在内核态执行 kernel_init。rest_init 先用 user_mode_thread(kernel_init) 创建 PID 1，再用 kernel_thread(kthreadd) 创建 PID 2。PID 1 先执行内核初始化，后续 exec 装入用户程序并返回 CPL 3。",
+      "file": "fire-spawn-init-ae11c28b82fde5f6.mp3",
+      "duration": 21.7853,
+      "sha256": "ae11c28b82fde5f6ea4d0911f9caffba48a40da4c34fbabe9a4057fba9ee8c32",
+      "spokenText": [
+        "rest init 创建第一个可运行的 init 任务。",
+        "P I D 1 先在内核态执行 kernel init。",
+        "rest init 先用 user mode thread(kernel init) 创建 P I D 1，。",
+        "再用 kernel thread(kernel thread daemon) 创建 P I D 2。",
+        "P I D 1 先执行内核初始化，后续 exec 装入用户程序并返回 C P L 3。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.237,
+        6.441,
+        11.271,
+        15.321
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 28,
+          "time": 0.0,
+          "duration": 3.117208333333333
+        },
+        {
+          "start": 28,
+          "end": 54,
+          "time": 3.2372083333333332,
+          "duration": 3.083625
+        },
+        {
+          "start": 54,
+          "end": 106,
+          "time": 6.440833333333333,
+          "duration": 4.710458333333333
+        },
+        {
+          "start": 106,
+          "end": 142,
+          "time": 11.271291666666666,
+          "duration": 3.9294583333333333
+        },
+        {
+          "start": 142,
+          "end": 181,
+          "time": 15.32075,
+          "duration": 6.365833333333334
+        }
+      ]
+    },
+    {
+      "id": "first-schedule",
+      "sourceText": "PID 0 让出 CPU，进入 idle 路径。一颗 CPU 通过切换任务推进多个启动活动。schedule_preempt_disabled 调用调度器，PID 0 随后进入 cpu_startup_entry。任务切换保存与恢复上下文，页表切换由 mm/active_mm 和目标地址空间决定。",
+      "file": "fire-first-schedule-6c993ac4c13bbc71.mp3",
+      "duration": 20.1872,
+      "sha256": "6c993ac4c13bbc71af70a921d009a5c397dcc97e63203884ee13edf02623edc8",
+      "spokenText": [
+        "P I D 0 让出 C P U，进入 idle 路径。",
+        "一颗 C P U 通过切换任务推进多个启动活动。",
+        "schedule preempt disabled 调用调度器，P I D 0 随后进入 cpu startup entry。",
+        "任务切换保存与恢复上下文，页表切换由 mm/active mm 和目标地址空间决定。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.439,
+        7.225,
+        10.446,
+        13.484,
+        15.529
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 24,
+          "time": 0.0,
+          "duration": 3.3186666666666667
+        },
+        {
+          "start": 24,
+          "end": 46,
+          "time": 3.4386666666666668,
+          "duration": 3.666166666666667
+        },
+        {
+          "start": 46,
+          "end": 107,
+          "time": 7.224833333333334,
+          "duration": 6.139625
+        },
+        {
+          "start": 107,
+          "end": 149,
+          "time": 13.484458333333333,
+          "duration": 6.604041666666666
+        }
+      ]
+    },
+    {
+      "id": "kernel-init",
+      "sourceText": "真实停点：PID 1 的 kernel_init。任务号为 1，mm 为空，当前执行内核初始化。该真实帧的解码器识别 PID 1、内核栈与 task_struct；comm 此时显示 swapper/0，任务身份由 pid 字段确定。随后它等待 kthreadd 准备好，执行 kernel_init_freeable。",
+      "file": "fire-kernel-init-155a2beaa109de04.mp3",
+      "duration": 22.0746,
+      "sha256": "155a2beaa109de04d9999525f43fe5ba182fc0309bda8cf112d9fd5353ddd34a",
+      "spokenText": [
+        "真实停点：P I D 1 的 kernel init。",
+        "任务号为 1，mm 为空，当前执行内核初始化。",
+        "该真实帧的解码器识别 P I D 1、内核栈与 task struct；。",
+        "comm 此时显示 swapper/0，任务身份由 pid 字段确定。",
+        "随后它等待 kernel thread daemon 准备好，执行 kernel init freeable。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.234,
+        7.573,
+        12.364,
+        17.157
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 25,
+          "time": 0.0,
+          "duration": 3.1141666666666667
+        },
+        {
+          "start": 25,
+          "end": 48,
+          "time": 3.234166666666667,
+          "duration": 4.218416666666666
+        },
+        {
+          "start": 48,
+          "end": 82,
+          "time": 7.572583333333333,
+          "duration": 4.671791666666667
+        },
+        {
+          "start": 82,
+          "end": 117,
+          "time": 12.364375,
+          "duration": 4.672375
+        },
+        {
+          "start": 117,
+          "end": 160,
+          "time": 17.15675,
+          "duration": 4.819166666666667
+        }
+      ]
+    },
+    {
+      "id": "initcalls",
+      "sourceText": "执行 initcalls，驱动开始探测。注册驱动、发现 virtio 设备并创建内核对象。kernel_init_freeable → do_basic_setup → do_initcalls。initcall 按等级运行，驱动的注册与设备绑定可能涉及异步工作。virtio-blk 根盘需要内核驱动就绪；这里只讲启动依赖，队列细节留给设备专题。",
+      "file": "fire-initcalls-2c7f0278f4030804.mp3",
+      "duration": 23.4762,
+      "sha256": "2c7f0278f403080439a04676fb581bfe0e9eeecb56cc01e4e3dcf3a98f6f21f7",
+      "spokenText": [
+        "执行 init calls，驱动开始探测。",
+        "注册驱动、发现 virtio 设备并创建内核对象。",
+        "kernel init freeable ，到 do basic setup ，到 do initcalls。",
+        "init call 按等级运行，驱动的注册与设备绑定可能涉及异步工作。",
+        "virtio-blk 根盘需要内核驱动就绪；。",
+        "这里只讲启动依赖，队列细节留给设备专题。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.864,
+        6.897,
+        11.365,
+        16.666,
+        19.758
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 20,
+          "time": 0.0,
+          "duration": 2.7442083333333334
+        },
+        {
+          "start": 20,
+          "end": 45,
+          "time": 2.8642083333333335,
+          "duration": 3.91275
+        },
+        {
+          "start": 45,
+          "end": 98,
+          "time": 6.896958333333333,
+          "duration": 4.3485
+        },
+        {
+          "start": 98,
+          "end": 132,
+          "time": 11.365458333333333,
+          "duration": 5.1803333333333335
+        },
+        {
+          "start": 132,
+          "end": 154,
+          "time": 16.665791666666667,
+          "duration": 2.9720833333333334
+        },
+        {
+          "start": 154,
+          "end": 174,
+          "time": 19.757875,
+          "duration": 3.619625
+        }
+      ]
+    },
+    {
+      "id": "unpack-initramfs",
+      "sourceText": "把压缩 cpio 解成内存文件树。GRUB 装进来的字节，此时变成可打开的文件。populate_rootfs 通过异步域调用 do_populate_rootfs；unpack_to_rootfs 创建目录、文件和链接，PID 1 的后续代码 wait_for_initramfs 等待完成。initramfs 内容占用 RAM，作为挂载 ext2 根盘之前的临时 rootfs。",
+      "file": "fire-unpack-initramfs-15e55cbbca5feafd.mp3",
+      "duration": 25.4247,
+      "sha256": "15e55cbbca5feafd46dea7d695d3db342951864fd9f1fc7524d96f62f8cde54f",
+      "spokenText": [
+        "把压缩 cpio 解成内存文件树。",
+        "G R U B 装进来的字节，此时变成可打开的文件。",
+        "populate rootfs 通过异步域调用 do populate rootfs；。",
+        "unpack to rootfs 创建目录、文件和链接，P I D 1 的后续代码 wait for initramfs 等待完成。",
+        "init ram F S 内容占用 R A M，作为挂载 ext2 根盘之前的临时 rootfs。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.591,
+        6.552,
+        11.309,
+        14.691,
+        19.16
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 17,
+          "time": 0.0,
+          "duration": 2.470875
+        },
+        {
+          "start": 17,
+          "end": 40,
+          "time": 2.590875,
+          "duration": 3.8415833333333333
+        },
+        {
+          "start": 40,
+          "end": 83,
+          "time": 6.552458333333333,
+          "duration": 4.636541666666667
+        },
+        {
+          "start": 83,
+          "end": 147,
+          "time": 11.309,
+          "duration": 7.731
+        },
+        {
+          "start": 147,
+          "end": 191,
+          "time": 19.16,
+          "duration": 6.166083333333333
+        }
+      ]
+    },
+    {
+      "id": "console-and-initmem",
+      "sourceText": "打开控制台并回收启动专用内存。标准输入输出就绪后，准备首次执行用户空间。console_on_rootfs 打开 /dev/console 并建立 0、1、2 三个文件描述符。kernel_init 等待异步初始化结束，释放可回收的启动专用 initmem，并为常驻内核页面设置只读权限。",
+      "file": "fire-console-and-initmem-4255a6d5370cb91e.mp3",
+      "duration": 21.2617,
+      "sha256": "4255a6d5370cb91ec2532e2814c964c54becc25a3992c2955656b7750e6e15b6",
+      "spokenText": [
+        "打开控制台并回收启动专用内存。",
+        "标准输入输出就绪后，准备首次执行用户空间。",
+        "console on rootfs 打开 /dev/console 并建立 0、1、2 三个文件描述符。",
+        "kernel init 等待异步初始化结束，释放可回收的启动专用 init memory，并为常驻内核页面设置只读权限。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.888,
+        6.83,
+        12.902,
+        16.147
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 15,
+          "time": 0.0,
+          "duration": 2.767541666666667
+        },
+        {
+          "start": 15,
+          "end": 36,
+          "time": 2.8875416666666665,
+          "duration": 3.8225416666666665
+        },
+        {
+          "start": 36,
+          "end": 88,
+          "time": 6.8300833333333335,
+          "duration": 5.951666666666667
+        },
+        {
+          "start": 88,
+          "end": 144,
+          "time": 12.90175,
+          "duration": 8.261333333333333
+        }
+      ]
+    },
+    {
+      "id": "exec-init",
+      "sourceText": "PID 1 首次 exec：/init。任务身份保留，地址空间装入用户态的 BusyBox shell。rdinit=/init 指定早期用户空间入口。run_init_process 最终调用 kernel_execve；脚本解释器为 /bin/sh。内核装入可执行段、用户栈和参数，返回用户态时 CPL=3；在 exec 的内核函数内部仍是 CPL=0。",
+      "file": "fire-exec-init-f9b788b7d76b86f4.mp3",
+      "duration": 25.6556,
+      "sha256": "f9b788b7d76b86f472d39535bebc1b54ea580fce4c6c00b79b4b7ed3ca5a5c9c",
+      "spokenText": [
+        "P I D 1 首次 exec：/init。",
+        "任务身份保留，地址空间装入用户态的 Busy Box shell。",
+        "rdinit等于/init 指定早期用户空间入口。",
+        "run init process 最终调用 kernel execve；。",
+        "脚本解释器为 /bin/sh。",
+        "内核装入可执行段、用户栈和参数，返回用户态时 C P L等于3；。",
+        "在 exec 的内核函数内部仍是 C P L等于0。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.551,
+        6.81,
+        10.376,
+        13.669,
+        15.798,
+        21.662
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 20,
+          "time": 0.0,
+          "duration": 2.4312916666666666
+        },
+        {
+          "start": 20,
+          "end": 52,
+          "time": 2.5512916666666667,
+          "duration": 4.139125
+        },
+        {
+          "start": 52,
+          "end": 76,
+          "time": 6.810416666666667,
+          "duration": 3.446
+        },
+        {
+          "start": 76,
+          "end": 112,
+          "time": 10.376416666666668,
+          "duration": 3.1725
+        },
+        {
+          "start": 112,
+          "end": 127,
+          "time": 13.668916666666666,
+          "duration": 2.0086666666666666
+        },
+        {
+          "start": 127,
+          "end": 156,
+          "time": 15.797583333333334,
+          "duration": 5.744166666666667
+        },
+        {
+          "start": 156,
+          "end": 179,
+          "time": 21.66175,
+          "duration": 3.895208333333333
+        }
+      ]
+    },
+    {
+      "id": "init-mounts",
+      "sourceText": "/init 挂载 /dev、/proc 与 /sys。进程执行脚本，通过系统调用让内核提供三种视图。devtmpfs 暴露设备节点，proc 暴露进程与内核运行信息，sysfs 暴露设备模型。这些虚拟文件系统由内核动态提供内容。/init 等待 /dev/vda 出现后再挂载根盘。",
+      "file": "fire-init-mounts-48721233a9a0aa9a.mp3",
+      "duration": 22.2513,
+      "sha256": "48721233a9a0aa9ad0e0a67b3e95ed5a14b9f08d565a4b531eeb59979cdb5877",
+      "spokenText": [
+        "/init 挂载 /dev、/proc 与 /sys。",
+        "进程执行脚本，通过系统调用让内核提供三种视图。",
+        "devtmpfs 暴露设备节点，proc 暴露进程与内核运行信息，sysfs 暴露设备模型。",
+        "这些虚拟文件系统由内核动态提供内容。",
+        "/init 等待 /dev/vda 出现后再挂载根盘。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.465,
+        7.331,
+        9.93,
+        14.925,
+        18.428
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 27,
+          "time": 0.0,
+          "duration": 2.345375
+        },
+        {
+          "start": 27,
+          "end": 50,
+          "time": 2.465375,
+          "duration": 4.745166666666667
+        },
+        {
+          "start": 50,
+          "end": 96,
+          "time": 7.330541666666667,
+          "duration": 7.4744166666666665
+        },
+        {
+          "start": 96,
+          "end": 114,
+          "time": 14.924958333333333,
+          "duration": 3.382625
+        },
+        {
+          "start": 114,
+          "end": 141,
+          "time": 18.427583333333335,
+          "duration": 3.7250833333333335
+        }
+      ]
+    },
+    {
+      "id": "mount-ext2",
+      "sourceText": "真实停点：ext2_fill_super。用户 mount 已进入内核；当前任务是 mount，CPL=0。这个帧记录用户 mount 任务通过系统调用执行 ext2_fill_super，任务身份保持，CPU 处于 CPL 0。virtio 读盘产生的数据进入 RAM，文件系统验证元数据并建立 VFS 对象。/dev/vda 是持久化根盘。",
+      "file": "fire-mount-ext2-29dcffd29d365e47.mp3",
+      "duration": 25.3559,
+      "sha256": "29dcffd29d365e47ecadb6b73f157166c8aff5728e4e5eba271f3d8b0020fd95",
+      "spokenText": [
+        "真实停点：ext2 fill super。",
+        "用户 mount 已进入内核；。",
+        "当前任务是 mount，C P L等于0。",
+        "这个帧记录用户 mount 任务通过系统调用执行 ext2 fill super，任务身份保持，C P U 处于 C P L 0。",
+        "virtio 读盘产生的数据进入 R A M，文件系统验证元数据并建立 V F S 对象。",
+        "/dev/vda 是持久化根盘。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.611,
+        4.606,
+        7.642,
+        13.429,
+        16.372,
+        22.909
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 21,
+          "time": 0.0,
+          "duration": 2.4911666666666665
+        },
+        {
+          "start": 21,
+          "end": 36,
+          "time": 2.6111666666666666,
+          "duration": 1.8745833333333333
+        },
+        {
+          "start": 36,
+          "end": 54,
+          "time": 4.60575,
+          "duration": 2.91625
+        },
+        {
+          "start": 54,
+          "end": 115,
+          "time": 7.642,
+          "duration": 8.610291666666667
+        },
+        {
+          "start": 115,
+          "end": 156,
+          "time": 16.372291666666666,
+          "duration": 6.416291666666667
+        },
+        {
+          "start": 156,
+          "end": 172,
+          "time": 22.908583333333333,
+          "duration": 2.348625
+        }
+      ]
+    },
+    {
+      "id": "move-mounts",
+      "sourceText": "把系统视图移动到新根。切换 / 之前先保留已经挂好的设备与系统信息。mount --move 调整 /dev、/proc、/sys 在挂载树中的位置，保留各挂载的内容与对象。随后 exec switch_root，PID 1 保持，脚本解释器的用户映像将被替换。",
+      "file": "fire-move-mounts-7497143ee9b2b06a.mp3",
+      "duration": 18.6326,
+      "sha256": "7497143ee9b2b06a8a60d0d41a04d4a6fa8f021a43f5a2ece00551a753c02295",
+      "spokenText": [
+        "把系统视图移动到新根。",
+        "切换 / 之前先保留已经挂好的设备与系统信息。",
+        "mount --move 调整 /dev、/proc、/sys 在挂载树中的位置，保留各挂载的内容与对象。",
+        "随后 exec switch root，P I D 1 保持，脚本解释器的用户映像将被替换。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.113,
+        6.091,
+        11.107,
+        12.695
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 11,
+          "time": 0.0,
+          "duration": 1.9932916666666667
+        },
+        {
+          "start": 11,
+          "end": 34,
+          "time": 2.1132916666666666,
+          "duration": 3.8574166666666665
+        },
+        {
+          "start": 34,
+          "end": 87,
+          "time": 6.090708333333334,
+          "duration": 6.48475
+        },
+        {
+          "start": 87,
+          "end": 131,
+          "time": 12.695458333333333,
+          "duration": 5.8384583333333335
+        }
+      ]
+    },
+    {
+      "id": "switch-root",
+      "sourceText": "switch_root：/ 变成 ext2 根。PID 1 保持，根目录和可执行程序发生变化。BusyBox switch_root 要求当前进程为 PID 1、目标新根是挂载点、当前根为 ramfs/tmpfs。它删除当前 rootfs 内容，移动新根挂载，chroot 后 exec /sbin/init。可回收的 initramfs 内容随删除释放。",
+      "file": "fire-switch-root-a6b9ed4b287abdc5.mp3",
+      "duration": 25.195,
+      "sha256": "a6b9ed4b287abdc52bab82ead3cef6261a1a20f99e699ed1e02c1716b8f16169",
+      "spokenText": [
+        "switch root：/ 变成 ext2 根。",
+        "P I D 1 保持，根目录和可执行程序发生变化。",
+        "Busy Box switch root 要求当前进程为 P I D 1、目标新根是挂载点、当前根为 ramfs/tmpfs。",
+        "它删除当前 rootfs 内容，移动新根挂载，chroot 后 exec /sbin/init。",
+        "可回收的 init ram F S 内容随删除释放。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.565,
+        6.61,
+        15.43,
+        21.608
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 24,
+          "time": 0.0,
+          "duration": 2.4454166666666666
+        },
+        {
+          "start": 24,
+          "end": 47,
+          "time": 2.5654166666666667,
+          "duration": 3.924916666666667
+        },
+        {
+          "start": 47,
+          "end": 107,
+          "time": 6.610333333333333,
+          "duration": 8.699375
+        },
+        {
+          "start": 107,
+          "end": 155,
+          "time": 15.429708333333334,
+          "duration": 6.058333333333334
+        },
+        {
+          "start": 155,
+          "end": 178,
+          "time": 21.608041666666665,
+          "duration": 3.48825
+        }
+      ]
+    },
+    {
+      "id": "busybox-init",
+      "sourceText": "/sbin/init 读取 inittab。根盘上的 PID 1 开始管理系统服务与终端。本实验使用 BusyBox init。它解析 /etc/inittab，按动作类型先执行 sysinit，再执行 wait、once，最后维护 respawn 与 askfirst。",
+      "file": "fire-busybox-init-795e0fc9d13ad90f.mp3",
+      "duration": 17.1743,
+      "sha256": "795e0fc9d13ad90f78a1670a5aacc651ce5cba0fa57a9f208c74e46bf72e606f",
+      "spokenText": [
+        "/sbin/init 读取 inittab。",
+        "根盘上的 P I D 1 开始管理系统服务与终端。",
+        "本实验使用 Busy Box init。",
+        "它解析 /etc/inittab，按动作类型先执行 sysinit，再执行 wait、once，最后维护 respawn 与 askfirst。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.468,
+        6.147,
+        8.584,
+        12.594
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 22,
+          "time": 0.0,
+          "duration": 2.348
+        },
+        {
+          "start": 22,
+          "end": 45,
+          "time": 2.468,
+          "duration": 3.559458333333333
+        },
+        {
+          "start": 45,
+          "end": 64,
+          "time": 6.147458333333334,
+          "duration": 2.316125
+        },
+        {
+          "start": 64,
+          "end": 136,
+          "time": 8.583583333333333,
+          "duration": 8.492041666666667
+        }
+      ]
+    },
+    {
+      "id": "rcs",
+      "sourceText": "/etc/rcS 建立实验环境。挂载调试视图、设置主机名，再输出欢迎信息。rcS 创建 /dev/pts、debugfs 和 tracefs 挂载点，设置 hostname 为 linux-lab。脚本中的 mount、mkdir、hostname 等命令通过内核接口完成挂载、目录创建与主机名设置。",
+      "file": "fire-rcs-715d1f1701e31136.mp3",
+      "duration": 23.3626,
+      "sha256": "715d1f1701e31136d8ef4284c39a8afdae81716147183084313e1c8c647937cb",
+      "spokenText": [
+        "/etc/rc S 建立实验环境。",
+        "挂载调试视图、设置主机名，再输出欢迎信息。",
+        "rc S 创建 /dev/pts、debugfs 和 tracefs 挂载点，设置 hostname 为 linux-lab。",
+        "脚本中的 mount、mkdir、hostname 等命令通过内核接口完成挂载、目录创建与主机名设置。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.64,
+        6.867,
+        11.905,
+        15.206
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 16,
+          "time": 0.0,
+          "duration": 2.520208333333333
+        },
+        {
+          "start": 16,
+          "end": 37,
+          "time": 2.6402083333333333,
+          "duration": 4.107291666666667
+        },
+        {
+          "start": 37,
+          "end": 99,
+          "time": 6.8675,
+          "duration": 8.218416666666666
+        },
+        {
+          "start": 99,
+          "end": 150,
+          "time": 15.205916666666667,
+          "duration": 8.058
+        }
+      ]
+    },
+    {
+      "id": "spawn-terminals",
+      "sourceText": "两个终端入口采用不同策略。tty1 等回车；ttyS0 直接运行 shell 并支持重启。实际配置是 tty1::askfirst:/bin/sh -l 与 ttyS0::respawn:/bin/cttyhack /bin/sh -l。cttyhack 为串口 shell 建立控制终端环境，init 通过 fork/exec 创建子进程，并等待或回收它们。",
+      "file": "fire-spawn-terminals-f54266ccbd71e04d.mp3",
+      "duration": 23.681,
+      "sha256": "f54266ccbd71e04db7a0b201ea78f39dd181b21a1037cfcdea001ad1ed1fc67f",
+      "spokenText": [
+        "两个终端入口采用不同策略。",
+        "tty1 等回车；。",
+        "tty S0 直接运行 shell 并支持重启。",
+        "实际配置是 tty1::askfirst:/bin/sh -l 与 tty S0::respawn:/bin/cttyhack /bin/sh -l。",
+        "cttyhack 为串口 shell 建立控制终端环境，init 通过 fork/exec 创建子进程，并等待或回收它们。"
+      ],
+      "cueStarts": [
+        0.0,
+        4.2,
+        7.562,
+        15.161,
+        19.027
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 13,
+          "time": 0.0,
+          "duration": 2.35225
+        },
+        {
+          "start": 13,
+          "end": 22,
+          "time": 2.47225,
+          "duration": 1.608
+        },
+        {
+          "start": 22,
+          "end": 45,
+          "time": 4.20025,
+          "duration": 3.241375
+        },
+        {
+          "start": 45,
+          "end": 119,
+          "time": 7.561625,
+          "duration": 7.479708333333333
+        },
+        {
+          "start": 119,
+          "end": 180,
+          "time": 15.161333333333333,
+          "duration": 8.420958333333333
+        }
+      ]
+    },
+    {
+      "id": "login-shell",
+      "sourceText": "登录 shell 读取环境并打印提示符。可输入命令的界面终于建立。/bin/sh -l 运行 BusyBox shell。用户代码通过 write 输出提示符，通过终端读取路径等待输入。系统运行配置中的 init、必要内核线程与终端程序，进程采样列出实际任务。",
+      "file": "fire-login-shell-92e029ce417b31df.mp3",
+      "duration": 19.4229,
+      "sha256": "92e029ce417b31dfc662bb7c4f70a904a97a9e1d8a5c076027d52d2e13acfc72",
+      "spokenText": [
+        "登录 shell 读取环境并打印提示符。",
+        "可输入命令的界面终于建立。",
+        "/bin/sh -l 运行 Busy Box shell。",
+        "用户代码通过 write 输出提示符，通过终端读取路径等待输入。",
+        "系统运行配置中的 init、必要内核线程与终端程序，进程采样列出实际任务。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.904,
+        5.314,
+        8.148,
+        13.064
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 20,
+          "time": 0.0,
+          "duration": 2.7841666666666667
+        },
+        {
+          "start": 20,
+          "end": 33,
+          "time": 2.904166666666667,
+          "duration": 2.2899583333333333
+        },
+        {
+          "start": 33,
+          "end": 61,
+          "time": 5.314125,
+          "duration": 2.7135833333333332
+        },
+        {
+          "start": 61,
+          "end": 93,
+          "time": 8.147708333333334,
+          "duration": 4.796166666666666
+        },
+        {
+          "start": 93,
+          "end": 130,
+          "time": 13.063875,
+          "duration": 6.260375
+        }
+      ]
+    },
+    {
+      "id": "tty-read",
+      "sourceText": "shell 先 poll 等待终端可读。先等待输入就绪，再读取字符。本构建的 BusyBox 行编辑器先调用 poll 检查标准输入，输入就绪后才调用 read。真实停点位于 n_tty_poll，当前任务为串口 shell、CPL=0。它是检查可读状态的入口；随后等待队列和调度器让 shell 休眠，CPU 可以运行其他任务或进入 idle。",
+      "file": "fire-tty-read-154c39f2795f5716.mp3",
+      "duration": 25.7449,
+      "sha256": "154c39f2795f5716c3d5c76d1ef864c9f23bde2fe2fb3b08b497d67e97515e31",
+      "spokenText": [
+        "shell 先 poll 等待终端可读。",
+        "先等待输入就绪，再读取字符。",
+        "本构建的 Busy Box 行编辑器先调用 poll 检查标准输入，输入就绪后才调用 read。",
+        "真实停点位于 n tty poll，当前任务为串口 shell、C P L等于0。",
+        "它是检查可读状态的入口；。",
+        "随后等待队列和调度器让 shell 休眠，C P U 可以运行其他任务或进入 idle。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.373,
+        5.293,
+        9.677,
+        11.657,
+        17.552,
+        19.659
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 20,
+          "time": 0.0,
+          "duration": 2.253416666666667
+        },
+        {
+          "start": 20,
+          "end": 34,
+          "time": 2.3734166666666665,
+          "duration": 2.7999583333333335
+        },
+        {
+          "start": 34,
+          "end": 81,
+          "time": 5.293375,
+          "duration": 6.243916666666666
+        },
+        {
+          "start": 81,
+          "end": 119,
+          "time": 11.657291666666667,
+          "duration": 5.774375
+        },
+        {
+          "start": 119,
+          "end": 131,
+          "time": 17.551666666666666,
+          "duration": 1.986875
+        },
+        {
+          "start": 131,
+          "end": 173,
+          "time": 19.658541666666668,
+          "duration": 5.987708333333333
+        }
+      ]
+    },
+    {
+      "id": "shell-ready",
+      "sourceText": "真实终点：提示符已出现，CPU 正在 idle。当前 CPU 任务可以是 PID 0，而 shell 已在等待输入。本样本串口出现 linux-lab:/root#。暂停时 CPU 位于内核 idle 路径、CPL=0，PID 1 为睡眠中的 init。串口记录证明系统到达可输入终端，寄存器帧记录暂停瞬间的 idle 任务。",
+      "file": "fire-shell-ready-45437caf6e815740.mp3",
+      "duration": 24.2427,
+      "sha256": "45437caf6e81574004af49c4fe6fd12676c852350d10d892ea888f3ffb53f289",
+      "spokenText": [
+        "真实终点：提示符已出现，C P U 正在 idle。",
+        "当前 C P U 任务可以是 P I D 0，而 shell 已在等待输入。",
+        "本样本串口出现 linux-lab:/root#。",
+        "暂停时 C P U 位于内核 idle 路径、C P L等于0，P I D 1 为睡眠中的 init。",
+        "串口记录证明系统到达可输入终端，寄存器帧记录暂停瞬间的 idle 任务。"
+      ],
+      "cueStarts": [
+        0.0,
+        4.202,
+        8.759,
+        11.716,
+        18.395
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 24,
+          "time": 0.0,
+          "duration": 4.082291666666666
+        },
+        {
+          "start": 24,
+          "end": 58,
+          "time": 4.2022916666666665,
+          "duration": 4.4365
+        },
+        {
+          "start": 58,
+          "end": 83,
+          "time": 8.758791666666667,
+          "duration": 2.8375416666666666
+        },
+        {
+          "start": 83,
+          "end": 127,
+          "time": 11.716333333333333,
+          "duration": 6.558583333333333
+        },
+        {
+          "start": 127,
+          "end": 163,
+          "time": 18.394916666666667,
+          "duration": 5.749083333333333
+        }
+      ]
+    },
+    {
+      "id": "next-key",
+      "sourceText": "下一次输入将如何穿过全景。终端输入 → 设备 → 中断 → TTY → shell。串口或键盘把输入送入设备，内核读取并交给 TTY，达到读取条件后唤醒 shell。shell 解析命令，内建命令可直接执行，外部程序通常通过 fork/exec。本步骤以机制示意预览后续输入路径，实际输入在真实调试会话中进行。",
+      "file": "fire-next-key-06f0f4fb3021868b.mp3",
+      "duration": 25.8627,
+      "sha256": "06f0f4fb3021868bdc48dc365c93437f2fb1b64976a6b796bd6973d3dd869297",
+      "spokenText": [
+        "下一次输入将如何穿过全景。",
+        "终端输入 ，到 设备 ，到 中断 ，到 T T Y ，到 shell。",
+        "串口或键盘把输入送入设备，内核读取并交给 T T Y，达到读取条件后唤醒 shell。",
+        "shell 解析命令，内建命令可直接执行，外部程序通常通过 fork/exec。",
+        "本步骤以机制示意预览后续输入路径，实际输入在真实调试会话中进行。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.393,
+        6.828,
+        11.136,
+        14.013,
+        20.075
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 13,
+          "time": 0.0,
+          "duration": 2.2729166666666667
+        },
+        {
+          "start": 13,
+          "end": 42,
+          "time": 2.392916666666667,
+          "duration": 4.315
+        },
+        {
+          "start": 42,
+          "end": 83,
+          "time": 6.827916666666667,
+          "duration": 7.064875
+        },
+        {
+          "start": 83,
+          "end": 123,
+          "time": 14.012791666666667,
+          "duration": 5.942125
+        },
+        {
+          "start": 123,
+          "end": 155,
+          "time": 20.074916666666667,
+          "duration": 5.6890833333333335
+        }
+      ]
+    }
+  ],
+  "audioMap": {
+    "power-off": "audio/panorama-fire/fire-power-off-07b84e0e3a1fd5e2.mp3",
+    "reset-vector": "audio/panorama-fire/fire-reset-vector-8b0ab1090f7c09f7.mp3",
+    "far-jump": "audio/panorama-fire/fire-far-jump-b6ea8ca5a60ab4a6.mp3",
+    "bios-stack": "audio/panorama-fire/fire-bios-stack-5bb55239cfabd0cf.mp3",
+    "bios-tables": "audio/panorama-fire/fire-bios-tables-6649c1cd3919dcf1.mp3",
+    "bios-devices": "audio/panorama-fire/fire-bios-devices-07f53da9290aa3a0.mp3",
+    "boot-image": "audio/panorama-fire/fire-boot-image-990f2221ff140ded.mp3",
+    "grub-core": "audio/panorama-fire/fire-grub-core-0b04137fd5d4f037.mp3",
+    "grub-kernel": "audio/panorama-fire/fire-grub-kernel-0a9b1428a103545f.mp3",
+    "grub-initrd": "audio/panorama-fire/fire-grub-initrd-d6104cd9e52ff0dc.mp3",
+    "boot-params": "audio/panorama-fire/fire-boot-params-8fa5ab37306acfd8.mp3",
+    "setup-main": "audio/panorama-fire/fire-setup-main-0fb3528e8e16d1c9.mp3",
+    "setup-e820": "audio/panorama-fire/fire-setup-e820-5fbd109217cc097d.mp3",
+    "setup-a20": "audio/panorama-fire/fire-setup-a20-2eecbce23b6b4f74.mp3",
+    "setup-gdt": "audio/panorama-fire/fire-setup-gdt-a8293959a71534a6.mp3",
+    "set-pe": "audio/panorama-fire/fire-set-pe-d3880cd09f53717c.mp3",
+    "startup32": "audio/panorama-fire/fire-startup32-61067d3241c5f419.mp3",
+    "decompress-placement": "audio/panorama-fire/fire-decompress-placement-aad86a3b67c43e1a.mp3",
+    "enable-pae": "audio/panorama-fire/fire-enable-pae-ff296ca50864aca7.mp3",
+    "identity-pages": "audio/panorama-fire/fire-identity-pages-366c294b51ede8c4.mp3",
+    "load-cr3": "audio/panorama-fire/fire-load-cr3-5517ef2e331d4060.mp3",
+    "enable-lme": "audio/panorama-fire/fire-enable-lme-3d532a0d20c378aa.mp3",
+    "enable-paging": "audio/panorama-fire/fire-enable-paging-263cb176d37656ba.mp3",
+    "startup64": "audio/panorama-fire/fire-startup64-7c3246b7ebd94e71.mp3",
+    "relocate": "audio/panorama-fire/fire-relocate-6a4faa1068431525.mp3",
+    "extract-kernel": "audio/panorama-fire/fire-extract-kernel-f158d18cd11aea6b.mp3",
+    "jump-kernel": "audio/panorama-fire/fire-jump-kernel-27c0825139cdecbc.mp3",
+    "kernel-tables": "audio/panorama-fire/fire-kernel-tables-01420a964a440a81.mp3",
+    "kernel-gs": "audio/panorama-fire/fire-kernel-gs-2a2c86d018c526ed.mp3",
+    "copy-bootdata": "audio/panorama-fire/fire-copy-bootdata-f3c0eed3d4d37c38.mp3",
+    "start-kernel": "audio/panorama-fire/fire-start-kernel-79a3f14a0cb294dc.mp3",
+    "irq-disable": "audio/panorama-fire/fire-irq-disable-5611f54e28101922.mp3",
+    "memblock": "audio/panorama-fire/fire-memblock-c6c832de8345c010.mp3",
+    "memory-allocators": "audio/panorama-fire/fire-memory-allocators-79a787233b02840c.mp3",
+    "scheduler": "audio/panorama-fire/fire-scheduler-d338c0e69f4c1633.mp3",
+    "irq-timers": "audio/panorama-fire/fire-irq-timers-3d4e223925411591.mp3",
+    "irq-enable": "audio/panorama-fire/fire-irq-enable-d62b64047a4bde5e.mp3",
+    "vfs-process-core": "audio/panorama-fire/fire-vfs-process-core-a7d56b315045932d.mp3",
+    "spawn-init": "audio/panorama-fire/fire-spawn-init-ae11c28b82fde5f6.mp3",
+    "first-schedule": "audio/panorama-fire/fire-first-schedule-6c993ac4c13bbc71.mp3",
+    "kernel-init": "audio/panorama-fire/fire-kernel-init-155a2beaa109de04.mp3",
+    "initcalls": "audio/panorama-fire/fire-initcalls-2c7f0278f4030804.mp3",
+    "unpack-initramfs": "audio/panorama-fire/fire-unpack-initramfs-15e55cbbca5feafd.mp3",
+    "console-and-initmem": "audio/panorama-fire/fire-console-and-initmem-4255a6d5370cb91e.mp3",
+    "exec-init": "audio/panorama-fire/fire-exec-init-f9b788b7d76b86f4.mp3",
+    "init-mounts": "audio/panorama-fire/fire-init-mounts-48721233a9a0aa9a.mp3",
+    "mount-ext2": "audio/panorama-fire/fire-mount-ext2-29dcffd29d365e47.mp3",
+    "move-mounts": "audio/panorama-fire/fire-move-mounts-7497143ee9b2b06a.mp3",
+    "switch-root": "audio/panorama-fire/fire-switch-root-a6b9ed4b287abdc5.mp3",
+    "busybox-init": "audio/panorama-fire/fire-busybox-init-795e0fc9d13ad90f.mp3",
+    "rcs": "audio/panorama-fire/fire-rcs-715d1f1701e31136.mp3",
+    "spawn-terminals": "audio/panorama-fire/fire-spawn-terminals-f54266ccbd71e04d.mp3",
+    "login-shell": "audio/panorama-fire/fire-login-shell-92e029ce417b31df.mp3",
+    "tty-read": "audio/panorama-fire/fire-tty-read-154c39f2795f5716.mp3",
+    "shell-ready": "audio/panorama-fire/fire-shell-ready-45437caf6e815740.mp3",
+    "next-key": "audio/panorama-fire/fire-next-key-06f0f4fb3021868b.mp3"
+  }
+}

@@ -1,845 +1,4044 @@
 {
- "voice": "zh-CN-XiaoxiaoNeural",
- "entries": [
-  {
-   "key": "97a78ce93a8cd9a7",
-   "file": "97a78ce93a8cd9a7.mp3",
-   "duration": 7.15
-  },
-  {
-   "key": "7849241ad4a157a4",
-   "file": "7849241ad4a157a4.mp3",
-   "duration": 6.89
-  },
-  {
-   "key": "241ca247872185a4",
-   "file": "241ca247872185a4.mp3",
-   "duration": 7.34
-  },
-  {
-   "key": "62729f1974f8f41d",
-   "file": "62729f1974f8f41d.mp3",
-   "duration": 7.06
-  },
-  {
-   "key": "ad309a0d177fee2b",
-   "file": "ad309a0d177fee2b.mp3",
-   "duration": 6.65
-  },
-  {
-   "key": "e82b036586b53d9a",
-   "file": "e82b036586b53d9a.mp3",
-   "duration": 7.75
-  },
-  {
-   "key": "672ab5ae8da7c5c1",
-   "file": "672ab5ae8da7c5c1.mp3",
-   "duration": 7.94
-  },
-  {
-   "key": "01e6cb788088d9c7",
-   "file": "01e6cb788088d9c7.mp3",
-   "duration": 9.1
-  },
-  {
-   "key": "53532b10faccff77",
-   "file": "53532b10faccff77.mp3",
-   "duration": 10.9
-  },
-  {
-   "key": "98dfbd5370acfade",
-   "file": "98dfbd5370acfade.mp3",
-   "duration": 9.77
-  },
-  {
-   "key": "152bc371d4e47929",
-   "file": "152bc371d4e47929.mp3",
-   "duration": 10.54
-  },
-  {
-   "key": "045d3052f1c7694a",
-   "file": "045d3052f1c7694a.mp3",
-   "duration": 5.66
-  },
-  {
-   "key": "fd7550f57b0e219c",
-   "file": "fd7550f57b0e219c.mp3",
-   "duration": 4.66
-  },
-  {
-   "key": "459b40593eaec8f6",
-   "file": "459b40593eaec8f6.mp3",
-   "duration": 9.12
-  },
-  {
-   "key": "4d6a3b2d48b4ba49",
-   "file": "4d6a3b2d48b4ba49.mp3",
-   "duration": 8.28
-  },
-  {
-   "key": "51a3f757ece78ade",
-   "file": "51a3f757ece78ade.mp3",
-   "duration": 9.98
-  },
-  {
-   "key": "c321f11c71585857",
-   "file": "c321f11c71585857.mp3",
-   "duration": 9.0
-  },
-  {
-   "key": "b3549dabb1c34fa0",
-   "file": "b3549dabb1c34fa0.mp3",
-   "duration": 5.57
-  },
-  {
-   "key": "002beb70298b722e",
-   "file": "002beb70298b722e.mp3",
-   "duration": 6.0
-  },
-  {
-   "key": "4a7a506abd27eeb1",
-   "file": "4a7a506abd27eeb1.mp3",
-   "duration": 7.27
-  },
-  {
-   "key": "9f2fb445b27a4982",
-   "file": "9f2fb445b27a4982.mp3",
-   "duration": 8.38
-  },
-  {
-   "key": "bee76dea7e7cdf64",
-   "file": "bee76dea7e7cdf64.mp3",
-   "duration": 6.77
-  },
-  {
-   "key": "3f6f21d35e580d1e",
-   "file": "3f6f21d35e580d1e.mp3",
-   "duration": 7.99
-  },
-  {
-   "key": "ac22cf037e291c2e",
-   "file": "ac22cf037e291c2e.mp3",
-   "duration": 4.63
-  },
-  {
-   "key": "7668d5829e41bc0c",
-   "file": "7668d5829e41bc0c.mp3",
-   "duration": 7.61
-  },
-  {
-   "key": "5f675d02a409ccfb",
-   "file": "5f675d02a409ccfb.mp3",
-   "duration": 9.31
-  },
-  {
-   "key": "8d00c378a4054001",
-   "file": "8d00c378a4054001.mp3",
-   "duration": 6.17
-  },
-  {
-   "key": "b52ce055fb37cac4",
-   "file": "b52ce055fb37cac4.mp3",
-   "duration": 11.88
-  },
-  {
-   "key": "6afa8281f9a3ede1",
-   "file": "6afa8281f9a3ede1.mp3",
-   "duration": 9.5
-  },
-  {
-   "key": "a7ed127a2a0bf9a9",
-   "file": "a7ed127a2a0bf9a9.mp3",
-   "duration": 6.48
-  },
-  {
-   "key": "7b89216cedb20d92",
-   "file": "7b89216cedb20d92.mp3",
-   "duration": 6.84
-  },
-  {
-   "key": "19bc018eebf54bd6",
-   "file": "19bc018eebf54bd6.mp3",
-   "duration": 10.46
-  },
-  {
-   "key": "d34d226186bcf8b0",
-   "file": "d34d226186bcf8b0.mp3",
-   "duration": 12.07
-  },
-  {
-   "key": "52378006ecf87eb5",
-   "file": "52378006ecf87eb5.mp3",
-   "duration": 9.26
-  },
-  {
-   "key": "9563b839d7133a55",
-   "file": "9563b839d7133a55.mp3",
-   "duration": 6.58
-  },
-  {
-   "key": "caf31ca735e0ee76",
-   "file": "caf31ca735e0ee76.mp3",
-   "duration": 6.74
-  },
-  {
-   "key": "20de672b3cc22adf",
-   "file": "20de672b3cc22adf.mp3",
-   "duration": 6.84
-  },
-  {
-   "key": "7dd4a9a6c3f5c64e",
-   "file": "7dd4a9a6c3f5c64e.mp3",
-   "duration": 5.45
-  },
-  {
-   "key": "a972bfbebc732087",
-   "file": "a972bfbebc732087.mp3",
-   "duration": 6.02
-  },
-  {
-   "key": "946a0934079db8f5",
-   "file": "946a0934079db8f5.mp3",
-   "duration": 7.94
-  },
-  {
-   "key": "46c710a91042752b",
-   "file": "46c710a91042752b.mp3",
-   "duration": 7.08
-  },
-  {
-   "key": "480993f9ebfe1d12",
-   "file": "480993f9ebfe1d12.mp3",
-   "duration": 7.85
-  },
-  {
-   "key": "97f6c32fb940b58d",
-   "file": "97f6c32fb940b58d.mp3",
-   "duration": 6.17
-  },
-  {
-   "key": "5fce1dfa8082a7b4",
-   "file": "5fce1dfa8082a7b4.mp3",
-   "duration": 5.18
-  },
-  {
-   "key": "d39ca595c17ad751",
-   "file": "d39ca595c17ad751.mp3",
-   "duration": 6.43
-  },
-  {
-   "key": "e38bc89f34bd94c2",
-   "file": "e38bc89f34bd94c2.mp3",
-   "duration": 4.92
-  },
-  {
-   "key": "0639765e940ae5a9",
-   "file": "0639765e940ae5a9.mp3",
-   "duration": 7.39
-  },
-  {
-   "key": "cbf2e0e3aa491cbe",
-   "file": "cbf2e0e3aa491cbe.mp3",
-   "duration": 5.45
-  },
-  {
-   "key": "115749f5e6f69652",
-   "file": "115749f5e6f69652.mp3",
-   "duration": 9.5
-  },
-  {
-   "key": "b8b4fdaacfd742e6",
-   "file": "b8b4fdaacfd742e6.mp3",
-   "duration": 6.62
-  },
-  {
-   "key": "122a5a369c4b122e",
-   "file": "122a5a369c4b122e.mp3",
-   "duration": 6.41
-  },
-  {
-   "key": "68a188407832bbd7",
-   "file": "68a188407832bbd7.mp3",
-   "duration": 5.18
-  },
-  {
-   "key": "7879cadf6336dda9",
-   "file": "7879cadf6336dda9.mp3",
-   "duration": 6.89
-  },
-  {
-   "key": "ebf3493755938959",
-   "file": "ebf3493755938959.mp3",
-   "duration": 7.37
-  },
-  {
-   "key": "6d2469b3500f66ec",
-   "file": "6d2469b3500f66ec.mp3",
-   "duration": 6.55
-  },
-  {
-   "key": "2aff9b4b5c01fa5a",
-   "file": "2aff9b4b5c01fa5a.mp3",
-   "duration": 5.11
-  },
-  {
-   "key": "b33df6f6e3535ebc",
-   "file": "b33df6f6e3535ebc.mp3",
-   "duration": 7.51
-  },
-  {
-   "key": "ae19d9ca0a568d28",
-   "file": "ae19d9ca0a568d28.mp3",
-   "duration": 6.94
-  },
-  {
-   "key": "7aedf49d4ef1911b",
-   "file": "7aedf49d4ef1911b.mp3",
-   "duration": 4.92
-  },
-  {
-   "key": "87ee2e4036b70ba9",
-   "file": "87ee2e4036b70ba9.mp3",
-   "duration": 2.9
-  },
-  {
-   "key": "cd2de6310effb421",
-   "file": "cd2de6310effb421.mp3",
-   "duration": 6.5
-  },
-  {
-   "key": "3936e791cd542914",
-   "file": "3936e791cd542914.mp3",
-   "duration": 6.26
-  },
-  {
-   "key": "4062a2dd59d3b23d",
-   "file": "4062a2dd59d3b23d.mp3",
-   "duration": 7.03
-  },
-  {
-   "key": "dd082d9fc7be0065",
-   "file": "dd082d9fc7be0065.mp3",
-   "duration": 5.47
-  },
-  {
-   "key": "e7b7e1ea48428578",
-   "file": "e7b7e1ea48428578.mp3",
-   "duration": 3.48
-  },
-  {
-   "key": "70a94cb1a142c02d",
-   "file": "70a94cb1a142c02d.mp3",
-   "duration": 5.86
-  },
-  {
-   "key": "739e2296df0a8fbc",
-   "file": "739e2296df0a8fbc.mp3",
-   "duration": 7.22
-  },
-  {
-   "key": "9f22f13876925e8c",
-   "file": "9f22f13876925e8c.mp3",
-   "duration": 9.14
-  },
-  {
-   "key": "2d0eb64181385a5a",
-   "file": "2d0eb64181385a5a.mp3",
-   "duration": 5.04
-  },
-  {
-   "key": "2cdf69154cfd9914",
-   "file": "2cdf69154cfd9914.mp3",
-   "duration": 4.1
-  },
-  {
-   "key": "af5e65d3eb092eb0",
-   "file": "af5e65d3eb092eb0.mp3",
-   "duration": 4.7
-  },
-  {
-   "key": "e3ef9b442c823d2c",
-   "file": "e3ef9b442c823d2c.mp3",
-   "duration": 5.04
-  },
-  {
-   "key": "7e667b7db8856bd5",
-   "file": "7e667b7db8856bd5.mp3",
-   "duration": 8.4
-  },
-  {
-   "key": "c7862b7629d550d2",
-   "file": "c7862b7629d550d2.mp3",
-   "duration": 5.33
-  },
-  {
-   "key": "4174d211d047c21f",
-   "file": "4174d211d047c21f.mp3",
-   "duration": 6.29
-  },
-  {
-   "key": "9f68050ddcda366a",
-   "file": "9f68050ddcda366a.mp3",
-   "duration": 6.14
-  },
-  {
-   "key": "ad85e01669506c20",
-   "file": "ad85e01669506c20.mp3",
-   "duration": 6.62
-  },
-  {
-   "key": "34fc20da00f9c6ae",
-   "file": "34fc20da00f9c6ae.mp3",
-   "duration": 4.63
-  },
-  {
-   "key": "1a1b9c9a4972dc90",
-   "file": "1a1b9c9a4972dc90.mp3",
-   "duration": 7.78
-  },
-  {
-   "key": "be11ed42f7187fda",
-   "file": "be11ed42f7187fda.mp3",
-   "duration": 7.46
-  },
-  {
-   "key": "efa36c601d20436b",
-   "file": "efa36c601d20436b.mp3",
-   "duration": 7.06
-  },
-  {
-   "key": "2abc2bdce76f5d43",
-   "file": "2abc2bdce76f5d43.mp3",
-   "duration": 4.9
-  },
-  {
-   "key": "2ecf00d3d3c3e0fe",
-   "file": "2ecf00d3d3c3e0fe.mp3",
-   "duration": 4.7
-  },
-  {
-   "key": "2093db57850a3d15",
-   "file": "2093db57850a3d15.mp3",
-   "duration": 8.11
-  },
-  {
-   "key": "fe2af3d2aed0d05f",
-   "file": "fe2af3d2aed0d05f.mp3",
-   "duration": 7.2
-  },
-  {
-   "key": "9eb93be74f2ae1d6",
-   "file": "9eb93be74f2ae1d6.mp3",
-   "duration": 7.51
-  },
-  {
-   "key": "52d438139c0a4300",
-   "file": "52d438139c0a4300.mp3",
-   "duration": 5.35
-  },
-  {
-   "key": "80c2afe60ef368e2",
-   "file": "80c2afe60ef368e2.mp3",
-   "duration": 9.91
-  },
-  {
-   "key": "8d1cb15df40671c0",
-   "file": "8d1cb15df40671c0.mp3",
-   "duration": 8.57
-  },
-  {
-   "key": "76fae8b89acf7868",
-   "file": "76fae8b89acf7868.mp3",
-   "duration": 6.77
-  },
-  {
-   "key": "7eb7ab26bc261564",
-   "file": "7eb7ab26bc261564.mp3",
-   "duration": 6.77
-  },
-  {
-   "key": "f01098ec0db10160",
-   "file": "f01098ec0db10160.mp3",
-   "duration": 6.36
-  },
-  {
-   "key": "122d8339ed28d606",
-   "file": "122d8339ed28d606.mp3",
-   "duration": 3.24
-  },
-  {
-   "key": "a98d5cbe96c2e409",
-   "file": "a98d5cbe96c2e409.mp3",
-   "duration": 7.13
-  },
-  {
-   "key": "6baa49dceaca95f8",
-   "file": "6baa49dceaca95f8.mp3",
-   "duration": 6.86
-  },
-  {
-   "key": "716e4c5176a9980e",
-   "file": "716e4c5176a9980e.mp3",
-   "duration": 6.36
-  },
-  {
-   "key": "8eaff0c4e4d7e983",
-   "file": "8eaff0c4e4d7e983.mp3",
-   "duration": 3.82
-  },
-  {
-   "key": "e355fc945f2c56ab",
-   "file": "e355fc945f2c56ab.mp3",
-   "duration": 4.85
-  },
-  {
-   "key": "e4e8d44fc359b5b0",
-   "file": "e4e8d44fc359b5b0.mp3",
-   "duration": 6.31
-  },
-  {
-   "key": "8fcb10586c8a1992",
-   "file": "8fcb10586c8a1992.mp3",
-   "duration": 1.82
-  },
-  {
-   "key": "ae48331f7970078c",
-   "file": "ae48331f7970078c.mp3",
-   "duration": 9.12
-  },
-  {
-   "key": "1978eb0684766a45",
-   "file": "1978eb0684766a45.mp3",
-   "duration": 3.1
-  },
-  {
-   "key": "5c2a40f49534af6a",
-   "file": "5c2a40f49534af6a.mp3",
-   "duration": 7.44
-  },
-  {
-   "key": "86907b16046a8793",
-   "file": "86907b16046a8793.mp3",
-   "duration": 9.31
-  },
-  {
-   "key": "7792aab25c58d643",
-   "file": "7792aab25c58d643.mp3",
-   "duration": 9.12
-  },
-  {
-   "key": "a522578c820d9b58",
-   "file": "a522578c820d9b58.mp3",
-   "duration": 6.46
-  },
-  {
-   "key": "add852fde5d0541f",
-   "file": "add852fde5d0541f.mp3",
-   "duration": 7.94
-  },
-  {
-   "key": "3028e656b0ec4b49",
-   "file": "3028e656b0ec4b49.mp3",
-   "duration": 7.01
-  },
-  {
-   "key": "ff78bd69c1374b1d",
-   "file": "ff78bd69c1374b1d.mp3",
-   "duration": 4.85
-  },
-  {
-   "key": "cd3b4b3dce543938",
-   "file": "cd3b4b3dce543938.mp3",
-   "duration": 9.82
-  },
-  {
-   "key": "da3600e03b097b61",
-   "file": "da3600e03b097b61.mp3",
-   "duration": 10.78
-  },
-  {
-   "key": "24cb61c2d4335064",
-   "file": "24cb61c2d4335064.mp3",
-   "duration": 8.47
-  },
-  {
-   "key": "ffe4a320219925ea",
-   "file": "ffe4a320219925ea.mp3",
-   "duration": 6.6
-  },
-  {
-   "key": "985f2e4f0c3d3e35",
-   "file": "985f2e4f0c3d3e35.mp3",
-   "duration": 9.74
-  },
-  {
-   "key": "702906ca258042ee",
-   "file": "702906ca258042ee.mp3",
-   "duration": 6.58
-  },
-  {
-   "key": "2d08c9218f36f949",
-   "file": "2d08c9218f36f949.mp3",
-   "duration": 5.33
-  },
-  {
-   "key": "08210e9ca03e96d3",
-   "file": "08210e9ca03e96d3.mp3",
-   "duration": 5.18
-  },
-  {
-   "key": "aaef5b5ed615a0fc",
-   "file": "aaef5b5ed615a0fc.mp3",
-   "duration": 8.23
-  },
-  {
-   "key": "60f9bede2ced1da5",
-   "file": "60f9bede2ced1da5.mp3",
-   "duration": 8.95
-  },
-  {
-   "key": "9c9bf83eeef7e3f5",
-   "file": "9c9bf83eeef7e3f5.mp3",
-   "duration": 9.1
-  },
-  {
-   "key": "17cb429320570ecf",
-   "file": "17cb429320570ecf.mp3",
-   "duration": 7.15
-  },
-  {
-   "key": "9b68f5d2a5117bf7",
-   "file": "9b68f5d2a5117bf7.mp3",
-   "duration": 8.52
-  },
-  {
-   "key": "7717d732d2f85ac3",
-   "file": "7717d732d2f85ac3.mp3",
-   "duration": 7.51
-  },
-  {
-   "key": "3bf0daab6bca9504",
-   "file": "3bf0daab6bca9504.mp3",
-   "duration": 11.02
-  },
-  {
-   "key": "33d5f230dda83360",
-   "file": "33d5f230dda83360.mp3",
-   "duration": 7.03
-  },
-  {
-   "key": "98a6d99ea7748a02",
-   "file": "98a6d99ea7748a02.mp3",
-   "duration": 6.94
-  },
-  {
-   "key": "cd242fd2b222fe47",
-   "file": "cd242fd2b222fe47.mp3",
-   "duration": 9.74
-  },
-  {
-   "key": "87f7ed93b84274f1",
-   "file": "87f7ed93b84274f1.mp3",
-   "duration": 7.39
-  },
-  {
-   "key": "c27140adf64cd28d",
-   "file": "c27140adf64cd28d.mp3",
-   "duration": 9.98
-  },
-  {
-   "key": "e7104cf69668999f",
-   "file": "e7104cf69668999f.mp3",
-   "duration": 10.56
-  },
-  {
-   "key": "ef91fe082c56e60f",
-   "file": "ef91fe082c56e60f.mp3",
-   "duration": 9.72
-  },
-  {
-   "key": "20e83aaf0579ea40",
-   "file": "20e83aaf0579ea40.mp3",
-   "duration": 7.8
-  },
-  {
-   "key": "9d2058775bfad7bf",
-   "file": "9d2058775bfad7bf.mp3",
-   "duration": 6.36
-  },
-  {
-   "key": "162755f6797851c6",
-   "file": "162755f6797851c6.mp3",
-   "duration": 3.1
-  },
-  {
-   "key": "7b3bf1c96be8e25c",
-   "file": "7b3bf1c96be8e25c.mp3",
-   "duration": 5.59
-  },
-  {
-   "key": "6aa3f4f7d8576d9b",
-   "file": "6aa3f4f7d8576d9b.mp3",
-   "duration": 8.11
-  },
-  {
-   "key": "8a0638b7bca62f97",
-   "file": "8a0638b7bca62f97.mp3",
-   "duration": 6.82
-  },
-  {
-   "key": "b568298bf1720726",
-   "file": "b568298bf1720726.mp3",
-   "duration": 7.97
-  },
-  {
-   "key": "e6bd84652a06a6d0",
-   "file": "e6bd84652a06a6d0.mp3",
-   "duration": 8.06
-  },
-  {
-   "key": "24ef6efa578a695c",
-   "file": "24ef6efa578a695c.mp3",
-   "duration": 7.37
-  },
-  {
-   "key": "b69155d6de106942",
-   "file": "b69155d6de106942.mp3",
-   "duration": 9.62
-  },
-  {
-   "key": "acabce3d351b4429",
-   "file": "acabce3d351b4429.mp3",
-   "duration": 9.29
-  },
-  {
-   "key": "3bdf3872bc3fb1a1",
-   "file": "3bdf3872bc3fb1a1.mp3",
-   "duration": 8.42
-  },
-  {
-   "key": "1a360a17b0dbe1af",
-   "file": "1a360a17b0dbe1af.mp3",
-   "duration": 5.06
-  },
-  {
-   "key": "4f9c137058be1df2",
-   "file": "4f9c137058be1df2.mp3",
-   "duration": 7.06
-  },
-  {
-   "key": "b99cacb1e44a26c6",
-   "file": "b99cacb1e44a26c6.mp3",
-   "duration": 4.37
-  },
-  {
-   "key": "d69647758c12d6aa",
-   "file": "d69647758c12d6aa.mp3",
-   "duration": 7.58
-  },
-  {
-   "key": "064a10a0b1bf7d4f",
-   "file": "064a10a0b1bf7d4f.mp3",
-   "duration": 8.86
-  },
-  {
-   "key": "8a1cc0cf867d0871",
-   "file": "8a1cc0cf867d0871.mp3",
-   "duration": 6.98
-  },
-  {
-   "key": "936580e3cfdbb12a",
-   "file": "936580e3cfdbb12a.mp3",
-   "duration": 9.31
-  },
-  {
-   "key": "9f412d0270008637",
-   "file": "9f412d0270008637.mp3",
-   "duration": 7.2
-  },
-  {
-   "key": "dfe362e7b640f85a",
-   "file": "dfe362e7b640f85a.mp3",
-   "duration": 8.5
-  },
-  {
-   "key": "317b64170acf6497",
-   "file": "317b64170acf6497.mp3",
-   "duration": 4.49
-  },
-  {
-   "key": "845bd3d5c0279e01",
-   "file": "845bd3d5c0279e01.mp3",
-   "duration": 7.3
-  },
-  {
-   "key": "72cbe86b5b583fad",
-   "file": "72cbe86b5b583fad.mp3",
-   "duration": 8.16
-  },
-  {
-   "key": "914c7a8a93fdab94",
-   "file": "914c7a8a93fdab94.mp3",
-   "duration": 8.02
-  },
-  {
-   "key": "f57bbd9fda503783",
-   "file": "f57bbd9fda503783.mp3",
-   "duration": 8.23
-  },
-  {
-   "key": "7f898192a7ca9878",
-   "file": "7f898192a7ca9878.mp3",
-   "duration": 3.74
-  },
-  {
-   "key": "e5744cfac2e5df98",
-   "file": "e5744cfac2e5df98.mp3",
-   "duration": 6.7
-  },
-  {
-   "key": "17e3f67b7e178c5b",
-   "file": "17e3f67b7e178c5b.mp3",
-   "duration": 3.79
-  },
-  {
-   "key": "abaeccfe01054b21",
-   "file": "abaeccfe01054b21.mp3",
-   "duration": 7.22
-  },
-  {
-   "key": "467c3c888e9af92c",
-   "file": "467c3c888e9af92c.mp3",
-   "duration": 10.78
-  },
-  {
-   "key": "9cd390526498eda5",
-   "file": "9cd390526498eda5.mp3",
-   "duration": 7.92
-  },
-  {
-   "key": "aa1beff15590143b",
-   "file": "aa1beff15590143b.mp3",
-   "duration": 7.44
-  },
-  {
-   "key": "fa628200e4380804",
-   "file": "fa628200e4380804.mp3",
-   "duration": 6.53
-  },
-  {
-   "key": "dee50829603468e0",
-   "file": "dee50829603468e0.mp3",
-   "duration": 4.7
-  },
-  {
-   "key": "561285601e5eea68",
-   "file": "561285601e5eea68.mp3",
-   "duration": 6.24
-  },
-  {
-   "key": "e7e04a77f62fc4dc",
-   "file": "e7e04a77f62fc4dc.mp3",
-   "duration": 8.02
-  }
- ]
+  "provider": "fireredtts3-local",
+  "voice": "FireRedTTS 3 · 云希参考音色",
+  "model": "FireRedTTS 3 Base",
+  "codeRepository": "https://github.com/FireRedTeam/FireRedTTS3",
+  "codeCommit": "7a1f3a7282ff184cc1c7f070556baaf5f08b5216",
+  "weights": [
+    {
+      "repo": "FireRedTeam/FireRedTTS3",
+      "revision": "dcf1bdcd1b8b25b382fa84c3e34eb82e3054a610",
+      "files": [
+        {
+          "path": "campp/campplus_voxceleb.bin",
+          "size": 29357703,
+          "lfs": {
+            "oid": "5b1a88b6f8d85826fabef804779c3372b42f3af21457fa48bd5c097c0686b2de",
+            "size": 29357703,
+            "pointerSize": 133
+          }
+        },
+        {
+          "path": "fireredtts3_base/config.json",
+          "size": 420
+        },
+        {
+          "path": "fireredtts3_base/model.safetensors",
+          "size": 8482608484,
+          "lfs": {
+            "oid": "d6ceed109a04207ef48bc669fb68248d3a44d990fcf2b9641990a6134d2ebb8a",
+            "size": 8482608484,
+            "pointerSize": 135
+          }
+        },
+        {
+          "path": "redae/config.json",
+          "size": 853
+        },
+        {
+          "path": "redae/model.safetensors",
+          "size": 3775160672,
+          "lfs": {
+            "oid": "0723e87fdaf46d377f01aa32ce56b43f43f9b249415bc8b8f81040eaa8b14abe",
+            "size": 3775160672,
+            "pointerSize": 135
+          }
+        },
+        {
+          "path": "text_tokenizer/tokenizer.json",
+          "size": 11422654,
+          "lfs": {
+            "oid": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+            "size": 11422654,
+            "pointerSize": 133
+          }
+        },
+        {
+          "path": "text_tokenizer/tokenizer_config.json",
+          "size": 9732
+        },
+        {
+          "path": "text_tokenizer/vocab.json",
+          "size": 2776833
+        }
+      ]
+    }
+  ],
+  "referenceSource": "D:\\Work\\os-learn\\docs\\animation\\audio\\panorama-yunxi\\power-off-5a4c129a87737867.mp3",
+  "referenceSourceSha256": "2f23a317e00548444a3392c148b89c8e5c01770d5de564502fdc4059bebb3d27",
+  "referenceText": "上电前：硬件处于断电状态。断电时寄存器和 RAM 失去可靠的逻辑值。",
+  "referenceSeconds": 6.7,
+  "attentionBackend": "sdpa",
+  "dtype": "bfloat16",
+  "seed": 20261018,
+  "nTimesteps": 10,
+  "inferenceCfg": 2.0,
+  "stopThreshold": 0.5,
+  "speed": 1.0,
+  "sampleRate": 24000,
+  "maxSpokenChars": 80,
+  "normalize": false,
+  "pronunciationVersion": 5,
+  "segmentationVersion": 1,
+  "generationId": "boot-numeric-final-v5-20261019",
+  "renderRate": 1.0,
+  "device": "NVIDIA GeForce RTX 5070 Ti",
+  "entries": [
+    {
+      "id": "intro-0",
+      "sourceText": "这是一台刚接上电源、还没开机的电脑。我们一步一步看 Linux 是怎么跑起来的",
+      "file": "fire-intro-0-c59aafe408e93921.mp3",
+      "duration": 6.082,
+      "sha256": "c59aafe408e93921806a6d4c69482b91ee9a64c6442b6d6d495c424bc2511cba",
+      "spokenText": [
+        "这是一台刚接上电源、还没开机的电脑。",
+        "我们一步一步看 Linux 是怎么跑起来的。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 18,
+          "time": 0.0,
+          "duration": 2.922
+        },
+        {
+          "start": 18,
+          "end": 39,
+          "time": 3.042,
+          "duration": 2.941291666666667
+        }
+      ]
+    },
+    {
+      "id": "intro-1",
+      "sourceText": "左边是 CPU（中央处理器）：它只会做一件事，按顺序一条一条执行指令",
+      "file": "fire-intro-1-2a9a8021c7165ee4.mp3",
+      "duration": 5.9555,
+      "sha256": "2a9a8021c7165ee4b3e3cabb4018f6b354820da9d190beb53e9fa2e01866a19b",
+      "spokenText": [
+        "左边是 C P U（中央处理器）：它只会做一件事，按顺序一条一条执行指令。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 34,
+          "time": 0.0,
+          "duration": 5.856833333333333
+        }
+      ]
+    },
+    {
+      "id": "intro-2",
+      "sourceText": "CPU 里有一排“寄存器”：每个格子存一个数，CPU 只能直接计算格子里的数",
+      "file": "fire-intro-2-0a7aa4f3eb6a95c1.mp3",
+      "duration": 6.5188,
+      "sha256": "0a7aa4f3eb6a95c12da354cb9dce709c62bcec07509f5df0a468ac1d55b0539e",
+      "spokenText": [
+        "C P U 里有一排寄存器：每个格子存一个数，C P U 只能直接计算格子里的数。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 38,
+          "time": 0.0,
+          "duration": 6.420166666666667
+        }
+      ]
+    },
+    {
+      "id": "intro-3",
+      "sourceText": "中间是内存：一长排格子，每格 1 字节，每格都有编号，这个编号叫“地址”",
+      "file": "fire-intro-3-513724da008865a1.mp3",
+      "duration": 6.6992,
+      "sha256": "513724da008865a151be78222c82738375bab4badf1646c914b33841cab7ad0b",
+      "spokenText": [
+        "中间是内存：一长排格子，每格 一 字节，每格都有编号，这个编号叫地址。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 36,
+          "time": 0.0,
+          "duration": 6.6005
+        }
+      ]
+    },
+    {
+      "id": "intro-4",
+      "sourceText": "内存图从下往上地址越来越大；开分页以后，左边还会出现“虚拟地址”",
+      "file": "fire-intro-4-e791a8e023dbd7ef.mp3",
+      "duration": 5.8949,
+      "sha256": "e791a8e023dbd7ef5c26ad2608465dc27801c7203de3e10b5510ffe7e1218e7e",
+      "spokenText": [
+        "内存图从下往上地址越来越大。",
+        "开分页以后，左边还会出现虚拟地址。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 14,
+          "time": 0.0,
+          "duration": 2.612375
+        },
+        {
+          "start": 14,
+          "end": 32,
+          "time": 2.732375,
+          "duration": 3.063833333333333
+        }
+      ]
+    },
+    {
+      "id": "intro-5",
+      "sourceText": "右上是 CPU 此刻正在执行的源代码：汇编或 C 语言，亮着的一行就是当前这一步",
+      "file": "fire-intro-5-11cf05fc3e3d384e.mp3",
+      "duration": 6.898,
+      "sha256": "11cf05fc3e3d384ed9d84670945ae2b4b888a7c00b3c9b653a4fa1f1c581aeb7",
+      "spokenText": [
+        "右上是 C P U 此刻正在执行的源代码：汇编或 C 语言，亮着的一条就是当前这一步。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 40,
+          "time": 0.0,
+          "duration": 6.799291666666667
+        }
+      ]
+    },
+    {
+      "id": "intro-6",
+      "sourceText": "右下是光盘、磁盘和屏幕。操作系统的文件都在盘里，执行结果显示在屏幕上",
+      "file": "fire-intro-6-f6852db7bfa3175e.mp3",
+      "duration": 6.8286,
+      "sha256": "f6852db7bfa3175edf1c33f940e955029b30a2bf2ba6fae1b721e5cec6901b30",
+      "spokenText": [
+        "右下是光盘、磁盘和屏幕。",
+        "操作系统的文件都在盘里，执行结果显示在屏幕上。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 12,
+          "time": 0.0,
+          "duration": 2.5182083333333334
+        },
+        {
+          "start": 12,
+          "end": 34,
+          "time": 2.6382083333333335,
+          "duration": 4.09175
+        }
+      ]
+    },
+    {
+      "id": "primer-0",
+      "sourceText": "开机之前，先用一个 25 字节的小程序，看懂 CPU 是怎么干活的。这只是演示，不是开机代码",
+      "file": "fire-primer-0-5d0592fb38caf8a2.mp3",
+      "duration": 7.6195,
+      "sha256": "5d0592fb38caf8a2a9809c54afaea2986e4a5ffc6bed13fe90a2a8d746b86d74",
+      "spokenText": [
+        "开机之前，先用一个 二十五 字节的小程序，看懂 C P U 是怎么干活的。",
+        "这只是演示，不是开机代码。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 34,
+          "time": 0.0,
+          "duration": 5.166416666666667
+        },
+        {
+          "start": 34,
+          "end": 46,
+          "time": 5.286416666666667,
+          "duration": 2.234375
+        }
+      ]
+    },
+    {
+      "id": "primer-1",
+      "sourceText": "内存里放了三样东西：程序（0x10000）、数据（0x20000）、栈（0x30000）。最底下是中断向量表",
+      "file": "fire-primer-1-c487317cac85b5c1.mp3",
+      "duration": 12.9589,
+      "sha256": "c487317cac85b5c14725bbd487e2a25fc9e9361a69ad8fa9a327155145140a2b",
+      "spokenText": [
+        "内存里放了三样东西：程序（一，零，零，零，零）、数据（二，零，零，零，零）、栈（三，零，零，零，零）。",
+        "最底下是中断向量表。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 45,
+          "time": 0.0,
+          "duration": 10.8965
+        },
+        {
+          "start": 45,
+          "end": 54,
+          "time": 11.0165,
+          "duration": 1.8437083333333333
+        }
+      ]
+    },
+    {
+      "id": "primer-2",
+      "sourceText": "为什么要有段寄存器？16 位寄存器最大只能数到 65535，也就是 64 KB，可内存有 1 MB",
+      "file": "fire-primer-2-2f61c0bd5e5f2722.mp3",
+      "duration": 9.7513,
+      "sha256": "2f61c0bd5e5f272267a4be5fe33285e387f7cac2ba2e87bd6f48540320f01bdf",
+      "spokenText": [
+        "为什么要有段寄存器？",
+        "十六 位寄存器最大只能数到 六万五千五百三十五，也就是 六十四千字节，可内存有 一兆字节。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 10,
+          "time": 0.0,
+          "duration": 1.4840416666666667
+        },
+        {
+          "start": 10,
+          "end": 49,
+          "time": 1.6040416666666666,
+          "duration": 8.048583333333333
+        }
+      ]
+    },
+    {
+      "id": "primer-3",
+      "sourceText": "所以 CPU 有专门的段寄存器：CS 管代码在哪，DS 管数据在哪，SS 管栈在哪。每个都乘 16 当作起点",
+      "file": "fire-primer-3-34c8f51012b70092.mp3",
+      "duration": 10.3808,
+      "sha256": "34c8f51012b700926ffc042fbc2f85ddc8cb8780e67e6b7b576c738f5c90ce3a",
+      "spokenText": [
+        "所以 C P U 有专门的段寄存器：C S 管代码在哪，D S 管数据在哪，S S 管栈在哪。",
+        "每个都乘 十六 当作起点。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 42,
+          "time": 0.0,
+          "duration": 7.769541666666667
+        },
+        {
+          "start": 42,
+          "end": 54,
+          "time": 7.889541666666666,
+          "duration": 2.392625
+        }
+      ]
+    },
+    {
+      "id": "primer-4",
+      "sourceText": "取指令第 1 步：算地址。CS 乘 16，再加 IP",
+      "file": "fire-primer-4-c43c0449e5a730f8.mp3",
+      "duration": 4.5969,
+      "sha256": "c43c0449e5a730f8c5962367575fb00cbd19db8b73e1b5bfac33761c44814eb9",
+      "spokenText": [
+        "取指令第 一 步：算地址。",
+        "C S 乘 十六，再加 I P。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 13,
+          "time": 0.0,
+          "duration": 2.0185
+        },
+        {
+          "start": 13,
+          "end": 26,
+          "time": 2.1385,
+          "duration": 2.35975
+        }
+      ]
+    },
+    {
+      "id": "primer-5",
+      "sourceText": "第 2 步：从 0x10000 读出指令的字节 B8 00 20",
+      "file": "fire-primer-5-94d13acef6b8671d.mp3",
+      "duration": 7.1125,
+      "sha256": "94d13acef6b8671d68e13a5d836d4866a837e22c4d831f2540b4eacd63ac17ee",
+      "spokenText": [
+        "第 二 步：从 一，零，零，零，零 读出指令的字节 B，八，零，零，二，零。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 32,
+          "time": 0.0,
+          "duration": 7.013791666666667
+        }
+      ]
+    },
+    {
+      "id": "primer-6",
+      "sourceText": "第 3 步：看懂它。B8 的意思是“把后面两个字节放进 AX”，00 20 表示 0x2000（低字节在前）",
+      "file": "fire-primer-6-66c025d3c82b42f5.mp3",
+      "duration": 10.2114,
+      "sha256": "66c025d3c82b42f571c8795457010c558251fef53990e09c28a275c842bcb8b4",
+      "spokenText": [
+        "第 三 步：看懂它。",
+        "B，八 的意思是把后面两个字节放进 A X，零，零，二，零 表示 二，零，零，零（低字节在前）。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 10,
+          "time": 0.0,
+          "duration": 1.6225
+        },
+        {
+          "start": 10,
+          "end": 54,
+          "time": 1.7425,
+          "duration": 8.370208333333334
+        }
+      ]
+    },
+    {
+      "id": "primer-7",
+      "sourceText": "第 4 步：执行，AX = 0x2000。同时 IP 加上这条指令的长度 3，指向下一条",
+      "file": "fire-primer-7-2fc29ee3914e907f.mp3",
+      "duration": 8.1762,
+      "sha256": "2fc29ee3914e907f3c374fbac3578514fe972ad319258900e1b6d084d016cd48",
+      "spokenText": [
+        "第 四 步：执行，A X 等于 二，零，零，零。",
+        "同时 I P 加上这条指令的长度 三，指向下一条。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 21,
+          "time": 0.0,
+          "duration": 3.887166666666667
+        },
+        {
+          "start": 21,
+          "end": 44,
+          "time": 4.0071666666666665,
+          "duration": 4.070375
+        }
+      ]
+    },
+    {
+      "id": "primer-8",
+      "sourceText": "然后又从第 1 步开始：取 0x10003 处的 8E D8，把 AX 复制进 DS。段寄存器不能直接写数字",
+      "file": "fire-primer-8-14f5c92c15c311e5.mp3",
+      "duration": 10.7745,
+      "sha256": "14f5c92c15c311e5dda5d7daba2379769d1c35182bd94cd7ef8c3f6335e9bbb3",
+      "spokenText": [
+        "然后又从第 一 步开始：取 一，零，零，零，三 处的 八，E，D，八，把 A X 复制进 D S。",
+        "段寄存器不能直接写数字。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 43,
+          "time": 0.0,
+          "duration": 8.39025
+        },
+        {
+          "start": 43,
+          "end": 54,
+          "time": 8.51025,
+          "duration": 2.1655416666666665
+        }
+      ]
+    },
+    {
+      "id": "primer-9",
+      "sourceText": "读内存：数据地址等于 DS 乘 16，再加 0x10。代码用 CS，数据用 DS，互不干扰",
+      "file": "fire-primer-9-e0ecce8c7b538e4b.mp3",
+      "duration": 8.34,
+      "sha256": "e0ecce8c7b538e4be2b89f0c5fa6d66f71c5b45ebd2f52848bd67d5fdde7c824",
+      "spokenText": [
+        "读内存：数据地址等于 D S 乘 十六，再加 一，零。",
+        "代码用 C S，数据用 D S，互不干扰。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 27,
+          "time": 0.0,
+          "duration": 4.850125
+        },
+        {
+          "start": 27,
+          "end": 45,
+          "time": 4.970125,
+          "duration": 3.271166666666667
+        }
+      ]
+    },
+    {
+      "id": "primer-10",
+      "sourceText": "从 0x20010 读出 07 00，也就是 7，放进 AX",
+      "file": "fire-primer-10-4839643e59b26f35.mp3",
+      "duration": 5.6813,
+      "sha256": "4839643e59b26f359e70d089458e2071b690932bcb1c5ab890a0cf49bfa3cca6",
+      "spokenText": [
+        "从 二，零，零，一，零 读出 零，七，零，零，也就是 七，放进 A X。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 30,
+          "time": 0.0,
+          "duration": 5.582625
+        }
+      ]
+    },
+    {
+      "id": "primer-11",
+      "sourceText": "加法：AX 送进运算器，加上 5，结果 12 写回 AX",
+      "file": "fire-primer-11-9d643ec43c632f23.mp3",
+      "duration": 5.432,
+      "sha256": "9d643ec43c632f233843b7fd8c6f7b731bcb65304728f6941a1e195f9644b8ec",
+      "spokenText": [
+        "加法：A X 送进运算器，加上 五，结果 十二 写回 A X。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 28,
+          "time": 0.0,
+          "duration": 5.333333333333333
+        }
+      ]
+    },
+    {
+      "id": "primer-12",
+      "sourceText": "写内存：把 AX 的值写到 DS:0012，也就是物理地址 0x20012",
+      "file": "fire-primer-12-11c146130417a594.mp3",
+      "duration": 7.9411,
+      "sha256": "11c146130417a5949239840d1cfb3f5d19f1dc49b3e7fab9e73d3a98a186df30",
+      "spokenText": [
+        "写内存：把 A X 的值写到 D S 段的偏移 零，零，一，二，也就是物理地址 二，零，零，一，二。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 37,
+          "time": 0.0,
+          "duration": 7.842458333333333
+        }
+      ]
+    },
+    {
+      "id": "primer-13",
+      "sourceText": "栈：一块后放进去的先拿出来的草稿区。栈顶地址等于 SS 乘 16，再加 SP",
+      "file": "fire-primer-13-6f06951c595f0716.mp3",
+      "duration": 7.3286,
+      "sha256": "6f06951c595f071694d53532ede7c880a54e338722867176eee9700f7241bb9b",
+      "spokenText": [
+        "栈：一块后放进去的先拿出来的草稿区。",
+        "栈顶地址等于 S S 乘 十六，再加 S P。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 18,
+          "time": 0.0,
+          "duration": 3.3743333333333334
+        },
+        {
+          "start": 18,
+          "end": 38,
+          "time": 3.4943333333333335,
+          "duration": 3.7355833333333335
+        }
+      ]
+    },
+    {
+      "id": "primer-14",
+      "sourceText": "push：SP 先减 2，变成 0xFE，再把 AX 写到新的栈顶 0x300FE",
+      "file": "fire-primer-14-62a65aa1bc98f9ab.mp3",
+      "duration": 6.9994,
+      "sha256": "62a65aa1bc98f9ab0fc2de3398059d52cc6d8df7820fb7bd8de65dc4a4c3dd5f",
+      "spokenText": [
+        "push：S P 先减 二，变成 F，E，再把 A X 写到新的栈顶 三，零，零，F，E。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 41,
+          "time": 0.0,
+          "duration": 6.90075
+        }
+      ]
+    },
+    {
+      "id": "primer-15",
+      "sourceText": "call：先把下一条指令的地址 0x0012 压进栈，记住回来的路，再跳到 0x0016 的子程序",
+      "file": "fire-primer-15-a29b34ab8bbcd92a.mp3",
+      "duration": 9.4505,
+      "sha256": "a29b34ab8bbcd92a30acefcc401b30d87086facbb540343e6215124fd757fb59",
+      "spokenText": [
+        "call：先把下一条指令的地址 零，零，一，二 压进栈，记住回来的路，再跳到 零，零，一，六 的子程序。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 49,
+          "time": 0.0,
+          "duration": 9.351875
+        }
+      ]
+    },
+    {
+      "id": "primer-16",
+      "sourceText": "子程序里：AX + AX = 24（0x18）",
+      "file": "fire-primer-16-c925761b3bf3ffad.mp3",
+      "duration": 4.034,
+      "sha256": "c925761b3bf3ffad38226688e45fef99764d64bbfad9a86601c5d3c64737af7e",
+      "spokenText": [
+        "子程序里：A X + A X 等于 二十四（一，八）。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 23,
+          "time": 0.0,
+          "duration": 3.9335
+        }
+      ]
+    },
+    {
+      "id": "primer-17",
+      "sourceText": "ret：从栈顶弹出 0x0012 放回 IP，SP 加 2。程序回到 call 的下一条",
+      "file": "fire-primer-17-f5e124f1c2a0f7bc.mp3",
+      "duration": 7.4015,
+      "sha256": "f5e124f1c2a0f7bc23087dd6af735addfe110132ff92d8b6d5644bd159564c35",
+      "spokenText": [
+        "ret：从栈顶弹出 零，零，一，二 放回 I P，S P 加 二。",
+        "程序回到 call 的下一条。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 30,
+          "time": 0.0,
+          "duration": 5.311625
+        },
+        {
+          "start": 30,
+          "end": 44,
+          "time": 5.431625,
+          "duration": 1.8712083333333334
+        }
+      ]
+    },
+    {
+      "id": "primer-18",
+      "sourceText": "pop：把栈顶的 0x000C 取进 BX，SP 回到 0x100。数据还留在内存里，只是不再算栈的一部分",
+      "file": "fire-primer-18-97a0c3c64b055747.mp3",
+      "duration": 10.045,
+      "sha256": "97a0c3c64b055747f7de0e8741b977fe73b8a4e0b15cc69f79b2687793c3e446",
+      "spokenText": [
+        "pop：把栈顶的 零，零，零，C 取进 B X，S P 回到 一，零，零。",
+        "数据还留在内存里，只是不再算栈的一部分。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 34,
+          "time": 0.0,
+          "duration": 6.4855833333333335
+        },
+        {
+          "start": 34,
+          "end": 53,
+          "time": 6.605583333333334,
+          "duration": 3.340708333333333
+        }
+      ]
+    },
+    {
+      "id": "primer-19",
+      "sourceText": "hlt：CPU 停下来休息，什么都不做，直到有“中断”来叫醒它",
+      "file": "fire-primer-19-14c919a40d0812da.mp3",
+      "duration": 5.441,
+      "sha256": "14c919a40d0812da5dd023fdae1e019d7c1208a42e420559f0c6b1a5122628dd",
+      "spokenText": [
+        "hlt：C P U 停下来休息，什么都不做，直到有中断来叫醒它。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 31,
+          "time": 0.0,
+          "duration": 5.342375
+        }
+      ]
+    },
+    {
+      "id": "primer-20",
+      "sourceText": "中断：设备有事就给 CPU 发一个信号。时钟芯片每 55 毫秒发一次，这是 8 号中断。中断标志为 1 时，CPU 才接",
+      "file": "fire-primer-20-f35fb80fc8065083.mp3",
+      "duration": 10.3154,
+      "sha256": "f35fb80fc80650837f684f7b03f7d0cbfb6fb7dc14f9158d17f1d967fb7a1a80",
+      "spokenText": [
+        "中断：设备有事就给 C P U 发一个信号。",
+        "时钟芯片每 五十五 毫秒发一次，这是 八 号中断。",
+        "中断标志为 一 时，C P U 才接。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 20,
+          "time": 0.0,
+          "duration": 3.3885833333333335
+        },
+        {
+          "start": 20,
+          "end": 44,
+          "time": 3.508583333333333,
+          "duration": 3.745875
+        },
+        {
+          "start": 44,
+          "end": 60,
+          "time": 7.374458333333333,
+          "duration": 2.84225
+        }
+      ]
+    },
+    {
+      "id": "primer-21",
+      "sourceText": "CPU 先保存现场：把标志寄存器、CS、IP 依次压栈，然后把中断标志清 0，防止再被打断",
+      "file": "fire-primer-21-c84651891359d8f3.mp3",
+      "duration": 8.7937,
+      "sha256": "c84651891359d8f3fa190c985e7785a990b78c7440a426ebfb123eb79d2fb2be",
+      "spokenText": [
+        "C P U 先保存现场：把标志寄存器、C S、I P 依次压栈，然后把中断标志清 零，防止再被打断。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 45,
+          "time": 0.0,
+          "duration": 8.695083333333333
+        }
+      ]
+    },
+    {
+      "id": "primer-22",
+      "sourceText": "再查中断向量表：8 号表项在地址 8 乘 4，读出处理程序的地址",
+      "file": "fire-primer-22-f3bc4167891f6898.mp3",
+      "duration": 5.768,
+      "sha256": "f3bc4167891f68983d3679fa3cddda3a9d97cc6b9532c3375a2af0732bef4424",
+      "spokenText": [
+        "再查中断向量表：八 号表项在地址 八 乘 四，读出处理程序的地址。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 32,
+          "time": 0.0,
+          "duration": 5.669375
+        }
+      ]
+    },
+    {
+      "id": "primer-23",
+      "sourceText": "跳到 BIOS 的时钟处理程序：把时钟计数加 1，再告诉中断控制器“处理完了”",
+      "file": "fire-primer-23-3604fc556dfce443.mp3",
+      "duration": 6.3441,
+      "sha256": "3604fc556dfce4438205fecf51a6c747878f034ee922aff2e7768a12c7c00444",
+      "spokenText": [
+        "跳到 B I O S 的时钟处理程序：把时钟计数加 一，再告诉中断控制器处理完了。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 39,
+          "time": 0.0,
+          "duration": 6.245416666666666
+        }
+      ]
+    },
+    {
+      "id": "primer-24",
+      "sourceText": "iret：依次弹出 IP、CS、标志寄存器，回到原来的地方继续执行。程序完全感觉不到自己被打断过",
+      "file": "fire-primer-24-ad82804b4566908e.mp3",
+      "duration": 8.7052,
+      "sha256": "ad82804b4566908ed89dbbe24488ceac666980d83c4aaa44a18618c85fc0e6c6",
+      "spokenText": [
+        "iret：依次弹出 I P、C S、标志寄存器，回到原来的地方继续执行。",
+        "程序完全感觉不到自己被打断过。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 34,
+          "time": 0.0,
+          "duration": 5.7565
+        },
+        {
+          "start": 34,
+          "end": 48,
+          "time": 5.8765,
+          "duration": 2.7300833333333334
+        }
+      ]
+    },
+    {
+      "id": "primer-25",
+      "sourceText": "这就是 CPU 的基本功：算地址、取指令、执行、IP 前进；用栈记住返回地址；中断来了就保存现场、查表、处理、返回",
+      "file": "fire-primer-25-8d09a3157abd3ac7.mp3",
+      "duration": 11.6975,
+      "sha256": "8d09a3157abd3ac7351489fe5a8e578fa1491a645c44b54c12342582def4eab2",
+      "spokenText": [
+        "这就是 C P U 的基本功：算地址、取指令、执行、I P 前进。",
+        "用栈记住返回地址。",
+        "中断来了就保存现场、查表、处理、返回。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 30,
+          "time": 0.0,
+          "duration": 5.527208333333333
+        },
+        {
+          "start": 30,
+          "end": 39,
+          "time": 5.647208333333333,
+          "duration": 1.6469583333333333
+        },
+        {
+          "start": 39,
+          "end": 57,
+          "time": 7.414166666666667,
+          "duration": 4.184708333333333
+        }
+      ]
+    },
+    {
+      "id": "primer-26",
+      "sourceText": "后面的保护模式、64 位模式，只是把段和地址翻译换成了更强的机制。下面看真实的开机过程",
+      "file": "fire-primer-26-f98733d6a27abf4c.mp3",
+      "duration": 7.8125,
+      "sha256": "f98733d6a27abf4c0501c609741efaa950e079739b53a2481dd662cc5a740bda",
+      "spokenText": [
+        "后面的保护模式、六十四 位模式，只是把段和地址翻译换成了更强的机制。",
+        "下面看真实的开机过程。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 33,
+          "time": 0.0,
+          "duration": 5.604916666666667
+        },
+        {
+          "start": 33,
+          "end": 43,
+          "time": 5.724916666666667,
+          "duration": 1.9889166666666667
+        }
+      ]
+    },
+    {
+      "id": "reset-0",
+      "sourceText": "按下电源。CPU 被复位：所有寄存器都被设成固定的初始值",
+      "file": "fire-reset-0-92f809db127d7be7.mp3",
+      "duration": 5.6382,
+      "sha256": "92f809db127d7be7c2caf2e3a353cccab6e715b0af9244802e4813847b32c3c4",
+      "spokenText": [
+        "按下电源。",
+        "C P U 被复位：所有寄存器都被设成固定的初始值。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 5,
+          "time": 0.0,
+          "duration": 1.002125
+        },
+        {
+          "start": 5,
+          "end": 28,
+          "time": 1.122125,
+          "duration": 4.417416666666667
+        }
+      ]
+    },
+    {
+      "id": "reset-1",
+      "sourceText": "CPU 要去取第一条指令。指令地址等于 CS 的基址，加上 IP",
+      "file": "fire-reset-1-53f01874e353a2a9.mp3",
+      "duration": 5.6475,
+      "sha256": "53f01874e353a2a9d498a7b2b8f4cf12db30631b02d680acd614a6b1ea5e489c",
+      "spokenText": [
+        "C P U 要去取第一条指令。",
+        "指令地址等于 C S 的基址，加上 I P。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 13,
+          "time": 0.0,
+          "duration": 2.1939166666666665
+        },
+        {
+          "start": 13,
+          "end": 32,
+          "time": 2.3139166666666666,
+          "duration": 3.234958333333333
+        }
+      ]
+    },
+    {
+      "id": "reset-2",
+      "sourceText": "算出来的地址在 4 GB 地址空间的最顶端，那里接的是主板上的 BIOS 芯片",
+      "file": "fire-reset-2-d5e26cb9d2defcd6.mp3",
+      "duration": 6.4372,
+      "sha256": "d5e26cb9d2defcd68c3e35c5d06781a5ff829682b05f9f614889f5e34aff0868",
+      "spokenText": [
+        "算出来的地址在 四吉字节 地址空间的最顶端，那里接的是主板上的 B I O S 芯片。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 39,
+          "time": 0.0,
+          "duration": 6.338583333333333
+        }
+      ]
+    },
+    {
+      "id": "reset-3",
+      "sourceText": "取回来的第一条指令是远跳转：同时改掉 CS 和 IP",
+      "file": "fire-reset-3-44d738f89e4c03ed.mp3",
+      "duration": 4.5149,
+      "sha256": "44d738f89e4c03ede36642c00d5469392e622c7feb878e4f6c2f560763db311a",
+      "spokenText": [
+        "取回来的第一条指令是远跳转：同时改掉 C S 和 I P。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 26,
+          "time": 0.0,
+          "duration": 4.4162083333333335
+        }
+      ]
+    },
+    {
+      "id": "reset-4",
+      "sourceText": "新地址落在 1 MB 以下的 BIOS 区域，从这里开始执行 BIOS 程序",
+      "file": "fire-reset-4-d0fb94919027ae3a.mp3",
+      "duration": 6.2686,
+      "sha256": "d0fb94919027ae3aca2832c01237597cd16a7d98daa7e20af26a86d273bd74dd",
+      "spokenText": [
+        "新地址落在 一兆字节 以下的 B I O S 区域，从这里开始执行 B I O S 程序。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 38,
+          "time": 0.0,
+          "duration": 6.169958333333334
+        }
+      ]
+    },
+    {
+      "id": "bios-0",
+      "sourceText": "SeaBIOS 用 32 位 C 代码做初始化，方便用平坦地址访问内存和设备；C 语言本身不要求 32 位模式",
+      "file": "fire-bios-0-120aa76cac9abf70.mp3",
+      "duration": 9.2073,
+      "sha256": "120aa76cac9abf7035428b41363fb14dfc5fba022998d6f4c12665651a93bb21",
+      "spokenText": [
+        "Sea B I O S 用 三十二 位 C 代码做初始化，方便用平坦地址访问内存和设备。",
+        "C 语言本身不要求 三十二 位模式。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 39,
+          "time": 0.0,
+          "duration": 6.310708333333333
+        },
+        {
+          "start": 39,
+          "end": 55,
+          "time": 6.4307083333333335,
+          "duration": 2.677875
+        }
+      ]
+    },
+    {
+      "id": "bios-1",
+      "sourceText": "先关闭可屏蔽中断并屏蔽 NMI，再开启 A20，避免切换被打断，也避免高地址回绕",
+      "file": "fire-bios-1-95aa6f6c059a664f.mp3",
+      "duration": 7.6255,
+      "sha256": "95aa6f6c059a664ff47774e678d85dd3a8c8d7c0a782ba66bdb90851522267e9",
+      "spokenText": [
+        "先关闭可屏蔽中断并屏蔽 N M I，再开启 A 二十，避免切换被打断，也避免高地址回绕。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 40,
+          "time": 0.0,
+          "duration": 7.526791666666667
+        }
+      ]
+    },
+    {
+      "id": "bios-2",
+      "sourceText": "装入 BIOS 自带的 GDT 和临时 IDT。GDT 定义起点为 0 的 32 位代码段与数据段，范围是 4 GB",
+      "file": "fire-bios-2-90d5fa5a932ed85f.mp3",
+      "duration": 9.87,
+      "sha256": "90d5fa5a932ed85f8c52e25f6e90dc6ea3f707536a068cd5e177cdd189680a0b",
+      "spokenText": [
+        "装入 B I O S 自带的 G D T 和临时 I D T。",
+        "G D T 定义起点为 零 的 三十二 位代码段与数据段，范围是 四吉字节。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 24,
+          "time": 0.0,
+          "duration": 3.6534166666666668
+        },
+        {
+          "start": 24,
+          "end": 58,
+          "time": 3.773416666666667,
+          "duration": 5.997916666666667
+        }
+      ]
+    },
+    {
+      "id": "bios-3",
+      "sourceText": "写 CR0，把 PE 置 1，进入保护模式；同时清掉 PG、CD 和 NW。仅写 PE，还没装入新的 32 位代码段",
+      "file": "fire-bios-3-7a44e357c6f6d2e7.mp3",
+      "duration": 10.1133,
+      "sha256": "7a44e357c6f6d2e77a534b2f59031bcbced36b765bd551ab40552c266233d374",
+      "spokenText": [
+        "写 C R 零，把 P E 置 一，进入保护模式。",
+        "同时清掉 P G、C，D 和 N W。",
+        "仅写 P E，还没装入新的 三十二 位代码段。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 22,
+          "time": 0.0,
+          "duration": 3.241416666666667
+        },
+        {
+          "start": 22,
+          "end": 38,
+          "time": 3.3614166666666665,
+          "duration": 3.3020416666666668
+        },
+        {
+          "start": 38,
+          "end": 58,
+          "time": 6.783458333333333,
+          "duration": 3.2311666666666667
+        }
+      ]
+    },
+    {
+      "id": "bios-4",
+      "sourceText": "远跳转装入选择子 0x08 对应的 CS。段描述符指定默认 32 位操作数和地址，CPU 从此按 32 位代码段执行",
+      "file": "fire-bios-4-df64814219a22888.mp3",
+      "duration": 9.9868,
+      "sha256": "df64814219a22888ba7b0cb68c5115859590fabf7cdbc86f6c38f7f1af88cfbf",
+      "spokenText": [
+        "远跳转装入选择子 零，八 对应的 C S。",
+        "段描述符指定默认 三十二 位操作数和地址，C P U 从此按 三十二 位代码段执行。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 21,
+          "time": 0.0,
+          "duration": 3.258958333333333
+        },
+        {
+          "start": 21,
+          "end": 58,
+          "time": 3.3789583333333333,
+          "duration": 6.509166666666666
+        }
+      ]
+    },
+    {
+      "id": "bios-5",
+      "sourceText": "再把数据段和栈段换成选择子 0x10，起点都是 0，然后跳进 BIOS 的 C 初始化代码。PG 为 0，不用页表",
+      "file": "fire-bios-5-f3aa7afaeb9f0bb5.mp3",
+      "duration": 9.8142,
+      "sha256": "f3aa7afaeb9f0bb5bb3d848e16db5e1482056fa896a3efd954496165f376e118",
+      "spokenText": [
+        "再把数据段和栈段换成选择子 一，零，起点都是 零，然后跳进 B I O S 的 C 初始化代码。",
+        "P G 为 零，不用页表。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 46,
+          "time": 0.0,
+          "duration": 7.5880833333333335
+        },
+        {
+          "start": 46,
+          "end": 57,
+          "time": 7.708083333333334,
+          "duration": 2.007458333333333
+        }
+      ]
+    },
+    {
+      "id": "bios-6",
+      "sourceText": "第一件事：弄清有多少内存。答案是 512 MB，内存从此可以读写",
+      "file": "fire-bios-6-4e663bd9420c1317.mp3",
+      "duration": 6.3524,
+      "sha256": "4e663bd9420c1317fef9be1f9614949b5fa9e18510400ba784270d3e7e1119c7",
+      "spokenText": [
+        "第一件事：弄清有多少内存。",
+        "答案是 五百一十二兆字节，内存从此可以读写。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 13,
+          "time": 0.0,
+          "duration": 2.432958333333333
+        },
+        {
+          "start": 13,
+          "end": 32,
+          "time": 2.552958333333333,
+          "duration": 3.7007916666666665
+        }
+      ]
+    },
+    {
+      "id": "bios-7",
+      "sourceText": "在内存最底部写一张“中断向量表”：256 个入口，记录每种中断该去哪里处理",
+      "file": "fire-bios-7-c73464208b34d9b5.mp3",
+      "duration": 6.5083,
+      "sha256": "c73464208b34d9b58531eece7ecaa873a1a18484bc77c90ccb9320efc5491721",
+      "spokenText": [
+        "在内存最底部写一张中断向量表：二百五十六 个入口，记录每种中断该去哪里处理。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 37,
+          "time": 0.0,
+          "duration": 6.409583333333333
+        }
+      ]
+    },
+    {
+      "id": "bios-8",
+      "sourceText": "紧挨着写“BIOS 数据区”：记录键盘、屏幕、磁盘这些设备的状态",
+      "file": "fire-bios-8-b7cbe0e4a0e3c782.mp3",
+      "duration": 6.1163,
+      "sha256": "b7cbe0e4a0e3c782a7fdfbecaa504aa29ce9fca8aa6b5cb62a4159488fe55cca",
+      "spokenText": [
+        "紧挨着写B I O S 数据区：记录键盘、屏幕、磁盘这些设备的状态。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 32,
+          "time": 0.0,
+          "duration": 6.017625
+        }
+      ]
+    },
+    {
+      "id": "bios-9",
+      "sourceText": "运行显卡自带的小程序，屏幕亮了，显示 BIOS 的版本",
+      "file": "fire-bios-9-84db417211902824.mp3",
+      "duration": 4.9809,
+      "sha256": "84db4172119028249e7f9788dca14a67f56176c49b5d1dc34f0c0c2d28904cbd",
+      "spokenText": [
+        "运行显卡自带的小程序，屏幕亮了，显示 B I O S 的版本。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 27,
+          "time": 0.0,
+          "duration": 4.882208333333334
+        }
+      ]
+    },
+    {
+      "id": "bios-10",
+      "sourceText": "检查其他硬件：键盘、光驱、磁盘……然后开始找可以启动的盘",
+      "file": "fire-bios-10-46a3a6e2d84307dc.mp3",
+      "duration": 6.801,
+      "sha256": "46a3a6e2d84307dc522c7f4d165e619b192a69f90706ac25e4c824abbade6e86",
+      "spokenText": [
+        "检查其他硬件：键盘、光驱、磁盘，等等。然后开始找可以启动的盘。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 28,
+          "time": 0.0,
+          "duration": 6.702375
+        }
+      ]
+    },
+    {
+      "id": "bios-11",
+      "sourceText": "从光盘启动。屏幕显示 Booting from DVD/CD",
+      "file": "fire-bios-11-1a04bced3fc1f902.mp3",
+      "duration": 4.262,
+      "sha256": "1a04bced3fc1f902a2eebcbf12b33f85c0e7b979017f870887eecdffc71ee23f",
+      "spokenText": [
+        "从光盘启动。",
+        "屏幕显示 Booting from D V D/C D。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 6,
+          "time": 0.0,
+          "duration": 1.3040416666666668
+        },
+        {
+          "start": 6,
+          "end": 30,
+          "time": 1.4240416666666667,
+          "duration": 2.73925
+        }
+      ]
+    },
+    {
+      "id": "bios-12",
+      "sourceText": "先读光盘第 17 号扇区：这是“启动记录”，告诉 BIOS 引导程序放在盘上哪里",
+      "file": "fire-bios-12-e21b2c7c481ced71.mp3",
+      "duration": 7.0988,
+      "sha256": "e21b2c7c481ced71ce5da15816faecd6f04ae5b0c5e1f303ed9d74f00ac4607b",
+      "spokenText": [
+        "先读光盘第 十七 号扇区：这是启动记录，告诉 B I O S 引导程序放在盘上哪里。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 40,
+          "time": 0.0,
+          "duration": 7.000166666666667
+        }
+      ]
+    },
+    {
+      "id": "bios-13",
+      "sourceText": "把光盘里的引导程序（2 KB）复制到内存地址 0x7C00",
+      "file": "fire-bios-13-26adbaa8ffb2a135.mp3",
+      "duration": 6.0743,
+      "sha256": "26adbaa8ffb2a1357919c4dabd67f745661ad32a9954eb8c45a62e4cc5399833",
+      "spokenText": [
+        "把光盘里的引导程序（二千字节）复制到内存地址 七，C，零，零。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 29,
+          "time": 0.0,
+          "duration": 5.975666666666666
+        }
+      ]
+    },
+    {
+      "id": "bios-14",
+      "sourceText": "交给传统引导器前，先收回数据段范围，再远跳转到 16 位保护模式代码段，随后清掉 CR0.PE。还要再远跳转，才能恢复实模式 CS",
+      "file": "fire-bios-14-1b43858324dcea03.mp3",
+      "duration": 12.1852,
+      "sha256": "1b43858324dcea039e0e806dd074b33c09728c87182ba8c693d6d81a6efdaa31",
+      "spokenText": [
+        "交给传统引导器前，先收回数据段范围，再远跳转到 十六 位保护模式代码段，随后清掉 C R 零 的 P E 标志。",
+        "还要再远跳转，才能恢复实模式 C S。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 48,
+          "time": 0.0,
+          "duration": 8.835166666666666
+        },
+        {
+          "start": 48,
+          "end": 65,
+          "time": 8.955166666666667,
+          "duration": 3.1314166666666665
+        }
+      ]
+    },
+    {
+      "id": "bios-15",
+      "sourceText": "BIOS 退回 16 位实模式，AX 填上暗号 AA55，然后跳到 7C00，把 CPU 交给引导程序",
+      "file": "fire-bios-15-3a7ad28744e4c194.mp3",
+      "duration": 10.0842,
+      "sha256": "3a7ad28744e4c1944c74cfc0867730fa4158a35e2ecee0af34177e2f9e15895a",
+      "spokenText": [
+        "B I O S 退回 十六 位实模式，A X 填上暗号 A，A，五，五，然后跳到 七，C，零，零，把 C P U 交给引导程序。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 51,
+          "time": 0.0,
+          "duration": 9.9855
+        }
+      ]
+    },
+    {
+      "id": "grub-0",
+      "sourceText": "引导程序只有 2 KB，它的任务是把 GRUB 的其余部分从光盘读进内存",
+      "file": "fire-grub-0-23a5c18d2f095b6b.mp3",
+      "duration": 6.461,
+      "sha256": "23a5c18d2f095b6ba5077be78068b1d3edf8800b28d24f04edfd5297689e0efd",
+      "spokenText": [
+        "引导程序只有 二千字节，它的任务是把 G R U B 的其余部分从光盘读进内存。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 36,
+          "time": 0.0,
+          "duration": 6.362333333333333
+        }
+      ]
+    },
+    {
+      "id": "grub-1",
+      "sourceText": "GRUB 读配置文件 grub.cfg：要启动的内核文件是 /boot/bzImage",
+      "file": "fire-grub-1-157785302ecd0684.mp3",
+      "duration": 6.2925,
+      "sha256": "157785302ecd06842b5a2944c437714aee7f0f1c38c8e14114478faa3158cb00",
+      "spokenText": [
+        "G R U B 读配置文件 grub.cfg：要启动的内核文件是 /boot/B Z image。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 43,
+          "time": 0.0,
+          "duration": 6.193875
+        }
+      ]
+    },
+    {
+      "id": "grub-2",
+      "sourceText": "先把内核文件开头的 setup 部分（16 位程序）放到 0x90000",
+      "file": "fire-grub-2-3faeb108110c0dd7.mp3",
+      "duration": 6.1858,
+      "sha256": "3faeb108110c0dd7dbc3b6c606f9c9d046fa8289bda3ce01a5ecbbd33365b6f3",
+      "spokenText": [
+        "先把内核文件开头的 setup 部分（十六 位程序）放到 九，零，零，零，零。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 36,
+          "time": 0.0,
+          "duration": 6.087166666666667
+        }
+      ]
+    },
+    {
+      "id": "grub-3",
+      "sourceText": "再把内核的主体放到 1 MB 处，也就是 0x100000。它是压缩过的，6.2 MB",
+      "file": "fire-grub-3-5466de45ed5b1f10.mp3",
+      "duration": 8.8143,
+      "sha256": "5466de45ed5b1f10a0ec75d07f81d20957b7b2f85e0e4c12d57aacfeb2c576e0",
+      "spokenText": [
+        "再把内核的主体放到 一兆字节 处，也就是 一，零，零，零，零，零。",
+        "它是压缩过的，六点二兆字节。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 30,
+          "time": 0.0,
+          "duration": 6.147958333333333
+        },
+        {
+          "start": 30,
+          "end": 43,
+          "time": 6.2679583333333335,
+          "duration": 2.4477083333333334
+        }
+      ]
+    },
+    {
+      "id": "grub-4",
+      "sourceText": "再把 initramfs 放到内存顶部：它是一个打包好的小文件系统，里面有第一个用户程序",
+      "file": "fire-grub-4-f5d3c5da04ea24e0.mp3",
+      "duration": 7.0233,
+      "sha256": "f5d3c5da04ea24e04b0bef391ebc5bb75eabe1a76652cd3cda3eee806d0d9d37",
+      "spokenText": [
+        "再把 init ram F S 放到内存顶部：它是一个打包好的小文件系统，里面有第一个用户程序。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 44,
+          "time": 0.0,
+          "duration": 6.924625
+        }
+      ]
+    },
+    {
+      "id": "grub-5",
+      "sourceText": "把这些位置和命令行写进“启动参数表” boot_params，留给内核看",
+      "file": "fire-grub-5-0cd61f58469fb986.mp3",
+      "duration": 4.8574,
+      "sha256": "0cd61f58469fb9869cac9b2053efde0f5c458cd0277ee6e02677b76f304e8bdb",
+      "spokenText": [
+        "把这些位置和命令行写进启动参数表 boot params，留给内核看。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 36,
+          "time": 0.0,
+          "duration": 4.75875
+        }
+      ]
+    },
+    {
+      "id": "grub-6",
+      "sourceText": "GRUB 跳到 setup 的入口。Linux 的代码开始执行了",
+      "file": "fire-grub-6-e32f95c8efe4bc94.mp3",
+      "duration": 4.3723,
+      "sha256": "e32f95c8efe4bc94a20c0c2613b4a772f1e8e626260b0709c054d1481cec807d",
+      "spokenText": [
+        "G R U B 跳到 setup 的入口。",
+        "Linux 的代码开始执行了。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 18,
+          "time": 0.0,
+          "duration": 2.1654583333333335
+        },
+        {
+          "start": 18,
+          "end": 32,
+          "time": 2.285458333333333,
+          "duration": 1.9882083333333334
+        }
+      ]
+    },
+    {
+      "id": "setup-0",
+      "sourceText": "Linux 的第一行代码：把 DS 的值复制到 ES，让几个段寄存器指向同一块内存",
+      "file": "fire-setup-0-ffd48aaf816be1ce.mp3",
+      "duration": 6.65,
+      "sha256": "ffd48aaf816be1ce141adc30f7f6b332332fda803116cbe9e9037a83c1f4ac75",
+      "spokenText": [
+        "Linux 的第一条代码：把 D S 的值复制到 E S，让几个段寄存器指向同一块内存。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 41,
+          "time": 0.0,
+          "duration": 6.550208333333333
+        }
+      ]
+    },
+    {
+      "id": "setup-1",
+      "sourceText": "设置“栈”：一块临时草稿区，函数调用时要用。栈顶在 0x98FFC",
+      "file": "fire-setup-1-3e6fd2709f00d719.mp3",
+      "duration": 7.2304,
+      "sha256": "3e6fd2709f00d719b68764f38f5208889d4f7fdc4e43d9bff49828ecbfe6e345",
+      "spokenText": [
+        "设置栈：一块临时草稿区，函数调用时要用。",
+        "栈顶在 九，八，F，F，C。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 22,
+          "time": 0.0,
+          "duration": 4.088041666666666
+        },
+        {
+          "start": 22,
+          "end": 33,
+          "time": 4.2080416666666665,
+          "duration": 2.9237083333333334
+        }
+      ]
+    },
+    {
+      "id": "setup-2",
+      "sourceText": "把 CS 统一成 9000，再把 setup 的全局变量区清零",
+      "file": "fire-setup-2-269df5e1f9709264.mp3",
+      "duration": 4.4196,
+      "sha256": "269df5e1f970926462c8c9ca18123c3e881a4c19019f41066a556fefc9d8aad4",
+      "spokenText": [
+        "把 C S 统一成 九千，再把 setup 的全局变量区清零。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 31,
+          "time": 0.0,
+          "duration": 4.3209583333333335
+        }
+      ]
+    },
+    {
+      "id": "setup-3",
+      "sourceText": "跳进 C 语言写的 main 函数",
+      "file": "fire-setup-3-a10bfa3a167eb53f.mp3",
+      "duration": 2.0804,
+      "sha256": "a10bfa3a167eb53fee9e2dcf4dfed834da5d6c10834e553061d14a676a3ef602",
+      "spokenText": [
+        "跳进 C 语言写的 main 函数。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 17,
+          "time": 0.0,
+          "duration": 1.98175
+        }
+      ]
+    },
+    {
+      "id": "setup-4",
+      "sourceText": "把 GRUB 填好的启动参数复制一份，存进 setup 自己的 boot_params",
+      "file": "fire-setup-4-696bd5707ca55151.mp3",
+      "duration": 5.6443,
+      "sha256": "696bd5707ca551519464f6bba9e6d493399f42ec0c54e381b3ad6a1d35b12a07",
+      "spokenText": [
+        "把 G R U B 填好的启动参数复制一份，存进 setup 自己的 boot params。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 43,
+          "time": 0.0,
+          "duration": 5.545625
+        }
+      ]
+    },
+    {
+      "id": "setup-5",
+      "sourceText": "问 BIOS：哪些地址是真内存？用的是 BIOS 的 e820 功能",
+      "file": "fire-setup-5-6756f898ae46c5a9.mp3",
+      "duration": 6.2013,
+      "sha256": "6756f898ae46c5a955e26be1de484283106f617d09a378321671b0625906ffce",
+      "spokenText": [
+        "问 B I O S：哪些地址是真内存？",
+        "用的是 B I O S 的 e 八百二十 功能。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 16,
+          "time": 0.0,
+          "duration": 3.0533333333333332
+        },
+        {
+          "start": 16,
+          "end": 34,
+          "time": 3.1733333333333333,
+          "duration": 2.929333333333333
+        }
+      ]
+    },
+    {
+      "id": "setup-6",
+      "sourceText": "准备离开实模式。第一步，关中断（cli）：切换过程中不能被打断",
+      "file": "fire-setup-6-504168c214382e37.mp3",
+      "duration": 5.8986,
+      "sha256": "504168c214382e37639e6b4ab479ff230f2aacb441510c28597e3972a3bd06d8",
+      "spokenText": [
+        "准备离开实模式。",
+        "第一步，关中断（cli）：切换过程中不能被打断。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 8,
+          "time": 0.0,
+          "duration": 1.4785416666666666
+        },
+        {
+          "start": 8,
+          "end": 31,
+          "time": 1.5985416666666667,
+          "duration": 4.201375
+        }
+      ]
+    },
+    {
+      "id": "setup-7",
+      "sourceText": "打开 A20 地址线：不开它，1 MB 以上的地址会“绕回”0",
+      "file": "fire-setup-7-12f21e01eb667fe2.mp3",
+      "duration": 4.9315,
+      "sha256": "12f21e01eb667fe2580b88633417cf66129f2372dd96b5cd001c44075e685cef",
+      "spokenText": [
+        "打开 A 二十 地址线：不开它，一兆字节 以上的地址会绕回零。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 31,
+          "time": 0.0,
+          "duration": 4.832791666666667
+        }
+      ]
+    },
+    {
+      "id": "setup-8",
+      "sourceText": "屏蔽中断控制器上的所有硬件中断",
+      "file": "fire-setup-8-902f542c17a9d453.mp3",
+      "duration": 2.9026,
+      "sha256": "902f542c17a9d4538c9b41b65388a99e30fb480d07d087131242ecb70bd420d3",
+      "spokenText": [
+        "屏蔽中断控制器上的所有硬件中断。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 15,
+          "time": 0.0,
+          "duration": 2.8039583333333336
+        }
+      ]
+    },
+    {
+      "id": "setup-9",
+      "sourceText": "装一张空的中断描述符表 IDT：模式切换期间不处理中断",
+      "file": "fire-setup-9-f7e170feafc95b7c.mp3",
+      "duration": 5.0158,
+      "sha256": "f7e170feafc95b7c77475f9bbbfcd1aa175828009d3cd3867dc1a1d1b8142e61",
+      "spokenText": [
+        "装一张空的中断描述符表 I D T：模式切换期间不处理中断。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 27,
+          "time": 0.0,
+          "duration": 4.917125
+        }
+      ]
+    },
+    {
+      "id": "setup-10",
+      "sourceText": "装入“全局描述符表” GDT：定义代码段和数据段，都从 0 开始、覆盖 4 GB",
+      "file": "fire-setup-10-2e0db13a8ebffa3b.mp3",
+      "duration": 6.9752,
+      "sha256": "2e0db13a8ebffa3b13b9fbb83717b184338d3303a19ff1551f5c2afa61d1f95a",
+      "spokenText": [
+        "装入全局描述符表 G D T：定义代码段和数据段，都从 零 开始、覆盖 四吉字节。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 40,
+          "time": 0.0,
+          "duration": 6.876541666666666
+        }
+      ]
+    },
+    {
+      "id": "setup-11",
+      "sourceText": "调用 protected_mode_jump，带上两个参数：内核入口地址，和 boot_params 的地址",
+      "file": "fire-setup-11-3364ea64d7f27db0.mp3",
+      "duration": 6.3595,
+      "sha256": "3364ea64d7f27db0e623f4006282682914c3bb1abed428f9cf7ccfcbafcc1fdf",
+      "spokenText": [
+        "调用 protected mode jump，带上两个参数：内核入口地址，和 boot params 的地址。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 54,
+          "time": 0.0,
+          "duration": 6.260875
+        }
+      ]
+    },
+    {
+      "id": "pm-0",
+      "sourceText": "ESI 记下启动参数表的地址，之后一路传给内核",
+      "file": "fire-pm-0-cc4d618028b45093.mp3",
+      "duration": 4.2819,
+      "sha256": "cc4d618028b4509325588ab184daca02f95aa607745bff54e68b1ff02d06f43b",
+      "spokenText": [
+        "E S I 记下启动参数表的地址，之后一路传给内核。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 23,
+          "time": 0.0,
+          "duration": 4.183208333333333
+        }
+      ]
+    },
+    {
+      "id": "pm-1",
+      "sourceText": "读出 CR0（控制寄存器）到 EDX",
+      "file": "fire-pm-1-d130ad438368f52b.mp3",
+      "duration": 3.1893,
+      "sha256": "d130ad438368f52b3d3640e10a8e7e594538957a2c69c438a7c9c1800b1a17b4",
+      "spokenText": [
+        "读出 C R 零（控制寄存器）到 E D X。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 18,
+          "time": 0.0,
+          "duration": 3.0906666666666665
+        }
+      ]
+    },
+    {
+      "id": "pm-2",
+      "sourceText": "把最低位 PE 置 1：PE 就是“保护模式”的开关",
+      "file": "fire-pm-2-71073f4fed4385ea.mp3",
+      "duration": 3.674,
+      "sha256": "71073f4fed4385eae890f396f38246caa576756197a266a66f2ba08d30ec8eca",
+      "spokenText": [
+        "把最低位 P E 置 一：P E 就是保护模式的开关。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 26,
+          "time": 0.0,
+          "duration": 3.573583333333333
+        }
+      ]
+    },
+    {
+      "id": "pm-3",
+      "sourceText": "写回 CR0：PE = 1，CPU 进入保护模式！",
+      "file": "fire-pm-3-17b4258c4e87f0bc.mp3",
+      "duration": 4.3328,
+      "sha256": "17b4258c4e87f0bc97b12a49b6a70b91904d39a67039fa2e94fb00649c7e2815",
+      "spokenText": [
+        "写回 C R 零：P E 等于 一，C P U 进入保护模式！"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 25,
+          "time": 0.0,
+          "duration": 4.234166666666667
+        }
+      ]
+    },
+    {
+      "id": "pm-4",
+      "sourceText": "远跳转：CS 换成 GDT 里的代码段 0x10。从这一刻起，CPU 按 32 位执行指令",
+      "file": "fire-pm-4-3dba82f01936b35b.mp3",
+      "duration": 8.0334,
+      "sha256": "3dba82f01936b35be5ff449b8160c729f092daa1906aecd0bba7eb42322e066d",
+      "spokenText": [
+        "远跳转：C S 换成 G D T 里的代码段 一，零。",
+        "从这一刻起，C P U 按 三十二 位执行指令。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 25,
+          "time": 0.0,
+          "duration": 4.078875
+        },
+        {
+          "start": 25,
+          "end": 45,
+          "time": 4.198875,
+          "duration": 3.735875
+        }
+      ]
+    },
+    {
+      "id": "pm-5",
+      "sourceText": "DS、ES、SS 也换成 GDT 里的数据段 0x18",
+      "file": "fire-pm-5-1250a11d6ad0b8a7.mp3",
+      "duration": 4.4067,
+      "sha256": "1250a11d6ad0b8a7dae394c5b9ed63fae291a27f1676310766a8bb8c1f12209e",
+      "spokenText": [
+        "D S、E S、S S 也换成 G D T 里的数据段 一，八。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 27,
+          "time": 0.0,
+          "duration": 4.308
+        }
+      ]
+    },
+    {
+      "id": "pm-6",
+      "sourceText": "跳到 EAX 里的地址 0x100000：压缩内核的入口 startup_32",
+      "file": "fire-pm-6-ab66d550630f6bbf.mp3",
+      "duration": 7.4628,
+      "sha256": "ab66d550630f6bbf8adb20b3d3580d86caa064fab6cfe1e1796cf0ca8a712308",
+      "spokenText": [
+        "跳到 E A X 里的地址 一，零，零，零，零，零：压缩内核的入口 startup 三十二。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 39,
+          "time": 0.0,
+          "duration": 7.364166666666667
+        }
+      ]
+    },
+    {
+      "id": "paging-0",
+      "sourceText": "先算出自己被放在哪：用 call 再 pop 的小技巧，EBP = 0x100000",
+      "file": "fire-paging-0-305b84dc2b806578.mp3",
+      "duration": 7.4313,
+      "sha256": "305b84dc2b806578b1b4a2b1c7583f514a44913fbbd885df0cdc4167b756d66d",
+      "spokenText": [
+        "先算出自己被放在哪：用 call 再 pop 的小技巧，E B P 等于 一，零，零，零，零，零。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 42,
+          "time": 0.0,
+          "duration": 7.332666666666666
+        }
+      ]
+    },
+    {
+      "id": "paging-1",
+      "sourceText": "换上自己的 GDT 和栈，CS 换成 0x08，栈顶在 0x731400",
+      "file": "fire-paging-1-0b23577bdb70fb1a.mp3",
+      "duration": 8.0329,
+      "sha256": "0b23577bdb70fb1ac83d9e585e149c9d485eefaca95dc1f6193fec524661505a",
+      "spokenText": [
+        "换上自己的 G D T 和栈，C S 换成 零，八，栈顶在 七，三，一，四，零，零。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 36,
+          "time": 0.0,
+          "duration": 7.93425
+        }
+      ]
+    },
+    {
+      "id": "paging-2",
+      "sourceText": "检查这颗 CPU 支不支持 64 位：支持",
+      "file": "fire-paging-2-94fa37c04f52e7b9.mp3",
+      "duration": 3.8451,
+      "sha256": "94fa37c04f52e7b9bb0aa989e09c5f489a231ebc40826ee74781834ac9d2b1d1",
+      "spokenText": [
+        "检查这颗 C P U 支不支持 六十四 位：支持。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 21,
+          "time": 0.0,
+          "duration": 3.7464166666666667
+        }
+      ]
+    },
+    {
+      "id": "paging-3",
+      "sourceText": "算出解压时的安全位置，放进 EBX。先把自己挪到后面，前面留给解压结果",
+      "file": "fire-paging-3-b78f8fee857932a9.mp3",
+      "duration": 6.533,
+      "sha256": "b78f8fee857932a9463dc2d62dd04d30357f6b10edbec738f881a9d28cc6481a",
+      "spokenText": [
+        "算出解压时的安全位置，放进 E B X。",
+        "先把自己挪到后面，前面留给解压结果。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 18,
+          "time": 0.0,
+          "duration": 3.259708333333333
+        },
+        {
+          "start": 18,
+          "end": 35,
+          "time": 3.3797083333333333,
+          "duration": 3.054625
+        }
+      ]
+    },
+    {
+      "id": "paging-4",
+      "sourceText": "64 位第 1 步：打开 CR4 的 PAE 位（物理地址扩展），这是 64 位分页的前提",
+      "file": "fire-paging-4-d9f130d50f11da88.mp3",
+      "duration": 6.4294,
+      "sha256": "d9f130d50f11da884d3037adf43c357337d7146d8bdd70149b0760c7fa41f659",
+      "spokenText": [
+        "六十四 位第 一 步：打开 C R 四 的 P A E 位（物理地址扩展），这是 六十四 位分页的前提。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 45,
+          "time": 0.0,
+          "duration": 6.33075
+        }
+      ]
+    },
+    {
+      "id": "paging-5",
+      "sourceText": "64 位第 2 步：建“页表”。先在 0x26F1000 清出 6 页（24 KB）",
+      "file": "fire-paging-5-e38acb739f593624.mp3",
+      "duration": 7.955,
+      "sha256": "e38acb739f59362467c52f4fca15155a1a0120181897706497fa64540d58fac7",
+      "spokenText": [
+        "六十四 位第 二 步：建页表。",
+        "先在 二，六，F，一，零，零，零 清出 六 页（二十四千字节）。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 16,
+          "time": 0.0,
+          "duration": 2.021125
+        },
+        {
+          "start": 16,
+          "end": 42,
+          "time": 2.141125,
+          "duration": 5.715166666666667
+        }
+      ]
+    },
+    {
+      "id": "paging-6",
+      "sourceText": "第 4 级页表（PML4）只填 1 项：指向下一级",
+      "file": "fire-paging-6-443d7c454364be68.mp3",
+      "duration": 4.0934,
+      "sha256": "443d7c454364be6816f4328948b0b860a2d6aff4618d03fc10341dedb6ee7231",
+      "spokenText": [
+        "第 四 级页表（P M L 四）只填 一 项：指向下一级。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 25,
+          "time": 0.0,
+          "duration": 3.9947083333333335
+        }
+      ]
+    },
+    {
+      "id": "paging-7",
+      "sourceText": "第 3 级（PDPT）填 4 项：指向 4 张页目录",
+      "file": "fire-paging-7-f40165bb560effc9.mp3",
+      "duration": 3.8022,
+      "sha256": "f40165bb560effc915c9bb70011306701074e96a849041f97fa9f9e19ae085f2",
+      "spokenText": [
+        "第 三 级（P D P T）填 四 项：指向 四 张页目录。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 26,
+          "time": 0.0,
+          "duration": 3.7035416666666667
+        }
+      ]
+    },
+    {
+      "id": "paging-8",
+      "sourceText": "第 2 级（页目录）填 2048 项，每项管 2 MB，一共覆盖 4 GB：虚拟地址 = 物理地址",
+      "file": "fire-paging-8-68123ce56b677975.mp3",
+      "duration": 8.3841,
+      "sha256": "68123ce56b677975b02468a14579ebc39403c711b52574871b47f36111b4d5d0",
+      "spokenText": [
+        "第 二 级（页目录）填 二千零四十八 项，每项管 二兆字节，一共覆盖 四吉字节：虚拟地址 等于 物理地址。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 49,
+          "time": 0.0,
+          "duration": 8.285416666666666
+        }
+      ]
+    },
+    {
+      "id": "paging-9",
+      "sourceText": "64 位第 3 步：把页表的起点写进 CR3。CPU 以后从这里查页表",
+      "file": "fire-paging-9-25bc8152ea3c237b.mp3",
+      "duration": 6.0992,
+      "sha256": "25bc8152ea3c237bc74929deb4149160026ae945007f932dbadf4e248a8663f7",
+      "spokenText": [
+        "六十四 位第 三 步：把页表的起点写进 C R 三。",
+        "C P U 以后从这里查页表。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 23,
+          "time": 0.0,
+          "duration": 3.68725
+        },
+        {
+          "start": 23,
+          "end": 35,
+          "time": 3.80725,
+          "duration": 2.1933333333333334
+        }
+      ]
+    },
+    {
+      "id": "paging-10",
+      "sourceText": "64 位第 4 步：打开 EFER 寄存器的 LME 位：允许长模式（64 位）",
+      "file": "fire-paging-10-d3a12360e9a8c345.mp3",
+      "duration": 6.1088,
+      "sha256": "d3a12360e9a8c3455b084d16b232d9986647b103b8743db3a7091853121e2198",
+      "spokenText": [
+        "六十四 位第 四 步：打开 E F E R 寄存器的 L M E 位：允许long mode（六十四 位）。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 40,
+          "time": 0.0,
+          "duration": 6.010166666666667
+        }
+      ]
+    },
+    {
+      "id": "paging-11",
+      "sourceText": "把 64 位代码的入口 0x100200 压进栈，准备“返回”过去",
+      "file": "fire-paging-11-7c1b76ba5490f63f.mp3",
+      "duration": 6.6937,
+      "sha256": "7c1b76ba5490f63fe827e0306ee2d7d1c5a313bb7e002f1b442681ecc7435955",
+      "spokenText": [
+        "把 六十四 位代码的入口 一，零，零，二，零，零 压进栈，准备返回过去。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 33,
+          "time": 0.0,
+          "duration": 6.595
+        }
+      ]
+    },
+    {
+      "id": "paging-12",
+      "sourceText": "64 位第 5 步：写 CR0，PG = 1，分页正式开启！CPU 自动把 EFER 的 LMA 置 1",
+      "file": "fire-paging-12-427a4288528d45a6.mp3",
+      "duration": 8.5643,
+      "sha256": "427a4288528d45a64ee7dc9a00cc6d1b5174bb52a73814690b9927a056cb1f6c",
+      "spokenText": [
+        "六十四 位第 五 步：写 C R 零，P G 等于 一，分页正式开启！",
+        "C P U 自动把 E F E R 的 L M A 置 一。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 30,
+          "time": 0.0,
+          "duration": 4.850041666666667
+        },
+        {
+          "start": 30,
+          "end": 52,
+          "time": 4.970041666666667,
+          "duration": 3.495625
+        }
+      ]
+    },
+    {
+      "id": "paging-13",
+      "sourceText": "从现在起，CPU 用的每个地址都要先经过 MMU（地址翻译单元）查页表，再去访问内存",
+      "file": "fire-paging-13-caa265345d3df8e4.mp3",
+      "duration": 7.6527,
+      "sha256": "caa265345d3df8e4e5d8efeead3d4db059b2471fda919516881eeed12a495dce",
+      "spokenText": [
+        "从现在起，C P U 用的每个地址都要先经过 M M U（地址翻译单元）查页表，再去访问内存。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 42,
+          "time": 0.0,
+          "duration": 7.554
+        }
+      ]
+    },
+    {
+      "id": "paging-14",
+      "sourceText": "lret：从栈里弹出 CS 和入口地址。CPU 进入 64 位长模式！",
+      "file": "fire-paging-14-2ec0b7f7a104b8bf.mp3",
+      "duration": 5.7188,
+      "sha256": "2ec0b7f7a104b8bf69977833de100331e37c00dc181aab88815cf9bffb12e246",
+      "spokenText": [
+        "lret：从栈里弹出 C S 和入口地址。",
+        "C P U 进入 六十四 位long mode！"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 20,
+          "time": 0.0,
+          "duration": 3.03075
+        },
+        {
+          "start": 20,
+          "end": 35,
+          "time": 3.15075,
+          "duration": 2.469375
+        }
+      ]
+    },
+    {
+      "id": "decomp-0",
+      "sourceText": "64 位下段寄存器基本不再参与寻址，DS、ES、SS 清零",
+      "file": "fire-decomp-0-3048863801e979fa.mp3",
+      "duration": 5.7093,
+      "sha256": "3048863801e979fa7448ca66386d37f8376629cf446d526d7ace62d259b55340",
+      "spokenText": [
+        "六十四 位下段寄存器基本不再参与寻址，D S、E S、S S 清零。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 29,
+          "time": 0.0,
+          "duration": 5.610625
+        }
+      ]
+    },
+    {
+      "id": "decomp-1",
+      "sourceText": "把压缩内核整个复制到后面的安全位置：从后往前，一次 8 字节",
+      "file": "fire-decomp-1-a8f124370f5cb526.mp3",
+      "duration": 5.3963,
+      "sha256": "a8f124370f5cb52686c7ca00f70481c2a2bf835289411389ad4b5c18c880de5d",
+      "spokenText": [
+        "把压缩内核整个复制到后面的安全位置：从后往前，一次 八 字节。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 30,
+          "time": 0.0,
+          "duration": 5.297666666666666
+        }
+      ]
+    },
+    {
+      "id": "decomp-2",
+      "sourceText": "跳到复制后的新位置继续执行",
+      "file": "fire-decomp-2-0259d5b36216f6b6.mp3",
+      "duration": 2.597,
+      "sha256": "0259d5b36216f6b68a5313ab0c1804ee5739696b566ca908554ba2b9c487454c",
+      "spokenText": [
+        "跳到复制后的新位置继续执行。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 13,
+          "time": 0.0,
+          "duration": 2.498291666666667
+        }
+      ]
+    },
+    {
+      "id": "decomp-3",
+      "sourceText": "调用 C 函数 extract_kernel，开始解压。输出地址是 16 MB 处",
+      "file": "fire-decomp-3-d9867c9c68bd15eb.mp3",
+      "duration": 5.7356,
+      "sha256": "d9867c9c68bd15ebf98015874fa67e318d12f6bc3f3cbd24a9a96584ff5d41c4",
+      "spokenText": [
+        "调用 C 函数 extract kernel，开始解压。",
+        "输出地址是 十六兆字节 处。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 28,
+          "time": 0.0,
+          "duration": 2.9101666666666666
+        },
+        {
+          "start": 28,
+          "end": 41,
+          "time": 3.0301666666666667,
+          "duration": 2.60675
+        }
+      ]
+    },
+    {
+      "id": "decomp-4",
+      "sourceText": "解压：6 MB 的压缩数据变成 22 MB 的内核，从 16 MB 处开始往后写",
+      "file": "fire-decomp-4-5d5eb1aec869a444.mp3",
+      "duration": 7.0296,
+      "sha256": "5d5eb1aec869a444a633f20c3bb138dd6f6d81b0e5a172f9abdde3a3fb07256a",
+      "spokenText": [
+        "解压：六兆字节 的压缩数据变成 二十二兆字节 的内核，从 十六兆字节 处开始往后写。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 40,
+          "time": 0.0,
+          "duration": 6.930958333333334
+        }
+      ]
+    },
+    {
+      "id": "decomp-5",
+      "sourceText": "按内核文件里的说明，分出代码、只读数据、数据和全局变量区",
+      "file": "fire-decomp-5-6554220a30566e54.mp3",
+      "duration": 5.854,
+      "sha256": "6554220a30566e54bb63280078c0130f0d478e0a542c175b8caceb61e7a021cd",
+      "spokenText": [
+        "按内核文件里的说明，分出代码、只读数据、数据和全局变量区。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 28,
+          "time": 0.0,
+          "duration": 5.7552916666666665
+        }
+      ]
+    },
+    {
+      "id": "decomp-6",
+      "sourceText": "返回内核的入口地址：RAX = 0x1000000",
+      "file": "fire-decomp-6-dc5b8137ff3aca07.mp3",
+      "duration": 5.7752,
+      "sha256": "dc5b8137ff3aca075160e2cd4bfae42e46bb8b9183218854757797e801f2e740",
+      "spokenText": [
+        "返回内核的入口地址：R A X 等于 一，零，零，零，零，零，零。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 25,
+          "time": 0.0,
+          "duration": 5.6765
+        }
+      ]
+    },
+    {
+      "id": "decomp-7",
+      "sourceText": "RSI 带上启动参数表，跳进真正的 Linux 内核！",
+      "file": "fire-decomp-7-25fcffd38a378dbd.mp3",
+      "duration": 4.1713,
+      "sha256": "25fcffd38a378dbdd04ed7c7499498e17a39eaa79586cb534c0afb75f84d2f2c",
+      "spokenText": [
+        "R S I 带上启动参数表，跳进真正的 Linux 内核！"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 27,
+          "time": 0.0,
+          "duration": 4.072666666666667
+        }
+      ]
+    },
+    {
+      "id": "khead-0",
+      "sourceText": "内核的第一条指令：把启动参数表的地址存进 R15，防止被覆盖",
+      "file": "fire-khead-0-e748f844410910b4.mp3",
+      "duration": 5.6145,
+      "sha256": "e748f844410910b4f6c4d4df384a18107efcaf1d5b7705f20ba884be39740114",
+      "spokenText": [
+        "内核的第一条指令：把启动参数表的地址存进 R 十五，防止被覆盖。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 30,
+          "time": 0.0,
+          "duration": 5.515875
+        }
+      ]
+    },
+    {
+      "id": "khead-1",
+      "sourceText": "设置内核栈",
+      "file": "fire-khead-1-95207df6b8b14459.mp3",
+      "duration": 1.2938,
+      "sha256": "95207df6b8b1445984fc0c9209e0da95ef5258c4511b3acc359d54660aaaf030",
+      "spokenText": [
+        "设置内核栈。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 5,
+          "time": 0.0,
+          "duration": 1.1951666666666667
+        }
+      ]
+    },
+    {
+      "id": "khead-2",
+      "sourceText": "装上内核的段表和中断表，再修正内核页表：让内核的虚拟地址，对应到它在物理内存里的真实位置",
+      "file": "fire-khead-2-44b4bda37f4886e1.mp3",
+      "duration": 7.5984,
+      "sha256": "44b4bda37f4886e1d0812135002a37b5e55a0ae772a79dcbf09c9aabd8191e5c",
+      "spokenText": [
+        "装上内核的段表和中断表，再修正内核页表：让内核的虚拟地址，对应到它在物理内存里的真实位置。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 44,
+          "time": 0.0,
+          "duration": 7.499708333333333
+        }
+      ]
+    },
+    {
+      "id": "khead-3",
+      "sourceText": "CR3 换成内核自己的页表",
+      "file": "fire-khead-3-c24c06c0f6420e6b.mp3",
+      "duration": 2.4534,
+      "sha256": "c24c06c0f6420e6ba5274fb4ad1d5e9aac492f9d1a8e00d7413020265f9421e7",
+      "spokenText": [
+        "C R 三 换成内核自己的页表。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 13,
+          "time": 0.0,
+          "duration": 2.35475
+        }
+      ]
+    },
+    {
+      "id": "khead-4",
+      "sourceText": "跳到高地址。从此 RIP 是一个很大的虚拟地址，MMU 把它翻译成物理地址",
+      "file": "fire-khead-4-2a09ae0218348ec9.mp3",
+      "duration": 6.5417,
+      "sha256": "2a09ae0218348ec9c7d3db3a18bd537a5b0fc7a511451bac6de9a82a6df9e8c6",
+      "spokenText": [
+        "跳到高地址。",
+        "从此 R I P 是一个很大的虚拟地址，M M U 把它翻译成物理地址。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 6,
+          "time": 0.0,
+          "duration": 1.1670833333333333
+        },
+        {
+          "start": 6,
+          "end": 37,
+          "time": 1.2870833333333334,
+          "duration": 5.155958333333333
+        }
+      ]
+    },
+    {
+      "id": "khead-5",
+      "sourceText": "用高地址重新装入 GDT 和 IDT，设置 GS 寄存器的基址：以后用它找“每个 CPU 自己的数据”",
+      "file": "fire-khead-5-47f98e4c2256d8f7.mp3",
+      "duration": 7.9807,
+      "sha256": "47f98e4c2256d8f7b3164dc4b524f9a39c04e39170cdbc74504af5ad65e752ac",
+      "spokenText": [
+        "用高地址重新装入 G D T 和 I D T，设置 G S 寄存器的基址：以后用它找每个 C P U 自己的数据。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 51,
+          "time": 0.0,
+          "duration": 7.882041666666667
+        }
+      ]
+    },
+    {
+      "id": "khead-6",
+      "sourceText": "在 EFER 里再打开两个开关：SCE 允许 syscall 指令，NXE 允许把内存页标成“禁止执行”",
+      "file": "fire-khead-6-26e4c5627104d7f9.mp3",
+      "duration": 8.0369,
+      "sha256": "26e4c5627104d7f9b63013cd7f3fb0dc91166ff4edf1d9761961fcc971c8f16e",
+      "spokenText": [
+        "在 E F E R 里再打开两个开关：S C E 允许 syscall 指令，N X E 允许把内存页标成禁止执行。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 52,
+          "time": 0.0,
+          "duration": 7.93825
+        }
+      ]
+    },
+    {
+      "id": "khead-7",
+      "sourceText": "调用第一个 C 函数：x86_64_start_kernel",
+      "file": "fire-khead-7-f9d61f29e23381ba.mp3",
+      "duration": 3.8153,
+      "sha256": "f9d61f29e23381ba6efb9fef4b35944fd1af6a2d127d7b9a8940d0fdd3429296",
+      "spokenText": [
+        "调用第一个 C 函数：x 八十六 六十四 start kernel。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 30,
+          "time": 0.0,
+          "duration": 3.716625
+        }
+      ]
+    },
+    {
+      "id": "khead-8",
+      "sourceText": "删掉低地址的恒等映射，清空内核的全局变量区（BSS），把启动参数复制进内核",
+      "file": "fire-khead-8-6eaa01c2f35a71d4.mp3",
+      "duration": 7.0915,
+      "sha256": "6eaa01c2f35a71d41062315ecca983f1b40f967666a947d5ba3c59a828cf5b3c",
+      "spokenText": [
+        "删掉低地址的恒等映射，清空内核的全局变量区（B S S），把启动参数复制进内核。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 37,
+          "time": 0.0,
+          "duration": 6.992791666666666
+        }
+      ]
+    },
+    {
+      "id": "startk-0",
+      "sourceText": "进入 start_kernel：内核初始化的总入口，下面每一行都是一个子系统",
+      "file": "fire-startk-0-aab8b559e8048979.mp3",
+      "duration": 5.6525,
+      "sha256": "aab8b559e8048979282399db82a4a45bdea38ed0e93dddcb04eb89de9478ad59",
+      "spokenText": [
+        "进入 start kernel：内核初始化的总入口，下面每条代码都是一个子系统。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 38,
+          "time": 0.0,
+          "duration": 5.553875
+        }
+      ]
+    },
+    {
+      "id": "startk-1",
+      "sourceText": "先关中断：东西还没准备好，暂时不接任何“电话”",
+      "file": "fire-startk-1-a23399db5ae51d66.mp3",
+      "duration": 4.1739,
+      "sha256": "a23399db5ae51d662aa9ab30d4efd9d32f20e24c07135313d8cfba32d25c270c",
+      "spokenText": [
+        "先关中断：东西还没准备好，暂时不接任何电话。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 23,
+          "time": 0.0,
+          "duration": 4.075208333333333
+        }
+      ]
+    },
+    {
+      "id": "startk-2",
+      "sourceText": "setup_arch：按 e820 内存地图登记可用内存，并把全部物理内存，再映射一份到高处的虚拟地址",
+      "file": "fire-startk-2-ce5a4f9f67fb85d2.mp3",
+      "duration": 8.586,
+      "sha256": "ce5a4f9f67fb85d2f06ec112eae3c184d116bb27d7237088dabf34214a00598b",
+      "spokenText": [
+        "setup arch：按 e 八百二十 内存地图登记可用内存，并把全部物理内存，再映射一份到高处的虚拟地址。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 51,
+          "time": 0.0,
+          "duration": 8.487333333333334
+        }
+      ]
+    },
+    {
+      "id": "startk-3",
+      "sourceText": "填写中断描述符表 IDT：除零、缺页这些异常发生时，CPU 去哪里处理；GDT 也搬到每个 CPU 专用的区域",
+      "file": "fire-startk-3-114f6b14dcb43b70.mp3",
+      "duration": 9.914,
+      "sha256": "114f6b14dcb43b70b4ba06c2acea7340930cd706ad4af63395f9360ba2c89220",
+      "spokenText": [
+        "填写中断描述符表 I D T：除零、缺页这些异常发生时，C P U 去哪里处理。",
+        "G D T 也搬到每个 C P U 专用的区域。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 36,
+          "time": 0.0,
+          "duration": 6.727458333333334
+        },
+        {
+          "start": 36,
+          "end": 55,
+          "time": 6.847458333333333,
+          "duration": 2.9669166666666666
+        }
+      ]
+    },
+    {
+      "id": "startk-4",
+      "sourceText": "把空闲内存交给“伙伴分配器”：从此可以按页（4 KB）申请内存。一共约 13 万页",
+      "file": "fire-startk-4-3e3f08695d8a2603.mp3",
+      "duration": 7.3004,
+      "sha256": "3e3f08695d8a26030fe9b755d4a6310fce6582f7607e5b5ca78d609eaae7da18",
+      "spokenText": [
+        "把空闲内存交给伙伴分配器：从此可以按页（四千字节）申请内存。",
+        "一共约 十三 万页。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 32,
+          "time": 0.0,
+          "duration": 5.575875
+        },
+        {
+          "start": 32,
+          "end": 41,
+          "time": 5.695875,
+          "duration": 1.5058333333333334
+        }
+      ]
+    },
+    {
+      "id": "startk-5",
+      "sourceText": "初始化调度器：它负责决定哪个任务使用 CPU。现在只有 0 号任务",
+      "file": "fire-startk-5-3526779a62f39b8f.mp3",
+      "duration": 5.6006,
+      "sha256": "3526779a62f39b8fa41e379d17c2d21ad46cc27bb8c8b45a9f4ee440f1c4602b",
+      "spokenText": [
+        "初始化调度器：它负责决定哪个任务使用 C P U。",
+        "现在只有 零 号任务。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 23,
+          "time": 0.0,
+          "duration": 3.8986666666666667
+        },
+        {
+          "start": 23,
+          "end": 33,
+          "time": 4.018666666666666,
+          "duration": 1.4832916666666667
+        }
+      ]
+    },
+    {
+      "id": "startk-6",
+      "sourceText": "设置中断控制器和时钟：时钟会定时“敲门”，让内核有机会切换任务。IDT 换到一个只读的固定地址",
+      "file": "fire-startk-6-f8e9bf2c36fae524.mp3",
+      "duration": 8.2871,
+      "sha256": "f8e9bf2c36fae524455aa883369da37f06484f2881aa0aede200e563192fe733",
+      "spokenText": [
+        "设置中断控制器和时钟：时钟会定时敲门，让内核有机会切换任务。",
+        "I D T 换到一个只读的固定地址。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 32,
+          "time": 0.0,
+          "duration": 5.699333333333334
+        },
+        {
+          "start": 32,
+          "end": 47,
+          "time": 5.819333333333334,
+          "duration": 2.369125
+        }
+      ]
+    },
+    {
+      "id": "startk-7",
+      "sourceText": "开中断！从现在起，时钟、磁盘、键盘都可以打断 CPU",
+      "file": "fire-startk-7-6648122d6e46756e.mp3",
+      "duration": 5.81,
+      "sha256": "6648122d6e46756e057bd5b5f7a501ca1892bfaee21f1e42136c8dc511469077",
+      "spokenText": [
+        "开中断！",
+        "从现在起，时钟、磁盘、键盘都可以打断 C P U。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 4,
+          "time": 0.0,
+          "duration": 0.81725
+        },
+        {
+          "start": 4,
+          "end": 26,
+          "time": 0.93725,
+          "duration": 4.772333333333333
+        }
+      ]
+    },
+    {
+      "id": "startk-8",
+      "sourceText": "控制台准备好了，之前攒下的内核日志一起打印到屏幕",
+      "file": "fire-startk-8-a053f8b91a77dd96.mp3",
+      "duration": 4.4223,
+      "sha256": "a053f8b91a77dd96d68b3d72f49a832cbc7fe8613bb9c21ebcf571d80e608673",
+      "spokenText": [
+        "控制台准备好了，之前攒下的内核日志一起打印到屏幕。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 24,
+          "time": 0.0,
+          "duration": 4.323666666666667
+        }
+      ]
+    },
+    {
+      "id": "startk-9",
+      "sourceText": "准备文件系统要用的缓存、进程管理、/proc 等等",
+      "file": "fire-startk-9-1a90a057d45cb324.mp3",
+      "duration": 4.2766,
+      "sha256": "1a90a057d45cb324232091316819ff7eb505e6f7b293545bf5e913a62f206ef5",
+      "spokenText": [
+        "准备文件系统要用的缓存、进程管理、/proc 等等。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 25,
+          "time": 0.0,
+          "duration": 4.1779166666666665
+        }
+      ]
+    },
+    {
+      "id": "kpt-0",
+      "sourceText": "先停下来回顾页表。从开机到现在，CPU 一共用过 3 套页表，现在这套是第 4 套",
+      "file": "fire-kpt-0-3343a8a85d4de60b.mp3",
+      "duration": 7.514,
+      "sha256": "3343a8a85d4de60bd21b5defe16520e89186c904a740a81187b0039b8ee9dad0",
+      "spokenText": [
+        "先停下来回顾页表。",
+        "从开机到现在，C P U 一共用过 三 套页表，现在这套是第 四 套。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 9,
+          "time": 0.0,
+          "duration": 1.656875
+        },
+        {
+          "start": 9,
+          "end": 41,
+          "time": 1.776875,
+          "duration": 5.637125
+        }
+      ]
+    },
+    {
+      "id": "kpt-1",
+      "sourceText": "每换一次，就是把新页表的物理地址写进 CR3。现在的 0x1E2C000 就在内核数据区里",
+      "file": "fire-kpt-1-6a5febd87465cffa.mp3",
+      "duration": 9.6805,
+      "sha256": "6a5febd87465cffa022550077d70da00b108e901ac24cc65546b2674af09a6bb",
+      "spokenText": [
+        "每换一次，就是把新页表的物理地址写进 C R 三。",
+        "现在的 一，E，二，C，零，零，零 就在内核数据区里。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 23,
+          "time": 0.0,
+          "duration": 3.9139166666666667
+        },
+        {
+          "start": 23,
+          "end": 45,
+          "time": 4.033916666666666,
+          "duration": 5.547875
+        }
+      ]
+    },
+    {
+      "id": "kpt-2",
+      "sourceText": "页表最顶层叫 PML4，有 512 项，每项管 512 GB 虚拟地址。内核把它分成两半",
+      "file": "fire-kpt-2-e05580f409580828.mp3",
+      "duration": 8.2191,
+      "sha256": "e05580f409580828a10eb9a87e54603fda406ac3ebc25ff4e26cd740482b4851",
+      "spokenText": [
+        "页表最顶层叫 P M L 四，有 五百一十二 项，每项管 五百一十二吉字节 虚拟地址。",
+        "内核把它分成两半。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 36,
+          "time": 0.0,
+          "duration": 6.534833333333333
+        },
+        {
+          "start": 36,
+          "end": 44,
+          "time": 6.654833333333333,
+          "duration": 1.4655833333333332
+        }
+      ]
+    },
+    {
+      "id": "kpt-3",
+      "sourceText": "直接映射：内核想访问任何一个物理地址，只要在它前面加上一个固定的大数",
+      "file": "fire-kpt-3-9fc9d4290bd405c2.mp3",
+      "duration": 5.858,
+      "sha256": "9fc9d4290bd405c22bd9468442063aa83343b5d3e222c5dd07d9e5ceb56df2ee",
+      "spokenText": [
+        "直接映射：内核想访问任何一个物理地址，只要在它前面加上一个固定的大数。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 34,
+          "time": 0.0,
+          "duration": 5.7592083333333335
+        }
+      ]
+    },
+    {
+      "id": "kpt-4",
+      "sourceText": "低半部分现在是空的：用户程序还没出现。等第一个用户程序启动，它会有一张自己的页表",
+      "file": "fire-kpt-4-e3e4709c8ccf2677.mp3",
+      "duration": 6.9437,
+      "sha256": "e3e4709c8ccf2677a4db1747a3ad1f03c8e558f7f792a2b4e95c8a24351f1a87",
+      "spokenText": [
+        "低半部分现在是空的：用户程序还没出现。",
+        "等第一个用户程序启动，它会有一张自己的页表。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 19,
+          "time": 0.0,
+          "duration": 3.301125
+        },
+        {
+          "start": 19,
+          "end": 40,
+          "time": 3.421125,
+          "duration": 3.423958333333333
+        }
+      ]
+    },
+    {
+      "id": "sched-0",
+      "sourceText": "rest_init：创建 1 号进程 kernel_init 和 2 号进程 kthreadd",
+      "file": "fire-sched-0-c6612e6bf25bbbf0.mp3",
+      "duration": 5.6005,
+      "sha256": "c6612e6bf25bbbf02d972166cd978013069ddb77ad700274cf0819155fd7032f",
+      "spokenText": [
+        "rest init：创建 一 号进程 kernel init 和 二 号进程 kernel thread daemon。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 47,
+          "time": 0.0,
+          "duration": 5.501875
+        }
+      ]
+    },
+    {
+      "id": "sched-1",
+      "sourceText": "每个任务在内核里有一份“档案” task_struct：编号、状态、用哪套页表、内核栈在哪、被换下时 RSP 存在哪",
+      "file": "fire-sched-1-cd9932db92f90091.mp3",
+      "duration": 9.2997,
+      "sha256": "cd9932db92f900915378c8ab771d1cac953429231fb96ff4dc882f1ffd063820",
+      "spokenText": [
+        "每个任务在内核里有一份档案 task struct：编号、状态、用哪套页表、内核栈在哪、被换下时 R S P 存在哪。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 58,
+          "time": 0.0,
+          "duration": 9.201083333333333
+        }
+      ]
+    },
+    {
+      "id": "sched-2",
+      "sourceText": "调度器维护一个“就绪队列”：所有等着用 CPU 的任务排在里面，它负责挑下一个",
+      "file": "fire-sched-2-f0636a55484e8399.mp3",
+      "duration": 6.0501,
+      "sha256": "f0636a55484e83996b6b469e4a641dda59fa7218219699354adc5eca8894a421",
+      "spokenText": [
+        "调度器维护一个就绪队列：所有等着用 C P U 的任务排在里面，它负责挑下一个。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 39,
+          "time": 0.0,
+          "duration": 5.951458333333333
+        }
+      ]
+    },
+    {
+      "id": "sched-3",
+      "sourceText": "0 号任务调用 schedule()：调度器从就绪队列里挑出 1 号 kernel_init",
+      "file": "fire-sched-3-b9527c7f7353c538.mp3",
+      "duration": 5.8649,
+      "sha256": "b9527c7f7353c538e2ce426a06f31b86165e02cafacfdf76c68d81d7bc65e34c",
+      "spokenText": [
+        "零 号任务调用 schedule()：调度器从就绪队列里挑出 一 号 kernel init。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 46,
+          "time": 0.0,
+          "duration": 5.76625
+        }
+      ]
+    },
+    {
+      "id": "sched-4",
+      "sourceText": "切换第 1 步：新任务有自己的用户页表吗？kernel_init 是内核线程，没有，所以 CR3 不用换",
+      "file": "fire-sched-4-e8f38ccfe3137a15.mp3",
+      "duration": 7.7591,
+      "sha256": "e8f38ccfe3137a156268cff25fde3987872166481e391eaeb78a603fe023eb2f",
+      "spokenText": [
+        "切换第 一 步：新任务有自己的用户页表吗？",
+        "kernel init 是内核线程，没有，所以 C R 三 不用换。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 21,
+          "time": 0.0,
+          "duration": 3.180375
+        },
+        {
+          "start": 21,
+          "end": 52,
+          "time": 3.300375,
+          "duration": 4.360083333333334
+        }
+      ]
+    },
+    {
+      "id": "sched-5",
+      "sourceText": "切换第 2 步：把旧任务的 RBP、RBX 等寄存器压到它自己的内核栈上保存",
+      "file": "fire-sched-5-80111198eca18b21.mp3",
+      "duration": 6.2067,
+      "sha256": "80111198eca18b21c93915224d700d5c2fc2b050c8d7b200f72d18ba767f84a2",
+      "spokenText": [
+        "切换第 二 步：把旧任务的 R B P、R B X 等寄存器压到它自己的内核栈上保存。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 38,
+          "time": 0.0,
+          "duration": 6.108
+        }
+      ]
+    },
+    {
+      "id": "sched-6",
+      "sourceText": "切换第 3 步：把 RSP 存进旧任务的档案，再从新任务的档案里取出它的 RSP。栈换了，任务就换了",
+      "file": "fire-sched-6-5ce49661c74d82ef.mp3",
+      "duration": 8.3379,
+      "sha256": "5ce49661c74d82ef56c15d565e0919bc77406c1b2c69a1ec61dbfc3a6fe60114",
+      "spokenText": [
+        "切换第 三 步：把 R S P 存进旧任务的档案，再从新任务的档案里取出它的 R S P。",
+        "栈换了，任务就换了。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 41,
+          "time": 0.0,
+          "duration": 6.186458333333333
+        },
+        {
+          "start": 41,
+          "end": 50,
+          "time": 6.3064583333333335,
+          "duration": 1.9327916666666667
+        }
+      ]
+    },
+    {
+      "id": "sched-7",
+      "sourceText": "切换第 4 步：从新栈里弹出新任务的寄存器，然后返回。RIP 变成新任务的代码，kernel_init 开始运行",
+      "file": "fire-sched-7-e312f58cc064a547.mp3",
+      "duration": 9.1107,
+      "sha256": "e312f58cc064a5479144e621154e2067d62d17e6ec951a2e7c567ef31cf81a9a",
+      "spokenText": [
+        "切换第 四 步：从新栈里弹出新任务的寄存器，然后返回。",
+        "R I P 变成新任务的代码，kernel init 开始运行。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 27,
+          "time": 0.0,
+          "duration": 4.966833333333334
+        },
+        {
+          "start": 27,
+          "end": 56,
+          "time": 5.086833333333334,
+          "duration": 3.9252083333333334
+        }
+      ]
+    },
+    {
+      "id": "sched-8",
+      "sourceText": "总结：切换任务 = 换 RSP（栈）、换 RIP（从哪继续）；如果是不同的用户进程，还要换 CR3（页表）",
+      "file": "fire-sched-8-0c01107f17945079.mp3",
+      "duration": 8.4058,
+      "sha256": "0c01107f179450794cc8e19bb4e9db330dee8030cbcb578537f8ac89f804558a",
+      "spokenText": [
+        "总结：切换任务 等于 换 R S P（栈）、换 R I P（从哪继续）。",
+        "如果是不同的用户进程，还要换 C R 三（页表）。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 31,
+          "time": 0.0,
+          "duration": 4.8060833333333335
+        },
+        {
+          "start": 31,
+          "end": 53,
+          "time": 4.926083333333334,
+          "duration": 3.3810416666666665
+        }
+      ]
+    },
+    {
+      "id": "init-0",
+      "sourceText": "1 号进程执行几百个初始化函数：驱动在这里找到硬件，比如 virtio 磁盘、串口",
+      "file": "fire-init-0-9c2ed17a764020ac.mp3",
+      "duration": 7.5706,
+      "sha256": "9c2ed17a764020aca404a4f8bf3ace643554eb6f44bc410f97b4046f30189bc6",
+      "spokenText": [
+        "一 号进程执行几百个初始化函数：驱动在这里找到硬件，比如 virtio 磁盘、串口。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 41,
+          "time": 0.0,
+          "duration": 7.471958333333333
+        }
+      ]
+    },
+    {
+      "id": "init-1",
+      "sourceText": "把 initramfs 包解开，变成内存里的文件：/init、/bin/busybox ……",
+      "file": "fire-init-1-63c8bfb801a9fcdb.mp3",
+      "duration": 5.994,
+      "sha256": "63c8bfb801a9fcdbe07fafa7c35274dbd7e907953382468b1465ab2c6945e93c",
+      "spokenText": [
+        "把 init ram F S 包解开，变成内存里的文件：/init、/bin/busybox ，等等。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 46,
+          "time": 0.0,
+          "duration": 5.895375
+        }
+      ]
+    },
+    {
+      "id": "init-2",
+      "sourceText": "释放只在启动时用过的内存",
+      "file": "fire-init-2-ad98f068c0effffe.mp3",
+      "duration": 2.5104,
+      "sha256": "ad98f068c0effffe44effa97f991116b0720391a088a6cc58c631d1c74d3f491",
+      "spokenText": [
+        "释放只在启动时用过的内存。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 12,
+          "time": 0.0,
+          "duration": 2.4117083333333333
+        }
+      ]
+    },
+    {
+      "id": "init-3",
+      "sourceText": "执行 /init：1 号进程从内核线程变成第一个用户程序",
+      "file": "fire-init-3-db60c7eb579cb737.mp3",
+      "duration": 5.1316,
+      "sha256": "db60c7eb579cb7378c75fd6066adc201d579b2aa2c6d2dcad19059ceae8d3237",
+      "spokenText": [
+        "执行 /init：一 号进程从内核线程变成第一个用户程序。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 28,
+          "time": 0.0,
+          "duration": 5.032958333333333
+        }
+      ]
+    },
+    {
+      "id": "init-4",
+      "sourceText": "execve 先给 /init 分配一张新的、空的顶层页表 PML4（4 KB），放在空闲内存里",
+      "file": "fire-init-4-34591adf5f3f2c49.mp3",
+      "duration": 7.1878,
+      "sha256": "34591adf5f3f2c493d674bfe85cc6523d296bfe99b8b8f86b967b3134f26bfee",
+      "spokenText": [
+        "execve 先给 /init 分配一张新的、空的顶层页表 P M L 四（四千字节），放在空闲内存里。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 48,
+          "time": 0.0,
+          "duration": 7.089083333333333
+        }
+      ]
+    },
+    {
+      "id": "init-5",
+      "sourceText": "把内核页表的高半部分原样抄进来：所以每个进程都能看到同一个内核",
+      "file": "fire-init-5-af80de567f1e0c5b.mp3",
+      "duration": 5.5632,
+      "sha256": "af80de567f1e0c5b673a736fab3807207d4863589413993a668b7ac2053ffd74",
+      "spokenText": [
+        "把内核页表的高半部分原样抄进来：所以每个进程都能看到同一个内核。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 31,
+          "time": 0.0,
+          "duration": 5.464541666666666
+        }
+      ]
+    },
+    {
+      "id": "init-6",
+      "sourceText": "exec_mmap：扔掉旧的地址空间，换上新的，并把新页表的地址写进 CR3",
+      "file": "fire-init-6-68231910cb0b87a3.mp3",
+      "duration": 6.8912,
+      "sha256": "68231910cb0b87a35bea586e72c434a94ce7d50bd9b1ae48685e9a2c18fa8ebf",
+      "spokenText": [
+        "exec mmap：扔掉旧的地址空间，换上新的，并把新页表的地址写进 C R 三。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 38,
+          "time": 0.0,
+          "duration": 6.7925
+        }
+      ]
+    },
+    {
+      "id": "init-7",
+      "sourceText": "读 /init 的文件头，登记哪段虚拟地址放代码、哪段放栈。物理页这时还没真正分配",
+      "file": "fire-init-7-957e125fdb4d2320.mp3",
+      "duration": 7.1874,
+      "sha256": "957e125fdb4d2320e0df1ca93777dee1a64d062275d89fe163750aa593e596db",
+      "spokenText": [
+        "读 /init 的文件头，登记哪段虚拟地址放代码、哪段放栈。",
+        "物理页这时还没真正分配。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 30,
+          "time": 0.0,
+          "duration": 4.907916666666667
+        },
+        {
+          "start": 30,
+          "end": 41,
+          "time": 5.027916666666667,
+          "duration": 2.0608333333333335
+        }
+      ]
+    },
+    {
+      "id": "init-8",
+      "sourceText": "CPU 切到用户态（Ring 3）：CS = 0x33，权限变低，不能再碰内核的东西",
+      "file": "fire-init-8-115a5d2b09a4e135.mp3",
+      "duration": 7.442,
+      "sha256": "115a5d2b09a4e13529ec2a1eb2c836f1e9c64f9d43601e071f7e21248739ef6d",
+      "spokenText": [
+        "C P U 切到用户态（Ring 三）：C S 等于 三，三，权限变低，不能再碰内核的东西。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 42,
+          "time": 0.0,
+          "duration": 7.341958333333333
+        }
+      ]
+    },
+    {
+      "id": "init-9",
+      "sourceText": "第一次取这条指令时，页表里这一页还是空的。CPU 触发缺页异常，把出错的地址记下来，跳进内核",
+      "file": "fire-init-9-8b006ddab8c1c34d.mp3",
+      "duration": 8.7024,
+      "sha256": "8b006ddab8c1c34d5b10f36613949910e63c0142c1583fed9242d2afd118d14c",
+      "spokenText": [
+        "第一次取这条指令时，页表里这一页还是空的。",
+        "C P U 触发缺页异常，把出错的地址记下来，跳进内核。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 21,
+          "time": 0.0,
+          "duration": 3.6256666666666666
+        },
+        {
+          "start": 21,
+          "end": 46,
+          "time": 3.7456666666666667,
+          "duration": 4.858083333333333
+        }
+      ]
+    },
+    {
+      "id": "init-10",
+      "sourceText": "内核分配一个 4 KB 的物理页，把文件对应的内容读进去，填进页表，再回到用户态重新执行这条指令",
+      "file": "fire-init-10-a6d5f47dad64fd38.mp3",
+      "duration": 8.3435,
+      "sha256": "a6d5f47dad64fd38d6e2bbac82ced57e3f524876ed054a64c8e4d4a0792c08f0",
+      "spokenText": [
+        "内核分配一个 四千字节 的物理页，把文件对应的内容读进去，填进页表，再回到用户态重新执行这条指令。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 48,
+          "time": 0.0,
+          "duration": 8.244875
+        }
+      ]
+    },
+    {
+      "id": "init-11",
+      "sourceText": "这叫“按需分页”：用到哪一页才真正分配哪一页。程序刚启动时会连续发生很多次缺页",
+      "file": "fire-init-11-874601f26d3e8173.mp3",
+      "duration": 7.0535,
+      "sha256": "874601f26d3e8173ebe2fb7a1d7bfc1d48227fc7746fbbf4fe7a168804e7b96d",
+      "spokenText": [
+        "这叫按需分页：用到哪一页才真正分配哪一页。",
+        "程序刚启动时会连续发生很多次缺页。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 23,
+          "time": 0.0,
+          "duration": 3.5937083333333333
+        },
+        {
+          "start": 23,
+          "end": 39,
+          "time": 3.7137083333333334,
+          "duration": 3.2411666666666665
+        }
+      ]
+    },
+    {
+      "id": "root-0",
+      "sourceText": "/init 是个脚本：先挂载 /dev、/proc、/sys",
+      "file": "fire-root-0-23a230e7e60ac1df.mp3",
+      "duration": 3.8147,
+      "sha256": "23a230e7e60ac1df6cb287d16cb2dae16e4ce0c99afe8faccf678dbcfcdaaf5c",
+      "spokenText": [
+        "/init 是个脚本：先挂载 /dev、/proc、/sys。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 30,
+          "time": 0.0,
+          "duration": 3.716
+        }
+      ]
+    },
+    {
+      "id": "root-1",
+      "sourceText": "每次 mount 都是一次“系统调用”：用户程序执行 syscall 指令，CPU 跳进内核",
+      "file": "fire-root-1-b06482131d2ce212.mp3",
+      "duration": 6.4528,
+      "sha256": "b06482131d2ce2128badb8372df297a09de475deb045cbe9430bb0b73a5ad06d",
+      "spokenText": [
+        "每次 mount 都是一次系统调用：用户程序执行 syscall 指令，C P U 跳进内核。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 46,
+          "time": 0.0,
+          "duration": 6.354166666666667
+        }
+      ]
+    },
+    {
+      "id": "root-2",
+      "sourceText": "内核替它干完活，再用 sysretq 回到用户态",
+      "file": "fire-root-2-17f4bb81c5dfe3cb.mp3",
+      "duration": 3.8835,
+      "sha256": "17f4bb81c5dfe3cb49755cdc0bcb8ab2a2d4cbc7c753d6c23caffac163a9601b",
+      "spokenText": [
+        "内核替它干完活，再用 sysretq 回到用户态。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 24,
+          "time": 0.0,
+          "duration": 3.7847916666666666
+        }
+      ]
+    },
+    {
+      "id": "root-3",
+      "sourceText": "/init 要运行 mount 命令：先 fork 出一个子进程。子进程拿到父进程页表的副本",
+      "file": "fire-root-3-5f921f8aac405089.mp3",
+      "duration": 6.4685,
+      "sha256": "5f921f8aac405089ec068df41c2682d825242314bc2d977d72593c7188c30ef3",
+      "spokenText": [
+        "/init 要运行 mount 命令：先 fork 出一个子进程。",
+        "子进程拿到父进程页表的副本。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 33,
+          "time": 0.0,
+          "duration": 3.843875
+        },
+        {
+          "start": 33,
+          "end": 46,
+          "time": 3.963875,
+          "duration": 2.406
+        }
+      ]
+    },
+    {
+      "id": "root-4",
+      "sourceText": "“写时复制”：父子两边的页都先标成只读、共享同一份物理页。谁先写，才给谁复制一份",
+      "file": "fire-root-4-a2b6c5695d7a53b9.mp3",
+      "duration": 7.5625,
+      "sha256": "a2b6c5695d7a53b97d56b05781a39377afa20e07b7e29540fc5125f1d194a825",
+      "spokenText": [
+        "写时复制：父子两边的页都先标成只读、共享同一份物理页。",
+        "谁先写，才给谁复制一份。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 29,
+          "time": 0.0,
+          "duration": 5.116041666666667
+        },
+        {
+          "start": 29,
+          "end": 40,
+          "time": 5.236041666666667,
+          "duration": 2.2277916666666666
+        }
+      ]
+    },
+    {
+      "id": "root-5",
+      "sourceText": "调度器切到子进程：它是另一个用户进程，所以 CR3 换成它自己的页表",
+      "file": "fire-root-5-af3614e78a84c429.mp3",
+      "duration": 6.1851,
+      "sha256": "af3614e78a84c429c8ed3c121288aef7d4fc15ce874f3c865a971199b5dbebbf",
+      "spokenText": [
+        "调度器切到子进程：它是另一个用户进程，所以 C R 三 换成它自己的页表。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 34,
+          "time": 0.0,
+          "duration": 6.086458333333334
+        }
+      ]
+    },
+    {
+      "id": "root-6",
+      "sourceText": "子进程再 exec 成 mount 程序，等磁盘 /dev/vda 出现，然后挂载它：磁盘上是 ext2 文件系统",
+      "file": "fire-root-6-c85b9d7c16f9f6ab.mp3",
+      "duration": 8.7327,
+      "sha256": "c85b9d7c16f9f6ab003f12114806e7d13394dc1f67957112484de4e5735cbba7",
+      "spokenText": [
+        "子进程再 exec 成 mount 程序，等磁盘 /dev/vda 出现，然后挂载它：磁盘上是 ext 二 文件系统。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 57,
+          "time": 0.0,
+          "duration": 8.634041666666667
+        }
+      ]
+    },
+    {
+      "id": "root-7",
+      "sourceText": "内核读磁盘的“超级块”：磁盘把数据直接写进内存，再检查“魔数” EF53",
+      "file": "fire-root-7-dfb199a21dfd5e93.mp3",
+      "duration": 7.1482,
+      "sha256": "dfb199a21dfd5e93d545fe16dfb026128c31eac492c8efb130338dfb9ff843f1",
+      "spokenText": [
+        "内核读磁盘的超级块：磁盘把数据直接写进内存，再检查魔数 E，F，五，三。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 36,
+          "time": 0.0,
+          "duration": 7.049541666666666
+        }
+      ]
+    },
+    {
+      "id": "root-8",
+      "sourceText": "mount 进程做完就退出，它的页表被释放。调度器切回 /init，CR3 换回 /init 的页表",
+      "file": "fire-root-8-c0d8c634dd64b395.mp3",
+      "duration": 7.1964,
+      "sha256": "c0d8c634dd64b395878e079b0b410c8afa17026b9acb78f4886f7c894a440780",
+      "spokenText": [
+        "mount 进程做完就退出，它的页表被释放。",
+        "调度器切回 /init，C R 三 换回 /init 的页表。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 22,
+          "time": 0.0,
+          "duration": 3.2496666666666667
+        },
+        {
+          "start": 22,
+          "end": 50,
+          "time": 3.369666666666667,
+          "duration": 3.7280416666666665
+        }
+      ]
+    },
+    {
+      "id": "root-9",
+      "sourceText": "把 /dev、/proc、/sys 搬到新根下面",
+      "file": "fire-root-9-86730f05c0a97437.mp3",
+      "duration": 3.0583,
+      "sha256": "86730f05c0a974374edf4117cdcb4ab7f9d5ea611c63bf473e31d195a399a5f0",
+      "spokenText": [
+        "把 /dev、/proc、/sys 搬到新根下面。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 24,
+          "time": 0.0,
+          "duration": 2.9595833333333332
+        }
+      ]
+    },
+    {
+      "id": "root-10",
+      "sourceText": "switch_root：把根目录换成磁盘上的系统，然后执行磁盘上的 /sbin/init",
+      "file": "fire-root-10-0b67bd66f7368b8c.mp3",
+      "duration": 5.7649,
+      "sha256": "0b67bd66f7368b8c045b60b72aa674b368ac1a86dc5ead965e9c901a5fae61eb",
+      "spokenText": [
+        "switch root：把根目录换成磁盘上的系统，然后执行磁盘上的 /sbin/init。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 44,
+          "time": 0.0,
+          "duration": 5.6662083333333335
+        }
+      ]
+    },
+    {
+      "id": "shell-0",
+      "sourceText": "switch_root 最后执行磁盘上的 /sbin/init：还是 1 号进程，但用户页表整个换新",
+      "file": "fire-shell-0-9c922edfff2a0d26.mp3",
+      "duration": 6.759,
+      "sha256": "9c922edfff2a0d263244ba5f21fe2d4f2cc47bd1293313a91944caac1665128d",
+      "spokenText": [
+        "switch root 最后执行磁盘上的 /sbin/init：还是 一 号进程，但用户页表整个换新。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 50,
+          "time": 0.0,
+          "duration": 6.660333333333333
+        }
+      ]
+    },
+    {
+      "id": "shell-1",
+      "sourceText": "/sbin/init 读配置文件 /etc/inittab：先运行 /etc/rcS，再在终端上启动 shell",
+      "file": "fire-shell-1-abdf8dd5fa72bc26.mp3",
+      "duration": 8.114,
+      "sha256": "abdf8dd5fa72bc26104f0cb258367c091601c7e3847b404fe89b37640a267a95",
+      "spokenText": [
+        "/sbin/init 读配置文件 /etc/inittab：先运行 /etc/rc S，再在终端上启动 shell。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 56,
+          "time": 0.0,
+          "duration": 8.014291666666667
+        }
+      ]
+    },
+    {
+      "id": "shell-2",
+      "sourceText": "init fork 出一个子进程来运行 rcS 脚本。它的页表正好用上了 mount 刚释放的那一页",
+      "file": "fire-shell-2-d21d873615184de5.mp3",
+      "duration": 6.8635,
+      "sha256": "d21d873615184de5fc3c50a3f6de2ef12320e68434ee8a4572964f338cbc66fa",
+      "spokenText": [
+        "init fork 出一个子进程来运行 rc S 脚本。",
+        "它的页表正好用上了 mount 刚释放的那一页。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 27,
+          "time": 0.0,
+          "duration": 3.715291666666667
+        },
+        {
+          "start": 27,
+          "end": 50,
+          "time": 3.8352916666666665,
+          "duration": 2.9295833333333334
+        }
+      ]
+    },
+    {
+      "id": "shell-3",
+      "sourceText": "rcS 设置主机名，打印欢迎语",
+      "file": "fire-shell-3-47c5da17226d52c4.mp3",
+      "duration": 3.1606,
+      "sha256": "47c5da17226d52c400ef26726bf7fecef902b71fc4b34838833db0fb72637bbb",
+      "spokenText": [
+        "rc S 设置主机名，打印欢迎语。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 15,
+          "time": 0.0,
+          "duration": 3.061958333333333
+        }
+      ]
+    },
+    {
+      "id": "shell-4",
+      "sourceText": "rcS 结束后，init 再创建出 shell 进程：又一个进程，又一张页表",
+      "file": "fire-shell-4-0d2ce5e93aa41d70.mp3",
+      "duration": 5.9114,
+      "sha256": "0d2ce5e93aa41d7079def99d00520d8458020b868d3962211f71a18ee30e2493",
+      "spokenText": [
+        "rc S 结束后，init 再创建出 shell 进程：又一个进程，又一张页表。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 38,
+          "time": 0.0,
+          "duration": 5.812708333333333
+        }
+      ]
+    },
+    {
+      "id": "shell-5",
+      "sourceText": "shell 打印提示符 linux-lab:/root#",
+      "file": "fire-shell-5-32439cc77b5b0045.mp3",
+      "duration": 3.4023,
+      "sha256": "32439cc77b5b004528089919ce8eed27637545724fed9bd4de13b5337adf3674",
+      "spokenText": [
+        "shell 打印提示符 linux-lab:/root#。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 28,
+          "time": 0.0,
+          "duration": 3.3036666666666665
+        }
+      ]
+    },
+    {
+      "id": "shell-6",
+      "sourceText": "shell 去读键盘输入。还没人打字，于是内核让它睡觉，挂在终端上等待",
+      "file": "fire-shell-6-53a491b454c9ad20.mp3",
+      "duration": 5.93,
+      "sha256": "53a491b454c9ad20088a1b347e135a328dd04b1948578b4f3970921a06074486",
+      "spokenText": [
+        "shell 去读键盘输入。",
+        "还没人打字，于是内核让它睡觉，挂在终端上等待。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 13,
+          "time": 0.0,
+          "duration": 1.7162916666666668
+        },
+        {
+          "start": 13,
+          "end": 35,
+          "time": 1.8362916666666667,
+          "duration": 3.9947083333333335
+        }
+      ]
+    },
+    {
+      "id": "shell-7",
+      "sourceText": "所有进程都在等，CPU 换上 0 号任务 idle，执行 hlt 休息。idle 是内核线程，页表不用换，继续借用 shell 的",
+      "file": "fire-shell-7-43e3fe762b8b7a2c.mp3",
+      "duration": 9.8628,
+      "sha256": "43e3fe762b8b7a2cf605ed90b38ddf5f9134e2c514d4d53043d1d9e59fce3f4e",
+      "spokenText": [
+        "所有进程都在等，C P U 换上 零 号任务 idle，执行 hlt 休息。",
+        "idle 是内核线程，页表不用换，继续借用 shell 的。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 36,
+          "time": 0.0,
+          "duration": 5.3065
+        },
+        {
+          "start": 36,
+          "end": 65,
+          "time": 5.4265,
+          "duration": 4.337625
+        }
+      ]
+    },
+    {
+      "id": "key-0",
+      "sourceText": "你在终端里敲了一个字母 L。串口芯片收到这个字符，向 CPU 发出中断信号",
+      "file": "fire-key-0-00258e90b04166da.mp3",
+      "duration": 6.5391,
+      "sha256": "00258e90b04166daaf5ad47f6a1d95cc5481b448b26d88d103ec1a175e46edf9",
+      "spokenText": [
+        "你在终端里敲了一个字母 L。",
+        "串口芯片收到这个字符，向 C P U 发出中断信号。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 14,
+          "time": 0.0,
+          "duration": 2.089
+        },
+        {
+          "start": 14,
+          "end": 37,
+          "time": 2.209,
+          "duration": 4.231416666666667
+        }
+      ]
+    },
+    {
+      "id": "key-1",
+      "sourceText": "CPU 醒来，停下手头的事，查中断描述符表 IDT，跳到串口的中断处理程序",
+      "file": "fire-key-1-653852a9703d08f0.mp3",
+      "duration": 6.89,
+      "sha256": "653852a9703d08f086ec17698b8443a46f55f9b266cd4db694ddb426a44f991c",
+      "spokenText": [
+        "C P U 醒来，停下手头的事，查中断描述符表 I D T，跳到串口的中断处理程序。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 37,
+          "time": 0.0,
+          "duration": 6.790708333333333
+        }
+      ]
+    },
+    {
+      "id": "key-2",
+      "sourceText": "处理程序从串口芯片的数据端口读出这个字符：0x6C，就是字母 l",
+      "file": "fire-key-2-5c59d7d32e9c1994.mp3",
+      "duration": 6.0903,
+      "sha256": "5c59d7d32e9c1994ad7331c75cc9c5050dde55e0ace159f2ee90b1c2e09deeef",
+      "spokenText": [
+        "处理程序从串口芯片的数据端口读出这个字符：六，C，就是字母 l。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 32,
+          "time": 0.0,
+          "duration": 5.991583333333334
+        }
+      ]
+    },
+    {
+      "id": "key-3",
+      "sourceText": "字符放进终端的输入缓冲，同时“回显”到屏幕上",
+      "file": "fire-key-3-0eac249411384741.mp3",
+      "duration": 3.8566,
+      "sha256": "0eac24941138474139efa5695e96f1fba17cca8b1710a59ad2b5baccc7c43709",
+      "spokenText": [
+        "字符放进终端的输入缓冲，同时回显到屏幕上。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 22,
+          "time": 0.0,
+          "duration": 3.7579583333333333
+        }
+      ]
+    },
+    {
+      "id": "key-4",
+      "sourceText": "唤醒等待输入的 shell：调度器把它重新放上 CPU，它读到了字母 l",
+      "file": "fire-key-4-6cabfa7fdc97821d.mp3",
+      "duration": 5.7888,
+      "sha256": "6cabfa7fdc97821d8447213c454dc9fa7867440dcbf6eae9463a8f5eb542c7a2",
+      "spokenText": [
+        "唤醒等待输入的 shell：调度器把它重新放上 C P U，它读到了字母 l。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 36,
+          "time": 0.0,
+          "duration": 5.690083333333333
+        }
+      ]
+    },
+    {
+      "id": "key-5",
+      "sourceText": "这就是一台电脑从通电到能敲命令的全过程：BIOS、GRUB、内核、1 号进程、shell",
+      "file": "fire-key-5-ed117286e2d1f604.mp3",
+      "duration": 7.9222,
+      "sha256": "ed117286e2d1f604de46a46d5b4c771f59e7a591b7c84e57b85064a0d0bf7a36",
+      "spokenText": [
+        "这就是一台电脑从通电到能敲命令的全过程：B I O S、G R U B、内核、一 号进程、shell。"
+      ],
+      "cueStarts": [],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 44,
+          "time": 0.0,
+          "duration": 7.823541666666666
+        }
+      ]
+    }
+  ]
 }

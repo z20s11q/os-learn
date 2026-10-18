@@ -74,7 +74,7 @@ export function ControlBar() {
     <div className="topbar">
       <h1>Linux Observatory</h1>
       <a className="top-link" href="/media/player.html" target="_blank" rel="noopener">▶ 启动动画</a>
-      <a className="top-link" href="/animation/slides.html" target="_blank" rel="noopener">启动全景教学</a>
+      <a className="top-link" href="/animation/boot.html" target="_blank" rel="noopener">启动演示</a>
 
       {!hasSession ? (
         <label className="field">

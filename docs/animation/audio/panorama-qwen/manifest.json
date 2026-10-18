@@ -1,0 +1,3242 @@
+{
+  "provider": "qwen3-tts-local",
+  "voice": "Qwen3-TTS 1.7B · Serena",
+  "model": "Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice",
+  "modelConfigSha256": "17a07f527a1c25ea30b4e023a184482a23d3e279d697b1dc81b1bde498d29cf9",
+  "speaker": "Serena",
+  "instruct": "用清晰自然的普通话讲解计算机课程，语气平稳亲切，语速适中。中英文衔接流畅，英文单词发音准确，字母缩写逐个字母读。根据语义自然停顿，不要在词语中间停顿，不要唱歌，不要添加内容。",
+  "pronunciationVersion": 1,
+  "temperature": 0.7,
+  "seed": 20261018,
+  "device": "NVIDIA GeForce RTX 5070 Ti",
+  "entries": [
+    {
+      "id": "power-off",
+      "sourceText": "上电前：硬件处于断电状态。断电时寄存器和 RAM 失去可靠的逻辑值。CPU、RAM、ROM、总线和设备是同时存在的硬件。寄存器与 DRAM 在无电时没有可供 CPU 可靠读取的逻辑值；DRAM 数据随供电中断失去保持。上电后的 DRAM 内容由硬件初始化过程确定。ROM/Flash 和磁盘则能断电保存。\n本实验从 QEMU 已完成复位的状态开始：新建客户机的 RAM 通常由宿主零填充内存提供，固件映像由 QEMU 映射进物理地址空间。客户机 CPU 随后从映射的 ROM 取指。",
+      "file": "qwen-power-off-7aa4a790eb1825d6.mp3",
+      "duration": 48.84,
+      "sha256": "7aa4a790eb1825d68f766cd25a6733279663ba8e1a8621f4107e2dde640256b3",
+      "spokenText": [
+        "上电前：硬件处于断电状态。",
+        "断电时寄存器和 R A M 失去可靠的逻辑值。",
+        "C P U、R A M、R O M、总线和设备是同时存在的硬件。",
+        "寄存器与 D R A M 在无电时没有可供 C P U 可靠读取的逻辑值；。",
+        "D R A M 数据随供电中断失去保持。",
+        "上电后的 D R A M 内容由硬件初始化过程确定。",
+        "R O M/Flash 和磁盘则能断电保存。",
+        "本实验从 Q E M U 已完成复位的状态开始：新建客户机的 R A M 通常由宿主零填充内存提供，固件映像由 Q E M U 映射进物理地址空间。",
+        "客户机 C P U 随后从映射的 R O M 取指。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.84,
+        6.56,
+        14.2,
+        19.28,
+        22.76,
+        27.28,
+        30.92,
+        35.4,
+        40.52,
+        45.12
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 13,
+          "time": 0.0,
+          "duration": 2.72
+        },
+        {
+          "start": 13,
+          "end": 34,
+          "time": 2.84,
+          "duration": 3.6
+        },
+        {
+          "start": 34,
+          "end": 60,
+          "time": 6.56,
+          "duration": 7.52
+        },
+        {
+          "start": 60,
+          "end": 92,
+          "time": 14.2,
+          "duration": 4.96
+        },
+        {
+          "start": 92,
+          "end": 109,
+          "time": 19.28,
+          "duration": 3.36
+        },
+        {
+          "start": 109,
+          "end": 132,
+          "time": 22.76,
+          "duration": 4.4
+        },
+        {
+          "start": 132,
+          "end": 153,
+          "time": 27.28,
+          "duration": 3.52
+        },
+        {
+          "start": 153,
+          "end": 219,
+          "time": 30.92,
+          "duration": 14.08
+        },
+        {
+          "start": 219,
+          "end": 241,
+          "time": 45.12,
+          "duration": 3.6
+        }
+      ]
+    },
+    {
+      "id": "reset-vector",
+      "sourceText": "复位：CPU 从哪里取第一条指令。复位机制在第一条指令执行前建立寄存器初值。寄存器是 CPU 内的存储电路，复位信号能把指定状态强制为初值。QEMU 用 CPU 模型的复位函数模拟这一过程；下表展示第一条客户机指令执行前的初始状态。\nCS 选择子为 0xf000，隐藏基址为 0xffff0000，IP=0xfff0，按隐藏基址加偏移得到取指地址 0xfffffff0。下表列出本次真实复位帧的初值；架构规定与 CPU 模型初始化分别注明，未采样字段保留未知。\n复位让 CPU 准备好取指，引导器、Linux 和 initramfs 随后由固件与 GRUB 装入 RAM。此刻 ROM 的指令字节已经存在；表中 RAM 窗口的 00 来自本次 QEMU 初始样本，窗口外未采样。",
+      "file": "qwen-reset-vector-3febd608eac4658a.mp3",
+      "duration": 78.52,
+      "sha256": "3febd608eac4658a28eb3b963207b1c6cb9d28bcf031a60c473907e0548348e0",
+      "spokenText": [
+        "复位：C P U 从哪里取第一条指令。",
+        "复位机制在第一条指令执行前建立寄存器初值。",
+        "寄存器是 C P U 内的存储电路，复位信号能把指定状态强制为初值。",
+        "Q E M U 用 C P U 模型的复位函数模拟这一过程；。",
+        "下表展示第一条客户机指令执行前的初始状态。",
+        "C S 选择子为 十六进制 F 零 零 零，隐藏基址为 十六进制 F F F F 零 零 零 零，I P等于十六进制 F F F 零，按隐藏基址加偏移得到取指地址 十六进制 F F F F F F F 零。",
+        "下表列出本次真实复位帧的初值；。",
+        "架构规定与 C P U 模型初始化分别注明，未采样字段保留未知。",
+        "复位让 C P U 准备好取指，引导器、Linux 和 init ram F S 随后由固件与 G R U B 装入 R A M。",
+        "此刻 R O M 的指令字节已经存在；。",
+        "表中 R A M 窗口的 00 来自本次 Q E M U 初始样本，窗口外未采样。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.72,
+        8.56,
+        15.0,
+        20.64,
+        25.4,
+        35.791,
+        47.6,
+        51.48,
+        57.28,
+        59.764,
+        67.16,
+        71.12
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 17,
+          "time": 0.0,
+          "duration": 3.6
+        },
+        {
+          "start": 17,
+          "end": 38,
+          "time": 3.72,
+          "duration": 4.72
+        },
+        {
+          "start": 38,
+          "end": 70,
+          "time": 8.56,
+          "duration": 6.32
+        },
+        {
+          "start": 70,
+          "end": 95,
+          "time": 15.0,
+          "duration": 5.52
+        },
+        {
+          "start": 95,
+          "end": 117,
+          "time": 20.64,
+          "duration": 4.64
+        },
+        {
+          "start": 117,
+          "end": 185,
+          "time": 25.4,
+          "duration": 22.08
+        },
+        {
+          "start": 185,
+          "end": 200,
+          "time": 47.6,
+          "duration": 3.76
+        },
+        {
+          "start": 200,
+          "end": 231,
+          "time": 51.48,
+          "duration": 5.68
+        },
+        {
+          "start": 231,
+          "end": 286,
+          "time": 57.28,
+          "duration": 9.76
+        },
+        {
+          "start": 286,
+          "end": 303,
+          "time": 67.16,
+          "duration": 3.84
+        },
+        {
+          "start": 303,
+          "end": 339,
+          "time": 71.12,
+          "duration": 7.279958333333333
+        }
+      ]
+    },
+    {
+      "id": "far-jump",
+      "sourceText": "远跳转刷新 CS 缓存。复位向量中的 FAR JMP 进入 SeaBIOS 入口。捕获的前 5 字节为 ea 5b e0 00 f0，按 16 位远跳转解释为 F000:E05B。这个跳转改变 CS 隐藏基址和指令偏移，下一次取指落到低于 1 MiB 的固件窗口。",
+      "file": "qwen-far-jump-3dd5f4f15cc05c57.mp3",
+      "duration": 25.04,
+      "sha256": "3dd5f4f15cc05c57af8d134c1b54d076ed3790b120264367efe1cef33ad0886f",
+      "spokenText": [
+        "远跳转刷新 C S 缓存。",
+        "复位向量中的 F A R J M P 进入 Sea B I O S 入口。",
+        "捕获的前 5 字节为 ea 5b e0 00 f0，按 16 位远跳转解释为 F000:E05B。",
+        "这个跳转改变 C S 隐藏基址和指令偏移，下一次取指落到低于 1 Mi B 的固件窗口。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.28,
+        7.2,
+        16.12,
+        20.31
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 12,
+          "time": 0.0,
+          "duration": 2.16
+        },
+        {
+          "start": 12,
+          "end": 41,
+          "time": 2.28,
+          "duration": 4.8
+        },
+        {
+          "start": 41,
+          "end": 90,
+          "time": 7.2,
+          "duration": 8.8
+        },
+        {
+          "start": 90,
+          "end": 132,
+          "time": 16.12,
+          "duration": 8.8
+        }
+      ]
+    },
+    {
+      "id": "bios-stack",
+      "sourceText": "固件建立工作环境。先有栈与临时数据，固件才能调用更复杂的初始化。这是 CPU 复位之后执行的固件代码。实体机器的固件还需初始化内存控制器和 DRAM；QEMU 的客户机 RAM 在机器创建时由宿主内存提供。固件设置工作栈，把初始化代码搬到 RAM，并写临时结构。SeaBIOS 也会进入 32 位模式完成部分初始化，再回到 16 位 BIOS 服务；栈、段和 CR0 的具体中间值未逐条捕获。Linux 由后续 GRUB 阶段装载。",
+      "file": "qwen-bios-stack-356df54f3b14f3b6.mp3",
+      "duration": 43.96,
+      "sha256": "356df54f3b14f3b61b3aef3de29306cc9964e7f9f1be32b7040a7c4657086bae",
+      "spokenText": [
+        "固件建立工作环境。",
+        "先有栈与临时数据，固件才能调用更复杂的初始化。",
+        "这是 C P U 复位之后执行的固件代码。",
+        "实体机器的固件还需初始化内存控制器和 D R A M；。",
+        "Q E M U 的客户机 R A M 在机器创建时由宿主内存提供。",
+        "固件设置工作栈，把初始化代码搬到 R A M，并写临时结构。",
+        "Sea B I O S 也会进入 32 位模式完成部分初始化，再回到 16 位 B I O S 服务；。",
+        "栈、段和 C R 零 的具体中间值未逐条捕获。",
+        "Linux 由后续 G R U B 阶段装载。"
+      ],
+      "cueStarts": [
+        0.0,
+        1.72,
+        5.6,
+        8.84,
+        13.6,
+        23.0,
+        28.16,
+        36.6,
+        41.12
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 9,
+          "time": 0.0,
+          "duration": 1.6
+        },
+        {
+          "start": 9,
+          "end": 32,
+          "time": 1.72,
+          "duration": 3.76
+        },
+        {
+          "start": 32,
+          "end": 51,
+          "time": 5.6,
+          "duration": 3.12
+        },
+        {
+          "start": 51,
+          "end": 75,
+          "time": 8.84,
+          "duration": 4.64
+        },
+        {
+          "start": 75,
+          "end": 103,
+          "time": 13.6,
+          "duration": 9.28
+        },
+        {
+          "start": 103,
+          "end": 131,
+          "time": 23.0,
+          "duration": 5.04
+        },
+        {
+          "start": 131,
+          "end": 175,
+          "time": 28.16,
+          "duration": 8.32
+        },
+        {
+          "start": 175,
+          "end": 196,
+          "time": 36.6,
+          "duration": 4.4
+        },
+        {
+          "start": 196,
+          "end": 216,
+          "time": 41.12,
+          "duration": 2.72
+        }
+      ]
+    },
+    {
+      "id": "bios-tables",
+      "sourceText": "建立 IVT 与 BIOS 数据区。低地址 0x0000 与 0x0400 开始获得具体用途。IVT 的每个入口保存实模式中断服务的段:偏移；BDA 记录固件使用的设备参数。后来的 64 位 IDT 使用门描述符。内存总览持续标注这些区域的用途。",
+      "file": "qwen-bios-tables-762ba79ab63bcf8a.mp3",
+      "duration": 21.44,
+      "sha256": "762ba79ab63bcf8a18532991fdd151a1b513b34a2541850e006d41dd99896622",
+      "spokenText": [
+        "建立 I V T 与 B I O S 数据区。",
+        "低地址 十六进制 零 零 零 零 与 十六进制 零 四 零 零 开始获得具体用途。",
+        "I V T 的每个入口保存实模式中断服务的段:偏移；。",
+        "B D A 记录固件使用的设备参数。",
+        "后来的 64 位 I D T 使用门描述符。",
+        "内存总览持续标注这些区域的用途。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.6,
+        8.24,
+        12.36,
+        14.88,
+        18.28
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 18,
+          "time": 0.0,
+          "duration": 2.48
+        },
+        {
+          "start": 18,
+          "end": 47,
+          "time": 2.6,
+          "duration": 5.52
+        },
+        {
+          "start": 47,
+          "end": 71,
+          "time": 8.24,
+          "duration": 4.0
+        },
+        {
+          "start": 71,
+          "end": 87,
+          "time": 12.36,
+          "duration": 2.4
+        },
+        {
+          "start": 87,
+          "end": 107,
+          "time": 14.88,
+          "duration": 3.28
+        },
+        {
+          "start": 107,
+          "end": 123,
+          "time": 18.28,
+          "duration": 3.04
+        }
+      ]
+    },
+    {
+      "id": "bios-devices",
+      "sourceText": "固件探测设备并运行 VGA ROM。CPU 在执行固件代码，设备经总线被初始化。maininit 顺序建立接口、平台与设备，运行 VGA option ROM，启用控制台并准备启动顺序。此刻显示的是固件输出；后续 GRUB 装载 Linux，早期用户空间再挂载根文件系统。",
+      "file": "qwen-bios-devices-0b669014d5644735.mp3",
+      "duration": 24.84,
+      "sha256": "0b669014d5644735bd7bff11cf25b41e532f2643ec3b84b3a3bce2d0fb25bd5c",
+      "spokenText": [
+        "固件探测设备并运行 V G A R O M。",
+        "C P U 在执行固件代码，设备经总线被初始化。",
+        "maininit 顺序建立接口、平台与设备，运行 V G A option R O M，启用控制台并准备启动顺序。",
+        "此刻显示的是固件输出；。",
+        "后续 G R U B 装载 Linux，早期用户空间再挂载根文件系统。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.56,
+        7.84,
+        11.327,
+        16.36,
+        18.72
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 18,
+          "time": 0.0,
+          "duration": 3.44
+        },
+        {
+          "start": 18,
+          "end": 40,
+          "time": 3.56,
+          "duration": 4.16
+        },
+        {
+          "start": 40,
+          "end": 93,
+          "time": 7.84,
+          "duration": 8.4
+        },
+        {
+          "start": 93,
+          "end": 104,
+          "time": 16.36,
+          "duration": 2.24
+        },
+        {
+          "start": 104,
+          "end": 136,
+          "time": 18.72,
+          "duration": 6.0
+        }
+      ]
+    },
+    {
+      "id": "boot-image",
+      "sourceText": "把引导镜像送到 0x7c00。本实验从光盘 ISO 启动；这是实际的第一段引导代码停点。SeaBIOS 的 boot_cdrom 读取 El Torito 启动镜像并调用其入口。真实帧在 0x7c00 停住，IF=1、CR0.PE=0；读取来源是 boot.iso，/dev/vda 留作后续 ext2 根盘。",
+      "file": "qwen-boot-image-e86bd5d86179e92c.mp3",
+      "duration": 33.44,
+      "sha256": "e86bd5d86179e92cb209d203b738d30f7188a9665268c768deb4054ebee4deae",
+      "spokenText": [
+        "把引导镜像送到 十六进制 七 C 零 零。",
+        "本实验从光盘 I S O 启动；。",
+        "这是实际的第一段引导代码停点。",
+        "Sea B I O S 的 boot cdrom 读取 El Torito 启动镜像并调用其入口。",
+        "真实帧在 十六进制 七 C 零 零 停住，I F等于1、C R 零 的 P E 标志等于0；。",
+        "读取来源是 boot.iso，/dev/vda 留作后续 ext2 根盘。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.88,
+        6.4,
+        9.24,
+        15.6,
+        22.92
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 15,
+          "time": 0.0,
+          "duration": 3.76
+        },
+        {
+          "start": 15,
+          "end": 29,
+          "time": 3.88,
+          "duration": 2.4
+        },
+        {
+          "start": 29,
+          "end": 44,
+          "time": 6.4,
+          "duration": 2.72
+        },
+        {
+          "start": 44,
+          "end": 89,
+          "time": 9.24,
+          "duration": 6.24
+        },
+        {
+          "start": 89,
+          "end": 118,
+          "time": 15.6,
+          "duration": 7.2
+        },
+        {
+          "start": 118,
+          "end": 155,
+          "time": 22.92,
+          "duration": 10.4
+        }
+      ]
+    },
+    {
+      "id": "grub-core",
+      "sourceText": "引导代码继续装入 GRUB。分阶段加载的目的是突破最初引导窗口的大小限制。GRUB 在 RAM 中执行、通过固件与设备访问 ISO 文件。它会使用保护模式完成工作。此阶段的 GRUB 核心寄存器值未独立采样，数值栏按来源保留最近停点。",
+      "file": "qwen-grub-core-8926626673ef7ede.mp3",
+      "duration": 23.64,
+      "sha256": "8926626673ef7ede5950a7e267fdda81c3e168834877f99ac8bc309b2f2e6dba",
+      "spokenText": [
+        "引导代码继续装入 G R U B。",
+        "分阶段加载的目的是突破最初引导窗口的大小限制。",
+        "G R U B 在 R A M 中执行、通过固件与设备访问 I S O 文件。",
+        "它会使用保护模式完成工作。",
+        "此阶段的 G R U B 核心寄存器值未独立采样，数值栏按来源保留最近停点。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.6,
+        7.52,
+        13.96,
+        16.64
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 14,
+          "time": 0.0,
+          "duration": 2.48
+        },
+        {
+          "start": 14,
+          "end": 37,
+          "time": 2.6,
+          "duration": 4.8
+        },
+        {
+          "start": 37,
+          "end": 69,
+          "time": 7.52,
+          "duration": 6.32
+        },
+        {
+          "start": 69,
+          "end": 82,
+          "time": 13.96,
+          "duration": 2.56
+        },
+        {
+          "start": 82,
+          "end": 117,
+          "time": 16.64,
+          "duration": 6.88
+        }
+      ]
+    },
+    {
+      "id": "grub-kernel",
+      "sourceText": "linux16 装载 bzImage。磁盘中的内核文件被读入物理内存。grub.cfg 使用 linux16。bzImage 同时包含启动协议头、低位 setup 和高位压缩内核。传给内核的命令行关闭随机布局，启用 VGA 与串口控制台。",
+      "file": "qwen-grub-kernel-dbf9d2d2638afd5c.mp3",
+      "duration": 19.72,
+      "sha256": "dbf9d2d2638afd5c318e3a55bfbf4c58a5df64b08923ab76215d06925f8073d2",
+      "spokenText": [
+        "linux16 装载 B Z image。",
+        "磁盘中的内核文件被读入物理内存。",
+        "grub.cfg 使用 linux16。",
+        "B Z image 同时包含启动协议头、低位 setup 和高位压缩内核。",
+        "传给内核的命令行关闭随机布局，启用 V G A 与串口控制台。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.52,
+        5.76,
+        8.76,
+        14.56
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 19,
+          "time": 0.0,
+          "duration": 2.4
+        },
+        {
+          "start": 19,
+          "end": 35,
+          "time": 2.52,
+          "duration": 3.12
+        },
+        {
+          "start": 35,
+          "end": 55,
+          "time": 5.76,
+          "duration": 2.88
+        },
+        {
+          "start": 55,
+          "end": 90,
+          "time": 8.76,
+          "duration": 5.68
+        },
+        {
+          "start": 90,
+          "end": 119,
+          "time": 14.56,
+          "duration": 5.04
+        }
+      ]
+    },
+    {
+      "id": "grub-initrd",
+      "sourceText": "initrd16 装载早期用户空间。initramfs 以压缩归档形式保存在 RAM 中。GRUB 将 initramfs.cpio.gz 放到可用 RAM，并在引导参数中记录起点和长度。归档里有 /init、BusyBox、挂载点等。装载文件与内核解包归档是两个不同动作。",
+      "file": "qwen-grub-initrd-a6b93eef5dc5b382.mp3",
+      "duration": 28.04,
+      "sha256": "a6b93eef5dc5b38296d1d9540c911d24e8f092a9b7081e0f14694ca1b4cdd1fd",
+      "spokenText": [
+        "initrd16 装载早期用户空间。",
+        "init ram F S 以压缩归档形式保存在 R A M 中。",
+        "G R U B 将 init ram F S.cpio.gz 放到可用 R A M，并在引导参数中记录起点和长度。",
+        "归档里有 /init、Busy Box、挂载点等。",
+        "装载文件与内核解包归档是两个不同动作。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.32,
+        8.0,
+        16.826,
+        20.84,
+        24.32
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 18,
+          "time": 0.0,
+          "duration": 3.2
+        },
+        {
+          "start": 18,
+          "end": 45,
+          "time": 3.32,
+          "duration": 4.56
+        },
+        {
+          "start": 45,
+          "end": 94,
+          "time": 8.0,
+          "duration": 12.72
+        },
+        {
+          "start": 94,
+          "end": 118,
+          "time": 20.84,
+          "duration": 3.36
+        },
+        {
+          "start": 118,
+          "end": 137,
+          "time": 24.32,
+          "duration": 3.6
+        }
+      ]
+    },
+    {
+      "id": "boot-params",
+      "sourceText": "交接清单：boot_params。内存地图、命令行和 initrd 位置必须一起交给内核。boot_params 是 4096 字节引导参数结构。引导器按 Linux 启动协议准备 CPU 模式、段、栈和交接数据，再跳到入口。源码中 setup 还会补充 BIOS 查询结果。",
+      "file": "qwen-boot-params-ff705ae29796ce47.mp3",
+      "duration": 22.92,
+      "sha256": "ff705ae29796ce47309e3eef488b175cfe8a78a41d3b4fdb3d0b9d5406439056",
+      "spokenText": [
+        "交接清单：boot params。",
+        "内存地图、命令行和 init R D 位置必须一起交给内核。",
+        "boot params 是 4096 字节引导参数结构。",
+        "引导器按 Linux 启动协议准备 C P U 模式、段、栈和交接数据，再跳到入口。",
+        "源码中 setup 还会补充 B I O S 查询结果。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.36,
+        6.96,
+        11.24,
+        19.36
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 17,
+          "time": 0.0,
+          "duration": 2.24
+        },
+        {
+          "start": 17,
+          "end": 45,
+          "time": 2.36,
+          "duration": 4.48
+        },
+        {
+          "start": 45,
+          "end": 73,
+          "time": 6.96,
+          "duration": 4.16
+        },
+        {
+          "start": 73,
+          "end": 113,
+          "time": 11.24,
+          "duration": 8.0
+        },
+        {
+          "start": 113,
+          "end": 138,
+          "time": 19.36,
+          "duration": 3.44
+        }
+      ]
+    },
+    {
+      "id": "setup-main",
+      "sourceText": "setup.main 收集硬件信息。最后利用 BIOS 服务获得内核需要的启动信息。main 负责复制参数、检查 CPU、检测内存并配置视频。本机实际停点位于 0x91171，CS 隐藏基址为 0x90000，CR0.PE=0；地址和指令字节已与当前构建的 setup ELF 核对。这里采到的是函数入口，后续步骤再观察初始化结果。",
+      "file": "qwen-setup-main-7305415ac4d21027.mp3",
+      "duration": 34.56,
+      "sha256": "7305415ac4d21027c26b6acb17f3c039668c5ba3064e0ac57cf35c042f62a90e",
+      "spokenText": [
+        "setup.main 收集硬件信息。",
+        "最后利用 B I O S 服务获得内核需要的启动信息。",
+        "main 负责复制参数、检查 C P U、检测内存并配置视频。",
+        "本机实际停点位于 十六进制 九 一 一 七 一，C S 隐藏基址为 十六进制 九 零 零 零 零，C R 零 的 P E 标志等于0；。",
+        "地址和指令字节已与当前构建的 setup E L F 核对。",
+        "这里采到的是函数入口，后续步骤再观察初始化结果。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.6,
+        7.36,
+        13.48,
+        24.24,
+        29.4
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 18,
+          "time": 0.0,
+          "duration": 2.48
+        },
+        {
+          "start": 18,
+          "end": 42,
+          "time": 2.6,
+          "duration": 4.64
+        },
+        {
+          "start": 42,
+          "end": 71,
+          "time": 7.36,
+          "duration": 6.0
+        },
+        {
+          "start": 71,
+          "end": 114,
+          "time": 13.48,
+          "duration": 10.64
+        },
+        {
+          "start": 114,
+          "end": 142,
+          "time": 24.24,
+          "duration": 5.04
+        },
+        {
+          "start": 142,
+          "end": 166,
+          "time": 29.4,
+          "duration": 5.04
+        }
+      ]
+    },
+    {
+      "id": "setup-e820",
+      "sourceText": "探测 e820：哪些地址是真 RAM。e820 区分可分配 RAM 与固件、设备保留区。内存地图把可用 RAM、固件保留区、ACPI 等区间区分开。低位 VGA/ROM 窗口属于设备和固件映射。网格按源码标注物理范围与用途，实测字节另见采样窗口。",
+      "file": "qwen-setup-e820-f711593e483cb9c0.mp3",
+      "duration": 27.32,
+      "sha256": "f711593e483cb9c0a43f775131a863c5152c666113ac21b14cc14504a5617578",
+      "spokenText": [
+        "探测 e820：哪些地址是真 R A M。",
+        "e820 区分可分配 R A M 与固件、设备保留区。",
+        "内存地图把可用 R A M、固件保留区、A C P I 等区间区分开。",
+        "低位 V G A/R O M 窗口属于设备和固件映射。",
+        "网格按源码标注物理范围与用途，实测字节另见采样窗口。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.96,
+        9.52,
+        16.28,
+        21.36
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 19,
+          "time": 0.0,
+          "duration": 3.84
+        },
+        {
+          "start": 19,
+          "end": 44,
+          "time": 3.96,
+          "duration": 5.44
+        },
+        {
+          "start": 44,
+          "end": 74,
+          "time": 9.52,
+          "duration": 6.64
+        },
+        {
+          "start": 74,
+          "end": 97,
+          "time": 16.28,
+          "duration": 4.96
+        },
+        {
+          "start": 97,
+          "end": 123,
+          "time": 21.36,
+          "duration": 5.84
+        }
+      ]
+    },
+    {
+      "id": "setup-a20",
+      "sourceText": "关闭中断，确保 A20 可用。离开 BIOS 环境前，先屏蔽实模式中断入口。go_to_protected_mode 调用实模式切换钩子、使能 A20、复位协处理器并屏蔽 PIC。A20 使地址线第 20 位参与寻址，允许访问超过 1 MiB 的地址；保护模式由 CR0.PE 控制。",
+      "file": "qwen-setup-a20-961de6a04912975e.mp3",
+      "duration": 25.72,
+      "sha256": "961de6a04912975e24d5f7f8a92b20ab3cf9bfbcc30cd3be1acd8fda147773b9",
+      "spokenText": [
+        "关闭中断，确保 A20 可用。",
+        "离开 B I O S 环境前，先屏蔽实模式中断入口。",
+        "go to protected mode 调用实模式切换钩子、使能 A20、复位协处理器并屏蔽 P I C。",
+        "A20 使地址线第 20 位参与寻址，允许访问超过 1 Mi B 的地址；。",
+        "保护模式由 C R 零 的 P E 标志 控制。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.08,
+        7.04,
+        15.8,
+        21.92
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 15,
+          "time": 0.0,
+          "duration": 2.96
+        },
+        {
+          "start": 15,
+          "end": 38,
+          "time": 3.08,
+          "duration": 3.84
+        },
+        {
+          "start": 38,
+          "end": 90,
+          "time": 7.04,
+          "duration": 8.64
+        },
+        {
+          "start": 90,
+          "end": 126,
+          "time": 15.8,
+          "duration": 6.0
+        },
+        {
+          "start": 126,
+          "end": 142,
+          "time": 21.92,
+          "duration": 3.68
+        }
+      ]
+    },
+    {
+      "id": "setup-gdt",
+      "sourceText": "装入 GDT，准备新的代码段。保护模式的 CS/DS 是描述符选择子。GDT 内有 32 位代码段、数据段与用于兼容性的 TSS 描述符。LGDT 装入表地址与界限；后续段装载和远跳转刷新对应段缓存。setup 还临时装入空 IDT。",
+      "file": "qwen-setup-gdt-7cdf3793e940d143.mp3",
+      "duration": 22.48,
+      "sha256": "7cdf3793e940d1430ddb1d6b5c28febcf1dc103e2d58b490d92a71ad59cbe0d0",
+      "spokenText": [
+        "装入 G D T，准备新的代码段。",
+        "保护模式的 C S/D S 是描述符选择子。",
+        "G D T 内有 32 位代码段、数据段与用于兼容性的 T S S 描述符。",
+        "L G D T 装入表地址与界限；。",
+        "后续段装载和远跳转刷新对应段缓存。",
+        "setup 还临时装入空 I D T。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.44,
+        6.72,
+        13.48,
+        16.32,
+        19.56
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 15,
+          "time": 0.0,
+          "duration": 2.32
+        },
+        {
+          "start": 15,
+          "end": 35,
+          "time": 2.44,
+          "duration": 4.16
+        },
+        {
+          "start": 35,
+          "end": 69,
+          "time": 6.72,
+          "duration": 6.64
+        },
+        {
+          "start": 69,
+          "end": 83,
+          "time": 13.48,
+          "duration": 2.72
+        },
+        {
+          "start": 83,
+          "end": 100,
+          "time": 16.32,
+          "duration": 3.12
+        },
+        {
+          "start": 100,
+          "end": 117,
+          "time": 19.56,
+          "duration": 2.8
+        }
+      ]
+    },
+    {
+      "id": "set-pe",
+      "sourceText": "CR0.PE 置 1。模式切换由具体控制位和远跳转共同完成。protected_mode_jump 置 CR0.PE，再通过远跳转装入 32 位代码段，随后装载数据段与栈。此时 CR0.PG=0，线性地址直接用于物理寻址。",
+      "file": "qwen-set-pe-b7a110c1ef9e2c5e.mp3",
+      "duration": 23.12,
+      "sha256": "b7a110c1ef9e2c5eb9226be22c777a655bad9724a987368551086d99e91cd245",
+      "spokenText": [
+        "C R 零 的 P E 标志 置 1。",
+        "模式切换由具体控制位和远跳转共同完成。",
+        "protected mode jump 置 C R 零 的 P E 标志，再通过远跳转装入 32 位代码段，随后装载数据段与栈。",
+        "此时 C R 零 的 P G 标志等于0，线性地址直接用于物理寻址。"
+      ],
+      "cueStarts": [
+        0.0,
+        7.84,
+        12.936,
+        17.8
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 11,
+          "time": 0.0,
+          "duration": 3.6
+        },
+        {
+          "start": 11,
+          "end": 30,
+          "time": 3.72,
+          "duration": 4.0
+        },
+        {
+          "start": 30,
+          "end": 86,
+          "time": 7.84,
+          "duration": 9.84
+        },
+        {
+          "start": 86,
+          "end": 111,
+          "time": 17.8,
+          "duration": 5.2
+        }
+      ]
+    },
+    {
+      "id": "startup32",
+      "sourceText": "到达压缩内核 startup_32。真实停点：物理地址 0x100000，PE=1、PG=0。CPU 此时运行解压器，后续跳入主内核。抓到的 CS=0x10、DS/SS=0x18，CR3=0，EFER=0。ESI 传递 boot_params，栈供解压器使用。所有一般寄存器可在全景中逐个检查。",
+      "file": "qwen-startup32-3ca783f766225b03.mp3",
+      "duration": 36.64,
+      "sha256": "3ca783f766225b036baaa5eb6167b60a3f44a798a8c16caa4d08ab20919d1559",
+      "spokenText": [
+        "到达压缩内核 startup 32。",
+        "真实停点：物理地址 十六进制 一 零 零 零 零 零，P E等于1、P G等于0。",
+        "C P U 此时运行解压器，后续跳入主内核。",
+        "抓到的 C S等于十六进制 一 零、D S/S S等于十六进制 一 八，C R 三等于0，E F E R等于0。",
+        "E S I 传递 boot params，栈供解压器使用。",
+        "所有一般寄存器可在全景中逐个检查。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.44,
+        8.8,
+        12.2,
+        28.4,
+        32.92
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 18,
+          "time": 0.0,
+          "duration": 2.32
+        },
+        {
+          "start": 18,
+          "end": 47,
+          "time": 2.44,
+          "duration": 6.24
+        },
+        {
+          "start": 47,
+          "end": 67,
+          "time": 8.8,
+          "duration": 3.28
+        },
+        {
+          "start": 67,
+          "end": 103,
+          "time": 12.2,
+          "duration": 16.08
+        },
+        {
+          "start": 103,
+          "end": 130,
+          "time": 28.4,
+          "duration": 4.4
+        },
+        {
+          "start": 130,
+          "end": 147,
+          "time": 32.92,
+          "duration": 3.6
+        }
+      ]
+    },
+    {
+      "id": "decompress-placement",
+      "sourceText": "计算搬移与解压的目标位置。输入压缩包、解压器与输出内核分别占用安全的工作区。代码依据内核对齐值、加载物理地址与 init_size 计算解压器搬移位置。寄存器承担地址与长度计算，具体地址由本次构建和装载结果确定。",
+      "file": "qwen-decompress-placement-e22b42929a43eedb.mp3",
+      "duration": 21.36,
+      "sha256": "e22b42929a43eedb810f4f6123a97079759c93686d3a3ae04a69fbb300afcb33",
+      "spokenText": [
+        "计算搬移与解压的目标位置。",
+        "输入压缩包、解压器与输出内核分别占用安全的工作区。",
+        "代码依据内核对齐值、加载物理地址与 init size 计算解压器搬移位置。",
+        "寄存器承担地址与长度计算，具体地址由本次构建和装载结果确定。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.44,
+        7.84,
+        14.76
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 13,
+          "time": 0.0,
+          "duration": 2.32
+        },
+        {
+          "start": 13,
+          "end": 38,
+          "time": 2.44,
+          "duration": 5.28
+        },
+        {
+          "start": 38,
+          "end": 76,
+          "time": 7.84,
+          "duration": 6.8
+        },
+        {
+          "start": 76,
+          "end": 106,
+          "time": 14.76,
+          "duration": 6.48
+        }
+      ]
+    },
+    {
+      "id": "enable-pae",
+      "sourceText": "第一步：CR4.PAE = 1。先允许长模式需要的分页结构。startup_32 从 CR4 读出原值，仅 OR 上 PAE 位再写回。此刻 CR0.PG=0，CPU 继续执行 32 位保护模式代码。",
+      "file": "qwen-enable-pae-f79f8b87eadaa1ab.mp3",
+      "duration": 21.92,
+      "sha256": "f79f8b87eadaa1abffbf5c5bb3da75991c1caaf2542edb8f1c605a8ce6b043c8",
+      "spokenText": [
+        "第一步：C R 四 的 P A E 标志 等于 1。",
+        "先允许long mode需要的分页结构。",
+        "startup 32 从 C R 四 读出原值，仅 O R 上 P A E 位再写回。",
+        "此刻 C R 零 的 P G 标志等于0，C P U 继续执行 32 位保护模式代码。"
+      ],
+      "cueStarts": [
+        0.0,
+        5.24,
+        8.16,
+        15.48
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 16,
+          "time": 0.0,
+          "duration": 5.12
+        },
+        {
+          "start": 16,
+          "end": 30,
+          "time": 5.24,
+          "duration": 2.8
+        },
+        {
+          "start": 30,
+          "end": 68,
+          "time": 8.16,
+          "duration": 7.2
+        },
+        {
+          "start": 68,
+          "end": 100,
+          "time": 15.48,
+          "duration": 6.32
+        }
+      ]
+    },
+    {
+      "id": "identity-pages",
+      "sourceText": "第二步：在 RAM 建临时页表。最初的映射让地址切换后仍能找到同一段代码。源码清空启动页表并建立覆盖早期 4 GiB 的恒等映射。本路径使用 2 MiB 大页，地址沿 PML4 → PDPT → PD 翻译，PD 大页表项直接给出物理页基址。映射覆盖范围与实际 RAM 容量分别由页表和机器配置确定。",
+      "file": "qwen-identity-pages-bde68a151e5f6c99.mp3",
+      "duration": 28.28,
+      "sha256": "bde68a151e5f6c99df21bb8a274ec4162967cb3f93f6f88630276d5884e75054",
+      "spokenText": [
+        "第二步：在 R A M 建临时页表。",
+        "最初的映射让地址切换后仍能找到同一段代码。",
+        "源码清空启动页表并建立覆盖早期 4 Gi B 的恒等映射。",
+        "本路径使用 2 Mi B 大页，地址沿 P M L 四 ，到 P D P T ，到 P D 翻译，P D 大页表项直接给出物理页基址。",
+        "映射覆盖范围与实际 R A M 容量分别由页表和机器配置确定。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.48,
+        8.56,
+        13.32,
+        19.95,
+        22.96
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 16,
+          "time": 0.0,
+          "duration": 3.36
+        },
+        {
+          "start": 16,
+          "end": 37,
+          "time": 3.48,
+          "duration": 4.96
+        },
+        {
+          "start": 37,
+          "end": 65,
+          "time": 8.56,
+          "duration": 4.64
+        },
+        {
+          "start": 65,
+          "end": 121,
+          "time": 13.32,
+          "duration": 9.52
+        },
+        {
+          "start": 121,
+          "end": 150,
+          "time": 22.96,
+          "duration": 5.2
+        }
+      ]
+    },
+    {
+      "id": "load-cr3",
+      "sourceText": "第三步：CR3 指向页表根。页表放在 RAM；CR3 保存根的物理地址。写入 CR3 后，PG 仍然为 0，当前线性地址直接用于物理寻址。页表根、页表项和最终数据页面分别记录与观察。",
+      "file": "qwen-load-cr3-57eebf63bae55b78.mp3",
+      "duration": 20.36,
+      "sha256": "57eebf63bae55b782cc3b75b78dfb6162cce69db7f552ddf30b8a19f0e1a380c",
+      "spokenText": [
+        "第三步：C R 三 指向页表根。",
+        "页表放在 R A M；。",
+        "C R 三 保存根的物理地址。",
+        "写入 C R 三 后，P G 仍然为 0，当前线性地址直接用于物理寻址。",
+        "页表根、页表项和最终数据页面分别记录与观察。"
+      ],
+      "cueStarts": [
+        0.0,
+        5.52,
+        8.04,
+        14.88
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 14,
+          "time": 0.0,
+          "duration": 3.84
+        },
+        {
+          "start": 14,
+          "end": 23,
+          "time": 3.96,
+          "duration": 1.44
+        },
+        {
+          "start": 23,
+          "end": 36,
+          "time": 5.52,
+          "duration": 2.4
+        },
+        {
+          "start": 36,
+          "end": 69,
+          "time": 8.04,
+          "duration": 6.72
+        },
+        {
+          "start": 69,
+          "end": 91,
+          "time": 14.88,
+          "duration": 5.36
+        }
+      ]
+    },
+    {
+      "id": "enable-lme",
+      "sourceText": "第四步：EFER.LME = 1。设置长模式允许位，等待分页激活。ECX 选择 EFER MSR，RDMSR 读出后设置 LME，再 WRMSR 写回。此刻 LME=1、LMA=0、PG=0；LMA 由后续硬件激活过程更新，CS.L 由代码段装载更新。",
+      "file": "qwen-enable-lme-adaaa8bd6b7374cd.mp3",
+      "duration": 31.08,
+      "sha256": "adaaa8bd6b7374cd571f1470deb96c73c9cdcee736ad4a42738dbb76d15795e7",
+      "spokenText": [
+        "第四步：E F E R 的 L M E 标志 等于 1。",
+        "设置long mode允许位，等待分页激活。",
+        "E C X 选择 E F E R M S R，R D M S R 读出后设置 L M E，再 W R M S R 写回。",
+        "此刻 L M E等于1、L M A等于0、P G等于0；。",
+        "L M A 由后续硬件激活过程更新，C S.L 由代码段装载更新。"
+      ],
+      "cueStarts": [
+        0.0,
+        5.8,
+        9.28,
+        18.36,
+        23.92
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 17,
+          "time": 0.0,
+          "duration": 5.68
+        },
+        {
+          "start": 17,
+          "end": 33,
+          "time": 5.8,
+          "duration": 3.36
+        },
+        {
+          "start": 33,
+          "end": 76,
+          "time": 9.28,
+          "duration": 8.96
+        },
+        {
+          "start": 76,
+          "end": 96,
+          "time": 18.36,
+          "duration": 5.44
+        },
+        {
+          "start": 96,
+          "end": 126,
+          "time": 23.92,
+          "duration": 7.04
+        }
+      ]
+    },
+    {
+      "id": "enable-paging",
+      "sourceText": "第五步：CR0.PG = 1。分页生效，硬件激活长模式环境。满足 PE、PAE、LME 条件后写 CR0_STATE。此时硬件报告 EFER.LMA=1，当前 CS 属性仍可以选择 32 位兼容子模式；后续装载 L=1 的代码段进入 64 位执行。",
+      "file": "qwen-enable-paging-abf9f0ab95040674.mp3",
+      "duration": 27.08,
+      "sha256": "abf9f0ab950406741217e76d57e4f881dd93abc5c32bd41f2766c0a126caa4cd",
+      "spokenText": [
+        "第五步：C R 零 的 P G 标志 等于 1。",
+        "分页生效，硬件激活long mode环境。",
+        "满足 P E、P A E、L M E 条件后写 C R 零 S T A T E。",
+        "此时硬件报告 E F E R 的 L M A 标志等于1，当前 C S 属性仍可以选择 32 位兼容子模式；。",
+        "后续装载 L等于1 的代码段进入 64 位执行。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.88,
+        6.72,
+        14.28,
+        22.88
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 15,
+          "time": 0.0,
+          "duration": 3.76
+        },
+        {
+          "start": 15,
+          "end": 30,
+          "time": 3.88,
+          "duration": 2.72
+        },
+        {
+          "start": 30,
+          "end": 59,
+          "time": 6.72,
+          "duration": 7.44
+        },
+        {
+          "start": 59,
+          "end": 101,
+          "time": 14.28,
+          "duration": 8.48
+        },
+        {
+          "start": 101,
+          "end": 124,
+          "time": 22.88,
+          "duration": 4.08
+        }
+      ]
+    },
+    {
+      "id": "startup64",
+      "sourceText": "第六步：远返回进入 64 位代码。真实停点：startup_64 = 0x100200。LRET 装入 CS.L=1 的代码段。这个帧证明 PE=1、PG=1、PAE=1、LME=1、LMA=1，同时给出本次真实页表根地址。名称 startup_64 既存在于解压器也存在于主内核；此处仍是解压器。",
+      "file": "qwen-startup64-e409b46c9a339676.mp3",
+      "duration": 34.72,
+      "sha256": "e409b46c9a33967642e135adfeb1fc00cbdcc9f37cfac1403af112e47bfa1a78",
+      "spokenText": [
+        "第六步：远返回进入 64 位代码。",
+        "真实停点：startup 64 等于 十六进制 一 零 零 二 零 零。",
+        "L R E T 装入 C S.L等于1 的代码段。",
+        "这个帧证明 P E等于1、P G等于1、P A E等于1、L M E等于1、L M A等于1，同时给出本次真实页表根地址。",
+        "名称 startup 64 既存在于解压器也存在于主内核；。",
+        "此处仍是解压器。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.16,
+        8.4,
+        12.76,
+        23.357,
+        27.84,
+        33.08
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 17,
+          "time": 0.0,
+          "duration": 3.04
+        },
+        {
+          "start": 17,
+          "end": 44,
+          "time": 3.16,
+          "duration": 5.12
+        },
+        {
+          "start": 44,
+          "end": 64,
+          "time": 8.4,
+          "duration": 4.24
+        },
+        {
+          "start": 64,
+          "end": 112,
+          "time": 12.76,
+          "duration": 14.96
+        },
+        {
+          "start": 112,
+          "end": 141,
+          "time": 27.84,
+          "duration": 5.12
+        },
+        {
+          "start": 141,
+          "end": 149,
+          "time": 33.08,
+          "duration": 1.52
+        }
+      ]
+    },
+    {
+      "id": "relocate",
+      "sourceText": "搬移解压器，保留输出空间。从高地址向低地址复制，保持待搬移数据完整。解压器建立自己的栈、校正 GDT 指针并搬移代码。源码中 STD 和 REP MOVSQ 让复制地址递减，随后 CLD 恢复递增方向。DF 的改变由指令语义推导；这一瞬间的完整寄存器值未采样。",
+      "file": "qwen-relocate-51fd5ea8f9256584.mp3",
+      "duration": 26.4,
+      "sha256": "51fd5ea8f92565844682cd5bac382ce22b900004bd2177ac778ca357adfa74ef",
+      "spokenText": [
+        "搬移解压器，保留输出空间。",
+        "从高地址向低地址复制，保持待搬移数据完整。",
+        "解压器建立自己的栈、校正 G D T 指针并搬移代码。",
+        "源码中 S T D 和 R E P M O V S Q 让复制地址递减，随后 C L D 恢复递增方向。",
+        "D F 的改变由指令语义推导；。",
+        "这一瞬间的完整寄存器值未采样。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.6,
+        6.96,
+        12.84,
+        20.88,
+        23.32
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 13,
+          "time": 0.0,
+          "duration": 2.48
+        },
+        {
+          "start": 13,
+          "end": 34,
+          "time": 2.6,
+          "duration": 4.24
+        },
+        {
+          "start": 34,
+          "end": 59,
+          "time": 6.96,
+          "duration": 5.76
+        },
+        {
+          "start": 59,
+          "end": 101,
+          "time": 12.84,
+          "duration": 7.92
+        },
+        {
+          "start": 101,
+          "end": 115,
+          "time": 20.88,
+          "duration": 2.32
+        },
+        {
+          "start": 115,
+          "end": 130,
+          "time": 23.32,
+          "duration": 2.96
+        }
+      ]
+    },
+    {
+      "id": "extract-kernel",
+      "sourceText": "清 BSS，解压到最终物理地址。压缩文件变成 CPU 可直接执行的内核段。先清空解压器 BSS，建立身份映射和异常处理，再调用 extract_kernel。输出包含代码、只读数据、可写数据等，并为 BSS 建立零初始化。内存占用按 ELF 装载段及运行期分配确定。",
+      "file": "qwen-extract-kernel-9c31e721ef07ece2.mp3",
+      "duration": 28.52,
+      "sha256": "9c31e721ef07ece239ff6f1a014afed40dd1ae383d4197f55e91aef195ef0c41",
+      "spokenText": [
+        "清 B S S，解压到最终物理地址。",
+        "压缩文件变成 C P U 可直接执行的内核段。",
+        "先清空解压器 B S S，建立身份映射和异常处理，再调用 extract kernel。",
+        "输出包含代码、只读数据、可写数据等，并为 B S S 建立零初始化。",
+        "内存占用按 E L F 装载段及运行期分配确定。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.8,
+        9.6,
+        17.32,
+        24.4
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 16,
+          "time": 0.0,
+          "duration": 3.68
+        },
+        {
+          "start": 16,
+          "end": 37,
+          "time": 3.8,
+          "duration": 5.68
+        },
+        {
+          "start": 37,
+          "end": 79,
+          "time": 9.6,
+          "duration": 7.6
+        },
+        {
+          "start": 79,
+          "end": 111,
+          "time": 17.32,
+          "duration": 6.96
+        },
+        {
+          "start": 111,
+          "end": 133,
+          "time": 24.4,
+          "duration": 4.0
+        }
+      ]
+    },
+    {
+      "id": "jump-kernel",
+      "sourceText": "跳入主内核 startup_64。控制权离开解压器；RSI 继续交接 boot_params。extract_kernel 返回入口地址放在 RAX，汇编恢复 RSI 并间接跳转。两个 startup_64 同名但位于不同可执行体，分别引用解压器与主内核的源码位置。",
+      "file": "qwen-jump-kernel-2062ed3b35488a49.mp3",
+      "duration": 24.2,
+      "sha256": "2062ed3b35488a49a621111511a5645a910b57f245f319782283698db2b60d1d",
+      "spokenText": [
+        "跳入主内核 startup 64。",
+        "控制权离开解压器；。",
+        "R S I 继续交接 boot params。",
+        "extract kernel 返回入口地址放在 R A X，汇编恢复 R S I 并间接跳转。",
+        "两个 startup 64 同名但位于不同可执行体，分别引用解压器与主内核的源码位置。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.36,
+        4.64,
+        7.96,
+        16.16,
+        20.949
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 17,
+          "time": 0.0,
+          "duration": 2.24
+        },
+        {
+          "start": 17,
+          "end": 26,
+          "time": 2.36,
+          "duration": 2.16
+        },
+        {
+          "start": 26,
+          "end": 47,
+          "time": 4.64,
+          "duration": 3.2
+        },
+        {
+          "start": 47,
+          "end": 90,
+          "time": 7.96,
+          "duration": 8.08
+        },
+        {
+          "start": 90,
+          "end": 133,
+          "time": 16.16,
+          "duration": 7.92
+        }
+      ]
+    },
+    {
+      "id": "kernel-tables",
+      "sourceText": "主内核建立自己的页表与栈。临时身份映射逐步让位于内核地址布局。head_64.S 设置 GDT/IDT、校正早期页表并写 CR3；代码随后转入高地址映射。CPU 的虚拟 RIP 通过页表指向内核物理页，RSP 指向内核栈。",
+      "file": "qwen-kernel-tables-295aeedfa03be055.mp3",
+      "duration": 21.08,
+      "sha256": "295aeedfa03be0550810853c40a42d3f78a994161aae817c068278971a00fb37",
+      "spokenText": [
+        "主内核建立自己的页表与栈。",
+        "临时身份映射逐步让位于内核地址布局。",
+        "head 64.S 设置 G D T/I D T、校正早期页表并写 C R 三；。",
+        "代码随后转入高地址映射。",
+        "C P U 的虚拟 R I P 通过页表指向内核物理页，R S P 指向内核栈。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.36,
+        5.92,
+        12.36,
+        14.72
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 13,
+          "time": 0.0,
+          "duration": 2.24
+        },
+        {
+          "start": 13,
+          "end": 31,
+          "time": 2.36,
+          "duration": 3.44
+        },
+        {
+          "start": 31,
+          "end": 65,
+          "time": 5.92,
+          "duration": 6.32
+        },
+        {
+          "start": 65,
+          "end": 77,
+          "time": 12.36,
+          "duration": 2.24
+        },
+        {
+          "start": 77,
+          "end": 111,
+          "time": 14.72,
+          "duration": 6.24
+        }
+      ]
+    },
+    {
+      "id": "kernel-gs",
+      "sourceText": "GS、系统调用与异常环境准备。GS.base 为每 CPU 数据提供快速入口。主内核入口设置段寄存器与 GS 基址，随后初始化 EFER 的 SYSCALL 与 NX 等能力。GS 选择子可以为 0，而隐藏基址有有效地址；全景分别展示选择子和隐藏基址。具体打开的位依 CPU 与内核配置。",
+      "file": "qwen-kernel-gs-50d63ebbf6567ef0.mp3",
+      "duration": 33.36,
+      "sha256": "50d63ebbf6567ef03297bda6742d4824db1ac378293c5f250d6a851bcb5aa2d0",
+      "spokenText": [
+        "G S、系统调用与异常环境准备。",
+        "G S.base 为每 C P U 数据提供快速入口。",
+        "主内核入口设置段寄存器与 G S 基址，随后初始化 E F E R 的 S Y S C A L L 与 N X 等能力。",
+        "G S 选择子可以为 0，而隐藏基址有有效地址；。",
+        "全景分别展示选择子和隐藏基址。",
+        "具体打开的位依 C P U 与内核配置。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.48,
+        8.64,
+        13.076,
+        20.2,
+        26.88,
+        30.28
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 15,
+          "time": 0.0,
+          "duration": 3.36
+        },
+        {
+          "start": 15,
+          "end": 39,
+          "time": 3.48,
+          "duration": 5.04
+        },
+        {
+          "start": 39,
+          "end": 88,
+          "time": 8.64,
+          "duration": 11.44
+        },
+        {
+          "start": 88,
+          "end": 111,
+          "time": 20.2,
+          "duration": 6.56
+        },
+        {
+          "start": 111,
+          "end": 126,
+          "time": 26.88,
+          "duration": 3.28
+        },
+        {
+          "start": 126,
+          "end": 144,
+          "time": 30.28,
+          "duration": 2.96
+        }
+      ]
+    },
+    {
+      "id": "copy-bootdata",
+      "sourceText": "进入 C 代码，复制引导数据。早期临时位置的数据需要保存到内核拥有的结构里。x86_64_start_kernel 清 BSS、建立早期映射和异常处理，把 boot_params 与命令行复制到内核结构，之后进入 x86_64_start_reservations。C 执行环境已建立，进程、内存分配器和设备体系由后续初始化建设。",
+      "file": "qwen-copy-bootdata-493efb498519a5f3.mp3",
+      "duration": 26.88,
+      "sha256": "493efb498519a5f3278769294d213f8a3b5191eb3b39e2f08e8be73f40150536",
+      "spokenText": [
+        "进入 C 代码，复制引导数据。",
+        "早期临时位置的数据需要保存到内核拥有的结构里。",
+        "x86 64 start kernel 清 B S S、建立早期映射和异常处理，把 boot params 与命令行复制到内核结构，之后进入 x86 64 start reservations。",
+        "C 执行环境已建立，进程、内存分配器和设备体系由后续初始化建设。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.92,
+        7.52,
+        12.416,
+        15.766,
+        19.88
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 15,
+          "time": 0.0,
+          "duration": 2.8
+        },
+        {
+          "start": 15,
+          "end": 38,
+          "time": 2.92,
+          "duration": 4.48
+        },
+        {
+          "start": 38,
+          "end": 133,
+          "time": 7.52,
+          "duration": 12.24
+        },
+        {
+          "start": 133,
+          "end": 165,
+          "time": 19.88,
+          "duration": 6.88
+        }
+      ]
+    },
+    {
+      "id": "start-kernel",
+      "sourceText": "真实停点：start_kernel。通用初始化总入口；当前任务仍为 PID 0。这里采集到的 RIP 与源码 init/main.c 对应。CR3、CR4、EFER 记录此停点的页表与功能配置，任务信息按当前帧展示；后续 rest_init 创建 PID 1 和 PID 2。",
+      "file": "qwen-start-kernel-7a235457c59f14b9.mp3",
+      "duration": 25.84,
+      "sha256": "7a235457c59f14b9c37401fd4321ecdc01eb7258047b620fcf759f292bdcde25",
+      "spokenText": [
+        "真实停点：start kernel。",
+        "通用初始化总入口；。",
+        "当前任务仍为 P I D 0。",
+        "这里采集到的 R I P 与源码 init/main.c 对应。",
+        "C R 三、C R 四、E F E R 记录此停点的页表与功能配置，任务信息按当前帧展示；。",
+        "后续 rest init 创建 P I D 1 和 P I D 2。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.36,
+        4.4,
+        6.76,
+        12.4,
+        21.4
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 18,
+          "time": 0.0,
+          "duration": 2.24
+        },
+        {
+          "start": 18,
+          "end": 27,
+          "time": 2.36,
+          "duration": 1.92
+        },
+        {
+          "start": 27,
+          "end": 40,
+          "time": 4.4,
+          "duration": 2.24
+        },
+        {
+          "start": 40,
+          "end": 70,
+          "time": 6.76,
+          "duration": 5.52
+        },
+        {
+          "start": 70,
+          "end": 108,
+          "time": 12.4,
+          "duration": 8.88
+        },
+        {
+          "start": 108,
+          "end": 138,
+          "time": 21.4,
+          "duration": 4.32
+        }
+      ]
+    },
+    {
+      "id": "irq-disable",
+      "sourceText": "保持 IF=0，先建设再接收中断。先建立中断处理设施，再开放可屏蔽中断。start_kernel 显式 local_irq_disable 并记录 early_boot_irqs_disabled。IF=0 屏蔽外部可屏蔽中断；同步异常独立触发，早期缺页处理仍参与启动。",
+      "file": "qwen-irq-disable-1db09d9176526702.mp3",
+      "duration": 23.48,
+      "sha256": "1db09d91765267029856b0c30d005feedcfaf4b676b5ae4bbc117c2b57cb1476",
+      "spokenText": [
+        "保持 I F等于0，先建设再接收中断。",
+        "先建立中断处理设施，再开放可屏蔽中断。",
+        "start kernel 显式 local irq disable 并记录 early boot irqs disabled。",
+        "I F等于0 屏蔽外部可屏蔽中断；。",
+        "同步异常独立触发，早期缺页处理仍参与启动。"
+      ],
+      "cueStarts": [
+        0.0,
+        4.04,
+        8.72,
+        15.64,
+        18.8
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 17,
+          "time": 0.0,
+          "duration": 3.92
+        },
+        {
+          "start": 17,
+          "end": 36,
+          "time": 4.04,
+          "duration": 4.56
+        },
+        {
+          "start": 36,
+          "end": 99,
+          "time": 8.72,
+          "duration": 6.8
+        },
+        {
+          "start": 99,
+          "end": 114,
+          "time": 15.64,
+          "duration": 3.04
+        },
+        {
+          "start": 114,
+          "end": 135,
+          "time": 18.8,
+          "duration": 4.56
+        }
+      ]
+    },
+    {
+      "id": "memblock",
+      "sourceText": "setup_arch：登记可用与保留内存。从固件清单，变成 Linux 的内存账本。setup_arch 解析引导参数与 e820，把可用区间交给 memblock，并保留内核、initrd、页表和固件等占用。memblock 维护早期可用与保留区间，后续伙伴系统管理页面分配。",
+      "file": "qwen-memblock-78d023b1eae7c6e8.mp3",
+      "duration": 23.6,
+      "sha256": "78d023b1eae7c6e833c16b19dbbabe40d78964c77b2cc1b7a9c026dc31a78ab7",
+      "spokenText": [
+        "setup arch：登记可用与保留内存。",
+        "从固件清单，变成 Linux 的内存账本。",
+        "setup arch 解析引导参数与 e820，把可用区间交给 memblock，并保留内核、init R D、页表和固件等占用。",
+        "memblock 维护早期可用与保留区间，后续伙伴系统管理页面分配。"
+      ],
+      "cueStarts": [
+        0.0,
+        4.04,
+        7.92,
+        11.912,
+        18.52
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 21,
+          "time": 0.0,
+          "duration": 3.92
+        },
+        {
+          "start": 21,
+          "end": 42,
+          "time": 4.04,
+          "duration": 3.76
+        },
+        {
+          "start": 42,
+          "end": 105,
+          "time": 7.92,
+          "duration": 10.48
+        },
+        {
+          "start": 105,
+          "end": 139,
+          "time": 18.52,
+          "duration": 4.96
+        }
+      ]
+    },
+    {
+      "id": "memory-allocators",
+      "sourceText": "mm_core_init：从区间走向页分配。struct page、伙伴系统和 slab 支持后续对象分配。内核逐步建立页描述符、页分配与对象缓存体系。随后创建进程、文件对象或页表都会申请内存。全局网格按源码标注这些 RAM 用途，具体页面变化由采样窗口另列。",
+      "file": "qwen-memory-allocators-a6d7b067335658e1.mp3",
+      "duration": 24.04,
+      "sha256": "a6d7b067335658e1017cb12b11020d6ec59501a3c77e42d7ba6f94edcc6800f2",
+      "spokenText": [
+        "mm core init：从区间走向页分配。",
+        "struct page、伙伴系统和 slab 支持后续对象分配。",
+        "内核逐步建立页描述符、页分配与对象缓存体系。",
+        "随后创建进程、文件对象或页表都会申请内存。",
+        "全局网格按源码标注这些 R A M 用途，具体页面变化由采样窗口另列。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.48,
+        8.08,
+        12.84,
+        17.36
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 22,
+          "time": 0.0,
+          "duration": 3.36
+        },
+        {
+          "start": 22,
+          "end": 54,
+          "time": 3.48,
+          "duration": 4.48
+        },
+        {
+          "start": 54,
+          "end": 76,
+          "time": 8.08,
+          "duration": 4.64
+        },
+        {
+          "start": 76,
+          "end": 97,
+          "time": 12.84,
+          "duration": 4.4
+        },
+        {
+          "start": 97,
+          "end": 130,
+          "time": 17.36,
+          "duration": 6.56
+        }
+      ]
+    },
+    {
+      "id": "scheduler",
+      "sourceText": "sched_init：有了可调度任务的基础。调度器先建立，定时中断稍后才能安全驱动它。初始任务 PID 0 来自静态 init_task。sched_init 建立运行队列等结构；本实验单 vCPU，任意瞬间只执行一个任务。",
+      "file": "qwen-scheduler-3df0420f15f58f07.mp3",
+      "duration": 19.72,
+      "sha256": "3df0420f15f58f0751c96e4e94c2994129094a9b23d27888711521949b691c8c",
+      "spokenText": [
+        "sched init：有了可调度任务的基础。",
+        "调度器先建立，定时中断稍后才能安全驱动它。",
+        "初始任务 P I D 0 来自静态 init task。",
+        "sched init 建立运行队列等结构；。",
+        "本实验单 v C P U，任意瞬间只执行一个任务。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.56,
+        8.56,
+        11.96,
+        15.2
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 22,
+          "time": 0.0,
+          "duration": 3.44
+        },
+        {
+          "start": 22,
+          "end": 43,
+          "time": 3.56,
+          "duration": 4.88
+        },
+        {
+          "start": 43,
+          "end": 69,
+          "time": 8.56,
+          "duration": 3.28
+        },
+        {
+          "start": 69,
+          "end": 90,
+          "time": 11.96,
+          "duration": 3.12
+        },
+        {
+          "start": 90,
+          "end": 112,
+          "time": 15.2,
+          "duration": 4.4
+        }
+      ]
+    },
+    {
+      "id": "irq-timers",
+      "sourceText": "建立 IRQ、时钟与定时器。中断门、控制器与计时设施需要协同就绪。init_IRQ、tick_init、init_timers、hrtimers_init 与 time_init 建立中断和时钟基础。IDT 保存处理入口，PIC/APIC 交付外部中断；客户机时钟由计时硬件和内核维护，网页计时器控制教学节奏。",
+      "file": "qwen-irq-timers-a54260486a7b4ee4.mp3",
+      "duration": 27.0775,
+      "sha256": "a54260486a7b4ee48ca8fff3a819ee9434e1af2e4e2971a31b36bb933a1a6e75",
+      "spokenText": [
+        "建立 I R Q、时钟与定时器。",
+        "中断门、控制器与计时设施需要协同就绪。",
+        "init I R Q、tick init、init timers、hrtimers init 与 time init 建立中断和时钟基础。",
+        "I D T 保存处理入口，P I C/A P I C 交付外部中断；。",
+        "客户机时钟由计时硬件和内核维护，网页计时器控制教学节奏。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.84,
+        6.64,
+        16.44,
+        21.76
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 14,
+          "time": 0.0,
+          "duration": 2.72
+        },
+        {
+          "start": 14,
+          "end": 33,
+          "time": 2.84,
+          "duration": 3.68
+        },
+        {
+          "start": 33,
+          "end": 100,
+          "time": 6.64,
+          "duration": 9.68
+        },
+        {
+          "start": 100,
+          "end": 127,
+          "time": 16.44,
+          "duration": 5.2
+        },
+        {
+          "start": 127,
+          "end": 155,
+          "time": 21.76,
+          "duration": 5.1974583333333335
+        }
+      ]
+    },
+    {
+      "id": "irq-enable",
+      "sourceText": "开中断：RFLAGS.IF 变为 1。具备必要设施后，才允许外部可屏蔽中断进入。start_kernel 在 time_init 等工作之后 local_irq_enable。IF=1 允许响应可屏蔽中断；实际交付取决于中断控制器、优先级、屏蔽和待处理事件。",
+      "file": "qwen-irq-enable-b6394723c04fd6fa.mp3",
+      "duration": 25.32,
+      "sha256": "b6394723c04fd6fae3d33cbe86548f28f9119de20517d113ffc669bceeba241a",
+      "spokenText": [
+        "开中断：R F L A G S 的 I F 标志 变为 1。",
+        "具备必要设施后，才允许外部可屏蔽中断进入。",
+        "start kernel 在 time init 等工作之后 local irq enable。",
+        "I F等于1 允许响应可屏蔽中断；。",
+        "实际交付取决于中断控制器、优先级、屏蔽和待处理事件。"
+      ],
+      "cueStarts": [
+        0.0,
+        5.56,
+        9.44,
+        14.84,
+        17.84
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 19,
+          "time": 0.0,
+          "duration": 5.44
+        },
+        {
+          "start": 19,
+          "end": 40,
+          "time": 5.56,
+          "duration": 3.76
+        },
+        {
+          "start": 40,
+          "end": 88,
+          "time": 9.44,
+          "duration": 5.28
+        },
+        {
+          "start": 88,
+          "end": 103,
+          "time": 14.84,
+          "duration": 2.88
+        },
+        {
+          "start": 103,
+          "end": 129,
+          "time": 17.84,
+          "duration": 7.36
+        }
+      ]
+    },
+    {
+      "id": "vfs-process-core",
+      "sourceText": "进程、VFS 与缓存准备完成。为创建 PID 1 和访问文件做准备。fork_init、proc_caches_init、vfs_caches_init、pagecache_init、signals_init 等建立进程、文件与信号的基础。文件系统模块、设备探测和根盘挂载还有后续 initcall 与早期用户空间工作。",
+      "file": "qwen-vfs-process-core-a285e47285e9c75c.mp3",
+      "duration": 24.32,
+      "sha256": "a285e47285e9c75c6b810c410adc576fbba42aad0f74c43c3b51885ae80a076a",
+      "spokenText": [
+        "进程、V F S 与缓存准备完成。",
+        "为创建 P I D 1 和访问文件做准备。",
+        "fork init、proc caches init、vfs caches init、pagecache init、signals init 等建立进程、文件与信号的基础。",
+        "文件系统模块、设备探测和根盘挂载还有后续 init call 与早期用户空间工作。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.4,
+        6.56,
+        11.68,
+        16.92
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 15,
+          "time": 0.0,
+          "duration": 3.28
+        },
+        {
+          "start": 15,
+          "end": 34,
+          "time": 3.4,
+          "duration": 3.04
+        },
+        {
+          "start": 34,
+          "end": 120,
+          "time": 6.56,
+          "duration": 10.24
+        },
+        {
+          "start": 120,
+          "end": 160,
+          "time": 16.92,
+          "duration": 7.28
+        }
+      ]
+    },
+    {
+      "id": "spawn-init",
+      "sourceText": "rest_init 创建第一个可运行的 init 任务。PID 1 先在内核态执行 kernel_init。rest_init 先用 user_mode_thread(kernel_init) 创建 PID 1，再用 kernel_thread(kthreadd) 创建 PID 2。PID 1 先执行内核初始化，后续 exec 装入用户程序并返回 CPL 3。",
+      "file": "qwen-spawn-init-f5bb8efbbfd6ebe4.mp3",
+      "duration": 25.92,
+      "sha256": "f5bb8efbbfd6ebe4d37686a18a5655ad714c5424fe0b8233dea252e7ae75e67f",
+      "spokenText": [
+        "rest init 创建第一个可运行的 init 任务。",
+        "P I D 1 先在内核态执行 kernel init。",
+        "rest init 先用 user mode thread(kernel init) 创建 P I D 1，再用 kernel thread(kernel thread daemon) 创建 P I D 2。",
+        "P I D 1 先执行内核初始化，后续 exec 装入用户程序并返回 C P L 3。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.8,
+        7.44,
+        13.585,
+        17.96
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 28,
+          "time": 0.0,
+          "duration": 3.68
+        },
+        {
+          "start": 28,
+          "end": 54,
+          "time": 3.8,
+          "duration": 3.52
+        },
+        {
+          "start": 54,
+          "end": 142,
+          "time": 7.44,
+          "duration": 10.4
+        },
+        {
+          "start": 142,
+          "end": 181,
+          "time": 17.96,
+          "duration": 7.84
+        }
+      ]
+    },
+    {
+      "id": "first-schedule",
+      "sourceText": "PID 0 让出 CPU，进入 idle 路径。一颗 CPU 通过切换任务推进多个启动活动。schedule_preempt_disabled 调用调度器，PID 0 随后进入 cpu_startup_entry。任务切换保存与恢复上下文，页表切换由 mm/active_mm 和目标地址空间决定。",
+      "file": "qwen-first-schedule-96b6e45b65ed7ff5.mp3",
+      "duration": 20.88,
+      "sha256": "96b6e45b65ed7ff5146fb09d662b3d66b64506f3c7da9a567679a4e4ed727ff5",
+      "spokenText": [
+        "P I D 0 让出 C P U，进入 idle 路径。",
+        "一颗 C P U 通过切换任务推进多个启动活动。",
+        "schedule preempt disabled 调用调度器，P I D 0 随后进入 cpu startup entry。",
+        "任务切换保存与恢复上下文，页表切换由 mm/active mm 和目标地址空间决定。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.48,
+        7.28,
+        10.805,
+        14.12,
+        16.175
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 24,
+          "time": 0.0,
+          "duration": 3.36
+        },
+        {
+          "start": 24,
+          "end": 46,
+          "time": 3.48,
+          "duration": 3.68
+        },
+        {
+          "start": 46,
+          "end": 107,
+          "time": 7.28,
+          "duration": 6.72
+        },
+        {
+          "start": 107,
+          "end": 149,
+          "time": 14.12,
+          "duration": 6.64
+        }
+      ]
+    },
+    {
+      "id": "kernel-init",
+      "sourceText": "真实停点：PID 1 的 kernel_init。任务号为 1，mm 为空，当前执行内核初始化。该真实帧的解码器识别 PID 1、内核栈与 task_struct；comm 此时显示 swapper/0，任务身份由 pid 字段确定。随后它等待 kthreadd 准备好，执行 kernel_init_freeable。",
+      "file": "qwen-kernel-init-af635ba1399e3a53.mp3",
+      "duration": 22.84,
+      "sha256": "af635ba1399e3a5390637b0a877ff7bb646cfddbb56633b8e95d87ef3fabb483",
+      "spokenText": [
+        "真实停点：P I D 1 的 kernel init。",
+        "任务号为 1，mm 为空，当前执行内核初始化。",
+        "该真实帧的解码器识别 P I D 1、内核栈与 task struct；。",
+        "comm 此时显示 swapper/0，任务身份由 pid 字段确定。",
+        "随后它等待 kernel thread daemon 准备好，执行 kernel init freeable。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.84,
+        7.44,
+        12.2,
+        17.2
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 25,
+          "time": 0.0,
+          "duration": 2.72
+        },
+        {
+          "start": 25,
+          "end": 48,
+          "time": 2.84,
+          "duration": 4.48
+        },
+        {
+          "start": 48,
+          "end": 82,
+          "time": 7.44,
+          "duration": 4.64
+        },
+        {
+          "start": 82,
+          "end": 117,
+          "time": 12.2,
+          "duration": 4.88
+        },
+        {
+          "start": 117,
+          "end": 160,
+          "time": 17.2,
+          "duration": 5.52
+        }
+      ]
+    },
+    {
+      "id": "initcalls",
+      "sourceText": "执行 initcalls，驱动开始探测。注册驱动、发现 virtio 设备并创建内核对象。kernel_init_freeable → do_basic_setup → do_initcalls。initcall 按等级运行，驱动的注册与设备绑定可能涉及异步工作。virtio-blk 根盘需要内核驱动就绪；这里只讲启动依赖，队列细节留给设备专题。",
+      "file": "qwen-initcalls-70036ab8d929c32f.mp3",
+      "duration": 26.08,
+      "sha256": "70036ab8d929c32f68f8f9df07b1f56352d9ed1b0745a22b58d9b2b3c8d83833",
+      "spokenText": [
+        "执行 init calls，驱动开始探测。",
+        "注册驱动、发现 virtio 设备并创建内核对象。",
+        "kernel init freeable ，到 do basic setup ，到 do initcalls。",
+        "init call 按等级运行，驱动的注册与设备绑定可能涉及异步工作。",
+        "virtio-blk 根盘需要内核驱动就绪；。",
+        "这里只讲启动依赖，队列细节留给设备专题。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.76,
+        6.48,
+        11.88,
+        17.92,
+        21.24
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 20,
+          "time": 0.0,
+          "duration": 2.64
+        },
+        {
+          "start": 20,
+          "end": 45,
+          "time": 2.76,
+          "duration": 3.6
+        },
+        {
+          "start": 45,
+          "end": 98,
+          "time": 6.48,
+          "duration": 5.28
+        },
+        {
+          "start": 98,
+          "end": 132,
+          "time": 11.88,
+          "duration": 5.92
+        },
+        {
+          "start": 132,
+          "end": 154,
+          "time": 17.92,
+          "duration": 3.2
+        },
+        {
+          "start": 154,
+          "end": 174,
+          "time": 21.24,
+          "duration": 4.72
+        }
+      ]
+    },
+    {
+      "id": "unpack-initramfs",
+      "sourceText": "把压缩 cpio 解成内存文件树。GRUB 装进来的字节，此时变成可打开的文件。populate_rootfs 通过异步域调用 do_populate_rootfs；unpack_to_rootfs 创建目录、文件和链接，PID 1 的后续代码 wait_for_initramfs 等待完成。initramfs 内容占用 RAM，作为挂载 ext2 根盘之前的临时 rootfs。",
+      "file": "qwen-unpack-initramfs-6c33e434574d88e6.mp3",
+      "duration": 29.96,
+      "sha256": "6c33e434574d88e68b956dc64b37c93eaf02c4bee9b76c148ec0fac13d455273",
+      "spokenText": [
+        "把压缩 cpio 解成内存文件树。",
+        "G R U B 装进来的字节，此时变成可打开的文件。",
+        "populate rootfs 通过异步域调用 do populate rootfs；。",
+        "unpack to rootfs 创建目录、文件和链接，P I D 1 的后续代码 wait for initramfs 等待完成。",
+        "init ram F S 内容占用 R A M，作为挂载 ext2 根盘之前的临时 rootfs。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.32,
+        7.68,
+        13.56,
+        17.48,
+        22.64
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 17,
+          "time": 0.0,
+          "duration": 3.2
+        },
+        {
+          "start": 17,
+          "end": 40,
+          "time": 3.32,
+          "duration": 4.24
+        },
+        {
+          "start": 40,
+          "end": 83,
+          "time": 7.68,
+          "duration": 5.76
+        },
+        {
+          "start": 83,
+          "end": 147,
+          "time": 13.56,
+          "duration": 8.96
+        },
+        {
+          "start": 147,
+          "end": 191,
+          "time": 22.64,
+          "duration": 7.2
+        }
+      ]
+    },
+    {
+      "id": "console-and-initmem",
+      "sourceText": "打开控制台并回收启动专用内存。标准输入输出就绪后，准备首次执行用户空间。console_on_rootfs 打开 /dev/console 并建立 0、1、2 三个文件描述符。kernel_init 等待异步初始化结束，释放可回收的启动专用 initmem，并为常驻内核页面设置只读权限。",
+      "file": "qwen-console-and-initmem-64b79cb7a6941273.mp3",
+      "duration": 24.0,
+      "sha256": "64b79cb7a6941273908fe33c655442f9ec317b2b9a99af1d6682f5a65771085b",
+      "spokenText": [
+        "打开控制台并回收启动专用内存。",
+        "标准输入输出就绪后，准备首次执行用户空间。",
+        "console on rootfs 打开 /dev/console 并建立 0、1、2 三个文件描述符。",
+        "kernel init 等待异步初始化结束，释放可回收的启动专用 init memory，并为常驻内核页面设置只读权限。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.92,
+        7.44,
+        14.76,
+        18.343
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 15,
+          "time": 0.0,
+          "duration": 2.8
+        },
+        {
+          "start": 15,
+          "end": 36,
+          "time": 2.92,
+          "duration": 4.4
+        },
+        {
+          "start": 36,
+          "end": 88,
+          "time": 7.44,
+          "duration": 7.2
+        },
+        {
+          "start": 88,
+          "end": 144,
+          "time": 14.76,
+          "duration": 9.12
+        }
+      ]
+    },
+    {
+      "id": "exec-init",
+      "sourceText": "PID 1 首次 exec：/init。任务身份保留，地址空间装入用户态的 BusyBox shell。rdinit=/init 指定早期用户空间入口。run_init_process 最终调用 kernel_execve；脚本解释器为 /bin/sh。内核装入可执行段、用户栈和参数，返回用户态时 CPL=3；在 exec 的内核函数内部仍是 CPL=0。",
+      "file": "qwen-exec-init-cc75422806d43c09.mp3",
+      "duration": 28.52,
+      "sha256": "cc75422806d43c09886df46fa45aebbb72bcb28c07bc69577c6808c3aaf619eb",
+      "spokenText": [
+        "P I D 1 首次 exec：/init。",
+        "任务身份保留，地址空间装入用户态的 Busy Box shell。",
+        "rdinit等于/init 指定早期用户空间入口。",
+        "run init process 最终调用 kernel execve；。",
+        "脚本解释器为 /bin/sh。",
+        "内核装入可执行段、用户栈和参数，返回用户态时 C P L等于3；。",
+        "在 exec 的内核函数内部仍是 C P L等于0。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.24,
+        8.24,
+        12.6,
+        16.0,
+        19.24,
+        24.24
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 20,
+          "time": 0.0,
+          "duration": 3.12
+        },
+        {
+          "start": 20,
+          "end": 52,
+          "time": 3.24,
+          "duration": 4.88
+        },
+        {
+          "start": 52,
+          "end": 76,
+          "time": 8.24,
+          "duration": 4.24
+        },
+        {
+          "start": 76,
+          "end": 112,
+          "time": 12.6,
+          "duration": 3.28
+        },
+        {
+          "start": 112,
+          "end": 127,
+          "time": 16.0,
+          "duration": 3.12
+        },
+        {
+          "start": 127,
+          "end": 156,
+          "time": 19.24,
+          "duration": 4.88
+        },
+        {
+          "start": 156,
+          "end": 179,
+          "time": 24.24,
+          "duration": 4.16
+        }
+      ]
+    },
+    {
+      "id": "init-mounts",
+      "sourceText": "/init 挂载 /dev、/proc 与 /sys。进程执行脚本，通过系统调用让内核提供三种视图。devtmpfs 暴露设备节点，proc 暴露进程与内核运行信息，sysfs 暴露设备模型。这些虚拟文件系统由内核动态提供内容。/init 等待 /dev/vda 出现后再挂载根盘。",
+      "file": "qwen-init-mounts-baa9f9b06f040a5a.mp3",
+      "duration": 23.8,
+      "sha256": "baa9f9b06f040a5ab9014dd493cac4a20fee3082d599fc2cc705ac6b0e6e73b2",
+      "spokenText": [
+        "/init 挂载 /dev、/proc 与 /sys。",
+        "进程执行脚本，通过系统调用让内核提供三种视图。",
+        "devtmpfs 暴露设备节点，proc 暴露进程与内核运行信息，sysfs 暴露设备模型。",
+        "这些虚拟文件系统由内核动态提供内容。",
+        "/init 等待 /dev/vda 出现后再挂载根盘。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.44,
+        7.12,
+        10.153,
+        15.96,
+        19.6
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 27,
+          "time": 0.0,
+          "duration": 2.32
+        },
+        {
+          "start": 27,
+          "end": 50,
+          "time": 2.44,
+          "duration": 4.56
+        },
+        {
+          "start": 50,
+          "end": 96,
+          "time": 7.12,
+          "duration": 8.72
+        },
+        {
+          "start": 96,
+          "end": 114,
+          "time": 15.96,
+          "duration": 3.52
+        },
+        {
+          "start": 114,
+          "end": 141,
+          "time": 19.6,
+          "duration": 4.08
+        }
+      ]
+    },
+    {
+      "id": "mount-ext2",
+      "sourceText": "真实停点：ext2_fill_super。用户 mount 已进入内核；当前任务是 mount，CPL=0。这个帧记录用户 mount 任务通过系统调用执行 ext2_fill_super，任务身份保持，CPU 处于 CPL 0。virtio 读盘产生的数据进入 RAM，文件系统验证元数据并建立 VFS 对象。/dev/vda 是持久化根盘。",
+      "file": "qwen-mount-ext2-98ffa37399d8d587.mp3",
+      "duration": 27.44,
+      "sha256": "98ffa37399d8d5870a6005f2d1e8465fed812793d3bee463a1c4b8a3a0a4748f",
+      "spokenText": [
+        "真实停点：ext2 fill super。",
+        "用户 mount 已进入内核；。",
+        "当前任务是 mount，C P L等于0。",
+        "这个帧记录用户 mount 任务通过系统调用执行 ext2 fill super，任务身份保持，C P U 处于 C P L 0。",
+        "virtio 读盘产生的数据进入 R A M，文件系统验证元数据并建立 V F S 对象。",
+        "/dev/vda 是持久化根盘。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.0,
+        4.8,
+        8.04,
+        13.793,
+        16.72,
+        24.36
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 21,
+          "time": 0.0,
+          "duration": 2.88
+        },
+        {
+          "start": 21,
+          "end": 36,
+          "time": 3.0,
+          "duration": 1.68
+        },
+        {
+          "start": 36,
+          "end": 54,
+          "time": 4.8,
+          "duration": 3.12
+        },
+        {
+          "start": 54,
+          "end": 115,
+          "time": 8.04,
+          "duration": 8.56
+        },
+        {
+          "start": 115,
+          "end": 156,
+          "time": 16.72,
+          "duration": 7.52
+        },
+        {
+          "start": 156,
+          "end": 172,
+          "time": 24.36,
+          "duration": 2.96
+        }
+      ]
+    },
+    {
+      "id": "move-mounts",
+      "sourceText": "把系统视图移动到新根。切换 / 之前先保留已经挂好的设备与系统信息。mount --move 调整 /dev、/proc、/sys 在挂载树中的位置，保留各挂载的内容与对象。随后 exec switch_root，PID 1 保持，脚本解释器的用户映像将被替换。",
+      "file": "qwen-move-mounts-6a7c0a83a7014839.mp3",
+      "duration": 23.12,
+      "sha256": "6a7c0a83a7014839c305fc6d69a982f398db66dd9a4202e3f307239f114f4048",
+      "spokenText": [
+        "把系统视图移动到新根。",
+        "切换 / 之前先保留已经挂好的设备与系统信息。",
+        "mount --move 调整 /dev、/proc、/sys 在挂载树中的位置，保留各挂载的内容与对象。",
+        "随后 exec switch root，P I D 1 保持，脚本解释器的用户映像将被替换。"
+      ],
+      "cueStarts": [
+        0.0,
+        1.96,
+        6.4,
+        13.269,
+        15.4
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 11,
+          "time": 0.0,
+          "duration": 1.84
+        },
+        {
+          "start": 11,
+          "end": 34,
+          "time": 1.96,
+          "duration": 4.32
+        },
+        {
+          "start": 34,
+          "end": 87,
+          "time": 6.4,
+          "duration": 8.88
+        },
+        {
+          "start": 87,
+          "end": 131,
+          "time": 15.4,
+          "duration": 7.6
+        }
+      ]
+    },
+    {
+      "id": "switch-root",
+      "sourceText": "switch_root：/ 变成 ext2 根。PID 1 保持，根目录和可执行程序发生变化。BusyBox switch_root 要求当前进程为 PID 1、目标新根是挂载点、当前根为 ramfs/tmpfs。它删除当前 rootfs 内容，移动新根挂载，chroot 后 exec /sbin/init。可回收的 initramfs 内容随删除释放。",
+      "file": "qwen-switch-root-d89d5e985420ee0a.mp3",
+      "duration": 32.1977,
+      "sha256": "d89d5e985420ee0a35465852ab76328e5da3c2523f71ae377ed3198892a8bff0",
+      "spokenText": [
+        "switch root：/ 变成 ext2 根。",
+        "P I D 1 保持，根目录和可执行程序发生变化。",
+        "Busy Box switch root 要求当前进程为 P I D 1、目标新根是挂载点、当前根为 ramfs/tmpfs。",
+        "它删除当前 rootfs 内容，移动新根挂载，chroot 后 exec /sbin/init。",
+        "可回收的 init ram F S 内容随删除释放。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.68,
+        7.84,
+        18.84,
+        27.36
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 24,
+          "time": 0.0,
+          "duration": 2.56
+        },
+        {
+          "start": 24,
+          "end": 47,
+          "time": 2.68,
+          "duration": 5.04
+        },
+        {
+          "start": 47,
+          "end": 107,
+          "time": 7.84,
+          "duration": 10.88
+        },
+        {
+          "start": 107,
+          "end": 155,
+          "time": 18.84,
+          "duration": 8.4
+        },
+        {
+          "start": 155,
+          "end": 178,
+          "time": 27.36,
+          "duration": 4.71775
+        }
+      ]
+    },
+    {
+      "id": "busybox-init",
+      "sourceText": "/sbin/init 读取 inittab。根盘上的 PID 1 开始管理系统服务与终端。本实验使用 BusyBox init。它解析 /etc/inittab，按动作类型先执行 sysinit，再执行 wait、once，最后维护 respawn 与 askfirst。",
+      "file": "qwen-busybox-init-4d961d1bfaf08ac8.mp3",
+      "duration": 20.08,
+      "sha256": "4d961d1bfaf08ac8aa83aa42d409343f160b9ed7f53c8ca1f28f1f2d325b9027",
+      "spokenText": [
+        "/sbin/init 读取 inittab。",
+        "根盘上的 P I D 1 开始管理系统服务与终端。",
+        "本实验使用 Busy Box init。",
+        "它解析 /etc/inittab，按动作类型先执行 sysinit，再执行 wait、once，最后维护 respawn 与 askfirst。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.08,
+        6.64,
+        9.08,
+        14.218
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 22,
+          "time": 0.0,
+          "duration": 2.96
+        },
+        {
+          "start": 22,
+          "end": 45,
+          "time": 3.08,
+          "duration": 3.44
+        },
+        {
+          "start": 45,
+          "end": 64,
+          "time": 6.64,
+          "duration": 2.32
+        },
+        {
+          "start": 64,
+          "end": 136,
+          "time": 9.08,
+          "duration": 10.88
+        }
+      ]
+    },
+    {
+      "id": "rcs",
+      "sourceText": "/etc/rcS 建立实验环境。挂载调试视图、设置主机名，再输出欢迎信息。rcS 创建 /dev/pts、debugfs 和 tracefs 挂载点，设置 hostname 为 linux-lab。脚本中的 mount、mkdir、hostname 等命令通过内核接口完成挂载、目录创建与主机名设置。",
+      "file": "qwen-rcs-a690a59a6d80a116.mp3",
+      "duration": 24.88,
+      "sha256": "a690a59a6d80a11680443d5c51ebeed9b25040db65eec30b96ed52390e7e9178",
+      "spokenText": [
+        "/etc/rc S 建立实验环境。",
+        "挂载调试视图、设置主机名，再输出欢迎信息。",
+        "rc S 创建 /dev/pts、debugfs 和 tracefs 挂载点，设置 hostname 为 linux-lab。",
+        "脚本中的 mount、mkdir、hostname 等命令通过内核接口完成挂载、目录创建与主机名设置。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.24,
+        7.52,
+        12.227,
+        15.32
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 16,
+          "time": 0.0,
+          "duration": 3.12
+        },
+        {
+          "start": 16,
+          "end": 37,
+          "time": 3.24,
+          "duration": 4.16
+        },
+        {
+          "start": 37,
+          "end": 99,
+          "time": 7.52,
+          "duration": 7.68
+        },
+        {
+          "start": 99,
+          "end": 150,
+          "time": 15.32,
+          "duration": 9.44
+        }
+      ]
+    },
+    {
+      "id": "spawn-terminals",
+      "sourceText": "两个终端入口采用不同策略。tty1 等回车；ttyS0 直接运行 shell 并支持重启。实际配置是 tty1::askfirst:/bin/sh -l 与 ttyS0::respawn:/bin/cttyhack /bin/sh -l。cttyhack 为串口 shell 建立控制终端环境，init 通过 fork/exec 创建子进程，并等待或回收它们。",
+      "file": "qwen-spawn-terminals-be1c28a5a0041870.mp3",
+      "duration": 40.04,
+      "sha256": "be1c28a5a004187042154914d3ebe657e5551cbd53c3729c29d0f825dc11bedd",
+      "spokenText": [
+        "两个终端入口采用不同策略。",
+        "tty1 等回车；。",
+        "tty S0 直接运行 shell 并支持重启。",
+        "实际配置是 tty1::askfirst:/bin/sh -l 与 tty S0::respawn:/bin/cttyhack /bin/sh -l。",
+        "cttyhack 为串口 shell 建立控制终端环境，init 通过 fork/exec 创建子进程，并等待或回收它们。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.92,
+        7.4,
+        30.08,
+        34.597
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 13,
+          "time": 0.0,
+          "duration": 2.16
+        },
+        {
+          "start": 13,
+          "end": 22,
+          "time": 2.28,
+          "duration": 1.52
+        },
+        {
+          "start": 22,
+          "end": 45,
+          "time": 3.92,
+          "duration": 3.36
+        },
+        {
+          "start": 45,
+          "end": 119,
+          "time": 7.4,
+          "duration": 22.56
+        },
+        {
+          "start": 119,
+          "end": 180,
+          "time": 30.08,
+          "duration": 9.84
+        }
+      ]
+    },
+    {
+      "id": "login-shell",
+      "sourceText": "登录 shell 读取环境并打印提示符。可输入命令的界面终于建立。/bin/sh -l 运行 BusyBox shell。用户代码通过 write 输出提示符，通过终端读取路径等待输入。系统运行配置中的 init、必要内核线程与终端程序，进程采样列出实际任务。",
+      "file": "qwen-login-shell-d12799a7afffb2f2.mp3",
+      "duration": 22.6,
+      "sha256": "d12799a7afffb2f2289cbeaeece7a77a14b3ddf5a4833833c7a918e0ff44fae9",
+      "spokenText": [
+        "登录 shell 读取环境并打印提示符。",
+        "可输入命令的界面终于建立。",
+        "/bin/sh -l 运行 Busy Box shell。",
+        "用户代码通过 write 输出提示符，通过终端读取路径等待输入。",
+        "系统运行配置中的 init、必要内核线程与终端程序，进程采样列出实际任务。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.4,
+        5.68,
+        9.56,
+        15.36
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 20,
+          "time": 0.0,
+          "duration": 3.28
+        },
+        {
+          "start": 20,
+          "end": 33,
+          "time": 3.4,
+          "duration": 2.16
+        },
+        {
+          "start": 33,
+          "end": 61,
+          "time": 5.68,
+          "duration": 3.76
+        },
+        {
+          "start": 61,
+          "end": 93,
+          "time": 9.56,
+          "duration": 5.68
+        },
+        {
+          "start": 93,
+          "end": 130,
+          "time": 15.36,
+          "duration": 7.12
+        }
+      ]
+    },
+    {
+      "id": "tty-read",
+      "sourceText": "shell 先 poll 等待终端可读。先等待输入就绪，再读取字符。本构建的 BusyBox 行编辑器先调用 poll 检查标准输入，输入就绪后才调用 read。真实停点位于 n_tty_poll，当前任务为串口 shell、CPL=0。它是检查可读状态的入口；随后等待队列和调度器让 shell 休眠，CPU 可以运行其他任务或进入 idle。",
+      "file": "qwen-tty-read-80b5ad689c4f077f.mp3",
+      "duration": 28.48,
+      "sha256": "80b5ad689c4f077f371166598013f0244a4109b12f1c6ba3612f1319e18b6bd8",
+      "spokenText": [
+        "shell 先 poll 等待终端可读。",
+        "先等待输入就绪，再读取字符。",
+        "本构建的 Busy Box 行编辑器先调用 poll 检查标准输入，输入就绪后才调用 read。",
+        "真实停点位于 n tty poll，当前任务为串口 shell、C P L等于0。",
+        "它是检查可读状态的入口；。",
+        "随后等待队列和调度器让 shell 休眠，C P U 可以运行其他任务或进入 idle。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.68,
+        6.24,
+        11.464,
+        13.8,
+        19.28,
+        21.72
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 20,
+          "time": 0.0,
+          "duration": 2.56
+        },
+        {
+          "start": 20,
+          "end": 34,
+          "time": 2.68,
+          "duration": 3.44
+        },
+        {
+          "start": 34,
+          "end": 81,
+          "time": 6.24,
+          "duration": 7.44
+        },
+        {
+          "start": 81,
+          "end": 119,
+          "time": 13.8,
+          "duration": 5.36
+        },
+        {
+          "start": 119,
+          "end": 131,
+          "time": 19.28,
+          "duration": 2.32
+        },
+        {
+          "start": 131,
+          "end": 173,
+          "time": 21.72,
+          "duration": 6.64
+        }
+      ]
+    },
+    {
+      "id": "shell-ready",
+      "sourceText": "真实终点：提示符已出现，CPU 正在 idle。当前 CPU 任务可以是 PID 0，而 shell 已在等待输入。本样本串口出现 linux-lab:/root#。暂停时 CPU 位于内核 idle 路径、CPL=0，PID 1 为睡眠中的 init。串口记录证明系统到达可输入终端，寄存器帧记录暂停瞬间的 idle 任务。",
+      "file": "qwen-shell-ready-ac44772b7f07fadb.mp3",
+      "duration": 26.52,
+      "sha256": "ac44772b7f07fadb7786274affff76200e8bb1d530a59550c4ab1cc3fe4d872c",
+      "spokenText": [
+        "真实终点：提示符已出现，C P U 正在 idle。",
+        "当前 C P U 任务可以是 P I D 0，而 shell 已在等待输入。",
+        "本样本串口出现 linux-lab:/root#。",
+        "暂停时 C P U 位于内核 idle 路径、C P L等于0，P I D 1 为睡眠中的 init。",
+        "串口记录证明系统到达可输入终端，寄存器帧记录暂停瞬间的 idle 任务。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.32,
+        7.44,
+        12.12,
+        19.68
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 24,
+          "time": 0.0,
+          "duration": 3.2
+        },
+        {
+          "start": 24,
+          "end": 58,
+          "time": 3.32,
+          "duration": 4.0
+        },
+        {
+          "start": 58,
+          "end": 83,
+          "time": 7.44,
+          "duration": 4.56
+        },
+        {
+          "start": 83,
+          "end": 127,
+          "time": 12.12,
+          "duration": 7.44
+        },
+        {
+          "start": 127,
+          "end": 163,
+          "time": 19.68,
+          "duration": 6.72
+        }
+      ]
+    },
+    {
+      "id": "next-key",
+      "sourceText": "下一次输入将如何穿过全景。终端输入 → 设备 → 中断 → TTY → shell。串口或键盘把输入送入设备，内核读取并交给 TTY，达到读取条件后唤醒 shell。shell 解析命令，内建命令可直接执行，外部程序通常通过 fork/exec。本步骤以机制示意预览后续输入路径，实际输入在真实调试会话中进行。",
+      "file": "qwen-next-key-c0b1b022a1b5f186.mp3",
+      "duration": 33.16,
+      "sha256": "c0b1b022a1b5f1864c48233f07a667c1b663bf520c25533ff95d50febf59bd2a",
+      "spokenText": [
+        "下一次输入将如何穿过全景。",
+        "终端输入 ，到 设备 ，到 中断 ，到 T T Y ，到 shell。",
+        "串口或键盘把输入送入设备，内核读取并交给 T T Y，达到读取条件后唤醒 shell。",
+        "shell 解析命令，内建命令可直接执行，外部程序通常通过 fork/exec。",
+        "本步骤以机制示意预览后续输入路径，实际输入在真实调试会话中进行。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.92,
+        9.6,
+        14.576,
+        17.88,
+        25.12
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 13,
+          "time": 0.0,
+          "duration": 2.8
+        },
+        {
+          "start": 13,
+          "end": 42,
+          "time": 2.92,
+          "duration": 6.56
+        },
+        {
+          "start": 42,
+          "end": 83,
+          "time": 9.6,
+          "duration": 8.16
+        },
+        {
+          "start": 83,
+          "end": 123,
+          "time": 17.88,
+          "duration": 7.12
+        },
+        {
+          "start": 123,
+          "end": 155,
+          "time": 25.12,
+          "duration": 7.92
+        }
+      ]
+    }
+  ],
+  "audioMap": {
+    "power-off": "audio/panorama-qwen/qwen-power-off-7aa4a790eb1825d6.mp3",
+    "reset-vector": "audio/panorama-qwen/qwen-reset-vector-3febd608eac4658a.mp3",
+    "far-jump": "audio/panorama-qwen/qwen-far-jump-3dd5f4f15cc05c57.mp3",
+    "bios-stack": "audio/panorama-qwen/qwen-bios-stack-356df54f3b14f3b6.mp3",
+    "bios-tables": "audio/panorama-qwen/qwen-bios-tables-762ba79ab63bcf8a.mp3",
+    "bios-devices": "audio/panorama-qwen/qwen-bios-devices-0b669014d5644735.mp3",
+    "boot-image": "audio/panorama-qwen/qwen-boot-image-e86bd5d86179e92c.mp3",
+    "grub-core": "audio/panorama-qwen/qwen-grub-core-8926626673ef7ede.mp3",
+    "grub-kernel": "audio/panorama-qwen/qwen-grub-kernel-dbf9d2d2638afd5c.mp3",
+    "grub-initrd": "audio/panorama-qwen/qwen-grub-initrd-a6b93eef5dc5b382.mp3",
+    "boot-params": "audio/panorama-qwen/qwen-boot-params-ff705ae29796ce47.mp3",
+    "setup-main": "audio/panorama-qwen/qwen-setup-main-7305415ac4d21027.mp3",
+    "setup-e820": "audio/panorama-qwen/qwen-setup-e820-f711593e483cb9c0.mp3",
+    "setup-a20": "audio/panorama-qwen/qwen-setup-a20-961de6a04912975e.mp3",
+    "setup-gdt": "audio/panorama-qwen/qwen-setup-gdt-7cdf3793e940d143.mp3",
+    "set-pe": "audio/panorama-qwen/qwen-set-pe-b7a110c1ef9e2c5e.mp3",
+    "startup32": "audio/panorama-qwen/qwen-startup32-3ca783f766225b03.mp3",
+    "decompress-placement": "audio/panorama-qwen/qwen-decompress-placement-e22b42929a43eedb.mp3",
+    "enable-pae": "audio/panorama-qwen/qwen-enable-pae-f79f8b87eadaa1ab.mp3",
+    "identity-pages": "audio/panorama-qwen/qwen-identity-pages-bde68a151e5f6c99.mp3",
+    "load-cr3": "audio/panorama-qwen/qwen-load-cr3-57eebf63bae55b78.mp3",
+    "enable-lme": "audio/panorama-qwen/qwen-enable-lme-adaaa8bd6b7374cd.mp3",
+    "enable-paging": "audio/panorama-qwen/qwen-enable-paging-abf9f0ab95040674.mp3",
+    "startup64": "audio/panorama-qwen/qwen-startup64-e409b46c9a339676.mp3",
+    "relocate": "audio/panorama-qwen/qwen-relocate-51fd5ea8f9256584.mp3",
+    "extract-kernel": "audio/panorama-qwen/qwen-extract-kernel-9c31e721ef07ece2.mp3",
+    "jump-kernel": "audio/panorama-qwen/qwen-jump-kernel-2062ed3b35488a49.mp3",
+    "kernel-tables": "audio/panorama-qwen/qwen-kernel-tables-295aeedfa03be055.mp3",
+    "kernel-gs": "audio/panorama-qwen/qwen-kernel-gs-50d63ebbf6567ef0.mp3",
+    "copy-bootdata": "audio/panorama-qwen/qwen-copy-bootdata-493efb498519a5f3.mp3",
+    "start-kernel": "audio/panorama-qwen/qwen-start-kernel-7a235457c59f14b9.mp3",
+    "irq-disable": "audio/panorama-qwen/qwen-irq-disable-1db09d9176526702.mp3",
+    "memblock": "audio/panorama-qwen/qwen-memblock-78d023b1eae7c6e8.mp3",
+    "memory-allocators": "audio/panorama-qwen/qwen-memory-allocators-a6d7b067335658e1.mp3",
+    "scheduler": "audio/panorama-qwen/qwen-scheduler-3df0420f15f58f07.mp3",
+    "irq-timers": "audio/panorama-qwen/qwen-irq-timers-a54260486a7b4ee4.mp3",
+    "irq-enable": "audio/panorama-qwen/qwen-irq-enable-b6394723c04fd6fa.mp3",
+    "vfs-process-core": "audio/panorama-qwen/qwen-vfs-process-core-a285e47285e9c75c.mp3",
+    "spawn-init": "audio/panorama-qwen/qwen-spawn-init-f5bb8efbbfd6ebe4.mp3",
+    "first-schedule": "audio/panorama-qwen/qwen-first-schedule-96b6e45b65ed7ff5.mp3",
+    "kernel-init": "audio/panorama-qwen/qwen-kernel-init-af635ba1399e3a53.mp3",
+    "initcalls": "audio/panorama-qwen/qwen-initcalls-70036ab8d929c32f.mp3",
+    "unpack-initramfs": "audio/panorama-qwen/qwen-unpack-initramfs-6c33e434574d88e6.mp3",
+    "console-and-initmem": "audio/panorama-qwen/qwen-console-and-initmem-64b79cb7a6941273.mp3",
+    "exec-init": "audio/panorama-qwen/qwen-exec-init-cc75422806d43c09.mp3",
+    "init-mounts": "audio/panorama-qwen/qwen-init-mounts-baa9f9b06f040a5a.mp3",
+    "mount-ext2": "audio/panorama-qwen/qwen-mount-ext2-98ffa37399d8d587.mp3",
+    "move-mounts": "audio/panorama-qwen/qwen-move-mounts-6a7c0a83a7014839.mp3",
+    "switch-root": "audio/panorama-qwen/qwen-switch-root-d89d5e985420ee0a.mp3",
+    "busybox-init": "audio/panorama-qwen/qwen-busybox-init-4d961d1bfaf08ac8.mp3",
+    "rcs": "audio/panorama-qwen/qwen-rcs-a690a59a6d80a116.mp3",
+    "spawn-terminals": "audio/panorama-qwen/qwen-spawn-terminals-be1c28a5a0041870.mp3",
+    "login-shell": "audio/panorama-qwen/qwen-login-shell-d12799a7afffb2f2.mp3",
+    "tty-read": "audio/panorama-qwen/qwen-tty-read-80b5ad689c4f077f.mp3",
+    "shell-ready": "audio/panorama-qwen/qwen-shell-ready-ac44772b7f07fadb.mp3",
+    "next-key": "audio/panorama-qwen/qwen-next-key-c0b1b022a1b5f186.mp3"
+  }
+}

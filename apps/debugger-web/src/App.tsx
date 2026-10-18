@@ -56,8 +56,8 @@ export function App() {
               会话启动真实的 QEMU，通过 GDB/MI 与 QMP 采集停止状态；字段按采集结果和证据来源展示，缺失项标记为未采集。
             </p>
             <p className="entry-links">
-              <a className="button-link" href="/animation/slides.html" target="_blank" rel="noopener">
-                ▶ 启动全景教学（CPU / 内存 / 中文旁白）
+              <a className="button-link" href="/animation/boot.html" target="_blank" rel="noopener">
+                ▶ 启动演示（CPU / 内存 / 中文旁白）
               </a>
               <a className="button-link" href="/media/player.html" target="_blank" rel="noopener">
                 看视频版（约 8:10）

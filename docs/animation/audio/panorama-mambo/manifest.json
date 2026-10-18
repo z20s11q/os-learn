@@ -1,0 +1,3250 @@
+{
+  "provider": "gpt-sovits-local",
+  "voice": "曼波 · GPT-SoVITS",
+  "model": "GPT-SoVITS v2 · MamboTTS v1.2.1",
+  "speaker": "曼波",
+  "checkpoints": {
+    "manbo_e8_s168.pth": "80668f169f2c12912adcbbaf5476591b1bff2e35a7f72bc05822baaec1b88073",
+    "manbo-e10.ckpt": "426ac73fe84a8597f60254fe915830f0c3e2412ee41df9d09899911b08911df4",
+    "refer.wav": "8e9c9363e3abc02486012b3c889dc73540aebf044019de4426266c19099658c3"
+  },
+  "referenceText": "大家好，欢迎来到我的频道，今天给大家分享一个有趣的内容",
+  "pronunciationVersion": 1,
+  "speed": 1.0,
+  "top_k": 15,
+  "top_p": 1.0,
+  "temperature": 1.0,
+  "cut_punc": "。！？；",
+  "renderRate": 0.9,
+  "device": "NVIDIA GeForce RTX 5070 Ti",
+  "entries": [
+    {
+      "id": "power-off",
+      "sourceText": "上电前：硬件处于断电状态。断电时寄存器和 RAM 失去可靠的逻辑值。CPU、RAM、ROM、总线和设备是同时存在的硬件。寄存器与 DRAM 在无电时没有可供 CPU 可靠读取的逻辑值；DRAM 数据随供电中断失去保持。上电后的 DRAM 内容由硬件初始化过程确定。ROM/Flash 和磁盘则能断电保存。\n本实验从 QEMU 已完成复位的状态开始：新建客户机的 RAM 通常由宿主零填充内存提供，固件映像由 QEMU 映射进物理地址空间。客户机 CPU 随后从映射的 ROM 取指。",
+      "file": "mambo-power-off-fd819c05c7297914.mp3",
+      "duration": 44.4911,
+      "sha256": "fd819c05c729791485b63c575dcca7e66fbc35ece755c32fe610fe9ff052a8e2",
+      "spokenText": [
+        "上电前：硬件处于断电状态。",
+        "断电时寄存器和 R A M 失去可靠的逻辑值。",
+        "C P U、R A M、R O M、总线和设备是同时存在的硬件。",
+        "寄存器与 D R A M 在无电时没有可供 C P U 可靠读取的逻辑值；。",
+        "D R A M 数据随供电中断失去保持。",
+        "上电后的 D R A M 内容由硬件初始化过程确定。",
+        "R O M/Flash 和磁盘则能断电保存。",
+        "本实验从 Q E M U 已完成复位的状态开始：新建客户机的 R A M 通常由宿主零填充内存提供，固件映像由 Q E M U 映射进物理地址空间。",
+        "客户机 C P U 随后从映射的 R O M 取指。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.98,
+        6.736,
+        11.059,
+        16.782,
+        20.676,
+        25.051,
+        28.481,
+        32.331,
+        36.731,
+        40.714
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 13,
+          "time": 0.0,
+          "duration": 2.846203703703704
+        },
+        {
+          "start": 13,
+          "end": 34,
+          "time": 2.9795370370370367,
+          "duration": 3.6226388888888885
+        },
+        {
+          "start": 34,
+          "end": 60,
+          "time": 6.735509259259259,
+          "duration": 4.190138888888889
+        },
+        {
+          "start": 60,
+          "end": 92,
+          "time": 11.058981481481482,
+          "duration": 5.589768518518518
+        },
+        {
+          "start": 92,
+          "end": 109,
+          "time": 16.782083333333333,
+          "duration": 3.7608333333333333
+        },
+        {
+          "start": 109,
+          "end": 132,
+          "time": 20.67625,
+          "duration": 4.241296296296296
+        },
+        {
+          "start": 132,
+          "end": 153,
+          "time": 25.050879629629627,
+          "duration": 3.297268518518518
+        },
+        {
+          "start": 153,
+          "end": 219,
+          "time": 28.48148148148148,
+          "duration": 12.099351851851852
+        },
+        {
+          "start": 219,
+          "end": 241,
+          "time": 40.714166666666664,
+          "duration": 3.6685185185185185
+        }
+      ]
+    },
+    {
+      "id": "reset-vector",
+      "sourceText": "复位：CPU 从哪里取第一条指令。复位机制在第一条指令执行前建立寄存器初值。寄存器是 CPU 内的存储电路，复位信号能把指定状态强制为初值。QEMU 用 CPU 模型的复位函数模拟这一过程；下表展示第一条客户机指令执行前的初始状态。\nCS 选择子为 0xf000，隐藏基址为 0xffff0000，IP=0xfff0，按隐藏基址加偏移得到取指地址 0xfffffff0。下表列出本次真实复位帧的初值；架构规定与 CPU 模型初始化分别注明，未采样字段保留未知。\n复位让 CPU 准备好取指，引导器、Linux 和 initramfs 随后由固件与 GRUB 装入 RAM。此刻 ROM 的指令字节已经存在；表中 RAM 窗口的 00 来自本次 QEMU 初始样本，窗口外未采样。",
+      "file": "mambo-reset-vector-2f9b0672340583b7.mp3",
+      "duration": 64.1368,
+      "sha256": "2f9b0672340583b73d37a000a963055aa09c8b192ae228cc8ce9475d87f37860",
+      "spokenText": [
+        "复位：C P U 从哪里取第一条指令。",
+        "复位机制在第一条指令执行前建立寄存器初值。",
+        "寄存器是 C P U 内的存储电路，复位信号能把指定状态强制为初值。",
+        "Q E M U 用 C P U 模型的复位函数模拟这一过程；。",
+        "下表展示第一条客户机指令执行前的初始状态。",
+        "C S 选择子为 十六进制 F 零 零 零，隐藏基址为 十六进制 F F F F 零 零 零 零，I P等于十六进制 F F F 零，按隐藏基址加偏移得到取指地址 十六进制 F F F F F F F 零。",
+        "下表列出本次真实复位帧的初值；。",
+        "架构规定与 C P U 模型初始化分别注明，未采样字段保留未知。",
+        "复位让 C P U 准备好取指，引导器、Linux 和 init ram F S 随后由固件与 G R U B 装入 R A M。",
+        "此刻 R O M 的指令字节已经存在；。",
+        "表中 R A M 窗口的 00 来自本次 Q E M U 初始样本，窗口外未采样。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.209,
+        7.29,
+        13.214,
+        17.683,
+        21.673,
+        29.156,
+        37.709,
+        41.277,
+        47.052,
+        49.076,
+        55.138,
+        58.115
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 17,
+          "time": 0.0,
+          "duration": 3.075648148148148
+        },
+        {
+          "start": 17,
+          "end": 38,
+          "time": 3.2089814814814814,
+          "duration": 3.9475462962962964
+        },
+        {
+          "start": 38,
+          "end": 70,
+          "time": 7.289861111111112,
+          "duration": 5.790601851851851
+        },
+        {
+          "start": 70,
+          "end": 95,
+          "time": 13.213796296296296,
+          "duration": 4.335416666666666
+        },
+        {
+          "start": 95,
+          "end": 117,
+          "time": 17.682546296296298,
+          "duration": 3.8568055555555554
+        },
+        {
+          "start": 117,
+          "end": 185,
+          "time": 21.672685185185184,
+          "duration": 15.902824074074074
+        },
+        {
+          "start": 185,
+          "end": 200,
+          "time": 37.708842592592596,
+          "duration": 3.4349999999999996
+        },
+        {
+          "start": 200,
+          "end": 231,
+          "time": 41.277175925925924,
+          "duration": 5.641342592592593
+        },
+        {
+          "start": 231,
+          "end": 286,
+          "time": 47.05185185185185,
+          "duration": 7.952500000000001
+        },
+        {
+          "start": 286,
+          "end": 303,
+          "time": 55.137685185185184,
+          "duration": 2.843888888888889
+        },
+        {
+          "start": 303,
+          "end": 339,
+          "time": 58.1149074074074,
+          "duration": 5.913240740740741
+        }
+      ]
+    },
+    {
+      "id": "far-jump",
+      "sourceText": "远跳转刷新 CS 缓存。复位向量中的 FAR JMP 进入 SeaBIOS 入口。捕获的前 5 字节为 ea 5b e0 00 f0，按 16 位远跳转解释为 F000:E05B。这个跳转改变 CS 隐藏基址和指令偏移，下一次取指落到低于 1 MiB 的固件窗口。",
+      "file": "mambo-far-jump-7be66bf4ffdee897.mp3",
+      "duration": 19.9814,
+      "sha256": "7be66bf4ffdee897f938eb1f8b0515766afd160f654805740b744196efae8b45",
+      "spokenText": [
+        "远跳转刷新 C S 缓存。",
+        "复位向量中的 F A R J M P 进入 Sea B I O S 入口。",
+        "捕获的前 5 字节为 ea 5b e0 00 f0，按 16 位远跳转解释为 F000:E05B。",
+        "这个跳转改变 C S 隐藏基址和指令偏移，下一次取指落到低于 1 Mi B 的固件窗口。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.294,
+        6.867,
+        13.966,
+        16.779
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 12,
+          "time": 0.0,
+          "duration": 2.160185185185185
+        },
+        {
+          "start": 12,
+          "end": 41,
+          "time": 2.293518518518518,
+          "duration": 4.4406481481481475
+        },
+        {
+          "start": 41,
+          "end": 90,
+          "time": 6.8675,
+          "duration": 6.965092592592592
+        },
+        {
+          "start": 90,
+          "end": 132,
+          "time": 13.965925925925925,
+          "duration": 5.907268518518518
+        }
+      ]
+    },
+    {
+      "id": "bios-stack",
+      "sourceText": "固件建立工作环境。先有栈与临时数据，固件才能调用更复杂的初始化。这是 CPU 复位之后执行的固件代码。实体机器的固件还需初始化内存控制器和 DRAM；QEMU 的客户机 RAM 在机器创建时由宿主内存提供。固件设置工作栈，把初始化代码搬到 RAM，并写临时结构。SeaBIOS 也会进入 32 位模式完成部分初始化，再回到 16 位 BIOS 服务；栈、段和 CR0 的具体中间值未逐条捕获。Linux 由后续 GRUB 阶段装载。",
+      "file": "mambo-bios-stack-6896851a2154e434.mp3",
+      "duration": 40.2981,
+      "sha256": "6896851a2154e4349a1c8ac6ceb63d717bac9a64ca514800a3c6d86e9593b5a3",
+      "spokenText": [
+        "固件建立工作环境。",
+        "先有栈与临时数据，固件才能调用更复杂的初始化。",
+        "这是 C P U 复位之后执行的固件代码。",
+        "实体机器的固件还需初始化内存控制器和 D R A M；。",
+        "Q E M U 的客户机 R A M 在机器创建时由宿主内存提供。",
+        "固件设置工作栈，把初始化代码搬到 R A M，并写临时结构。",
+        "Sea B I O S 也会进入 32 位模式完成部分初始化，再回到 16 位 B I O S 服务；。",
+        "栈、段和 C R 零 的具体中间值未逐条捕获。",
+        "Linux 由后续 G R U B 阶段装载。"
+      ],
+      "cueStarts": [
+        0.0,
+        1.949,
+        6.753,
+        9.934,
+        14.764,
+        20.164,
+        25.829,
+        32.92,
+        36.99
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 9,
+          "time": 0.0,
+          "duration": 1.8161574074074072
+        },
+        {
+          "start": 9,
+          "end": 32,
+          "time": 1.9494907407407407,
+          "duration": 4.669814814814814
+        },
+        {
+          "start": 32,
+          "end": 51,
+          "time": 6.752638888888889,
+          "duration": 3.0475462962962965
+        },
+        {
+          "start": 51,
+          "end": 75,
+          "time": 9.933518518518518,
+          "duration": 4.697314814814815
+        },
+        {
+          "start": 75,
+          "end": 103,
+          "time": 14.764166666666668,
+          "duration": 5.266898148148148
+        },
+        {
+          "start": 103,
+          "end": 131,
+          "time": 20.164398148148145,
+          "duration": 5.531111111111111
+        },
+        {
+          "start": 131,
+          "end": 175,
+          "time": 25.828842592592594,
+          "duration": 6.957916666666667
+        },
+        {
+          "start": 175,
+          "end": 196,
+          "time": 32.92009259259259,
+          "duration": 3.9365277777777776
+        },
+        {
+          "start": 196,
+          "end": 216,
+          "time": 36.989953703703705,
+          "duration": 3.200833333333333
+        }
+      ]
+    },
+    {
+      "id": "bios-tables",
+      "sourceText": "建立 IVT 与 BIOS 数据区。低地址 0x0000 与 0x0400 开始获得具体用途。IVT 的每个入口保存实模式中断服务的段:偏移；BDA 记录固件使用的设备参数。后来的 64 位 IDT 使用门描述符。内存总览持续标注这些区域的用途。",
+      "file": "mambo-bios-tables-abbd0532e7b1864e.mp3",
+      "duration": 23.1962,
+      "sha256": "abbd0532e7b1864e65945233ee366a26b81984c62c68e30e0387072098fa5796",
+      "spokenText": [
+        "建立 I V T 与 B I O S 数据区。",
+        "低地址 十六进制 零 零 零 零 与 十六进制 零 四 零 零 开始获得具体用途。",
+        "I V T 的每个入口保存实模式中断服务的段:偏移；。",
+        "B D A 记录固件使用的设备参数。",
+        "后来的 64 位 I D T 使用门描述符。",
+        "内存总览持续标注这些区域的用途。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.302,
+        9.084,
+        13.541,
+        16.353,
+        20.042
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 18,
+          "time": 0.0,
+          "duration": 3.168287037037037
+        },
+        {
+          "start": 18,
+          "end": 47,
+          "time": 3.3016203703703706,
+          "duration": 5.6490277777777775
+        },
+        {
+          "start": 47,
+          "end": 71,
+          "time": 9.083981481481482,
+          "duration": 4.3240740740740735
+        },
+        {
+          "start": 71,
+          "end": 87,
+          "time": 13.54138888888889,
+          "duration": 2.67787037037037
+        },
+        {
+          "start": 87,
+          "end": 107,
+          "time": 16.35259259259259,
+          "duration": 3.55625
+        },
+        {
+          "start": 107,
+          "end": 123,
+          "time": 20.042175925925925,
+          "duration": 3.0450925925925927
+        }
+      ]
+    },
+    {
+      "id": "bios-devices",
+      "sourceText": "固件探测设备并运行 VGA ROM。CPU 在执行固件代码，设备经总线被初始化。maininit 顺序建立接口、平台与设备，运行 VGA option ROM，启用控制台并准备启动顺序。此刻显示的是固件输出；后续 GRUB 装载 Linux，早期用户空间再挂载根文件系统。",
+      "file": "mambo-bios-devices-7ff41f51495a2327.mp3",
+      "duration": 24.1753,
+      "sha256": "7ff41f51495a23271a40f062b5a10f3ca537df224c4dd4cee87ff5b08b03a635",
+      "spokenText": [
+        "固件探测设备并运行 V G A R O M。",
+        "C P U 在执行固件代码，设备经总线被初始化。",
+        "maininit 顺序建立接口、平台与设备，运行 V G A option R O M，启用控制台并准备启动顺序。",
+        "此刻显示的是固件输出；。",
+        "后续 G R U B 装载 Linux，早期用户空间再挂载根文件系统。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.707,
+        8.075,
+        11.534,
+        16.542,
+        18.721
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 18,
+          "time": 0.0,
+          "duration": 3.573703703703704
+        },
+        {
+          "start": 18,
+          "end": 40,
+          "time": 3.7070370370370367,
+          "duration": 4.234444444444445
+        },
+        {
+          "start": 40,
+          "end": 93,
+          "time": 8.074814814814815,
+          "duration": 8.334212962962962
+        },
+        {
+          "start": 93,
+          "end": 104,
+          "time": 16.542361111111113,
+          "duration": 2.0450462962962965
+        },
+        {
+          "start": 104,
+          "end": 136,
+          "time": 18.72074074074074,
+          "duration": 5.345416666666667
+        }
+      ]
+    },
+    {
+      "id": "boot-image",
+      "sourceText": "把引导镜像送到 0x7c00。本实验从光盘 ISO 启动；这是实际的第一段引导代码停点。SeaBIOS 的 boot_cdrom 读取 El Torito 启动镜像并调用其入口。真实帧在 0x7c00 停住，IF=1、CR0.PE=0；读取来源是 boot.iso，/dev/vda 留作后续 ext2 根盘。",
+      "file": "mambo-boot-image-4599b8b68d04c1ca.mp3",
+      "duration": 27.4614,
+      "sha256": "4599b8b68d04c1caaa8cfea4356e6dbcd1dae8cbc4a7129e7b548d27e55ca7be",
+      "spokenText": [
+        "把引导镜像送到 十六进制 七 C 零 零。",
+        "本实验从光盘 I S O 启动；。",
+        "这是实际的第一段引导代码停点。",
+        "Sea B I O S 的 boot cdrom 读取 El Torito 启动镜像并调用其入口。",
+        "真实帧在 十六进制 七 C 零 零 停住，I F等于1、C R 零 的 P E 标志等于0；。",
+        "读取来源是 boot.iso，/dev/vda 留作后续 ext2 根盘。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.668,
+        6.057,
+        8.846,
+        14.527,
+        21.745
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 15,
+          "time": 0.0,
+          "duration": 3.534259259259259
+        },
+        {
+          "start": 15,
+          "end": 29,
+          "time": 3.6675925925925923,
+          "duration": 2.2556944444444444
+        },
+        {
+          "start": 29,
+          "end": 44,
+          "time": 6.0566203703703705,
+          "duration": 2.6560648148148145
+        },
+        {
+          "start": 44,
+          "end": 89,
+          "time": 8.846018518518518,
+          "duration": 5.5478703703703705
+        },
+        {
+          "start": 89,
+          "end": 118,
+          "time": 14.527222222222223,
+          "duration": 7.0844907407407405
+        },
+        {
+          "start": 118,
+          "end": 155,
+          "time": 21.745046296296298,
+          "duration": 5.607314814814814
+        }
+      ]
+    },
+    {
+      "id": "grub-core",
+      "sourceText": "引导代码继续装入 GRUB。分阶段加载的目的是突破最初引导窗口的大小限制。GRUB 在 RAM 中执行、通过固件与设备访问 ISO 文件。它会使用保护模式完成工作。此阶段的 GRUB 核心寄存器值未独立采样，数值栏按来源保留最近停点。",
+      "file": "mambo-grub-core-c73a729b300de9a8.mp3",
+      "duration": 23.2742,
+      "sha256": "c73a729b300de9a89000c7fe2ca955dfdbf7655212dc1e087b3b34f19c0f8fcb",
+      "spokenText": [
+        "引导代码继续装入 G R U B。",
+        "分阶段加载的目的是突破最初引导窗口的大小限制。",
+        "G R U B 在 R A M 中执行、通过固件与设备访问 I S O 文件。",
+        "它会使用保护模式完成工作。",
+        "此阶段的 G R U B 核心寄存器值未独立采样，数值栏按来源保留最近停点。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.128,
+        7.724,
+        12.986,
+        15.46
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 14,
+          "time": 0.0,
+          "duration": 2.994351851851852
+        },
+        {
+          "start": 14,
+          "end": 37,
+          "time": 3.127685185185185,
+          "duration": 4.462731481481481
+        },
+        {
+          "start": 37,
+          "end": 69,
+          "time": 7.723749999999999,
+          "duration": 5.129351851851852
+        },
+        {
+          "start": 69,
+          "end": 82,
+          "time": 12.986435185185186,
+          "duration": 2.34
+        },
+        {
+          "start": 82,
+          "end": 117,
+          "time": 15.459768518518517,
+          "duration": 7.707175925925926
+        }
+      ]
+    },
+    {
+      "id": "grub-kernel",
+      "sourceText": "linux16 装载 bzImage。磁盘中的内核文件被读入物理内存。grub.cfg 使用 linux16。bzImage 同时包含启动协议头、低位 setup 和高位压缩内核。传给内核的命令行关闭随机布局，启用 VGA 与串口控制台。",
+      "file": "mambo-grub-kernel-3ce01ee5a1980675.mp3",
+      "duration": 19.5877,
+      "sha256": "3ce01ee5a1980675cb16d44aa3662b602758f3356d53b586395bb4bc8656f72f",
+      "spokenText": [
+        "linux16 装载 B Z image。",
+        "磁盘中的内核文件被读入物理内存。",
+        "grub.cfg 使用 linux16。",
+        "B Z image 同时包含启动协议头、低位 setup 和高位压缩内核。",
+        "传给内核的命令行关闭随机布局，启用 V G A 与串口控制台。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.478,
+        5.991,
+        8.751,
+        14.117
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 19,
+          "time": 0.0,
+          "duration": 2.345138888888889
+        },
+        {
+          "start": 19,
+          "end": 35,
+          "time": 2.478472222222222,
+          "duration": 3.3796296296296293
+        },
+        {
+          "start": 35,
+          "end": 55,
+          "time": 5.9914351851851855,
+          "duration": 2.6264814814814814
+        },
+        {
+          "start": 55,
+          "end": 90,
+          "time": 8.75125,
+          "duration": 5.232870370370371
+        },
+        {
+          "start": 90,
+          "end": 119,
+          "time": 14.117453703703704,
+          "duration": 5.361064814814815
+        }
+      ]
+    },
+    {
+      "id": "grub-initrd",
+      "sourceText": "initrd16 装载早期用户空间。initramfs 以压缩归档形式保存在 RAM 中。GRUB 将 initramfs.cpio.gz 放到可用 RAM，并在引导参数中记录起点和长度。归档里有 /init、BusyBox、挂载点等。装载文件与内核解包归档是两个不同动作。",
+      "file": "mambo-grub-initrd-6720ee044a6090cc.mp3",
+      "duration": 22.2787,
+      "sha256": "6720ee044a6090ccc96876bc8568c638cbd813e0a2ad84da8a58532969d021cf",
+      "spokenText": [
+        "initrd16 装载早期用户空间。",
+        "init ram F S 以压缩归档形式保存在 R A M 中。",
+        "G R U B 将 init ram F S.cpio.gz 放到可用 R A M，并在引导参数中记录起点和长度。",
+        "归档里有 /init、Busy Box、挂载点等。",
+        "装载文件与内核解包归档是两个不同动作。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.84,
+        7.253,
+        12.651,
+        15.165,
+        18.503
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 18,
+          "time": 0.0,
+          "duration": 2.7062962962962964
+        },
+        {
+          "start": 18,
+          "end": 45,
+          "time": 2.8396296296296297,
+          "duration": 4.280462962962963
+        },
+        {
+          "start": 45,
+          "end": 94,
+          "time": 7.253425925925925,
+          "duration": 7.778472222222223
+        },
+        {
+          "start": 94,
+          "end": 118,
+          "time": 15.16523148148148,
+          "duration": 3.2041203703703705
+        },
+        {
+          "start": 118,
+          "end": 137,
+          "time": 18.502685185185186,
+          "duration": 3.6671296296296294
+        }
+      ]
+    },
+    {
+      "id": "boot-params",
+      "sourceText": "交接清单：boot_params。内存地图、命令行和 initrd 位置必须一起交给内核。boot_params 是 4096 字节引导参数结构。引导器按 Linux 启动协议准备 CPU 模式、段、栈和交接数据，再跳到入口。源码中 setup 还会补充 BIOS 查询结果。",
+      "file": "mambo-boot-params-af986d106b9a8d95.mp3",
+      "duration": 22.6206,
+      "sha256": "af986d106b9a8d95eab1bf20d742394c258865dfaa4f94bb34108687f221cc9f",
+      "spokenText": [
+        "交接清单：boot params。",
+        "内存地图、命令行和 init R D 位置必须一起交给内核。",
+        "boot params 是 4096 字节引导参数结构。",
+        "引导器按 Linux 启动协议准备 C P U 模式、段、栈和交接数据，再跳到入口。",
+        "源码中 setup 还会补充 B I O S 查询结果。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.47,
+        7.851,
+        11.697,
+        18.442
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 17,
+          "time": 0.0,
+          "duration": 2.3371296296296293
+        },
+        {
+          "start": 17,
+          "end": 45,
+          "time": 2.4704629629629626,
+          "duration": 5.247592592592592
+        },
+        {
+          "start": 45,
+          "end": 73,
+          "time": 7.851388888888889,
+          "duration": 3.7118518518518515
+        },
+        {
+          "start": 73,
+          "end": 113,
+          "time": 11.696574074074073,
+          "duration": 6.612037037037037
+        },
+        {
+          "start": 113,
+          "end": 138,
+          "time": 18.441944444444445,
+          "duration": 4.069814814814815
+        }
+      ]
+    },
+    {
+      "id": "setup-main",
+      "sourceText": "setup.main 收集硬件信息。最后利用 BIOS 服务获得内核需要的启动信息。main 负责复制参数、检查 CPU、检测内存并配置视频。本机实际停点位于 0x91171，CS 隐藏基址为 0x90000，CR0.PE=0；地址和指令字节已与当前构建的 setup ELF 核对。这里采到的是函数入口，后续步骤再观察初始化结果。",
+      "file": "mambo-setup-main-6c848bef129ebb57.mp3",
+      "duration": 31.0027,
+      "sha256": "6c848bef129ebb573a1bad2e964a7659905f143633bacebb4e3caa19188c2763",
+      "spokenText": [
+        "setup.main 收集硬件信息。",
+        "最后利用 B I O S 服务获得内核需要的启动信息。",
+        "main 负责复制参数、检查 C P U、检测内存并配置视频。",
+        "本机实际停点位于 十六进制 九 一 一 七 一，C S 隐藏基址为 十六进制 九 零 零 零 零，C R 零 的 P E 标志等于0；。",
+        "地址和指令字节已与当前构建的 setup E L F 核对。",
+        "这里采到的是函数入口，后续步骤再观察初始化结果。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.094,
+        6.069,
+        11.14,
+        21.6,
+        26.134
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 18,
+          "time": 0.0,
+          "duration": 1.9605555555555554
+        },
+        {
+          "start": 18,
+          "end": 42,
+          "time": 2.093888888888889,
+          "duration": 3.841342592592593
+        },
+        {
+          "start": 42,
+          "end": 71,
+          "time": 6.068564814814814,
+          "duration": 4.937824074074073
+        },
+        {
+          "start": 71,
+          "end": 114,
+          "time": 11.139722222222222,
+          "duration": 10.326620370370371
+        },
+        {
+          "start": 114,
+          "end": 142,
+          "time": 21.599675925925926,
+          "duration": 4.400833333333333
+        },
+        {
+          "start": 142,
+          "end": 166,
+          "time": 26.133842592592593,
+          "duration": 4.759861111111111
+        }
+      ]
+    },
+    {
+      "id": "setup-e820",
+      "sourceText": "探测 e820：哪些地址是真 RAM。e820 区分可分配 RAM 与固件、设备保留区。内存地图把可用 RAM、固件保留区、ACPI 等区间区分开。低位 VGA/ROM 窗口属于设备和固件映射。网格按源码标注物理范围与用途，实测字节另见采样窗口。",
+      "file": "mambo-setup-e820-a62263fea407bef7.mp3",
+      "duration": 24.4477,
+      "sha256": "a62263fea407bef75334d080da51d4b5bb59bcbe42edc70dc451e11c4db43ffe",
+      "spokenText": [
+        "探测 e820：哪些地址是真 R A M。",
+        "e820 区分可分配 R A M 与固件、设备保留区。",
+        "内存地图把可用 R A M、固件保留区、A C P I 等区间区分开。",
+        "低位 V G A/R O M 窗口属于设备和固件映射。",
+        "网格按源码标注物理范围与用途，实测字节另见采样窗口。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.866,
+        9.088,
+        14.236,
+        18.478
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 19,
+          "time": 0.0,
+          "duration": 3.7325
+        },
+        {
+          "start": 19,
+          "end": 44,
+          "time": 3.8658333333333332,
+          "duration": 5.088425925925925
+        },
+        {
+          "start": 44,
+          "end": 74,
+          "time": 9.087592592592593,
+          "duration": 5.015138888888889
+        },
+        {
+          "start": 74,
+          "end": 97,
+          "time": 14.236064814814815,
+          "duration": 4.108425925925926
+        },
+        {
+          "start": 97,
+          "end": 123,
+          "time": 18.477824074074075,
+          "duration": 5.862638888888888
+        }
+      ]
+    },
+    {
+      "id": "setup-a20",
+      "sourceText": "关闭中断，确保 A20 可用。离开 BIOS 环境前，先屏蔽实模式中断入口。go_to_protected_mode 调用实模式切换钩子、使能 A20、复位协处理器并屏蔽 PIC。A20 使地址线第 20 位参与寻址，允许访问超过 1 MiB 的地址；保护模式由 CR0.PE 控制。",
+      "file": "mambo-setup-a20-e8698ef2d5432a7e.mp3",
+      "duration": 25.3594,
+      "sha256": "e8698ef2d5432a7e86dcfd7be8ed411213c1d63dfac6bac2622415b07ef0fd92",
+      "spokenText": [
+        "关闭中断，确保 A20 可用。",
+        "离开 B I O S 环境前，先屏蔽实模式中断入口。",
+        "go to protected mode 调用实模式切换钩子、使能 A20、复位协处理器并屏蔽 P I C。",
+        "A20 使地址线第 20 位参与寻址，允许访问超过 1 Mi B 的地址；。",
+        "保护模式由 C R 零 的 P E 标志 控制。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.585,
+        8.12,
+        16.181,
+        21.794
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 15,
+          "time": 0.0,
+          "duration": 3.452037037037037
+        },
+        {
+          "start": 15,
+          "end": 38,
+          "time": 3.5853703703703705,
+          "duration": 4.400972222222222
+        },
+        {
+          "start": 38,
+          "end": 90,
+          "time": 8.119675925925925,
+          "duration": 7.927638888888889
+        },
+        {
+          "start": 90,
+          "end": 126,
+          "time": 16.180648148148148,
+          "duration": 5.480462962962963
+        },
+        {
+          "start": 126,
+          "end": 142,
+          "time": 21.79444444444444,
+          "duration": 3.457037037037037
+        }
+      ]
+    },
+    {
+      "id": "setup-gdt",
+      "sourceText": "装入 GDT，准备新的代码段。保护模式的 CS/DS 是描述符选择子。GDT 内有 32 位代码段、数据段与用于兼容性的 TSS 描述符。LGDT 装入表地址与界限；后续段装载和远跳转刷新对应段缓存。setup 还临时装入空 IDT。",
+      "file": "mambo-setup-gdt-f40b5a968d0600e2.mp3",
+      "duration": 21.4101,
+      "sha256": "f40b5a968d0600e21aba2792311007650bc226828b367c3306d87c8aeba20a05",
+      "spokenText": [
+        "装入 G D T，准备新的代码段。",
+        "保护模式的 C S/D S 是描述符选择子。",
+        "G D T 内有 32 位代码段、数据段与用于兼容性的 T S S 描述符。",
+        "L G D T 装入表地址与界限；。",
+        "后续段装载和远跳转刷新对应段缓存。",
+        "setup 还临时装入空 I D T。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.624,
+        6.093,
+        12.049,
+        14.772,
+        18.839
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 15,
+          "time": 0.0,
+          "duration": 2.490648148148148
+        },
+        {
+          "start": 15,
+          "end": 35,
+          "time": 2.6239814814814815,
+          "duration": 3.335324074074074
+        },
+        {
+          "start": 35,
+          "end": 69,
+          "time": 6.092638888888889,
+          "duration": 5.82287037037037
+        },
+        {
+          "start": 69,
+          "end": 83,
+          "time": 12.048842592592592,
+          "duration": 2.589814814814815
+        },
+        {
+          "start": 83,
+          "end": 100,
+          "time": 14.77199074074074,
+          "duration": 3.933888888888889
+        },
+        {
+          "start": 100,
+          "end": 117,
+          "time": 18.839212962962964,
+          "duration": 2.462685185185185
+        }
+      ]
+    },
+    {
+      "id": "set-pe",
+      "sourceText": "CR0.PE 置 1。模式切换由具体控制位和远跳转共同完成。protected_mode_jump 置 CR0.PE，再通过远跳转装入 32 位代码段，随后装载数据段与栈。此时 CR0.PG=0，线性地址直接用于物理寻址。",
+      "file": "mambo-set-pe-c49876a9b0bc85fb.mp3",
+      "duration": 20.2022,
+      "sha256": "c49876a9b0bc85fbedfcfc85e4ec8b55674879a70a53653bc337ef05a2dffb5a",
+      "spokenText": [
+        "C R 零 的 P E 标志 置 1。",
+        "模式切换由具体控制位和远跳转共同完成。",
+        "protected mode jump 置 C R 零 的 P E 标志，再通过远跳转装入 32 位代码段，随后装载数据段与栈。",
+        "此时 C R 零 的 P G 标志等于0，线性地址直接用于物理寻址。"
+      ],
+      "cueStarts": [
+        0.0,
+        6.513,
+        10.685,
+        14.703
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 11,
+          "time": 0.0,
+          "duration": 2.6439351851851853
+        },
+        {
+          "start": 11,
+          "end": 30,
+          "time": 2.777268518518518,
+          "duration": 3.602083333333333
+        },
+        {
+          "start": 30,
+          "end": 86,
+          "time": 6.512685185185186,
+          "duration": 8.057222222222222
+        },
+        {
+          "start": 86,
+          "end": 111,
+          "time": 14.703240740740739,
+          "duration": 5.391666666666667
+        }
+      ]
+    },
+    {
+      "id": "startup32",
+      "sourceText": "到达压缩内核 startup_32。真实停点：物理地址 0x100000，PE=1、PG=0。CPU 此时运行解压器，后续跳入主内核。抓到的 CS=0x10、DS/SS=0x18，CR3=0，EFER=0。ESI 传递 boot_params，栈供解压器使用。所有一般寄存器可在全景中逐个检查。",
+      "file": "mambo-startup32-950b17ebbf09b631.mp3",
+      "duration": 26.0991,
+      "sha256": "950b17ebbf09b6313a6482b24efc00d2b042946a3c2e3449860fa1f28b70d031",
+      "spokenText": [
+        "到达压缩内核 startup 32。",
+        "真实停点：物理地址 十六进制 一 零 零 零 零 零，P E等于1、P G等于0。",
+        "C P U 此时运行解压器，后续跳入主内核。",
+        "抓到的 C S等于十六进制 一 零、D S/S S等于十六进制 一 八，C R 三等于0，E F E R等于0。",
+        "E S I 传递 boot params，栈供解压器使用。",
+        "所有一般寄存器可在全景中逐个检查。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.512,
+        8.83,
+        12.952,
+        18.404,
+        22.201
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 18,
+          "time": 0.0,
+          "duration": 2.3785185185185185
+        },
+        {
+          "start": 18,
+          "end": 47,
+          "time": 2.511851851851852,
+          "duration": 6.185185185185185
+        },
+        {
+          "start": 47,
+          "end": 67,
+          "time": 8.83037037037037,
+          "duration": 3.9884259259259256
+        },
+        {
+          "start": 67,
+          "end": 103,
+          "time": 12.95212962962963,
+          "duration": 5.318425925925927
+        },
+        {
+          "start": 103,
+          "end": 130,
+          "time": 18.40388888888889,
+          "duration": 3.6640740740740743
+        },
+        {
+          "start": 130,
+          "end": 147,
+          "time": 22.201296296296295,
+          "duration": 3.789074074074074
+        }
+      ]
+    },
+    {
+      "id": "decompress-placement",
+      "sourceText": "计算搬移与解压的目标位置。输入压缩包、解压器与输出内核分别占用安全的工作区。代码依据内核对齐值、加载物理地址与 init_size 计算解压器搬移位置。寄存器承担地址与长度计算，具体地址由本次构建和装载结果确定。",
+      "file": "mambo-decompress-placement-1ce1843aa6617a20.mp3",
+      "duration": 20.295,
+      "sha256": "1ce1843aa6617a20c5d45b74c3f1313234b1b3922bf8dd890798c79316f33ac1",
+      "spokenText": [
+        "计算搬移与解压的目标位置。",
+        "输入压缩包、解压器与输出内核分别占用安全的工作区。",
+        "代码依据内核对齐值、加载物理地址与 init size 计算解压器搬移位置。",
+        "寄存器承担地址与长度计算，具体地址由本次构建和装载结果确定。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.526,
+        7.79,
+        14.23
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 13,
+          "time": 0.0,
+          "duration": 2.392685185185185
+        },
+        {
+          "start": 13,
+          "end": 38,
+          "time": 2.526018518518519,
+          "duration": 5.130185185185185
+        },
+        {
+          "start": 38,
+          "end": 76,
+          "time": 7.789537037037037,
+          "duration": 6.307083333333333
+        },
+        {
+          "start": 76,
+          "end": 106,
+          "time": 14.229953703703703,
+          "duration": 5.956203703703704
+        }
+      ]
+    },
+    {
+      "id": "enable-pae",
+      "sourceText": "第一步：CR4.PAE = 1。先允许长模式需要的分页结构。startup_32 从 CR4 读出原值，仅 OR 上 PAE 位再写回。此刻 CR0.PG=0，CPU 继续执行 32 位保护模式代码。",
+      "file": "mambo-enable-pae-0301ab94c5b6b03f.mp3",
+      "duration": 17.747,
+      "sha256": "0301ab94c5b6b03f1ce1cfeffb0e987f0e88a86a0c04aaef2c7340fc9f5aa1cd",
+      "spokenText": [
+        "第一步：C R 四 的 P A E 标志 等于 1。",
+        "先允许long mode需要的分页结构。",
+        "startup 32 从 C R 四 读出原值，仅 O R 上 P A E 位再写回。",
+        "此刻 C R 零 的 P G 标志等于0，C P U 继续执行 32 位保护模式代码。"
+      ],
+      "cueStarts": [
+        0.0,
+        4.103,
+        6.691,
+        12.792
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 16,
+          "time": 0.0,
+          "duration": 3.9697685185185185
+        },
+        {
+          "start": 16,
+          "end": 30,
+          "time": 4.103101851851852,
+          "duration": 2.454583333333333
+        },
+        {
+          "start": 30,
+          "end": 68,
+          "time": 6.6910185185185185,
+          "duration": 5.9675462962962955
+        },
+        {
+          "start": 68,
+          "end": 100,
+          "time": 12.79189814814815,
+          "duration": 4.8475
+        }
+      ]
+    },
+    {
+      "id": "identity-pages",
+      "sourceText": "第二步：在 RAM 建临时页表。最初的映射让地址切换后仍能找到同一段代码。源码清空启动页表并建立覆盖早期 4 GiB 的恒等映射。本路径使用 2 MiB 大页，地址沿 PML4 → PDPT → PD 翻译，PD 大页表项直接给出物理页基址。映射覆盖范围与实际 RAM 容量分别由页表和机器配置确定。",
+      "file": "mambo-identity-pages-836be708f0dbe0d9.mp3",
+      "duration": 26.642,
+      "sha256": "836be708f0dbe0d9a0a80bd3954266c72e58387c34434d91ae0c8908c634e8aa",
+      "spokenText": [
+        "第二步：在 R A M 建临时页表。",
+        "最初的映射让地址切换后仍能找到同一段代码。",
+        "源码清空启动页表并建立覆盖早期 4 Gi B 的恒等映射。",
+        "本路径使用 2 Mi B 大页，地址沿 P M L 四 ，到 P D P T ，到 P D 翻译，P D 大页表项直接给出物理页基址。",
+        "映射覆盖范围与实际 R A M 容量分别由页表和机器配置确定。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.287,
+        7.467,
+        13.259,
+        18.566,
+        21.012
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 16,
+          "time": 0.0,
+          "duration": 3.153287037037037
+        },
+        {
+          "start": 16,
+          "end": 37,
+          "time": 3.2866203703703705,
+          "duration": 4.047499999999999
+        },
+        {
+          "start": 37,
+          "end": 65,
+          "time": 7.467453703703704,
+          "duration": 5.658611111111111
+        },
+        {
+          "start": 65,
+          "end": 121,
+          "time": 13.259398148148149,
+          "duration": 7.619166666666666
+        },
+        {
+          "start": 121,
+          "end": 150,
+          "time": 21.011898148148145,
+          "duration": 5.520601851851852
+        }
+      ]
+    },
+    {
+      "id": "load-cr3",
+      "sourceText": "第三步：CR3 指向页表根。页表放在 RAM；CR3 保存根的物理地址。写入 CR3 后，PG 仍然为 0，当前线性地址直接用于物理寻址。页表根、页表项和最终数据页面分别记录与观察。",
+      "file": "mambo-load-cr3-61d00103411ebbdf.mp3",
+      "duration": 18.9546,
+      "sha256": "61d00103411ebbdf3732fcd70bf093caee018480d681d1f82c8be5298c25f1d0",
+      "spokenText": [
+        "第三步：C R 三 指向页表根。",
+        "页表放在 R A M；。",
+        "C R 三 保存根的物理地址。",
+        "写入 C R 三 后，P G 仍然为 0，当前线性地址直接用于物理寻址。",
+        "页表根、页表项和最终数据页面分别记录与观察。"
+      ],
+      "cueStarts": [
+        0.0,
+        4.849,
+        7.539,
+        14.088
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 14,
+          "time": 0.0,
+          "duration": 3.052037037037037
+        },
+        {
+          "start": 14,
+          "end": 23,
+          "time": 3.18537037037037,
+          "duration": 1.5302777777777778
+        },
+        {
+          "start": 23,
+          "end": 36,
+          "time": 4.848981481481482,
+          "duration": 2.5564814814814816
+        },
+        {
+          "start": 36,
+          "end": 69,
+          "time": 7.538796296296296,
+          "duration": 6.41537037037037
+        },
+        {
+          "start": 69,
+          "end": 91,
+          "time": 14.0875,
+          "duration": 4.758657407407407
+        }
+      ]
+    },
+    {
+      "id": "enable-lme",
+      "sourceText": "第四步：EFER.LME = 1。设置长模式允许位，等待分页激活。ECX 选择 EFER MSR，RDMSR 读出后设置 LME，再 WRMSR 写回。此刻 LME=1、LMA=0、PG=0；LMA 由后续硬件激活过程更新，CS.L 由代码段装载更新。",
+      "file": "mambo-enable-lme-18508a71e1e60b69.mp3",
+      "duration": 24.7858,
+      "sha256": "18508a71e1e60b69a5796a9e17de8dfc2829cee874351457821b3ad1106d6d81",
+      "spokenText": [
+        "第四步：E F E R 的 L M E 标志 等于 1。",
+        "设置long mode允许位，等待分页激活。",
+        "E C X 选择 E F E R M S R，R D M S R 读出后设置 L M E，再 W R M S R 写回。",
+        "此刻 L M E等于1、L M A等于0、P G等于0；。",
+        "L M A 由后续硬件激活过程更新，C S.L 由代码段装载更新。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.524,
+        6.95,
+        13.96,
+        18.497
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 17,
+          "time": 0.0,
+          "duration": 3.3902314814814813
+        },
+        {
+          "start": 17,
+          "end": 33,
+          "time": 3.5235648148148146,
+          "duration": 3.293009259259259
+        },
+        {
+          "start": 33,
+          "end": 76,
+          "time": 6.949907407407407,
+          "duration": 6.876666666666667
+        },
+        {
+          "start": 76,
+          "end": 96,
+          "time": 13.959907407407409,
+          "duration": 4.403935185185185
+        },
+        {
+          "start": 96,
+          "end": 126,
+          "time": 18.497175925925927,
+          "duration": 6.180879629629629
+        }
+      ]
+    },
+    {
+      "id": "enable-paging",
+      "sourceText": "第五步：CR0.PG = 1。分页生效，硬件激活长模式环境。满足 PE、PAE、LME 条件后写 CR0_STATE。此时硬件报告 EFER.LMA=1，当前 CS 属性仍可以选择 32 位兼容子模式；后续装载 L=1 的代码段进入 64 位执行。",
+      "file": "mambo-enable-paging-1b544b1975ad988f.mp3",
+      "duration": 24.626,
+      "sha256": "1b544b1975ad988f52a313ac7ab2e4b5bff928591c4ee9c6fce5a64854e7b0c1",
+      "spokenText": [
+        "第五步：C R 零 的 P G 标志 等于 1。",
+        "分页生效，硬件激活long mode环境。",
+        "满足 P E、P A E、L M E 条件后写 C R 零 S T A T E。",
+        "此时硬件报告 E F E R 的 L M A 标志等于1，当前 C S 属性仍可以选择 32 位兼容子模式；。",
+        "后续装载 L等于1 的代码段进入 64 位执行。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.609,
+        6.85,
+        12.116,
+        19.916
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 15,
+          "time": 0.0,
+          "duration": 3.4759722222222225
+        },
+        {
+          "start": 15,
+          "end": 30,
+          "time": 3.6093055555555553,
+          "duration": 3.1071296296296294
+        },
+        {
+          "start": 30,
+          "end": 59,
+          "time": 6.849768518518519,
+          "duration": 5.133379629629629
+        },
+        {
+          "start": 59,
+          "end": 101,
+          "time": 12.11648148148148,
+          "duration": 7.666203703703704
+        },
+        {
+          "start": 101,
+          "end": 124,
+          "time": 19.916018518518516,
+          "duration": 4.600555555555556
+        }
+      ]
+    },
+    {
+      "id": "startup64",
+      "sourceText": "第六步：远返回进入 64 位代码。真实停点：startup_64 = 0x100200。LRET 装入 CS.L=1 的代码段。这个帧证明 PE=1、PG=1、PAE=1、LME=1、LMA=1，同时给出本次真实页表根地址。名称 startup_64 既存在于解压器也存在于主内核；此处仍是解压器。",
+      "file": "mambo-startup64-bf56284df7394162.mp3",
+      "duration": 29.4218,
+      "sha256": "bf56284df739416269c20414e5923d54aaff1a38c8ce7518e6e152744ec7e623",
+      "spokenText": [
+        "第六步：远返回进入 64 位代码。",
+        "真实停点：startup 64 等于 十六进制 一 零 零 二 零 零。",
+        "L R E T 装入 C S.L等于1 的代码段。",
+        "这个帧证明 P E等于1、P G等于1、P A E等于1、L M E等于1、L M A等于1，同时给出本次真实页表根地址。",
+        "名称 startup 64 既存在于解压器也存在于主内核；。",
+        "此处仍是解压器。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.662,
+        9.421,
+        13.243,
+        19.864,
+        22.723,
+        27.713
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 17,
+          "time": 0.0,
+          "duration": 3.5285648148148145
+        },
+        {
+          "start": 17,
+          "end": 44,
+          "time": 3.661898148148148,
+          "duration": 5.625370370370371
+        },
+        {
+          "start": 44,
+          "end": 64,
+          "time": 9.42060185185185,
+          "duration": 3.689537037037037
+        },
+        {
+          "start": 64,
+          "end": 112,
+          "time": 13.243472222222222,
+          "duration": 9.346157407407407
+        },
+        {
+          "start": 112,
+          "end": 141,
+          "time": 22.722962962962963,
+          "duration": 4.856712962962963
+        },
+        {
+          "start": 141,
+          "end": 149,
+          "time": 27.71300925925926,
+          "duration": 1.5994907407407408
+        }
+      ]
+    },
+    {
+      "id": "relocate",
+      "sourceText": "搬移解压器，保留输出空间。从高地址向低地址复制，保持待搬移数据完整。解压器建立自己的栈、校正 GDT 指针并搬移代码。源码中 STD 和 REP MOVSQ 让复制地址递减，随后 CLD 恢复递增方向。DF 的改变由指令语义推导；这一瞬间的完整寄存器值未采样。",
+      "file": "mambo-relocate-f60c79c94088849f.mp3",
+      "duration": 25.933,
+      "sha256": "f60c79c94088849f5b7016f77c7311938189992ca292fb70b476a9ff75dce44c",
+      "spokenText": [
+        "搬移解压器，保留输出空间。",
+        "从高地址向低地址复制，保持待搬移数据完整。",
+        "解压器建立自己的栈、校正 G D T 指针并搬移代码。",
+        "源码中 S T D 和 R E P M O V S Q 让复制地址递减，随后 C L D 恢复递增方向。",
+        "D F 的改变由指令语义推导；。",
+        "这一瞬间的完整寄存器值未采样。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.9,
+        7.124,
+        12.249,
+        19.817,
+        22.513
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 13,
+          "time": 0.0,
+          "duration": 2.7662500000000003
+        },
+        {
+          "start": 13,
+          "end": 34,
+          "time": 2.899583333333333,
+          "duration": 4.09125
+        },
+        {
+          "start": 34,
+          "end": 59,
+          "time": 7.124166666666666,
+          "duration": 4.99199074074074
+        },
+        {
+          "start": 59,
+          "end": 101,
+          "time": 12.24949074074074,
+          "duration": 7.434537037037037
+        },
+        {
+          "start": 101,
+          "end": 115,
+          "time": 19.81736111111111,
+          "duration": 2.5624074074074072
+        },
+        {
+          "start": 115,
+          "end": 130,
+          "time": 22.513101851851854,
+          "duration": 3.311759259259259
+        }
+      ]
+    },
+    {
+      "id": "extract-kernel",
+      "sourceText": "清 BSS，解压到最终物理地址。压缩文件变成 CPU 可直接执行的内核段。先清空解压器 BSS，建立身份映射和异常处理，再调用 extract_kernel。输出包含代码、只读数据、可写数据等，并为 BSS 建立零初始化。内存占用按 ELF 装载段及运行期分配确定。",
+      "file": "mambo-extract-kernel-7429e439e666860f.mp3",
+      "duration": 25.2137,
+      "sha256": "7429e439e666860f0a702e30bda077d525aa2eaea01262ed22b4fb93df8c6996",
+      "spokenText": [
+        "清 B S S，解压到最终物理地址。",
+        "压缩文件变成 C P U 可直接执行的内核段。",
+        "先清空解压器 B S S，建立身份映射和异常处理，再调用 extract kernel。",
+        "输出包含代码、只读数据、可写数据等，并为 B S S 建立零初始化。",
+        "内存占用按 E L F 装载段及运行期分配确定。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.769,
+        6.967,
+        13.301,
+        20.289
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 16,
+          "time": 0.0,
+          "duration": 2.635972222222222
+        },
+        {
+          "start": 16,
+          "end": 37,
+          "time": 2.7693055555555555,
+          "duration": 4.063981481481481
+        },
+        {
+          "start": 37,
+          "end": 79,
+          "time": 6.96662037037037,
+          "duration": 6.201018518518518
+        },
+        {
+          "start": 79,
+          "end": 111,
+          "time": 13.30097222222222,
+          "duration": 6.854259259259259
+        },
+        {
+          "start": 111,
+          "end": 133,
+          "time": 20.288564814814812,
+          "duration": 4.817592592592592
+        }
+      ]
+    },
+    {
+      "id": "jump-kernel",
+      "sourceText": "跳入主内核 startup_64。控制权离开解压器；RSI 继续交接 boot_params。extract_kernel 返回入口地址放在 RAX，汇编恢复 RSI 并间接跳转。两个 startup_64 同名但位于不同可执行体，分别引用解压器与主内核的源码位置。",
+      "file": "mambo-jump-kernel-77e11a9eb864aa7c.mp3",
+      "duration": 21.0818,
+      "sha256": "77e11a9eb864aa7ccbe72e31714a011d63da8132ab6c54aa22633b15927c1e77",
+      "spokenText": [
+        "跳入主内核 startup 64。",
+        "控制权离开解压器；。",
+        "R S I 继续交接 boot params。",
+        "extract kernel 返回入口地址放在 R A X，汇编恢复 R S I 并间接跳转。",
+        "两个 startup 64 同名但位于不同可执行体，分别引用解压器与主内核的源码位置。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.363,
+        4.388,
+        6.856,
+        13.537,
+        18.033
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 17,
+          "time": 0.0,
+          "duration": 2.2291666666666665
+        },
+        {
+          "start": 17,
+          "end": 26,
+          "time": 2.3625000000000003,
+          "duration": 1.8920370370370372
+        },
+        {
+          "start": 26,
+          "end": 47,
+          "time": 4.38787037037037,
+          "duration": 2.335185185185185
+        },
+        {
+          "start": 47,
+          "end": 90,
+          "time": 6.856388888888889,
+          "duration": 6.546805555555555
+        },
+        {
+          "start": 90,
+          "end": 133,
+          "time": 13.536527777777776,
+          "duration": 7.436111111111111
+        }
+      ]
+    },
+    {
+      "id": "kernel-tables",
+      "sourceText": "主内核建立自己的页表与栈。临时身份映射逐步让位于内核地址布局。head_64.S 设置 GDT/IDT、校正早期页表并写 CR3；代码随后转入高地址映射。CPU 的虚拟 RIP 通过页表指向内核物理页，RSP 指向内核栈。",
+      "file": "mambo-kernel-tables-d5560382e0af0180.mp3",
+      "duration": 19.181,
+      "sha256": "d5560382e0af01804ace1da2d8781ca42cc62c931134d18aed7070623d33732e",
+      "spokenText": [
+        "主内核建立自己的页表与栈。",
+        "临时身份映射逐步让位于内核地址布局。",
+        "head 64.S 设置 G D T/I D T、校正早期页表并写 C R 三；。",
+        "代码随后转入高地址映射。",
+        "C P U 的虚拟 R I P 通过页表指向内核物理页，R S P 指向内核栈。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.532,
+        6.478,
+        12.324,
+        14.815
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 13,
+          "time": 0.0,
+          "duration": 2.3991203703703703
+        },
+        {
+          "start": 13,
+          "end": 31,
+          "time": 2.532453703703704,
+          "duration": 3.8119907407407405
+        },
+        {
+          "start": 31,
+          "end": 65,
+          "time": 6.477777777777778,
+          "duration": 5.712824074074074
+        },
+        {
+          "start": 65,
+          "end": 77,
+          "time": 12.323935185185185,
+          "duration": 2.3579166666666667
+        },
+        {
+          "start": 77,
+          "end": 111,
+          "time": 14.815185185185184,
+          "duration": 4.256435185185185
+        }
+      ]
+    },
+    {
+      "id": "kernel-gs",
+      "sourceText": "GS、系统调用与异常环境准备。GS.base 为每 CPU 数据提供快速入口。主内核入口设置段寄存器与 GS 基址，随后初始化 EFER 的 SYSCALL 与 NX 等能力。GS 选择子可以为 0，而隐藏基址有有效地址；全景分别展示选择子和隐藏基址。具体打开的位依 CPU 与内核配置。",
+      "file": "mambo-kernel-gs-6f12a4f2e696cfed.mp3",
+      "duration": 28.202,
+      "sha256": "6f12a4f2e696cfed2fccb63d493fd2b2d1f4fb7f393404c63c39308898e5927d",
+      "spokenText": [
+        "G S、系统调用与异常环境准备。",
+        "G S.base 为每 C P U 数据提供快速入口。",
+        "主内核入口设置段寄存器与 G S 基址，随后初始化 E F E R 的 S Y S C A L L 与 N X 等能力。",
+        "G S 选择子可以为 0，而隐藏基址有有效地址；。",
+        "全景分别展示选择子和隐藏基址。",
+        "具体打开的位依 C P U 与内核配置。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.424,
+        7.78,
+        11.198,
+        16.727,
+        21.573,
+        24.747
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 15,
+          "time": 0.0,
+          "duration": 3.2906944444444446
+        },
+        {
+          "start": 15,
+          "end": 39,
+          "time": 3.4240277777777774,
+          "duration": 4.222916666666666
+        },
+        {
+          "start": 39,
+          "end": 88,
+          "time": 7.780277777777778,
+          "duration": 8.812962962962963
+        },
+        {
+          "start": 88,
+          "end": 111,
+          "time": 16.726574074074072,
+          "duration": 4.712777777777778
+        },
+        {
+          "start": 111,
+          "end": 126,
+          "time": 21.572685185185183,
+          "duration": 3.040509259259259
+        },
+        {
+          "start": 126,
+          "end": 144,
+          "time": 24.74652777777778,
+          "duration": 3.346111111111111
+        }
+      ]
+    },
+    {
+      "id": "copy-bootdata",
+      "sourceText": "进入 C 代码，复制引导数据。早期临时位置的数据需要保存到内核拥有的结构里。x86_64_start_kernel 清 BSS、建立早期映射和异常处理，把 boot_params 与命令行复制到内核结构，之后进入 x86_64_start_reservations。C 执行环境已建立，进程、内存分配器和设备体系由后续初始化建设。",
+      "file": "mambo-copy-bootdata-3656c662c4920d35.mp3",
+      "duration": 27.4032,
+      "sha256": "3656c662c4920d3515c36d3d32d6df8551545a8ab533721f97dc54dff1a54c40",
+      "spokenText": [
+        "进入 C 代码，复制引导数据。",
+        "早期临时位置的数据需要保存到内核拥有的结构里。",
+        "x86 64 start kernel 清 B S S、建立早期映射和异常处理，把 boot params 与命令行复制到内核结构，之后进入 x86 64 start reservations。",
+        "C 执行环境已建立，进程、内存分配器和设备体系由后续初始化建设。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.268,
+        7.97,
+        12.81,
+        16.121,
+        20.203
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 15,
+          "time": 0.0,
+          "duration": 3.1350925925925925
+        },
+        {
+          "start": 15,
+          "end": 38,
+          "time": 3.268425925925926,
+          "duration": 4.568333333333333
+        },
+        {
+          "start": 38,
+          "end": 133,
+          "time": 7.970092592592593,
+          "duration": 12.099398148148149
+        },
+        {
+          "start": 133,
+          "end": 165,
+          "time": 20.202824074074073,
+          "duration": 7.092037037037037
+        }
+      ]
+    },
+    {
+      "id": "start-kernel",
+      "sourceText": "真实停点：start_kernel。通用初始化总入口；当前任务仍为 PID 0。这里采集到的 RIP 与源码 init/main.c 对应。CR3、CR4、EFER 记录此停点的页表与功能配置，任务信息按当前帧展示；后续 rest_init 创建 PID 1 和 PID 2。",
+      "file": "mambo-start-kernel-289b29bbcf5da770.mp3",
+      "duration": 22.6197,
+      "sha256": "289b29bbcf5da770a0fbd769d00f974f4633988a2118d17356fc7331de0c2170",
+      "spokenText": [
+        "真实停点：start kernel。",
+        "通用初始化总入口；。",
+        "当前任务仍为 P I D 0。",
+        "这里采集到的 R I P 与源码 init/main.c 对应。",
+        "C R 三、C R 四、E F E R 记录此停点的页表与功能配置，任务信息按当前帧展示；。",
+        "后续 rest init 创建 P I D 1 和 P I D 2。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.513,
+        4.447,
+        6.865,
+        11.893,
+        18.774
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 18,
+          "time": 0.0,
+          "duration": 2.379583333333333
+        },
+        {
+          "start": 18,
+          "end": 27,
+          "time": 2.5129166666666665,
+          "duration": 1.800648148148148
+        },
+        {
+          "start": 27,
+          "end": 40,
+          "time": 4.446898148148148,
+          "duration": 2.2845833333333334
+        },
+        {
+          "start": 40,
+          "end": 70,
+          "time": 6.864814814814815,
+          "duration": 4.894907407407407
+        },
+        {
+          "start": 70,
+          "end": 108,
+          "time": 11.893055555555554,
+          "duration": 6.7471296296296295
+        },
+        {
+          "start": 108,
+          "end": 138,
+          "time": 18.773518518518518,
+          "duration": 3.7373148148148143
+        }
+      ]
+    },
+    {
+      "id": "irq-disable",
+      "sourceText": "保持 IF=0，先建设再接收中断。先建立中断处理设施，再开放可屏蔽中断。start_kernel 显式 local_irq_disable 并记录 early_boot_irqs_disabled。IF=0 屏蔽外部可屏蔽中断；同步异常独立触发，早期缺页处理仍参与启动。",
+      "file": "mambo-irq-disable-e28e3b4323068709.mp3",
+      "duration": 21.6993,
+      "sha256": "e28e3b43230687092a4a749afe0c5bda8e6548acfe7f3329f54b44766ecc35c4",
+      "spokenText": [
+        "保持 I F等于0，先建设再接收中断。",
+        "先建立中断处理设施，再开放可屏蔽中断。",
+        "start kernel 显式 local irq disable 并记录 early boot irqs disabled。",
+        "I F等于0 屏蔽外部可屏蔽中断；。",
+        "同步异常独立触发，早期缺页处理仍参与启动。"
+      ],
+      "cueStarts": [
+        0.0,
+        4.319,
+        8.32,
+        13.566,
+        17.178
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 17,
+          "time": 0.0,
+          "duration": 4.185787037037037
+        },
+        {
+          "start": 17,
+          "end": 36,
+          "time": 4.31912037037037,
+          "duration": 3.8676851851851852
+        },
+        {
+          "start": 36,
+          "end": 99,
+          "time": 8.32013888888889,
+          "duration": 5.112777777777778
+        },
+        {
+          "start": 99,
+          "end": 114,
+          "time": 13.56625,
+          "duration": 3.4786574074074075
+        },
+        {
+          "start": 114,
+          "end": 135,
+          "time": 17.17824074074074,
+          "duration": 4.411759259259259
+        }
+      ]
+    },
+    {
+      "id": "memblock",
+      "sourceText": "setup_arch：登记可用与保留内存。从固件清单，变成 Linux 的内存账本。setup_arch 解析引导参数与 e820，把可用区间交给 memblock，并保留内核、initrd、页表和固件等占用。memblock 维护早期可用与保留区间，后续伙伴系统管理页面分配。",
+      "file": "mambo-memblock-af24c584d33ece5c.mp3",
+      "duration": 21.736,
+      "sha256": "af24c584d33ece5c3fdf6f27e95197fe3e27289797e6194125fad5c78f4f7c6e",
+      "spokenText": [
+        "setup arch：登记可用与保留内存。",
+        "从固件清单，变成 Linux 的内存账本。",
+        "setup arch 解析引导参数与 e820，把可用区间交给 memblock，并保留内核、init R D、页表和固件等占用。",
+        "memblock 维护早期可用与保留区间，后续伙伴系统管理页面分配。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.155,
+        6.789,
+        10.249,
+        16.005
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 21,
+          "time": 0.0,
+          "duration": 3.021481481481481
+        },
+        {
+          "start": 21,
+          "end": 42,
+          "time": 3.1548148148148147,
+          "duration": 3.5009259259259258
+        },
+        {
+          "start": 42,
+          "end": 105,
+          "time": 6.789074074074073,
+          "duration": 9.082592592592592
+        },
+        {
+          "start": 105,
+          "end": 139,
+          "time": 16.005,
+          "duration": 5.62337962962963
+        }
+      ]
+    },
+    {
+      "id": "memory-allocators",
+      "sourceText": "mm_core_init：从区间走向页分配。struct page、伙伴系统和 slab 支持后续对象分配。内核逐步建立页描述符、页分配与对象缓存体系。随后创建进程、文件对象或页表都会申请内存。全局网格按源码标注这些 RAM 用途，具体页面变化由采样窗口另列。",
+      "file": "mambo-memory-allocators-96e42eadb55ed760.mp3",
+      "duration": 24.0779,
+      "sha256": "96e42eadb55ed7608d5a700a6bff1c7097dcffec9d9b62715d5abfdb941b57e4",
+      "spokenText": [
+        "mm core init：从区间走向页分配。",
+        "struct page、伙伴系统和 slab 支持后续对象分配。",
+        "内核逐步建立页描述符、页分配与对象缓存体系。",
+        "随后创建进程、文件对象或页表都会申请内存。",
+        "全局网格按源码标注这些 R A M 用途，具体页面变化由采样窗口另列。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.59,
+        6.825,
+        12.037,
+        16.982
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 22,
+          "time": 0.0,
+          "duration": 2.456990740740741
+        },
+        {
+          "start": 22,
+          "end": 54,
+          "time": 2.590324074074074,
+          "duration": 4.100925925925926
+        },
+        {
+          "start": 54,
+          "end": 76,
+          "time": 6.824583333333333,
+          "duration": 5.079444444444444
+        },
+        {
+          "start": 76,
+          "end": 97,
+          "time": 12.03736111111111,
+          "duration": 4.811296296296296
+        },
+        {
+          "start": 97,
+          "end": 130,
+          "time": 16.98199074074074,
+          "duration": 6.987777777777778
+        }
+      ]
+    },
+    {
+      "id": "scheduler",
+      "sourceText": "sched_init：有了可调度任务的基础。调度器先建立，定时中断稍后才能安全驱动它。初始任务 PID 0 来自静态 init_task。sched_init 建立运行队列等结构；本实验单 vCPU，任意瞬间只执行一个任务。",
+      "file": "mambo-scheduler-3b4aeb01a7e2d573.mp3",
+      "duration": 17.7836,
+      "sha256": "3b4aeb01a7e2d573b6eab486c6b5b33daee12c395e89ef5633b32d34078e5e3d",
+      "spokenText": [
+        "sched init：有了可调度任务的基础。",
+        "调度器先建立，定时中断稍后才能安全驱动它。",
+        "初始任务 P I D 0 来自静态 init task。",
+        "sched init 建立运行队列等结构；。",
+        "本实验单 v C P U，任意瞬间只执行一个任务。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.625,
+        7.125,
+        11.3,
+        13.888
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 22,
+          "time": 0.0,
+          "duration": 2.4913425925925923
+        },
+        {
+          "start": 22,
+          "end": 43,
+          "time": 2.6246759259259256,
+          "duration": 4.366712962962963
+        },
+        {
+          "start": 43,
+          "end": 69,
+          "time": 7.124722222222222,
+          "duration": 4.041944444444445
+        },
+        {
+          "start": 69,
+          "end": 90,
+          "time": 11.299999999999999,
+          "duration": 2.4543518518518517
+        },
+        {
+          "start": 90,
+          "end": 112,
+          "time": 13.887685185185184,
+          "duration": 3.787685185185185
+        }
+      ]
+    },
+    {
+      "id": "irq-timers",
+      "sourceText": "建立 IRQ、时钟与定时器。中断门、控制器与计时设施需要协同就绪。init_IRQ、tick_init、init_timers、hrtimers_init 与 time_init 建立中断和时钟基础。IDT 保存处理入口，PIC/APIC 交付外部中断；客户机时钟由计时硬件和内核维护，网页计时器控制教学节奏。",
+      "file": "mambo-irq-timers-482db51e45a7b058.mp3",
+      "duration": 24.1785,
+      "sha256": "482db51e45a7b0582b1598519e41267bb56abe150368ecceca361a8184aec1bf",
+      "spokenText": [
+        "建立 I R Q、时钟与定时器。",
+        "中断门、控制器与计时设施需要协同就绪。",
+        "init I R Q、tick init、init timers、hrtimers init 与 time init 建立中断和时钟基础。",
+        "I D T 保存处理入口，P I C/A P I C 交付外部中断；。",
+        "客户机时钟由计时硬件和内核维护，网页计时器控制教学节奏。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.088,
+        7.154,
+        12.957,
+        18.348
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 14,
+          "time": 0.0,
+          "duration": 2.954675925925926
+        },
+        {
+          "start": 14,
+          "end": 33,
+          "time": 3.0880092592592594,
+          "duration": 3.9327777777777775
+        },
+        {
+          "start": 33,
+          "end": 100,
+          "time": 7.154120370370371,
+          "duration": 5.66949074074074
+        },
+        {
+          "start": 100,
+          "end": 127,
+          "time": 12.956944444444446,
+          "duration": 5.258194444444444
+        },
+        {
+          "start": 127,
+          "end": 155,
+          "time": 18.348472222222224,
+          "duration": 5.721203703703703
+        }
+      ]
+    },
+    {
+      "id": "irq-enable",
+      "sourceText": "开中断：RFLAGS.IF 变为 1。具备必要设施后，才允许外部可屏蔽中断进入。start_kernel 在 time_init 等工作之后 local_irq_enable。IF=1 允许响应可屏蔽中断；实际交付取决于中断控制器、优先级、屏蔽和待处理事件。",
+      "file": "mambo-irq-enable-6338964457005893.mp3",
+      "duration": 22.8555,
+      "sha256": "6338964457005893ff3b4745d30dc455e84f7d585d193f03ddb4c86526bd2f3f",
+      "spokenText": [
+        "开中断：R F L A G S 的 I F 标志 变为 1。",
+        "具备必要设施后，才允许外部可屏蔽中断进入。",
+        "start kernel 在 time init 等工作之后 local irq enable。",
+        "I F等于1 允许响应可屏蔽中断；。",
+        "实际交付取决于中断控制器、优先级、屏蔽和待处理事件。"
+      ],
+      "cueStarts": [
+        0.0,
+        4.599,
+        8.978,
+        13.323,
+        17.312
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 19,
+          "time": 0.0,
+          "duration": 4.465925925925926
+        },
+        {
+          "start": 19,
+          "end": 40,
+          "time": 4.5992592592592585,
+          "duration": 4.245138888888889
+        },
+        {
+          "start": 40,
+          "end": 88,
+          "time": 8.977731481481483,
+          "duration": 4.212361111111111
+        },
+        {
+          "start": 88,
+          "end": 103,
+          "time": 13.323425925925926,
+          "duration": 3.855648148148148
+        },
+        {
+          "start": 103,
+          "end": 129,
+          "time": 17.312407407407406,
+          "duration": 5.434259259259259
+        }
+      ]
+    },
+    {
+      "id": "vfs-process-core",
+      "sourceText": "进程、VFS 与缓存准备完成。为创建 PID 1 和访问文件做准备。fork_init、proc_caches_init、vfs_caches_init、pagecache_init、signals_init 等建立进程、文件与信号的基础。文件系统模块、设备探测和根盘挂载还有后续 initcall 与早期用户空间工作。",
+      "file": "mambo-vfs-process-core-6796d72b2c48add7.mp3",
+      "duration": 20.3643,
+      "sha256": "6796d72b2c48add72c17fd04d5b5d0b9fcf12cf651c0dbedb64e115acb300c92",
+      "spokenText": [
+        "进程、V F S 与缓存准备完成。",
+        "为创建 P I D 1 和访问文件做准备。",
+        "fork init、proc caches init、vfs caches init、pagecache init、signals init 等建立进程、文件与信号的基础。",
+        "文件系统模块、设备探测和根盘挂载还有后续 init call 与早期用户空间工作。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.345,
+        6.911,
+        10.18,
+        13.582
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 15,
+          "time": 0.0,
+          "duration": 3.2120370370370366
+        },
+        {
+          "start": 15,
+          "end": 34,
+          "time": 3.3453703703703703,
+          "duration": 3.4325462962962963
+        },
+        {
+          "start": 34,
+          "end": 120,
+          "time": 6.91125,
+          "duration": 6.537777777777778
+        },
+        {
+          "start": 120,
+          "end": 160,
+          "time": 13.582361111111112,
+          "duration": 6.673657407407408
+        }
+      ]
+    },
+    {
+      "id": "spawn-init",
+      "sourceText": "rest_init 创建第一个可运行的 init 任务。PID 1 先在内核态执行 kernel_init。rest_init 先用 user_mode_thread(kernel_init) 创建 PID 1，再用 kernel_thread(kthreadd) 创建 PID 2。PID 1 先执行内核初始化，后续 exec 装入用户程序并返回 CPL 3。",
+      "file": "mambo-spawn-init-16cb72e6f31d5750.mp3",
+      "duration": 20.2624,
+      "sha256": "16cb72e6f31d57500a7de18a09b10d5e23dbac03ad966a2010121eeae564b55a",
+      "spokenText": [
+        "rest init 创建第一个可运行的 init 任务。",
+        "P I D 1 先在内核态执行 kernel init。",
+        "rest init 先用 user mode thread(kernel init) 创建 P I D 1，再用 kernel thread(kernel thread daemon) 创建 P I D 2。",
+        "P I D 1 先执行内核初始化，后续 exec 装入用户程序并返回 C P L 3。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.21,
+        6.479,
+        10.503,
+        13.422
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 28,
+          "time": 0.0,
+          "duration": 3.0769907407407406
+        },
+        {
+          "start": 28,
+          "end": 54,
+          "time": 3.210324074074074,
+          "duration": 3.135601851851852
+        },
+        {
+          "start": 54,
+          "end": 142,
+          "time": 6.479259259259259,
+          "duration": 6.809537037037037
+        },
+        {
+          "start": 142,
+          "end": 181,
+          "time": 13.42212962962963,
+          "duration": 6.732499999999999
+        }
+      ]
+    },
+    {
+      "id": "first-schedule",
+      "sourceText": "PID 0 让出 CPU，进入 idle 路径。一颗 CPU 通过切换任务推进多个启动活动。schedule_preempt_disabled 调用调度器，PID 0 随后进入 cpu_startup_entry。任务切换保存与恢复上下文，页表切换由 mm/active_mm 和目标地址空间决定。",
+      "file": "mambo-first-schedule-ffae1a248d0daad8.mp3",
+      "duration": 20.0393,
+      "sha256": "ffae1a248d0daad813626cb0df863cb442ef04b18e4ed1c314ab4fb2726ca054",
+      "spokenText": [
+        "P I D 0 让出 C P U，进入 idle 路径。",
+        "一颗 C P U 通过切换任务推进多个启动活动。",
+        "schedule preempt disabled 调用调度器，P I D 0 随后进入 cpu startup entry。",
+        "任务切换保存与恢复上下文，页表切换由 mm/active mm 和目标地址空间决定。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.778,
+        8.019,
+        11.149,
+        14.12,
+        15.918
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 24,
+          "time": 0.0,
+          "duration": 3.644768518518519
+        },
+        {
+          "start": 24,
+          "end": 46,
+          "time": 3.7781018518518517,
+          "duration": 4.107129629629629
+        },
+        {
+          "start": 46,
+          "end": 107,
+          "time": 8.018564814814814,
+          "duration": 5.9679166666666665
+        },
+        {
+          "start": 107,
+          "end": 149,
+          "time": 14.119814814814815,
+          "duration": 5.810648148148148
+        }
+      ]
+    },
+    {
+      "id": "kernel-init",
+      "sourceText": "真实停点：PID 1 的 kernel_init。任务号为 1，mm 为空，当前执行内核初始化。该真实帧的解码器识别 PID 1、内核栈与 task_struct；comm 此时显示 swapper/0，任务身份由 pid 字段确定。随后它等待 kthreadd 准备好，执行 kernel_init_freeable。",
+      "file": "mambo-kernel-init-f989364e9b883822.mp3",
+      "duration": 21.96,
+      "sha256": "f989364e9b883822172170d517b2b714bb35f4332598f2021a222d313574705e",
+      "spokenText": [
+        "真实停点：P I D 1 的 kernel init。",
+        "任务号为 1，mm 为空，当前执行内核初始化。",
+        "该真实帧的解码器识别 P I D 1、内核栈与 task struct；。",
+        "comm 此时显示 swapper/0，任务身份由 pid 字段确定。",
+        "随后它等待 kernel thread daemon 准备好，执行 kernel init freeable。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.105,
+        7.627,
+        12.563,
+        17.029
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 25,
+          "time": 0.0,
+          "duration": 2.9713888888888884
+        },
+        {
+          "start": 25,
+          "end": 48,
+          "time": 3.104722222222222,
+          "duration": 4.389305555555556
+        },
+        {
+          "start": 48,
+          "end": 82,
+          "time": 7.627361111111111,
+          "duration": 4.802083333333334
+        },
+        {
+          "start": 82,
+          "end": 117,
+          "time": 12.562777777777777,
+          "duration": 4.3328240740740736
+        },
+        {
+          "start": 117,
+          "end": 160,
+          "time": 17.028935185185183,
+          "duration": 4.822268518518519
+        }
+      ]
+    },
+    {
+      "id": "initcalls",
+      "sourceText": "执行 initcalls，驱动开始探测。注册驱动、发现 virtio 设备并创建内核对象。kernel_init_freeable → do_basic_setup → do_initcalls。initcall 按等级运行，驱动的注册与设备绑定可能涉及异步工作。virtio-blk 根盘需要内核驱动就绪；这里只讲启动依赖，队列细节留给设备专题。",
+      "file": "mambo-initcalls-8159efc5e003e197.mp3",
+      "duration": 24.5032,
+      "sha256": "8159efc5e003e197dacad71adc8b3524bfc1647de9c86d3bfeabf5d0ace8ebd5",
+      "spokenText": [
+        "执行 init calls，驱动开始探测。",
+        "注册驱动、发现 virtio 设备并创建内核对象。",
+        "kernel init freeable ，到 do basic setup ，到 do initcalls。",
+        "init call 按等级运行，驱动的注册与设备绑定可能涉及异步工作。",
+        "virtio-blk 根盘需要内核驱动就绪；。",
+        "这里只讲启动依赖，队列细节留给设备专题。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.59,
+        7.283,
+        11.118,
+        17.032,
+        20.433
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 20,
+          "time": 0.0,
+          "duration": 2.4565740740740742
+        },
+        {
+          "start": 20,
+          "end": 45,
+          "time": 2.589907407407407,
+          "duration": 4.559537037037036
+        },
+        {
+          "start": 45,
+          "end": 98,
+          "time": 7.282777777777778,
+          "duration": 3.7021759259259257
+        },
+        {
+          "start": 98,
+          "end": 132,
+          "time": 11.118287037037037,
+          "duration": 5.780879629629629
+        },
+        {
+          "start": 132,
+          "end": 154,
+          "time": 17.0325,
+          "duration": 3.2675925925925924
+        },
+        {
+          "start": 154,
+          "end": 174,
+          "time": 20.433425925925924,
+          "duration": 3.9615277777777775
+        }
+      ]
+    },
+    {
+      "id": "unpack-initramfs",
+      "sourceText": "把压缩 cpio 解成内存文件树。GRUB 装进来的字节，此时变成可打开的文件。populate_rootfs 通过异步域调用 do_populate_rootfs；unpack_to_rootfs 创建目录、文件和链接，PID 1 的后续代码 wait_for_initramfs 等待完成。initramfs 内容占用 RAM，作为挂载 ext2 根盘之前的临时 rootfs。",
+      "file": "mambo-unpack-initramfs-31659898a300d06d.mp3",
+      "duration": 25.5323,
+      "sha256": "31659898a300d06d86328ff85dec7aa47c95c137ec2df751f28b002e332ca1f5",
+      "spokenText": [
+        "把压缩 cpio 解成内存文件树。",
+        "G R U B 装进来的字节，此时变成可打开的文件。",
+        "populate rootfs 通过异步域调用 do populate rootfs；。",
+        "unpack to rootfs 创建目录、文件和链接，P I D 1 的后续代码 wait for initramfs 等待完成。",
+        "init ram F S 内容占用 R A M，作为挂载 ext2 根盘之前的临时 rootfs。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.258,
+        7.683,
+        11.972,
+        14.984,
+        18.99
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 17,
+          "time": 0.0,
+          "duration": 3.1249074074074072
+        },
+        {
+          "start": 17,
+          "end": 40,
+          "time": 3.2582407407407405,
+          "duration": 4.291435185185185
+        },
+        {
+          "start": 40,
+          "end": 83,
+          "time": 7.68300925925926,
+          "duration": 4.155694444444444
+        },
+        {
+          "start": 83,
+          "end": 147,
+          "time": 11.972037037037037,
+          "duration": 6.884768518518518
+        },
+        {
+          "start": 147,
+          "end": 191,
+          "time": 18.99013888888889,
+          "duration": 6.434444444444445
+        }
+      ]
+    },
+    {
+      "id": "console-and-initmem",
+      "sourceText": "打开控制台并回收启动专用内存。标准输入输出就绪后，准备首次执行用户空间。console_on_rootfs 打开 /dev/console 并建立 0、1、2 三个文件描述符。kernel_init 等待异步初始化结束，释放可回收的启动专用 initmem，并为常驻内核页面设置只读权限。",
+      "file": "mambo-console-and-initmem-491b6b8319524ca7.mp3",
+      "duration": 23.5646,
+      "sha256": "491b6b8319524ca7c12560393d8fd5a737ead8ea60fcbfc188c0cc994f19a525",
+      "spokenText": [
+        "打开控制台并回收启动专用内存。",
+        "标准输入输出就绪后，准备首次执行用户空间。",
+        "console on rootfs 打开 /dev/console 并建立 0、1、2 三个文件描述符。",
+        "kernel init 等待异步初始化结束，释放可回收的启动专用 init memory，并为常驻内核页面设置只读权限。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.707,
+        8.166,
+        14.657,
+        18.114
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 15,
+          "time": 0.0,
+          "duration": 3.5735185185185183
+        },
+        {
+          "start": 15,
+          "end": 36,
+          "time": 3.7068518518518516,
+          "duration": 4.32587962962963
+        },
+        {
+          "start": 36,
+          "end": 88,
+          "time": 8.166064814814815,
+          "duration": 6.357546296296296
+        },
+        {
+          "start": 88,
+          "end": 144,
+          "time": 14.656944444444445,
+          "duration": 8.799444444444445
+        }
+      ]
+    },
+    {
+      "id": "exec-init",
+      "sourceText": "PID 1 首次 exec：/init。任务身份保留，地址空间装入用户态的 BusyBox shell。rdinit=/init 指定早期用户空间入口。run_init_process 最终调用 kernel_execve；脚本解释器为 /bin/sh。内核装入可执行段、用户栈和参数，返回用户态时 CPL=3；在 exec 的内核函数内部仍是 CPL=0。",
+      "file": "mambo-exec-init-c4f91aafcd5f15d9.mp3",
+      "duration": 26.4882,
+      "sha256": "c4f91aafcd5f15d9bf023fe3ee990f1d93be98dae9a80affa5b2682aa77c4b41",
+      "spokenText": [
+        "P I D 1 首次 exec：/init。",
+        "任务身份保留，地址空间装入用户态的 Busy Box shell。",
+        "rdinit等于/init 指定早期用户空间入口。",
+        "run init process 最终调用 kernel execve；。",
+        "脚本解释器为 /bin/sh。",
+        "内核装入可执行段、用户栈和参数，返回用户态时 C P L等于3；。",
+        "在 exec 的内核函数内部仍是 C P L等于0。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.18,
+        6.709,
+        10.645,
+        13.687,
+        15.718,
+        22.385
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 20,
+          "time": 0.0,
+          "duration": 2.046851851851852
+        },
+        {
+          "start": 20,
+          "end": 52,
+          "time": 2.1801851851851852,
+          "duration": 4.395416666666667
+        },
+        {
+          "start": 52,
+          "end": 76,
+          "time": 6.708935185185185,
+          "duration": 3.8027777777777776
+        },
+        {
+          "start": 76,
+          "end": 112,
+          "time": 10.645046296296297,
+          "duration": 2.908240740740741
+        },
+        {
+          "start": 112,
+          "end": 127,
+          "time": 13.68662037037037,
+          "duration": 1.898425925925926
+        },
+        {
+          "start": 127,
+          "end": 156,
+          "time": 15.718379629629629,
+          "duration": 6.532824074074074
+        },
+        {
+          "start": 156,
+          "end": 179,
+          "time": 22.38453703703704,
+          "duration": 3.995462962962963
+        }
+      ]
+    },
+    {
+      "id": "init-mounts",
+      "sourceText": "/init 挂载 /dev、/proc 与 /sys。进程执行脚本，通过系统调用让内核提供三种视图。devtmpfs 暴露设备节点，proc 暴露进程与内核运行信息，sysfs 暴露设备模型。这些虚拟文件系统由内核动态提供内容。/init 等待 /dev/vda 出现后再挂载根盘。",
+      "file": "mambo-init-mounts-baec269981a4ecd7.mp3",
+      "duration": 22.9845,
+      "sha256": "baec269981a4ecd7e7703c123418db35bbe329eaa55d820553c2147f819f6810",
+      "spokenText": [
+        "/init 挂载 /dev、/proc 与 /sys。",
+        "进程执行脚本，通过系统调用让内核提供三种视图。",
+        "devtmpfs 暴露设备节点，proc 暴露进程与内核运行信息，sysfs 暴露设备模型。",
+        "这些虚拟文件系统由内核动态提供内容。",
+        "/init 等待 /dev/vda 出现后再挂载根盘。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.71,
+        8.0,
+        10.361,
+        14.923,
+        18.824
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 27,
+          "time": 0.0,
+          "duration": 2.5767592592592594
+        },
+        {
+          "start": 27,
+          "end": 50,
+          "time": 2.7100925925925927,
+          "duration": 5.156203703703704
+        },
+        {
+          "start": 50,
+          "end": 96,
+          "time": 7.999629629629629,
+          "duration": 6.790231481481481
+        },
+        {
+          "start": 96,
+          "end": 114,
+          "time": 14.923194444444444,
+          "duration": 3.7677314814814813
+        },
+        {
+          "start": 114,
+          "end": 141,
+          "time": 18.82425925925926,
+          "duration": 4.051481481481481
+        }
+      ]
+    },
+    {
+      "id": "mount-ext2",
+      "sourceText": "真实停点：ext2_fill_super。用户 mount 已进入内核；当前任务是 mount，CPL=0。这个帧记录用户 mount 任务通过系统调用执行 ext2_fill_super，任务身份保持，CPU 处于 CPL 0。virtio 读盘产生的数据进入 RAM，文件系统验证元数据并建立 VFS 对象。/dev/vda 是持久化根盘。",
+      "file": "mambo-mount-ext2-052b9ca561b3c136.mp3",
+      "duration": 25.5464,
+      "sha256": "052b9ca561b3c1360e4b2cbb6c009a614c0eb98ca3cf9c99577595541479368d",
+      "spokenText": [
+        "真实停点：ext2 fill super。",
+        "用户 mount 已进入内核；。",
+        "当前任务是 mount，C P L等于0。",
+        "这个帧记录用户 mount 任务通过系统调用执行 ext2 fill super，任务身份保持，C P U 处于 C P L 0。",
+        "virtio 读盘产生的数据进入 R A M，文件系统验证元数据并建立 V F S 对象。",
+        "/dev/vda 是持久化根盘。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.229,
+        5.098,
+        8.215,
+        13.981,
+        16.927,
+        23.197
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 21,
+          "time": 0.0,
+          "duration": 3.0957407407407405
+        },
+        {
+          "start": 21,
+          "end": 36,
+          "time": 3.2290740740740738,
+          "duration": 1.7355092592592591
+        },
+        {
+          "start": 36,
+          "end": 54,
+          "time": 5.097916666666666,
+          "duration": 2.9834722222222223
+        },
+        {
+          "start": 54,
+          "end": 115,
+          "time": 8.214722222222223,
+          "duration": 8.57875
+        },
+        {
+          "start": 115,
+          "end": 156,
+          "time": 16.926805555555557,
+          "duration": 6.137314814814815
+        },
+        {
+          "start": 156,
+          "end": 172,
+          "time": 23.197453703703705,
+          "duration": 2.240462962962963
+        }
+      ]
+    },
+    {
+      "id": "move-mounts",
+      "sourceText": "把系统视图移动到新根。切换 / 之前先保留已经挂好的设备与系统信息。mount --move 调整 /dev、/proc、/sys 在挂载树中的位置，保留各挂载的内容与对象。随后 exec switch_root，PID 1 保持，脚本解释器的用户映像将被替换。",
+      "file": "mambo-move-mounts-aa42b73ad5eafdb6.mp3",
+      "duration": 18.7491,
+      "sha256": "aa42b73ad5eafdb6784d22709be2ec4576830316c495d8c30ea78f12f314048f",
+      "spokenText": [
+        "把系统视图移动到新根。",
+        "切换 / 之前先保留已经挂好的设备与系统信息。",
+        "mount --move 调整 /dev、/proc、/sys 在挂载树中的位置，保留各挂载的内容与对象。",
+        "随后 exec switch root，P I D 1 保持，脚本解释器的用户映像将被替换。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.591,
+        6.515,
+        11.211,
+        12.719
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 11,
+          "time": 0.0,
+          "duration": 2.457546296296296
+        },
+        {
+          "start": 11,
+          "end": 34,
+          "time": 2.5908796296296295,
+          "duration": 3.79125
+        },
+        {
+          "start": 34,
+          "end": 87,
+          "time": 6.515462962962962,
+          "duration": 6.070324074074074
+        },
+        {
+          "start": 87,
+          "end": 131,
+          "time": 12.719120370370371,
+          "duration": 5.922361111111111
+        }
+      ]
+    },
+    {
+      "id": "switch-root",
+      "sourceText": "switch_root：/ 变成 ext2 根。PID 1 保持，根目录和可执行程序发生变化。BusyBox switch_root 要求当前进程为 PID 1、目标新根是挂载点、当前根为 ramfs/tmpfs。它删除当前 rootfs 内容，移动新根挂载，chroot 后 exec /sbin/init。可回收的 initramfs 内容随删除释放。",
+      "file": "mambo-switch-root-e84153a640d09ea1.mp3",
+      "duration": 24.7673,
+      "sha256": "e84153a640d09ea13d50ada3e2ccf9a7df769b3f5e3570a49185fb09326b5c46",
+      "spokenText": [
+        "switch root：/ 变成 ext2 根。",
+        "P I D 1 保持，根目录和可执行程序发生变化。",
+        "Busy Box switch root 要求当前进程为 P I D 1、目标新根是挂载点、当前根为 ramfs/tmpfs。",
+        "它删除当前 rootfs 内容，移动新根挂载，chroot 后 exec /sbin/init。",
+        "可回收的 init ram F S 内容随删除释放。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.138,
+        7.558,
+        16.173,
+        21.835
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 24,
+          "time": 0.0,
+          "duration": 3.0046296296296293
+        },
+        {
+          "start": 24,
+          "end": 47,
+          "time": 3.137962962962963,
+          "duration": 4.286481481481482
+        },
+        {
+          "start": 47,
+          "end": 107,
+          "time": 7.557777777777777,
+          "duration": 8.481574074074073
+        },
+        {
+          "start": 107,
+          "end": 155,
+          "time": 16.172685185185184,
+          "duration": 5.528888888888889
+        },
+        {
+          "start": 155,
+          "end": 178,
+          "time": 21.834907407407407,
+          "duration": 2.8249999999999997
+        }
+      ]
+    },
+    {
+      "id": "busybox-init",
+      "sourceText": "/sbin/init 读取 inittab。根盘上的 PID 1 开始管理系统服务与终端。本实验使用 BusyBox init。它解析 /etc/inittab，按动作类型先执行 sysinit，再执行 wait、once，最后维护 respawn 与 askfirst。",
+      "file": "mambo-busybox-init-e668a3763a5fdfc1.mp3",
+      "duration": 16.3027,
+      "sha256": "e668a3763a5fdfc1e316f4a325ad9c951f52138645da57cc19f5984320b5464a",
+      "spokenText": [
+        "/sbin/init 读取 inittab。",
+        "根盘上的 P I D 1 开始管理系统服务与终端。",
+        "本实验使用 Busy Box init。",
+        "它解析 /etc/inittab，按动作类型先执行 sysinit，再执行 wait、once，最后维护 respawn 与 askfirst。"
+      ],
+      "cueStarts": [
+        0.0,
+        1.72,
+        6.135,
+        8.238,
+        11.995
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 22,
+          "time": 0.0,
+          "duration": 1.5865277777777778
+        },
+        {
+          "start": 22,
+          "end": 45,
+          "time": 1.7198611111111108,
+          "duration": 4.281851851851852
+        },
+        {
+          "start": 45,
+          "end": 64,
+          "time": 6.135046296296296,
+          "duration": 1.9693055555555556
+        },
+        {
+          "start": 64,
+          "end": 136,
+          "time": 8.237685185185185,
+          "duration": 7.9557870370370365
+        }
+      ]
+    },
+    {
+      "id": "rcs",
+      "sourceText": "/etc/rcS 建立实验环境。挂载调试视图、设置主机名，再输出欢迎信息。rcS 创建 /dev/pts、debugfs 和 tracefs 挂载点，设置 hostname 为 linux-lab。脚本中的 mount、mkdir、hostname 等命令通过内核接口完成挂载、目录创建与主机名设置。",
+      "file": "mambo-rcs-3f1e355b828b15d0.mp3",
+      "duration": 21.1227,
+      "sha256": "3f1e355b828b15d03f5ab72833614ee81854088a9d08dd37654b56b0da8b8074",
+      "spokenText": [
+        "/etc/rc S 建立实验环境。",
+        "挂载调试视图、设置主机名，再输出欢迎信息。",
+        "rc S 创建 /dev/pts、debugfs 和 tracefs 挂载点，设置 hostname 为 linux-lab。",
+        "脚本中的 mount、mkdir、hostname 等命令通过内核接口完成挂载、目录创建与主机名设置。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.057,
+        7.924,
+        11.228,
+        13.448
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 16,
+          "time": 0.0,
+          "duration": 2.923333333333333
+        },
+        {
+          "start": 16,
+          "end": 37,
+          "time": 3.0566666666666666,
+          "duration": 4.733888888888889
+        },
+        {
+          "start": 37,
+          "end": 99,
+          "time": 7.9238888888888885,
+          "duration": 5.391157407407407
+        },
+        {
+          "start": 99,
+          "end": 150,
+          "time": 13.44837962962963,
+          "duration": 7.564953703703703
+        }
+      ]
+    },
+    {
+      "id": "spawn-terminals",
+      "sourceText": "两个终端入口采用不同策略。tty1 等回车；ttyS0 直接运行 shell 并支持重启。实际配置是 tty1::askfirst:/bin/sh -l 与 ttyS0::respawn:/bin/cttyhack /bin/sh -l。cttyhack 为串口 shell 建立控制终端环境，init 通过 fork/exec 创建子进程，并等待或回收它们。",
+      "file": "mambo-spawn-terminals-746d22f71e1ec708.mp3",
+      "duration": 22.8847,
+      "sha256": "746d22f71e1ec708591f7ad3836e64cdc540954c6f8827cc8abb91b6d48b4b28",
+      "spokenText": [
+        "两个终端入口采用不同策略。",
+        "tty1 等回车；。",
+        "tty S0 直接运行 shell 并支持重启。",
+        "实际配置是 tty1::askfirst:/bin/sh -l 与 tty S0::respawn:/bin/cttyhack /bin/sh -l。",
+        "cttyhack 为串口 shell 建立控制终端环境，init 通过 fork/exec 创建子进程，并等待或回收它们。"
+      ],
+      "cueStarts": [
+        0.0,
+        4.419,
+        8.456,
+        13.933,
+        17.992
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 13,
+          "time": 0.0,
+          "duration": 2.500925925925926
+        },
+        {
+          "start": 13,
+          "end": 22,
+          "time": 2.634259259259259,
+          "duration": 1.6512962962962963
+        },
+        {
+          "start": 22,
+          "end": 45,
+          "time": 4.418888888888889,
+          "duration": 3.9034722222222222
+        },
+        {
+          "start": 45,
+          "end": 119,
+          "time": 8.455694444444445,
+          "duration": 5.343518518518519
+        },
+        {
+          "start": 119,
+          "end": 180,
+          "time": 13.932546296296296,
+          "duration": 8.844166666666666
+        }
+      ]
+    },
+    {
+      "id": "login-shell",
+      "sourceText": "登录 shell 读取环境并打印提示符。可输入命令的界面终于建立。/bin/sh -l 运行 BusyBox shell。用户代码通过 write 输出提示符，通过终端读取路径等待输入。系统运行配置中的 init、必要内核线程与终端程序，进程采样列出实际任务。",
+      "file": "mambo-login-shell-77db6abadc4153b9.mp3",
+      "duration": 21.7758,
+      "sha256": "77db6abadc4153b9d9cf40a69385f10c951849b7d3af9c6c113cb96a40128051",
+      "spokenText": [
+        "登录 shell 读取环境并打印提示符。",
+        "可输入命令的界面终于建立。",
+        "/bin/sh -l 运行 Busy Box shell。",
+        "用户代码通过 write 输出提示符，通过终端读取路径等待输入。",
+        "系统运行配置中的 init、必要内核线程与终端程序，进程采样列出实际任务。"
+      ],
+      "cueStarts": [
+        0.0,
+        3.477,
+        5.983,
+        8.275,
+        14.32
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 20,
+          "time": 0.0,
+          "duration": 3.3435185185185183
+        },
+        {
+          "start": 20,
+          "end": 33,
+          "time": 3.476851851851852,
+          "duration": 2.373148148148148
+        },
+        {
+          "start": 33,
+          "end": 61,
+          "time": 5.983333333333333,
+          "duration": 2.158657407407407
+        },
+        {
+          "start": 61,
+          "end": 93,
+          "time": 8.275324074074074,
+          "duration": 5.911388888888888
+        },
+        {
+          "start": 93,
+          "end": 130,
+          "time": 14.320046296296296,
+          "duration": 7.347870370370369
+        }
+      ]
+    },
+    {
+      "id": "tty-read",
+      "sourceText": "shell 先 poll 等待终端可读。先等待输入就绪，再读取字符。本构建的 BusyBox 行编辑器先调用 poll 检查标准输入，输入就绪后才调用 read。真实停点位于 n_tty_poll，当前任务为串口 shell、CPL=0。它是检查可读状态的入口；随后等待队列和调度器让 shell 休眠，CPU 可以运行其他任务或进入 idle。",
+      "file": "mambo-tty-read-fa396435ddc956a4.mp3",
+      "duration": 27.6998,
+      "sha256": "fa396435ddc956a4caf018520bd4f1dbc5c011d5ab8df53cb7af0d3c5de33290",
+      "spokenText": [
+        "shell 先 poll 等待终端可读。",
+        "先等待输入就绪，再读取字符。",
+        "本构建的 Busy Box 行编辑器先调用 poll 检查标准输入，输入就绪后才调用 read。",
+        "真实停点位于 n tty poll，当前任务为串口 shell、C P L等于0。",
+        "它是检查可读状态的入口；。",
+        "随后等待队列和调度器让 shell 休眠，C P U 可以运行其他任务或进入 idle。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.978,
+        6.144,
+        10.963,
+        13.141,
+        18.625,
+        20.932
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 20,
+          "time": 0.0,
+          "duration": 2.8451388888888887
+        },
+        {
+          "start": 20,
+          "end": 34,
+          "time": 2.9784722222222224,
+          "duration": 3.031944444444444
+        },
+        {
+          "start": 34,
+          "end": 81,
+          "time": 6.14375,
+          "duration": 6.863888888888889
+        },
+        {
+          "start": 81,
+          "end": 119,
+          "time": 13.14097222222222,
+          "duration": 5.3506481481481485
+        },
+        {
+          "start": 119,
+          "end": 131,
+          "time": 18.624953703703707,
+          "duration": 2.1738888888888885
+        },
+        {
+          "start": 131,
+          "end": 173,
+          "time": 20.932175925925925,
+          "duration": 6.658935185185185
+        }
+      ]
+    },
+    {
+      "id": "shell-ready",
+      "sourceText": "真实终点：提示符已出现，CPU 正在 idle。当前 CPU 任务可以是 PID 0，而 shell 已在等待输入。本样本串口出现 linux-lab:/root#。暂停时 CPU 位于内核 idle 路径、CPL=0，PID 1 为睡眠中的 init。串口记录证明系统到达可输入终端，寄存器帧记录暂停瞬间的 idle 任务。",
+      "file": "mambo-shell-ready-0efc310c4a83be20.mp3",
+      "duration": 23.8228,
+      "sha256": "0efc310c4a83be208eb18fb3996e6d8af613a6cd05bc4976a980641c05902d1a",
+      "spokenText": [
+        "真实终点：提示符已出现，C P U 正在 idle。",
+        "当前 C P U 任务可以是 P I D 0，而 shell 已在等待输入。",
+        "本样本串口出现 linux-lab:/root#。",
+        "暂停时 C P U 位于内核 idle 路径、C P L等于0，P I D 1 为睡眠中的 init。",
+        "串口记录证明系统到达可输入终端，寄存器帧记录暂停瞬间的 idle 任务。"
+      ],
+      "cueStarts": [
+        0.0,
+        4.601,
+        8.957,
+        12.056,
+        17.359
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 24,
+          "time": 0.0,
+          "duration": 4.467314814814815
+        },
+        {
+          "start": 24,
+          "end": 58,
+          "time": 4.6006481481481485,
+          "duration": 4.223009259259259
+        },
+        {
+          "start": 58,
+          "end": 83,
+          "time": 8.956990740740741,
+          "duration": 2.966064814814815
+        },
+        {
+          "start": 83,
+          "end": 127,
+          "time": 12.056388888888888,
+          "duration": 5.1688425925925925
+        },
+        {
+          "start": 127,
+          "end": 163,
+          "time": 17.358564814814816,
+          "duration": 6.35625
+        }
+      ]
+    },
+    {
+      "id": "next-key",
+      "sourceText": "下一次输入将如何穿过全景。终端输入 → 设备 → 中断 → TTY → shell。串口或键盘把输入送入设备，内核读取并交给 TTY，达到读取条件后唤醒 shell。shell 解析命令，内建命令可直接执行，外部程序通常通过 fork/exec。本步骤以机制示意预览后续输入路径，实际输入在真实调试会话中进行。",
+      "file": "mambo-next-key-99f7c4fdf360ab90.mp3",
+      "duration": 26.2063,
+      "sha256": "99f7c4fdf360ab9099eaef40bb1107a7e7a4f6b66d682cfa7a7ef87da2b26b67",
+      "spokenText": [
+        "下一次输入将如何穿过全景。",
+        "终端输入 ，到 设备 ，到 中断 ，到 T T Y ，到 shell。",
+        "串口或键盘把输入送入设备，内核读取并交给 T T Y，达到读取条件后唤醒 shell。",
+        "shell 解析命令，内建命令可直接执行，外部程序通常通过 fork/exec。",
+        "本步骤以机制示意预览后续输入路径，实际输入在真实调试会话中进行。"
+      ],
+      "cueStarts": [
+        0.0,
+        2.664,
+        7.765,
+        11.019,
+        13.235,
+        19.379
+      ],
+      "timing": "measured-sentences-estimated-clauses",
+      "sentences": [
+        {
+          "start": 0,
+          "end": 13,
+          "time": 0.0,
+          "duration": 2.531111111111111
+        },
+        {
+          "start": 13,
+          "end": 42,
+          "time": 2.6644444444444444,
+          "duration": 4.967685185185185
+        },
+        {
+          "start": 42,
+          "end": 83,
+          "time": 7.765462962962962,
+          "duration": 5.336481481481481
+        },
+        {
+          "start": 83,
+          "end": 123,
+          "time": 13.235277777777776,
+          "duration": 6.010324074074074
+        },
+        {
+          "start": 123,
+          "end": 155,
+          "time": 19.378935185185185,
+          "duration": 6.718703703703704
+        }
+      ]
+    }
+  ],
+  "audioMap": {
+    "power-off": "audio/panorama-mambo/mambo-power-off-fd819c05c7297914.mp3",
+    "reset-vector": "audio/panorama-mambo/mambo-reset-vector-2f9b0672340583b7.mp3",
+    "far-jump": "audio/panorama-mambo/mambo-far-jump-7be66bf4ffdee897.mp3",
+    "bios-stack": "audio/panorama-mambo/mambo-bios-stack-6896851a2154e434.mp3",
+    "bios-tables": "audio/panorama-mambo/mambo-bios-tables-abbd0532e7b1864e.mp3",
+    "bios-devices": "audio/panorama-mambo/mambo-bios-devices-7ff41f51495a2327.mp3",
+    "boot-image": "audio/panorama-mambo/mambo-boot-image-4599b8b68d04c1ca.mp3",
+    "grub-core": "audio/panorama-mambo/mambo-grub-core-c73a729b300de9a8.mp3",
+    "grub-kernel": "audio/panorama-mambo/mambo-grub-kernel-3ce01ee5a1980675.mp3",
+    "grub-initrd": "audio/panorama-mambo/mambo-grub-initrd-6720ee044a6090cc.mp3",
+    "boot-params": "audio/panorama-mambo/mambo-boot-params-af986d106b9a8d95.mp3",
+    "setup-main": "audio/panorama-mambo/mambo-setup-main-6c848bef129ebb57.mp3",
+    "setup-e820": "audio/panorama-mambo/mambo-setup-e820-a62263fea407bef7.mp3",
+    "setup-a20": "audio/panorama-mambo/mambo-setup-a20-e8698ef2d5432a7e.mp3",
+    "setup-gdt": "audio/panorama-mambo/mambo-setup-gdt-f40b5a968d0600e2.mp3",
+    "set-pe": "audio/panorama-mambo/mambo-set-pe-c49876a9b0bc85fb.mp3",
+    "startup32": "audio/panorama-mambo/mambo-startup32-950b17ebbf09b631.mp3",
+    "decompress-placement": "audio/panorama-mambo/mambo-decompress-placement-1ce1843aa6617a20.mp3",
+    "enable-pae": "audio/panorama-mambo/mambo-enable-pae-0301ab94c5b6b03f.mp3",
+    "identity-pages": "audio/panorama-mambo/mambo-identity-pages-836be708f0dbe0d9.mp3",
+    "load-cr3": "audio/panorama-mambo/mambo-load-cr3-61d00103411ebbdf.mp3",
+    "enable-lme": "audio/panorama-mambo/mambo-enable-lme-18508a71e1e60b69.mp3",
+    "enable-paging": "audio/panorama-mambo/mambo-enable-paging-1b544b1975ad988f.mp3",
+    "startup64": "audio/panorama-mambo/mambo-startup64-bf56284df7394162.mp3",
+    "relocate": "audio/panorama-mambo/mambo-relocate-f60c79c94088849f.mp3",
+    "extract-kernel": "audio/panorama-mambo/mambo-extract-kernel-7429e439e666860f.mp3",
+    "jump-kernel": "audio/panorama-mambo/mambo-jump-kernel-77e11a9eb864aa7c.mp3",
+    "kernel-tables": "audio/panorama-mambo/mambo-kernel-tables-d5560382e0af0180.mp3",
+    "kernel-gs": "audio/panorama-mambo/mambo-kernel-gs-6f12a4f2e696cfed.mp3",
+    "copy-bootdata": "audio/panorama-mambo/mambo-copy-bootdata-3656c662c4920d35.mp3",
+    "start-kernel": "audio/panorama-mambo/mambo-start-kernel-289b29bbcf5da770.mp3",
+    "irq-disable": "audio/panorama-mambo/mambo-irq-disable-e28e3b4323068709.mp3",
+    "memblock": "audio/panorama-mambo/mambo-memblock-af24c584d33ece5c.mp3",
+    "memory-allocators": "audio/panorama-mambo/mambo-memory-allocators-96e42eadb55ed760.mp3",
+    "scheduler": "audio/panorama-mambo/mambo-scheduler-3b4aeb01a7e2d573.mp3",
+    "irq-timers": "audio/panorama-mambo/mambo-irq-timers-482db51e45a7b058.mp3",
+    "irq-enable": "audio/panorama-mambo/mambo-irq-enable-6338964457005893.mp3",
+    "vfs-process-core": "audio/panorama-mambo/mambo-vfs-process-core-6796d72b2c48add7.mp3",
+    "spawn-init": "audio/panorama-mambo/mambo-spawn-init-16cb72e6f31d5750.mp3",
+    "first-schedule": "audio/panorama-mambo/mambo-first-schedule-ffae1a248d0daad8.mp3",
+    "kernel-init": "audio/panorama-mambo/mambo-kernel-init-f989364e9b883822.mp3",
+    "initcalls": "audio/panorama-mambo/mambo-initcalls-8159efc5e003e197.mp3",
+    "unpack-initramfs": "audio/panorama-mambo/mambo-unpack-initramfs-31659898a300d06d.mp3",
+    "console-and-initmem": "audio/panorama-mambo/mambo-console-and-initmem-491b6b8319524ca7.mp3",
+    "exec-init": "audio/panorama-mambo/mambo-exec-init-c4f91aafcd5f15d9.mp3",
+    "init-mounts": "audio/panorama-mambo/mambo-init-mounts-baec269981a4ecd7.mp3",
+    "mount-ext2": "audio/panorama-mambo/mambo-mount-ext2-052b9ca561b3c136.mp3",
+    "move-mounts": "audio/panorama-mambo/mambo-move-mounts-aa42b73ad5eafdb6.mp3",
+    "switch-root": "audio/panorama-mambo/mambo-switch-root-e84153a640d09ea1.mp3",
+    "busybox-init": "audio/panorama-mambo/mambo-busybox-init-e668a3763a5fdfc1.mp3",
+    "rcs": "audio/panorama-mambo/mambo-rcs-3f1e355b828b15d0.mp3",
+    "spawn-terminals": "audio/panorama-mambo/mambo-spawn-terminals-746d22f71e1ec708.mp3",
+    "login-shell": "audio/panorama-mambo/mambo-login-shell-77db6abadc4153b9.mp3",
+    "tty-read": "audio/panorama-mambo/mambo-tty-read-fa396435ddc956a4.mp3",
+    "shell-ready": "audio/panorama-mambo/mambo-shell-ready-0efc310c4a83be20.mp3",
+    "next-key": "audio/panorama-mambo/mambo-next-key-99f7c4fdf360ab90.mp3"
+  }
+}

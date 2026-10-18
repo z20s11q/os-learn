@@ -100,7 +100,7 @@ function extract(id, ref) {
 const CODE = {};
 for (const [id, ref] of Object.entries(CODE_REFS)) CODE[id] = extract(id, ref);
 
-const ops = ACTS.flatMap(act => act.ops.map(op => ({ ...op, act: act.id })));
+const ops = ACTS.flatMap(act => act.ops.map((op, index) => ({ ...op, act: act.id, narrationId: `${act.id}-${index}` })));
 const errors = [];
 ops.forEach((op, i) => {
   if (!op.code) return;
@@ -120,7 +120,7 @@ export function speakable(text) {
 }
 const tts = ops.map(op => {
   const text = speakable(op.tts || op.say);
-  return { key: crypto.createHash('sha1').update(`${VOICE}|${text}`).digest('hex').slice(0, 16), text };
+  return { id: op.narrationId, sourceText: op.tts || op.say, key: crypto.createHash('sha1').update(`${VOICE}|${text}`).digest('hex').slice(0, 16), text };
 });
 fs.mkdirSync(path.join(root, 'tmp'), { recursive: true });
 fs.writeFileSync(path.join(root, 'tmp/boot-story-tts.json'), JSON.stringify({ voice: VOICE, items: tts }, null, 1));
@@ -130,7 +130,12 @@ let timing = null;
 if (fs.existsSync(manifestPath)) {
   const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
   const byKey = new Map(manifest.entries.map(e => [e.key, e]));
-  timing = tts.map(t => byKey.get(t.key)).map(e => (e ? { file: e.file, audio: e.duration } : null));
+  const byId = new Map(manifest.entries.filter(e => e.id).map(e => [e.id, e]));
+  timing = tts.map(t => {
+    const local = byId.get(t.id);
+    const entry = local?.sourceText === t.sourceText ? local : byKey.get(t.key);
+    return entry ? { file: entry.file, audio: entry.duration } : null;
+  });
 }
 fs.writeFileSync(path.join(outDir, 'story-timing.js'),
   `// 由 scripts/build-boot-story.mjs 生成，请勿手改。\nexport const TIMING = ${JSON.stringify(timing)};\n`);

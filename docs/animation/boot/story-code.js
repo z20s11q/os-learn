@@ -167,7 +167,82 @@ export const CODE = {
    {
     "n": 55,
     "t": "        ljmpl $SEG32_MODE32_CS, $(BUILD_BIOS_ADDR + 1f)"
+   },
+   {
+    "n": 57,
+    "t": "        .code32"
+   },
+   {
+    "n": 58,
+    "t": "        // init data segments"
+   },
+   {
+    "n": 59,
+    "t": "1:      movl $SEG32_MODE32_DS, %ecx"
+   },
+   {
+    "n": 60,
+    "t": "        movw %cx, %ds"
+   },
+   {
+    "n": 61,
+    "t": "        movw %cx, %es"
+   },
+   {
+    "n": 62,
+    "t": "        movw %cx, %ss"
+   },
+   {
+    "n": 63,
+    "t": "        movw %cx, %fs"
+   },
+   {
+    "n": 64,
+    "t": "        movw %cx, %gs"
+   },
+   {
+    "n": 66,
+    "t": "        jmpl *%edx"
    }
+  ]
+ },
+ "sb-trans16": {
+  "file": "seabios/src/romlayout.S",
+  "lang": "汇编",
+  "lines": [
+   { "n": 75, "t": "transition16:" },
+   { "n": 76, "t": "        // Reset data segment limits" },
+   { "n": 77, "t": "        movl $SEG32_MODE16_DS, %ecx" },
+   { "n": 78, "t": "        movw %cx, %ds" },
+   { "n": 79, "t": "        movw %cx, %es" },
+   { "n": 80, "t": "        movw %cx, %ss" },
+   { "n": 81, "t": "        movw %cx, %fs" },
+   { "n": 82, "t": "        movw %cx, %gs" },
+   { "n": 85, "t": "        ljmpw $SEG32_MODE16_CS, $1f" },
+   { "n": 87, "t": "transition16big:" },
+   { "n": 88, "t": "        movl $SEG32_MODE16BIG_DS, %ecx" },
+   { "n": 89, "t": "        movw %cx, %ds" },
+   { "n": 90, "t": "        movw %cx, %es" },
+   { "n": 91, "t": "        movw %cx, %ss" },
+   { "n": 92, "t": "        movw %cx, %fs" },
+   { "n": 93, "t": "        movw %cx, %gs" },
+   { "n": 95, "t": "        ljmpw $SEG32_MODE16BIG_CS, $1f" },
+   { "n": 97, "t": "        .code16" },
+   { "n": 98, "t": "        // Disable protected mode" },
+   { "n": 99, "t": "1:      movl %cr0, %ecx" },
+   { "n": 100, "t": "        andl $~CR0_PE, %ecx" },
+   { "n": 101, "t": "        movl %ecx, %cr0" },
+   { "n": 103, "t": "        // far jump to flush CPU queue after transition to real mode" },
+   { "n": 104, "t": "        ljmpw $SEG_BIOS, $2f" },
+   { "n": 106, "t": "        // restore IDT to normal real-mode defaults" },
+   { "n": 107, "t": "2:      lidtw %cs:rmode_IDT_info" },
+   { "n": 110, "t": "        xorw %cx, %cx" },
+   { "n": 111, "t": "        movw %cx, %fs" },
+   { "n": 112, "t": "        movw %cx, %gs" },
+   { "n": 113, "t": "        movw %cx, %es" },
+   { "n": 114, "t": "        movw %cx, %ds" },
+   { "n": 115, "t": "        movw %cx, %ss  // Assume stack is in segment 0" },
+   { "n": 117, "t": "        jmpl *%edx" }
   ]
  },
  "sb-dopost": {

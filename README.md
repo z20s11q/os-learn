@@ -3,7 +3,7 @@
 
 | 项 | 内容 |
 |---|---|
-| 代码范围 | Linux Observatory 实时实验平台与启动全景教学页 |
+| 代码范围 | Linux Observatory 实时实验平台与逐条启动演示 |
 | 关联需求 | 从上电到终端等待输入的连续教学展示 |
 | 目的 | 说明入口、操作、证据来源、构建和验证方法 |
 | 读者 | 本项目的学习者与维护者 |
@@ -50,21 +50,21 @@ bash scripts/build-rootfs.sh     # 生成 rootfs.img、initramfs、lab.elf
 `scripts/build-rootfs.sh` 会把 `lab-*` 实验程序安装到根盘 `/bin`，并把
 `hello.txt`、`probe.bin` 写入 `/data`。
 
-## 启动全景教学：从上电到终端
+## 启动演示：从上电到终端
 
-推荐先打开连续教学页。CPU、状态位、机器组件、全局内存、低位内存、指令字节、终端和代码讲解持续挂载，支持自动讲解与逐步观察：
+推荐先打开新版逐条启动演示。CPU、寄存器、内存、指令、终端和代码讲解随步骤推进，支持自动播放与逐步观察：
 
 - 在线视频（服务启动后）：<http://127.0.0.1:13029/media/player.html>
-- **全景教学（推荐，逐步中文配音）**：<http://127.0.0.1:13029/animation/slides.html>
+- **新版启动演示（推荐，逐条中文配音）**：<http://127.0.0.1:18546/animation/boot.html>；主服务入口为 <http://127.0.0.1:13029/animation/boot.html>
 - 章节 PPT：<http://127.0.0.1:13029/animation/deck.html>
 - MP4：[docs/video/linux-boot-story.mp4](docs/video/linux-boot-story.mp4)；WebM：[docs/video/linux-boot-story.webm](docs/video/linux-boot-story.webm)（2560×1440，约 8:10，中文配音）
 - 浏览器时间轴：<http://127.0.0.1:13029/animation/>
 - 字幕/逐章文字：[docs/video/linux-boot-story.md](docs/video/linux-boot-story.md)
 - SRT：[docs/video/linux-boot-story.srt](docs/video/linux-boot-story.srt)
 
-页面入口为「启动全景教学」。每个步骤拆成若干句解说（共 321 句），右侧以歌词式字幕逐句推进：←/→ 逐句前进后退，PageUp/PageDown 换步，点击任意一句可直接跳到该句；空格播放/暂停、Home/End、F 全屏、O 搜索目录；底部可拖动进度和调整速度。`#步骤ID@句号` 可直接定位到某一句（`@end` 为最后一句）。原有 `#s08` 等章节链接会映射到对应启动阶段。完整讲义文字、复位初值表和证据在右侧「完整讲义」弹窗中。
+页面入口为「启动演示」，共有 174 个步骤。←/→ 前后换步，PageUp/PageDown 换章，空格播放/暂停，M 切换声音；底部可拖动进度和调整速度，`#1` 至 `#174` 可定位步骤。旧的右侧歌词式全景页面已删除，教学采样数据和历史音频保留。
 
-当前采样覆盖如下；全部实测数据来自同一次复位到终端提示符的启动。
+保留的历史全景采样资料覆盖如下；全部实测数据来自同一次复位到终端提示符的启动，不代表新版每个演示步骤都经过独立采样。
 
 | 项目 | 当前覆盖 |
 |---|---|
@@ -75,13 +75,11 @@ bash scripts/build-rootfs.sh     # 生成 rootfs.img、initramfs、lab.elf
 | 标志位定义 | 58 项；主界面紧凑展示常用状态位和模式位，其余可点开查看 |
 | 未单独校准的步骤 | 断电、SeaBIOS 内部 3 步、GRUB 内部 3 步及未来输入预览 |
 
-CPU、标志位、机器部件、内存区域、代码行和终端随每一句同步变化：一步内的寄存器净变化在讲到它的那一句才翻转为新值（下方保留“原 …”），标志位随所属寄存器同时翻转；讲到的对象发光，右侧「这一句」卡片列出本句的变化。虚线闪烁标示稍后会变化的字段，实线高亮表示已发生的净变化。浮点、调试、MSR 等寄存器组默认折叠，讲到或发生变化时自动展开。支持减少动态效果的系统设置。入口与执行后采样分开标注；未采样步骤保留最近样本并明确显示来源。逐句拆分、关键词联动与变化编排在 `docs/animation/panorama-cues.js`。
+新版演示的步骤、代码、时间轴及播放器位于 `docs/animation/boot/`。使用本机 GPU 生成的 FireRedTTS 3 配音，云希参考音色、1 倍语速，覆盖全部 174 段解说。合成按句切分为 242 个短段，单次最多 80 个实际朗读字符，之后再拼接步骤音频；播放使用预生成 MP3，无需实时运行模型。BIOS 章节分步展示 GDT、CR0.PE、远跳转和数据段装载，并说明平坦地址的用途与返回实模式的原因；依据 SeaBIOS 1.16.3 源码，不代表各指令均独立实测。原配音文件保留。
 
-内存矩阵为 8×16，每格聚合 4 MiB；颜色说明用途，亮框指出该格内已采样窗口有字节变化，窗口外内容标注采集缺口。字节窗高亮相同地址窗口在两个停点间的净变化，并保留读取失败原因。代码区为教学简码，引用可打开原文。本构建的 BusyBox shell 先 poll 等待输入，再 read 读取字符。
+数字仅在朗读稿中转换：普通数量读中文，十六进制逐位读且不带 `0x` 或“十六进制”前缀，保留每个零和字母；页面仍显示原始代码与数字。讲稿版本记录在配音清单的 `pronunciationVersion` 中。
 
-全景教学提供晓晓、晓伊、云希三套神经网络配音，每套覆盖全部微步骤，均按当前步骤独立生成；默认晓晓，正常语速全程约 26 分钟。可暂停、重播、切换声线，并支持浏览器朗读与自定义音频清单。哈吉米等特色模型生成的音频可按步骤 ID 导入。
-
-采样脚本为 `scripts/capture-panorama.mjs`；运行后用 `node scripts/build-panorama-samples.mjs` 从 `data/expanded-captures.json` 生成浏览器索引 `panorama-samples.js`。教学文字与状态投影在 `docs/animation/panorama-data.js`，音频清单在 `docs/animation/audio/panorama/manifest.json`。修改旁白后可将 `steps` 的 `id`、`narration` 导出为 JSON，再运行 `python3 docs/animation/generate_panorama_audio.py --input <JSON文件>`；脚本按文字和声线参数缓存，并把 edge-tts 的词级时间写入清单 `entries[].words`，字幕据此逐字对齐。静态文件在服务启动时登记，新增或重新生成音频后需执行 `./stop.sh && ./start.sh`。采样证据验收为 `node scripts/verify-panorama-sampling.mjs`，浏览器验收为 `node scripts/verify-panorama.mjs`；结果分别保存到 `artifacts/verify/panorama-sampling.json` 与 `artifacts/verify/panorama.json`。
+修改旁白后运行 `artifacts/fireredtts3/.venv312/Scripts/python.exe scripts/generate-local-narration.py --engine fire --bundle boot --fire-cuda-graph`，自动导出讲稿、处理代码术语读法、分段 CUDA 合成，并更新 `docs/animation/boot/audio/manifest.json` 与 `docs/animation/boot/story-timing.js`；短段缓存支持续跑，CUDA Graph 减少重复 GPU 调用开销。安装和使用方法见 [本机 GPU 配音](docs/local-narration.md)。Windows 教学页可设置 `$env:NARRATION_PORT='18546'` 后运行 `node scripts/serve-narration.mjs` 预览；播放验收为 `node scripts/verify-fire-narration-ui.mjs`。历史采样脚本 `scripts/capture-panorama.mjs` 与数据校验 `scripts/verify-panorama-sampling.mjs` 保留，旧全景浏览器验收不再适用。
 
 视频与章节页的目录如下：
 

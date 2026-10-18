@@ -2,6 +2,7 @@ import { machine, registerGroups, flagDefinitions, memoryRegions, virtualRegions
 import { memoryOverview, memoryCell, physicalSamples } from './panorama-memory.js';
 import { splitCues, cueTargets, planBeats, relatedCodeLines, estimateStarts, startsFromWords, cueAt } from './panorama-cues.js';
 import { annotate, annotateHtml } from './panorama-glossary.js';
+import { DEFAULT_NARRATOR, AVAILABLE_NARRATORS } from './narration-config.js';
 
 const $ = id => document.getElementById(id);
 const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -41,7 +42,8 @@ let speechOffset = 0;
 let voiceGeneration = 0;
 let customAudioMap = null;
 let narratorWords = {};
-const narratorPaths = { xiaoyi: 'audio/panorama/manifest.json', xiaoxiao: 'audio/panorama-xiaoxiao/manifest.json', yunxi: 'audio/panorama-yunxi/manifest.json' };
+let narratorCues = {};
+const narratorPaths = { fire: 'audio/panorama-fire/manifest.json', fish: 'audio/panorama-fish/manifest.json', mambo: 'audio/panorama-mambo/manifest.json', xiaoyi: 'audio/panorama/manifest.json', xiaoxiao: 'audio/panorama-xiaoxiao/manifest.json', yunxi: 'audio/panorama-yunxi/manifest.json' };
 
 function hashPosition() {
   const [hash, beatPart] = decodeURIComponent(location.hash.slice(1)).split('@');
@@ -96,6 +98,9 @@ function buildLesson(index) {
   return { index, state, step, cues, targets, plan, delta, terminalBefore: [...before], terminalLines };
 }
 function beatStarts(durationSeconds) {
+  const measured = narratorCues[lesson.step.id];
+  if (Array.isArray(measured) && measured.length === lesson.cues.length
+      && measured.every((t, i) => Number.isFinite(t) && t >= 0 && (!i || t >= measured[i - 1]))) return measured;
   const words = narratorWords[lesson.step.id];
   return startsFromWords(lesson.cues, lesson.step.narration, words) || estimateStarts(lesson.cues, durationSeconds || lesson.step.duration, 0.15, 0.4);
 }
@@ -537,7 +542,9 @@ async function speakStep(auto = false) {
   const cue = lesson.cues[beat];
   speechOffset = cue?.start || 0;
   const words = narratorWords[step.id];
-  const exact = words && startsFromWords(lesson.cues, text, words);
+  const measured = narratorCues[step.id];
+  const exact = Array.isArray(measured) && measured.length === lesson.cues.length
+    ? beatStarts() : words && startsFromWords(lesson.cues, text, words);
   const startFraction = beat && !exact ? estimateStarts(lesson.cues, 1, 0.01, 0.03)[beat] : 0;
   const pending = speech.play({ id: step.id, text: text.slice(speechOffset), startAt: exact ? exact[beat] : undefined, startFraction, rate: speed });
   startClock();
@@ -653,7 +660,7 @@ $('voiceSelect').onchange = e => speech.setVoice(e.target.value);
 $('narratorSelect').onchange = e => {
   if (playing) pause();
   playbackGeneration++; speechResume = false; speech.stop();
-  if (e.target.value === 'custom' && customAudioMap) { speech.setAudioMap(customAudioMap.audioMap); narratorWords = customAudioMap.words; $('audioInfo').textContent = `自定义声线 · ${Object.keys(customAudioMap.audioMap).length} 个步骤`; } else audioReady = loadNarrator(e.target.value);
+  if (e.target.value === 'custom' && customAudioMap) { speech.setAudioMap(customAudioMap.audioMap); narratorWords = customAudioMap.words; narratorCues = customAudioMap.cues; $('audioInfo').textContent = `自定义声线 · ${Object.keys(customAudioMap.audioMap).length} 个步骤`; } else audioReady = loadNarrator(e.target.value);
 };
 $('audioManifest').onchange = async e => {
   try {
@@ -666,7 +673,7 @@ $('audioManifest').onchange = async e => {
     if (!entries.length) throw Error('没有与本页步骤 ID 对应的音频');
     for (const [, value] of entries) { const url = new URL(typeof value === 'string' ? value : value.src, document.baseURI); if (!['https:', 'http:', 'blob:', 'data:'].includes(url.protocol) || url.protocol === 'data:' && !url.href.startsWith('data:audio/')) throw Error('清单包含无效音频地址'); }
     voiceGeneration++; playbackGeneration++; speechResume = false; speech.stop();
-    customAudioMap = { audioMap: Object.fromEntries(entries), words: wordsOf(parsed) }; speech.setAudioMap(customAudioMap.audioMap); narratorWords = customAudioMap.words;
+    customAudioMap = { audioMap: Object.fromEntries(entries), words: wordsOf(parsed), cues: cuesOf(parsed) }; speech.setAudioMap(customAudioMap.audioMap); narratorWords = customAudioMap.words; narratorCues = customAudioMap.cues;
     $('narratorSelect').querySelector('[value=custom]').disabled = false; $('narratorSelect').value = 'custom';
     $('audioInfo').textContent = `自定义声线 · ${entries.length} 个步骤`;
     $('voiceMessage').textContent = `已导入 ${entries.length} 个步骤的音频映射。相对地址以本页面目录为准。`;
@@ -692,10 +699,14 @@ updatePlayButton(); renderVoices(speech.getVoices());
 function wordsOf(manifest) {
   return Object.fromEntries((manifest.entries || []).filter(e => e.id && Array.isArray(e.words)).map(e => [e.id, e.words]));
 }
+function cuesOf(manifest) {
+  return Object.fromEntries((manifest.entries || []).filter(e => e.id && Array.isArray(e.cueStarts) && e.cueStarts.length).map(e => [e.id, e.cueStarts]));
+}
 async function loadNarrator(key) {
   const serial = ++voiceGeneration;
   speech.setAudioMap({});
   narratorWords = {};
+  narratorCues = {};
   $('audioInfo').textContent = '正在加载所选配音…';
   try {
     const response = await fetch(narratorPaths[key] || narratorPaths.xiaoyi);
@@ -704,7 +715,8 @@ async function loadNarrator(key) {
     if (serial !== voiceGeneration) return;
     speech.setAudioMap(manifest.audioMap || {});
     narratorWords = wordsOf(manifest);
-    $('audioInfo').textContent = `${Object.keys(manifest.audioMap || {}).length} 个步骤已配音 · ${manifest.voice || '中文神经网络声线'}${Object.keys(narratorWords).length ? ' · 字幕逐字对齐' : ''}。可切换浏览器声线或导入自己的音频。`;
+    narratorCues = cuesOf(manifest);
+    $('audioInfo').textContent = `${Object.keys(manifest.audioMap || {}).length} 个步骤已配音 · ${manifest.voice || '中文神经网络声线'}${Object.keys(narratorCues).length ? ' · 句间实测同步，句内估算' : Object.keys(narratorWords).length ? ' · 字幕逐字对齐' : ''}。可切换声线或导入自己的音频。`;
   } catch {
     if (serial !== voiceGeneration) return;
     if (key !== 'xiaoyi') {
@@ -714,4 +726,7 @@ async function loadNarrator(key) {
     $('audioInfo').textContent = '当前使用浏览器中文朗读。也可导入自定义音频清单，或用项目脚本生成逐步旁白。';
   }
 }
-audioReady = loadNarrator('xiaoxiao');
+$('narratorSelect').querySelector('[value=fish]').disabled = !AVAILABLE_NARRATORS.includes('fish');
+$('narratorSelect').querySelector('[value=fire]').disabled = !AVAILABLE_NARRATORS.includes('fire');
+$('narratorSelect').value = DEFAULT_NARRATOR;
+audioReady = loadNarrator(DEFAULT_NARRATOR);

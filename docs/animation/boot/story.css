@@ -164,3 +164,7 @@ h2 span{font-size:14px;font-weight:400;color:var(--dim)}
 #controls button,#controls select{font:15px var(--sans);color:#e9f0f7;background:#1a2838;border:1px solid #33475e;border-radius:8px;padding:5px 10px;cursor:pointer}
 #controls #play{min-width:92px;background:#3a2c10;border-color:#d9a640}
 #controls input[type=range]{width:220px}
+@media(max-width:900px){
+  #controls{left:8px;right:8px;bottom:8px;flex-wrap:wrap;justify-content:center;opacity:1}
+  #controls input[type=range]{flex:1 1 100%;width:100%;min-width:0}
+}

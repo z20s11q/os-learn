@@ -11,7 +11,8 @@ const SB = 'artifacts/build/qemu-source/roms/seabios/src/';
 export const CODE_REFS = {
   'sb-reset': { file: SB + 'romlayout.S', from: 'ORG 0xfff0 // Power-up Entry Point', to: 'ljmpw $SEG_BIOS, $entry_post', lang: '汇编' },
   'sb-entry': { file: SB + 'romlayout.S', from: 'entry_post:', to: 'ENTRY_INTO32 _cfunc32flat_handle_post', lang: '汇编' },
-  'sb-trans32': { file: SB + 'romlayout.S', from: 'transition32:', to: 'ljmpl $SEG32_MODE32_CS', lang: '汇编' },
+  'sb-trans32': { file: SB + 'romlayout.S', from: 'transition32:', to: 'jmpl *%edx', lang: '汇编' },
+  'sb-trans16': { file: SB + 'romlayout.S', from: 'transition16:', to: 'jmpl *%edx', lang: '汇编' },
   'sb-dopost': { file: SB + 'post.c', from: 'dopost(void)', to: 'reloc_preinit(maininit, NULL);', lang: 'C' },
   'sb-iface': { file: SB + 'post.c', from: 'interface_init(void)', to: 'mouse_init();', lang: 'C' },
   'sb-ivt': { file: SB + 'post.c', from: 'ivt_init(void)', to: 'SET_IVT(0x40, FUNC16(entry_40));', lang: 'C' },
@@ -332,9 +333,51 @@ export const ACTS = [
     id: 'bios', title: 'BIOS 自检',
     ops: [
       {
-        say: 'BIOS 的主体是 C 语言写的。为了运行它，BIOS 先把 CPU 临时切到 32 位模式',
-        code: 'sb-trans32', line: 'orl $CR0_PE, %ecx', insn: 'movl %ecx, %cr0', mean: 'CR0 关掉“禁用缓存”位，打开 PE 位',
-        set: { cr0: '0x11', rcx: '0x11', rip: 'in:romLow' }, mode: 'prot', seg: { cs: ['0x8', '0x0'] }, hit: ['ctl.cr0'],
+        say: 'SeaBIOS 用 32 位 C 代码做初始化，方便用平坦地址访问内存和设备；C 语言本身不要求 32 位模式',
+        code: 'sb-entry', line: 'ENTRY_INTO32 _cfunc32flat_handle_post', mean: '入口先准备工作栈，再转入 transition32；这里仍是 BIOS，不是 Linux',
+        set: { rsp: '0x7000' }, seg: { ss: ['0x0', '0x0'] }, hit: ['cpu', 'code', 'reg.rsp'],
+        focus: {
+          kind: 'table', title: '为什么暂时切到 32 位', head: ['用途', '边界'], rows: [
+            ['32 位 C 初始化代码', '平坦地址便于访问内存、PCI 和设备'],
+            ['不是 C 语言的硬性要求', '也能编译 16 位 C 代码'],
+            ['这是 BIOS 自己的切换', '不是 Linux，也没开启分页或 64 位'],
+            ['传统引导接口仍用 16 位', '之后还会切回实模式'],
+          ],
+        },
+      },
+      {
+        say: '先关闭可屏蔽中断并屏蔽 NMI，再开启 A20，避免切换被打断，也避免高地址回绕',
+        code: 'sb-trans32', line: 'cli', insn: 'cli; cld', mean: 'IF ← 0；后续屏蔽 NMI 并开启 A20，尚未切换模式',
+        set: { if: 0 }, hit: ['ctl.if'],
+      },
+      {
+        say: '装入 BIOS 自带的 GDT 和临时 IDT。GDT 定义起点为 0 的 32 位代码段与数据段，范围是 4 GB',
+        code: 'sb-trans32', line: 'lgdtw %cs:rombios32_gdt_48', insn: 'lgdtw %cs:rombios32_gdt_48', mean: 'GDTR 指向 BIOS 段表；IDTR 已指向临时表，具体地址未采样',
+        set: { gdtr: '未采样', idtr: '未采样' }, hit: ['ctl.gdtr', 'ctl.idtr'],
+        focus: {
+          kind: 'table', title: 'SeaBIOS 的平坦段（源码定义）', head: ['选择子', '用途', '起点', '范围'], rows: [
+            ['0x08', '32 位代码段 CS', '0', '4 GB'],
+            ['0x10', '32 位数据段 DS / SS', '0', '4 GB'],
+            ['LGDT 只装表指针', '还没加载新 CS', '—', '—'],
+            ['保护模式不等于分页', '此处 PG 仍为 0', '—', '—'],
+          ],
+        },
+      },
+      {
+        say: '写 CR0，把 PE 置 1，进入保护模式；同时清掉 PG、CD 和 NW。仅写 PE，还没装入新的 32 位代码段',
+        code: 'sb-trans32', line: 'movl %ecx, %cr0', insn: 'movl %ecx, %cr0', mean: 'CR0.PE ← 1，PG / CD / NW ← 0；32 位代码段尚待远跳转加载',
+        set: { cr0: '0x11', rcx: '0x11' }, mode: 'prot16', hit: ['ctl.cr0', 'mode'],
+      },
+      {
+        say: '远跳转装入选择子 0x08 对应的 CS。段描述符指定默认 32 位操作数和地址，CPU 从此按 32 位代码段执行',
+        code: 'sb-trans32', line: 'ljmpl $SEG32_MODE32_CS', insn: 'ljmpl $SEG32_MODE32_CS, $(BUILD_BIOS_ADDR + 1f)', mean: 'CS ← 0x08，隐藏基址 ← 0，D 位 ← 1；不是开启 64 位模式',
+        set: { rip: 'in:romLow' }, mode: 'prot', seg: { cs: ['0x8', '0x0'] }, hit: ['seg.cs', 'reg.rip', 'mode'],
+      },
+      {
+        say: '再把数据段和栈段换成选择子 0x10，起点都是 0，然后跳进 BIOS 的 C 初始化代码。PG 为 0，不用页表',
+        code: 'sb-trans32', line: 'movw %cx, %ss', insn: 'movw %cx, %ss', mean: 'DS / ES / SS / FS / GS ← 0x10；随后 jmpl *%edx 进入 C 代码',
+        set: { rcx: '0x10' }, seg: { ds: ['0x10', '0x0'], es: ['0x10', '0x0'], ss: ['0x10', '0x0'] },
+        hit: ['seg.ds', 'seg.es', 'seg.ss'],
       },
       {
         view: 512 * MB, say: '第一件事：弄清有多少内存。答案是 512 MB，内存从此可以读写',
@@ -378,10 +421,25 @@ export const ACTS = [
         mem: [reg('boot')], flow: [{ from: 'cdrom', to: 'mem.boot', label: '2 KB' }],
       },
       {
+        say: '交给传统引导器前，先收回数据段范围，再远跳转到 16 位保护模式代码段，随后清掉 CR0.PE。还要再远跳转，才能恢复实模式 CS',
+        code: 'sb-trans16', line: 'ljmpw $SEG32_MODE16_CS, $1f', insn: 'ljmpw $SEG32_MODE16_CS, $1f', mean: '先收回数据段范围并加载 16 位 CS；随后清 PE、远跳转并恢复实模式 IDT',
+        mode: 'prot16', seg: { cs: ['0x18', '0xf0000'], ds: ['0x20', '0x0'], es: ['0x20', '0x0'], ss: ['0x20', '0x0'] },
+        hit: ['seg.cs', 'mode'],
+        focus: {
+          kind: 'table', title: '为什么还要切回 16 位', head: ['切回顺序', '原因'], rows: [
+            ['收回数据段范围，加载 16 位 CS', '进入过渡代码'],
+            ['再清 CR0.PE', '退出保护模式'],
+            ['远跳转并恢复段 / IDT', '重新建立实模式执行环境'],
+            ['进入 0000:7C00', '传统引导器使用实模式接口'],
+          ],
+        },
+      },
+      {
         say: 'BIOS 退回 16 位实模式，AX 填上“暗号”AA55，然后跳到 0x7C00，把 CPU 交给引导程序',
         tts: 'BIOS 退回 16 位实模式，AX 填上暗号 AA55，然后跳到 7C00，把 CPU 交给引导程序',
         code: 'sb-callboot', line: 'br.ax = 0xaa55;', insn: 'farcall16(&br)', mean: '跳到 0000:7C00',
-        mode: 'real', set: { rax: '0xaa55', rip: '0x7c00', rsp: '0x6f40', cr0: '0x10', rcx: '0x0', if: 1 }, seg: { cs: ['0x0', '0x0'] },
+        mode: 'real', set: { rax: '0xaa55', rip: '0x7c00', rsp: '0x6f40', cr0: '0x10', rcx: '0x0', idtr: '0x0', if: 1 },
+        seg: { cs: ['0x0', '0x0'], ds: ['0x0', '0x0'], es: ['0x0', '0x0'], ss: ['0x0', '0x0'] },
         hit: ['reg.rax', 'reg.rip', 'ctl.cr0'], flow: [{ from: 'mem.boot', to: 'insn' }],
       },
     ],
