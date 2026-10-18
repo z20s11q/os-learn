@@ -1,0 +1,58 @@
+{
+  "schema": "oslab.capabilities/1",
+  "observer": {
+    "version": 1,
+    "qemuVersion": "8.2.10",
+    "patched": false
+  },
+  "standard": {
+    "singleStep": { "status": "verified", "evidence": "GDB stepi 从 0xfffffff0 前进到 0xf000:0xe05b" },
+    "breakpoint": { "status": "verified", "evidence": "hbreak start_kernel 命中 init/main.c:875" },
+    "registerRead": { "status": "verified", "evidence": "printf $rip/$cr0/$cr3/$efer 与 monitor info registers" },
+    "memoryRead": { "status": "verified", "evidence": "GDB x 与 monitor xp 读取物理 ROM 0xfffffff0" },
+    "physicalMemoryRead": { "status": "verified", "evidence": "monitor xp/16xb 0xfffffff0 返回 ea 5b e0 00 f0 ..." },
+    "qmpBlockQuery": { "status": "unknown", "note": "未在 T01 验证；且 query-block 不能当作扇区内容接口" },
+    "terminalSerial": { "status": "verified", "evidence": "artifacts/logs/t01b-kernel-fast.log 串口 shell 交互" },
+    "terminalVgaInput": { "status": "unavailable", "note": "T08 实现 PS/2 键盘注入后进行验证" }
+  },
+  "observer_": {
+    "capabilities": { "status": "unavailable", "note": "x-oslab-capabilities 未实现，T05a" },
+    "captureSnapshot": { "status": "unavailable", "note": "x-oslab-capture 未实现，T05a" },
+    "readPhysical": { "status": "unavailable", "note": "正式接口未实现；当前用 GDB monitor xp 作为临时通道" },
+    "events": { "status": "unavailable", "note": "x-oslab-events 未实现，T05b" },
+    "release": { "status": "unavailable", "note": "x-oslab-release 未实现，T05e" }
+  },
+  "events": {
+    "instruction.begin": { "status": "unavailable", "note": "需要 TCG 插件回调，T05b" },
+    "memory.read": { "status": "unavailable", "note": "标准 QEMU 无 CPU 访存事件；样例中的 memory.read 由 GDB 读取转换而来，不是电气总线采样" },
+    "memory.write": { "status": "unavailable", "note": "同上，T05b" },
+    "io.read": { "status": "unavailable", "note": "T05b" },
+    "io.write": { "status": "unavailable", "note": "T05b" },
+    "dma.read": { "status": "unavailable", "note": "T05c" },
+    "dma.write": { "status": "unavailable", "note": "T05c" },
+    "irq.raise": { "status": "unavailable", "note": "T05b" },
+    "irq.lower": { "status": "unavailable", "note": "T05b" },
+    "interrupt.accept": { "status": "unavailable", "note": "T05b" },
+    "block.submit": { "status": "unavailable", "note": "`-trace dma_*` 无输出，virtio-blk 走 blk_aio 路径；必须改在 virtqueue 层采集，T05c" },
+    "block.complete": { "status": "unavailable", "note": "同上，T05c" },
+    "input.accept": { "status": "unavailable", "note": "T05d" },
+    "serial.output": { "status": "unavailable", "note": "当前只观察到串口文本，未做字节级事件，T05d" },
+    "capture.fence": { "status": "unavailable", "note": "T05e" }
+  },
+  "devices": {
+    "vga": { "status": "unavailable", "note": "T05d" },
+    "i8042": { "status": "unavailable", "note": "T05d" },
+    "uart": { "status": "unavailable", "note": "T05d" },
+    "pic": { "status": "unavailable", "note": "T05d" },
+    "apic": { "status": "unavailable", "note": "T05d" },
+    "timer": { "status": "unavailable", "note": "T05d" },
+    "virtio-blk": { "status": "unavailable", "note": "T05c" }
+  },
+  "droppedEvents": 0,
+  "knownGaps": [
+    "标准 QEMU 8.2 不提供 CPU 访存/PIO/MMIO 统一事件，T05b 需要 TCG 插件或补丁",
+    "virtio-blk 块请求不经 dma-helpers 的 dma_blk_io，T05c 必须在 virtqueue 层采集",
+    "设备无副作用快照（VGA/i8042/UART/PIC/APIC/timer）全部待 T05d",
+    "停止屏障与 release 语义待 T05e"
+  ]
+}

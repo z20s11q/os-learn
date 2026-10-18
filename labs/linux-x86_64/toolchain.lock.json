@@ -1,0 +1,81 @@
+{
+  "schema": "oslab.toolchain-lock/1",
+  "host": {
+    "os": "TencentOS (VM-194-149-tencentos)",
+    "cpuThreads": 32,
+    "memoryGiB": 62
+  },
+  "tools": {
+    "qemu": {
+      "binary": "artifacts/build/qemu/qemu-system-x86_64",
+      "version": "8.2.10",
+      "source": "artifacts/build/qemu-source",
+      "configure": "--target-list=x86_64-softmmu --enable-tcg --enable-plugins --enable-trace-backends=log --disable-docs --disable-werror --disable-gtk --disable-sdl --disable-vnc --disable-curses --disable-opengl --disable-slirp",
+      "sha256": "bea40c93af3331768657864e37b5e36ed6e05d9b4bd67d29a21d440df48ec367",
+      "patched": true,
+      "patchSet": "instrumentation/qemu-observer/patches/0001-register-x-oslab-observer.patch",
+      "patchSetSha256": "2a0f898987b923873f0dd4fd62a1f9c655ffc32b3b0204aabfedf04e2c725a88",
+      "patchBuildRecord": "instrumentation/qemu-observer/build.lock.json",
+      "patchBaseline": "instrumentation/qemu-observer/baseline.json",
+      "note": "实验锁定 artifacts/build/qemu/qemu-system-x86_64，包含 T05a 观察扩展（x-oslab-capabilities/capture/read-physical/release）；上游来源通过源码包散列与补丁散列绑定，重建入口为 instrumentation/qemu-observer/build.sh"
+    },
+    "gdb": {
+      "version": "GNU gdb (GDB) Red Hat Enterprise Linux 9.2-4.tl3",
+      "path": "/usr/bin/gdb"
+    },
+    "gcc": {
+      "version": "8.5.0 20210514 (Tencent 8.5.0-28)",
+      "path": "/usr/bin/gcc"
+    },
+    "python3": {
+      "version": "3.12.13",
+      "path": "/usr/bin/python3"
+    },
+    "node": {
+      "version": "v24.18.0",
+      "path": "/root/.nvm/versions/node/v24.18.0/bin/node"
+    },
+    "cpio": {
+      "version": "2.12"
+    },
+    "mke2fs": {
+      "version": "1.45.6"
+    },
+    "sgdisk": {
+      "version": "1.0.3"
+    },
+    "xorriso": {
+      "version": "1.4.8"
+    },
+    "grub-install": {
+      "available": false,
+      "note": "锁定记录中 grub-install 的 available=false；boot.iso 由 grub2 目录与 xorriso 生成"
+    },
+    "grub-mkrescue": {
+      "available": false
+    }
+  },
+  "kernel": {
+    "source": "src/linux-6.12.112",
+    "release": "6.12.112-observatory",
+    "buildDir": "artifacts/build/linux",
+    "vmlinuxSha256": "e14918275626bf30e93c77e061f0b1af859fa2ff55d27b67c6ff66bbd245ad0b",
+    "bzImageSha256": "1b04ab59d4e56b14c6ad5bc9d491896d7f76fd02abbb7d16525ca862f0cab2e4",
+    "config": "labs/linux-x86_64/kernel.config"
+  },
+  "busybox": {
+    "version": "1.37.0",
+    "tarball": "/tmp/oslab-busybox-1.37.0.tar.bz2",
+    "binarySha256": "6fd21f587d3b56a8b9c3fecbbb1811427701540343f3047f14c34c79acd0e639",
+    "linking": "static"
+  },
+  "artifacts": {
+    "initramfsSha256": "16a5305c2d625cbebfd80355e0d2bcc75718da7026a3c2fedd56f4d5e7f8db1b",
+    "rootfsSha256": "d70ffb6e9a744725e24e485ca83e957ac17ff46f9ee56a2a2377f9e36e5c6479",
+    "labElfSha256": "c75780de7fb1d611fa86f5e5cd96cf434312c0f681a371bb44e5216e119401ca",
+    "bootIsoSha256": "d9adbef274ed6d63e92d04ebaa0bb2c718ee825940d3ec8e50c920193bab3d7e",
+    "probeBinSha256": "e398d94118190394242b039193a1a3907a13e91a54500b8e53ec236922cd7bdd",
+    "helloTxtSha256": "700307b9ce25083d541ef278e41b2eff476bbb052d39e14efa2fdd6fe606d4bb"
+  },
+  "generatedAt": "2026-10-17T14:58:00Z"
+}

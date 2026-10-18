@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "sessionId": "sample-t01-start-kernel",
+  "epoch": 1,
+  "frameId": 1,
+  "parentFrameId": 0,
+  "requestId": "sample-start-kernel-1",
+  "captureId": "cap-t01-start-kernel-1",
+  "executionMode": "recorded",
+  "stop": {
+    "reason": "breakpoint",
+    "rawReason": "Breakpoint 1, start_kernel () at init/main.c:875",
+    "pc": "0xffffffff82056d20",
+    "cpuId": 0,
+    "breakpointId": 1,
+    "previousPc": null
+  },
+  "eventRange": {
+    "first": "3",
+    "last": "4"
+  },
+  "coverage": {
+    "memory": "selected-pages",
+    "events": "filtered",
+    "unavailable": [
+      "cpu.memory-access-events",
+      "device.vga",
+      "device.i8042",
+      "device.virtio-blk",
+      "os.processes"
+    ]
+  },
+  "cpu": {
+    "cpuId": 0,
+    "mode": "long-64",
+    "cpl": 0,
+    "rip": "0xffffffff82056d20",
+    "rsp": null,
+    "general": [],
+    "segments": {
+      "cs": { "selector": "0x10", "base": "0x0", "limit": "0xffffffff", "attributes": "0xa09b", "usable": true }
+    },
+    "control": {
+      "cr0": "0x80050033",
+      "cr2": null,
+      "cr3": "0x20d6000",
+      "cr4": null,
+      "cr8": null
+    },
+    "efer": "0xd01",
+    "eflags": null,
+    "halted": false,
+    "instruction": {
+      "address": "0xffffffff82056d20",
+      "bytes": "0xf30f1efa",
+      "text": "endbr64",
+      "length": 4,
+      "evidence": "decoded"
+    },
+    "evidence": "GDB 硬件断点命中 start_kernel（init/main.c:875）；printf $rip/$cr0/$cr3/$efer 得 rip=0xffffffff82056d20 cr0=0x80050033 cr3=0x20d6000 efer=0xd01；x/8xb $pc 得 f3 0f 1e fa e8 27 93 01，首 4 字节解码为 endbr64。rsp/cr2/cr4/eflags 本帧未采集，因此为 null 并在 coverage.unavailable 中列出。"
+  },
+  "memory": [],
+  "devices": [],
+  "diskVersions": {},
+  "os": null,
+  "source": {
+    "path": "src/linux-6.12.112/init/main.c",
+    "fileHash": "3c40fe882bf9d1a69b0c9972986b73b78a90c4a601c9ac0b08c9551ac505d1c5",
+    "symbol": "start_kernel",
+    "line": 875,
+    "column": 1,
+    "module": "kernel"
+  },
+  "lesson": {
+    "lessonId": "L06-start-kernel",
+    "stage": "boot",
+    "title": "进入 Linux 内核 C 入口",
+    "reason": "PC 落在 vmlinux 的 .init.text 段 start_kernel 符号首字节，CR0.PG=1 且 EFER.LMA=1 说明已进入 64 位长模式",
+    "checksPassed": true
+  },
+  "evidence": {
+    "cpu.rip": { "kind": "observed", "source": "gdb", "captureId": "cap-t01-start-kernel-1", "refs": ["breakpoint#1", "event:3"] },
+    "cpu.control.cr0": { "kind": "observed", "source": "gdb", "captureId": "cap-t01-start-kernel-1", "refs": ["printf#cr0"] },
+    "cpu.control.cr3": { "kind": "observed", "source": "gdb", "captureId": "cap-t01-start-kernel-1", "refs": ["printf#cr3"] },
+    "cpu.efer": { "kind": "observed", "source": "gdb", "captureId": "cap-t01-start-kernel-1", "refs": ["printf#efer"] },
+    "cpu.instruction": { "kind": "decoded", "source": "disassembler", "captureId": "cap-t01-start-kernel-1", "refs": ["event:3"] },
+    "source.location": { "kind": "decoded", "source": "vmlinux-dwarf", "captureId": "cap-t01-start-kernel-1", "refs": ["vmlinux#e14918275626bf30e93c77e061f0b1af859fa2ff55d27b67c6ff66bbd245ad0b"] },
+    "cpu.rsp": { "kind": "unavailable", "source": "gdb", "refs": [], "reason": "本帧未采集该寄存器" },
+    "os.processes": { "kind": "unavailable", "source": "linux-decoder", "refs": [], "reason": "T07 解析器尚未实现" }
+  },
+  "recording": {
+    "reconstructible": false,
+    "checkpointFrameId": 0,
+    "instructionGaps": [
+      { "fromFrameId": 0, "toFrameId": 1, "note": "复位到 start_kernel 之间的固件/引导指令未逐条记录，仅保留两端帧" }
+    ],
+    "memoryGaps": [],
+    "events": "filtered",
+    "note": "区间记录：中间过程未采集完整指令流，不可用插值补出"
+  },
+  "committedAt": "2026-10-15T17:20:01Z"
+}

@@ -1,0 +1,69 @@
+{
+  "note": "以下样例全部由 2026-10-15 在 /data/os-learn 对真实 QEMU 8.2.10 的采集转换而来，数值未手工编造。seq 编号在转换时按采集顺序分配，地址与字节均为实测。",
+  "qemu": {
+    "binary": "artifacts/build/qemu/qemu-system-x86_64",
+    "version": "8.2.10",
+    "sha256": "f55b2c098db4207d8ac476991614e3ac28b6e6ebe4aa4166306632e3ba00d582"
+  },
+  "samples": [
+    {
+      "file": "reset-frame.json",
+      "origin": "QEMU -S 暂停于复位后第一条指令",
+      "commands": [
+        "gdb -q -nx -batch -ex 'target remote :11241' -ex 'monitor info registers'",
+        "gdb ... -ex 'monitor xp/16xb 0xfffffff0'",
+        "gdb ... -ex 'stepi' -ex 'monitor xp/8xb 0xfe05b'"
+      ],
+      "observed": {
+        "EIP": "0x0000fff0",
+        "CS": "selector=0xf000 base=0xffff0000 limit=0xffff attr=0x9b00",
+        "CR0": "0x60000010",
+        "CR3": "0x0",
+        "CR4": "0x0",
+        "EFER": "0x0",
+        "rom@0xfffffff0": "ea 5b e0 00 f0 30 36 2f 32 33 2f 39 39 00 fc 00",
+        "after_stepi": "rip=0xe05b cs=0xf000 base=0xf0000, bytes@0xfe05b = 2e 66 83 3e 28 62 00 0f"
+      }
+    },
+    {
+      "file": "start-kernel-frame.json",
+      "origin": "boot.iso 从复位启动，GDB 硬件断点命中 start_kernel",
+      "commands": [
+        "gdb ... -ex 'hbreak start_kernel' -ex 'continue'",
+        "gdb ... -ex 'printf \"rip=%#lx cr0=%#lx cr3=%#lx efer=%#lx\"'",
+        "gdb ... -ex 'x/8xb $pc' -ex 'info symbol $pc'"
+      ],
+      "observed": {
+        "rip": "0xffffffff82056d20",
+        "cr0": "0x80050033",
+        "cr3": "0x20d6000",
+        "efer": "0xd01",
+        "bytes@0xffffffff82056d20": "f3 0f 1e fa e8 27 93 01",
+        "source": "src/linux-6.12.112/init/main.c:875 (start_kernel, section .init.text)"
+      }
+    },
+    {
+      "file": "userland-read-frame.json",
+      "origin": "qemu -kernel bzImage -initrd initramfs.cpio.gz + virtio-blk 根盘，串口执行 lab-read",
+      "log": "artifacts/logs/t01e-userland.log",
+      "observed": {
+        "guestKernel": "6.12.112-observatory",
+        "hello.txt.sha256": "700307b9ce25083d541ef278e41b2eff476bbb052d39e14efa2fdd6fe606d4bb",
+        "probe.bin.sha256": "e398d94118190394242b039193a1a3907a13e91a54500b8e53ec236922cd7bdd",
+        "lab-read.output": "Hello from the real Linux virtio disk!\nThis file lives on ext2, not in the web page.",
+        "lab-memory.output": "pid=64 mapping=0x7ffff7ff6000"
+      }
+    },
+    {
+      "file": "events-reset.json",
+      "origin": "同一复位快照中 GDB 物理读的实际字节",
+      "caveat": "标准 QEMU 8.2 不产生 CPU 访存事件；此处 memory.read 是把 GDB 物理读的结果转换成事件结构，用于校验协议，不能作为「T05b 已完成」的证据。"
+    }
+  ],
+  "evidenceLogs": [
+    "artifacts/logs/t01b-kernel-fast.log",
+    "artifacts/logs/t01d-iso-boot.log",
+    "artifacts/logs/t01e-userland.log",
+    "artifacts/logs/t01c-dma-trace.log"
+  ]
+}

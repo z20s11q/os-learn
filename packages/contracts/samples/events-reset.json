@@ -1,0 +1,64 @@
+{
+  "attribution": {
+    "sessionId": "sample-t01-reset",
+    "epoch": 1,
+    "frameId": 0,
+    "captureId": "cap-t01-reset-1"
+  },
+  "watermark": "3",
+  "truncated": false,
+  "dropped": 0,
+  "events": [
+    {
+      "seq": "1",
+      "kind": "memory.read",
+      "cpuId": 0,
+      "addressSpace": "physical",
+      "address": "0xfffffff0",
+      "size": 16,
+      "bytes": "6lvgAPAwNi8yMy85OQD8AA==",
+      "byteOrder": "little",
+      "phase": "complete",
+      "pc": "0xfffffff0",
+      "evidence": {
+        "kind": "observed",
+        "source": "gdb",
+        "captureId": "cap-t01-reset-1",
+        "refs": ["monitor-xp#0xfffffff0"],
+        "reason": "GDB monitor xp 读取物理 ROM；16 字节中前 5 字节是 ljmp $0xf000:$0xe05b，其后是 BIOS 日期字符串 06/23/99"
+      }
+    },
+    {
+      "seq": "2",
+      "kind": "memory.read",
+      "cpuId": 0,
+      "addressSpace": "physical",
+      "address": "0xfe05b",
+      "size": 8,
+      "bytes": "LmaDPihiAA8=",
+      "byteOrder": "little",
+      "phase": "complete",
+      "pc": "0xfe05b",
+      "evidence": {
+        "kind": "observed",
+        "source": "gdb",
+        "captureId": "cap-t01-reset-1",
+        "refs": ["monitor-xp#0xfe05b"],
+        "reason": "复位向量 ljmp 的目标；单步一次后 PC 到达此处，字节以 0x2e（CS 段前缀）开头"
+      }
+    },
+    {
+      "seq": "3",
+      "kind": "capture.fence",
+      "phase": "fence",
+      "cpuId": 0,
+      "evidence": {
+        "kind": "observed",
+        "source": "observer",
+        "captureId": "cap-t01-reset-1",
+        "refs": ["capture#cap-t01-reset-1"],
+        "reason": "本 capture 的事件区间右端；T05 会在此处提供真实 watermark，此处为协议样例"
+      }
+    }
+  ]
+}

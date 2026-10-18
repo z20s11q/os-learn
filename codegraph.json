@@ -1,0 +1,7 @@
+{
+  "exclude": [
+    "artifacts/",
+    "var/",
+    "tmp/"
+  ]
+}

@@ -1,0 +1,28 @@
+--- a/monitor/meson.build
++++ b/monitor/meson.build
+@@ -9,3 +9,4 @@
+ 
+ specific_ss.add(when: 'CONFIG_SYSTEM_ONLY',
+ 		if_true: [files( 'hmp-cmds-target.c', 'hmp-target.c'), spice])
++specific_ss.add(when: 'CONFIG_SYSTEM_ONLY', if_true: files('x-oslab-observer.c'))
+--- a/monitor/qmp-cmds.c
++++ b/monitor/qmp-cmds.c
+@@ -32,6 +32,7 @@
+ #include "hw/mem/memory-device.h"
+ #include "hw/intc/intc.h"
+ #include "hw/rdma/rdma.h"
++#include "monitor/x-oslab-observer.h"
+ 
+ NameInfo *qmp_query_name(Error **errp)
+ {
+@@ -204,6 +205,10 @@
+     qmp_register_command(&qmp_commands, "device_add",
+                          qmp_device_add, 0, 0);
+ 
++    /* T05a 观察扩展：必须在 qmp_init_marshal() 之后注册，否则会被
++     * QTAILQ_INIT(&qmp_commands) 清掉。 */
++    x_oslab_init_commands(&qmp_commands);
++
+     QTAILQ_INIT(&qmp_cap_negotiation_commands);
+     qmp_register_command(&qmp_cap_negotiation_commands, "qmp_capabilities",
+                          qmp_marshal_qmp_capabilities,

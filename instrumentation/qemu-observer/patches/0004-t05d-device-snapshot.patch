@@ -1,0 +1,183 @@
+--- a/hw/display/vga.c
++++ b/hw/display/vga.c
+@@ -38,6 +38,13 @@
+ #include "hw/xen/xen.h"
+ #include "migration/vmstate.h"
+ #include "trace.h"
++/*
++ * x-oslab 观察扩展（T05d）：设备无副作用快照需要的 VGA 私有状态访问接口。
++ * VGACommonState 定义在 hw/display/vga_int.h（本目录私有头）并被内嵌在
++ * PCIVGAState 等设备结构体里，观察层无法从 QOM 对象反查，所以在这里补一个
++ * 只读的登记表 + 快照函数。头文件本身 target 无关，与本文件一样属于 libcommon。
++ */
++#include "hw/x-oslab-devices.h"
+ 
+ //#define DEBUG_VGA_MEM
+ //#define DEBUG_VGA_REG
+@@ -1885,6 +1892,157 @@
+ #define TEXTMODE_Y(x)	((x) / width)
+ #define VMEM2CHTYPE(v)	((v & 0xff0007ff) | \
+         ((v & 0x00000800) << 10) | ((v & 0x00007000) >> 1))
++/*
++ * x-oslab 观察扩展（T05d）：VGA 实例登记表与无副作用快照。
++ *
++ * 为什么要一张表：VGACommonState 被内嵌在 PCIVGAState 等设备结构体里
++ * （hw/display/vga-pci.c:49 "VGACommonState vga;"），QOM 对象上没有任何可以反查
++ * 它的公开属性，而观察层必须读到 CRTC 寄存器、start_addr 与显存指针才能给出
++ * 「VGA 字符/属性、光标」。因此在这里登记「QOM 对象 -> VGACommonState」。
++ *
++ * 无副作用：本快照只读结构体字段与显存。几何参数用 get_offsets() /
++ * get_resolution() 现算——QEMU 自己的刷新路径也是这么做的
++ * （vga_update_display -> vga_update_text -> update_basic_params），它们只读寄存器
++ * 并做算术，不改任何状态，所以快照结果不依赖「上一次刷新是否刚好发生过」。
++ * 显存通过 s->vram_ptr 直接读 backing store，不经过 vga_mem_ops（那才是设备
++ * 端口/MMIO 路径）。
++ *
++ * 登记发生在 realize 路径上（vga_common_init）。这里不做注销：本实验室的
++ * qemu 进程只跑一台机器、不热拔 VGA。为了在将来引入热拔时也不出现悬垂指针，
++ * 登记时对 owner 取一次引用（object_ref），对象不会被释放。
++ */
++typedef struct XOslabVgaSlot {
++    Object *owner;
++    VGACommonState *state;
++} XOslabVgaSlot;
++
++static XOslabVgaSlot x_oslab_vga_slots[X_OSLAB_VGA_MAX_SLOTS];
++static uint32_t x_oslab_vga_slot_count;
++
++static void x_oslab_vga_register(VGACommonState *s, Object *owner)
++{
++    uint32_t i;
++
++    if (owner == NULL) {
++        return;
++    }
++    for (i = 0; i < x_oslab_vga_slot_count; i++) {
++        if (x_oslab_vga_slots[i].owner == owner) {
++            x_oslab_vga_slots[i].state = s;
++            return;
++        }
++    }
++    if (x_oslab_vga_slot_count >= X_OSLAB_VGA_MAX_SLOTS) {
++        return;
++    }
++    x_oslab_vga_slots[x_oslab_vga_slot_count].owner = object_ref(owner);
++    x_oslab_vga_slots[x_oslab_vga_slot_count].state = s;
++    x_oslab_vga_slot_count++;
++}
++
++uint32_t x_oslab_vga_count(void)
++{
++    return x_oslab_vga_slot_count;
++}
++
++char *x_oslab_vga_path(uint32_t index)
++{
++    if (index >= x_oslab_vga_slot_count) {
++        return NULL;
++    }
++    return object_get_canonical_path(x_oslab_vga_slots[index].owner);
++}
++
++bool x_oslab_vga_snapshot(uint32_t index, XOslabVgaInfo *out)
++{
++    uint32_t start_addr = 0, line_offset = 0, line_compare = 0;
++    int width = 0, height = 0, cheight, graphic_mode;
++    VGACommonState *s;
++
++    if (out == NULL) {
++        return false;
++    }
++    memset(out, 0, sizeof(*out));
++    if (index >= x_oslab_vga_slot_count) {
++        return false;
++    }
++    s = x_oslab_vga_slots[index].state;
++    if (s == NULL) {
++        return false;
++    }
++
++    /*
++     * 显示模式的判据与 vga_update_text() 完全一致：先看 AR 的显示使能位
++     * （ar_index & 0x20），再看 GR06 的 graphics mode 位。
++     */
++    if (s->ar_index & 0x20) {
++        graphic_mode = (s->gr[VGA_GFX_MISC] & VGA_GR06_GRAPHICS_MODE)
++                       ? GMODE_GRAPH : GMODE_TEXT;
++    } else {
++        graphic_mode = GMODE_BLANK;
++    }
++    out->graphic_mode = graphic_mode;
++    out->text_mode = graphic_mode == GMODE_TEXT;
++    out->vbe_enabled = vbe_enabled(s);
++
++    if (s->get_offsets != NULL) {
++        s->get_offsets(s, &line_offset, &start_addr, &line_compare);
++    }
++    out->start_addr = start_addr;
++    out->line_offset = line_offset;
++    out->line_compare = line_compare;
++
++    if (s->get_resolution != NULL) {
++        s->get_resolution(s, &width, &height);
++    }
++
++    if (out->text_mode) {
++        /*
++         * 字符高度与网格算法抄自 vga_update_text()：
++         *   字符高度 = (CRTC R09 & 0x1f) + 1
++         *   列数     = CRTC R01 + 1
++         *   行数     = 纵显示结束扫描行数 / 字符高度
++         * get_resolution() 给出的 height 已经是「纵显示结束 + 1」的扫描行数
++         * （R12 加上 OVERFLOW 的第 1、6 位作为第 8、9 位）。
++         */
++        cheight = (s->cr[VGA_CRTC_MAX_SCAN] & 0x1f) + 1;
++        if (cheight <= 0) {
++            cheight = 1;
++        }
++        out->text_cols = s->cr[VGA_CRTC_H_DISP] + 1;
++        if (s->cr[VGA_CRTC_V_TOTAL] == 100) {
++            /* 与 vga_update_text() 同样的 CGA 160x100x16 特例 */
++            out->text_rows = 100;
++        } else {
++            out->text_rows = (uint32_t)height / (uint32_t)cheight;
++        }
++    }
++
++    /* 光标判据同样抄 vga_update_text()：CRTC R0E/R0F 减去起始单元。 */
++    out->cursor_offset = (int32_t)(((uint32_t)s->cr[VGA_CRTC_CURSOR_HI] << 8) |
++                                   (uint32_t)s->cr[VGA_CRTC_CURSOR_LO])
++                         - (int32_t)start_addr;
++    out->cursor_start = s->cr[VGA_CRTC_CURSOR_START];
++    out->cursor_end = s->cr[VGA_CRTC_CURSOR_END];
++    out->cursor_visible = !(s->cr[VGA_CRTC_CURSOR_START] & 0x20);
++
++    out->cell_stride = X_OSLAB_VGA_CELL_STRIDE;
++    out->vram_size = s->vram_size;
++    out->vram = s->vram_ptr;
++    memcpy(out->cr, s->cr, sizeof(out->cr));
++    memcpy(out->sr, s->sr, sizeof(out->sr));
++    memcpy(out->gr, s->gr, sizeof(out->gr));
++    memcpy(out->ar, s->ar, sizeof(out->ar));
++    out->ar_index = s->ar_index;
++    out->msr = s->msr;
++    out->st00 = s->st00;
++    out->st01 = s->st01;
++    out->bank_offset = s->bank_offset;
++
++    out->valid = true;
++    return true;
++}
++
+ /* relay text rendering to the display driver
+  * instead of doing a full vga_update_display() */
+ static void vga_update_text(void *opaque, console_ch_t *chardata)
+@@ -2232,6 +2390,8 @@
+     vmstate_register_ram(&s->vram, s->global_vmstate ? NULL : DEVICE(obj));
+     xen_register_framebuffer(&s->vram);
+     s->vram_ptr = memory_region_get_ram_ptr(&s->vram);
++    /* x-oslab（T05d）：登记这个 VGA 实例，供观察层的无副作用快照读取。 */
++    x_oslab_vga_register(s, obj);
+     s->get_bpp = vga_get_bpp;
+     s->get_offsets = vga_get_offsets;
+     s->get_resolution = vga_get_resolution;

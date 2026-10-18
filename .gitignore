@@ -1,0 +1,15 @@
+node_modules/
+artifacts/
+var/
+dist/
+*.log
+.codegraph/
+tmp/
+src/linux-6.12.112/
+src/*.tar.xz
+docs/video/
+docs/animation/out/
+*.webm
+*.mp4
+*.wav
+__pycache__/

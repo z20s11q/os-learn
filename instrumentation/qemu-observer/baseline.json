@@ -1,0 +1,183 @@
+{
+  "schema": "oslab.qemu-baseline/1",
+  "why": [
+    "QEMU 源码树 artifacts/build/qemu-source 不是 git 仓库，没有 commit hash 可以绑定。",
+    "因此用「上游源码包散列 + 被改文件的原始副本散列 + 补丁散列」替代 commit hash，",
+    "并把打好补丁后的文件散列也记下来，任何一方被改动都能被 build.sh 检出。",
+    "补丁按子任务拆分：0001 是 T05a 的注册补丁，0002 是 T05b 的事件序列补丁，0003 是 T05c 的 DMA/virtio 补丁，0004 是 T05d 的设备快照私有状态接口（只补 VGA；virtqueue 状态复用 QEMU 自带的标准 x-query-virtio* 命令，不重复改 QEMU），0005 是 T05e 的停止屏障补丁（只驱动 pending 台账的三处真实落点，不新增命令、不改事件环）。"
+  ],
+  "upstream": {
+    "version": "8.2.10",
+    "versionFile": "VERSION",
+    "tarballFilename": "oslab-qemu-8.2.10.tar.xz",
+    "tarballSha256": "37b4a643da8ed6015eef35f5d7f06e7259d9c95359965a0a98e9667c621ab2bb",
+    "tarballDefaultPath": "/tmp/oslab-qemu-8.2.10.tar.xz",
+    "note": "tarball 在工作区之外（/tmp），可能被清理；build.sh 允许通过 OSLAB_QEMU_TARBALL 指定，缺失时只能复用已解压的源码树。OSLAB_QEMU_REPLAY=1 时会用它对补丁做一次从原始源码的重放验证"
+  },
+  "modified": [
+    {
+      "path": "monitor/qmp-cmds.c",
+      "patch": "patches/0001-register-x-oslab-observer.patch",
+      "purpose": "在 qmp_init_marshal() 之后注册 x-oslab-* 命令（该函数内的 QTAILQ_INIT 会清掉更早的注册）",
+      "pristineCopy": "baseline/monitor_qmp-cmds.c.orig",
+      "pristineSha256": "a0e38c12795e73d1602ba9af3d2f8c77de3d787d05fff0ab1d636791b3823ed4",
+      "patchedSha256": "325df58ef7fd2c663c263d0adbe6448f3650912d28630e9ba4787f2837938bdc"
+    },
+    {
+      "path": "monitor/meson.build",
+      "patch": "patches/0001-register-x-oslab-observer.patch",
+      "purpose": "把 x-oslab-observer.c 加进 specific_ss（需要 target/i386 的头文件与 -DNEED_CPU_H）",
+      "pristineCopy": "baseline/monitor_meson.build.orig",
+      "pristineSha256": "6106822956aaad25be90999d4f1f603c886b5f288974f8913f3628ecf82214d0",
+      "patchedSha256": "92cd3ee67ce03fe10b47a3af61776a1f732698bdf13279c82cbd561cd5d8ba01"
+    },
+    {
+      "path": "accel/tcg/translator.c",
+      "patch": "patches/0002-t05b-event-stream.patch",
+      "purpose": "在 translator_loop 的逐指令循环里发射 instruction.begin / instruction.retire；retire 只在 db->is_jmp 为 DISAS_NEXT 或 DISAS_TOO_MANY 时发射（in/out 由 translator_io_start 置 DISAS_TOO_MANY，确实正常完成；DISAS_NORETURN 与分支不发射，避免把没完成的指令谎报成完成）",
+      "pristineCopy": "baseline/accel_tcg_translator.c.orig",
+      "pristineSha256": "508142e4797f7e20de7a839a0309c28e0e82d3aff31a54302aef3cbc4678a256",
+      "patchedSha256": "c38f09faa8c74b185917d539225f88b79f974788cd7e0cecafd45560d6febe60"
+    },
+    {
+      "path": "accel/tcg/tcg-runtime.h",
+      "patch": "patches/0002-t05b-event-stream.patch",
+      "purpose": "声明树内 TCG helper x_oslab_event（flags=0：helper 会写观察者自己的环，不能声明成无副作用，否则 TCG 可能跨越它做优化）",
+      "pristineCopy": "baseline/accel_tcg_tcg-runtime.h.orig",
+      "pristineSha256": "55ecd6bf746d36d04ed2564f11e72199a9bd54d8e3d129b4a9a97cdd40102940",
+      "patchedSha256": "f5ba2fec102e468e094ba8c8987736af1365c2a5b7516fb1f2c10aaa4e45d90f"
+    },
+    {
+      "path": "accel/tcg/meson.build",
+      "patch": "patches/0002-t05b-event-stream.patch",
+      "purpose": "把 x-oslab-events.c 加入 accel/tcg 的 per-target 编译单元（specific_ss 逐目标编译，因此可以包含 tcg/tcg-op.h 与目标 cpu.h）",
+      "pristineCopy": "baseline/accel_tcg_meson.build.orig",
+      "pristineSha256": "701d4fd780d7b8681a358e5d1cd7829bdfd57beba945379df43b454da3f00caf",
+      "patchedSha256": "21bbcf233ed1d2ee44fcf7942731150b4c9f2db6a1ef6817eb81a011fec2f8e5"
+    },
+    {
+      "path": "tcg/tcg-op-ldst.c",
+      "patch": "patches/0002-t05b-event-stream.patch",
+      "purpose": "在 4 个 tcg_gen_qemu_ld/st_i32/i64_int 上发射 memory.read / memory.write（宽度取 memop_size(get_memop(orig_oi))，orig_oi 是 MemOpIdx 而不是 MemOp）",
+      "pristineCopy": "baseline/tcg_tcg-op-ldst.c.orig",
+      "pristineSha256": "1edf0fc08ee5711f03d0ebfc5203b534552d6b4040ce0abecc8cfe10d3041206",
+      "patchedSha256": "2bf19e0d32886b605a648af0add85bf5c88dcedfd3190d9f06f6ba3fd747dc76"
+    },
+    {
+      "path": "target/i386/tcg/sysemu/misc_helper.c",
+      "patch": "patches/0002-t05b-event-stream.patch",
+      "purpose": "在 helper_inb/inw/inl 与 helper_outb/outw/outl 上发射 io.read / io.write；客体 in/out 走这里，宿主的 HMP i/o（system/ioport.c）故意不记，避免污染客体事件流",
+      "pristineCopy": "baseline/target_i386_tcg_sysemu_misc_helper.c.orig",
+      "pristineSha256": "b61c82b9817f5617a1d3cefa5e85e70e752e0163ad431ef6da6724b94d874eba",
+      "patchedSha256": "5a76599b8d5dca2683ad12c73bf9fdea1179f691cbff35404f51c41a955dae56"
+    },
+    {
+      "path": "target/i386/tcg/seg_helper.c",
+      "patch": "patches/0002-t05b-event-stream.patch",
+      "purpose": "在 do_interrupt_all 入口发射 exception.raise / interrupt.accept（按 is_hw / is_int 分类，事件先于交付动作发出）",
+      "pristineCopy": "baseline/target_i386_tcg_seg_helper.c.orig",
+      "pristineSha256": "828c17971a74a53a78b2c17216c808cd4fe49739b5c7419ee5a7d9b6a996fdcf",
+      "patchedSha256": "cd6a3b827a77c1c9d51b84efb3e3ada75f469729c215c18cf82331a755c7b964"
+    },
+    {
+      "path": "hw/virtio/virtio.c",
+      "patch": "patches/0003-t05c-dma-virtio.patch",
+      "purpose": "T05c：virtio_init()/virtio_cleanup() 登记与注销设备；在 virtqueue_split_pop()/virtqueue_packed_pop() 里各段映射完成、trace 之前，按描述符逐段发射 dma.read/dma.write（out=TO_DEVICE 是设备读客体内存，in=FROM_DEVICE 是设备写客体内存），地址取 elem->out/in_addr[i]、长度取对应 iov_len，requestId 用 (vq->queue_index, elem->index) 打包。T05d 的 virtqueue 状态查询不再改本文件（复用 x-query-virtio-queue-status）；T05e 另在 virtio_cleanup() 里清掉该设备的 pending 台账",
+      "pristineCopy": "baseline/hw_virtio_virtio.c.orig",
+      "pristineSha256": "ccc95651c0478a66da7667669d9890c0df82af30954654060732f4e0c201b55d",
+      "patchedSha256": "7ee79cd3a293c355dcc84d0b31d1e904362e57bd45f776f325e34ded6ed391c2"
+    },
+    {
+      "path": "include/hw/virtio/virtio.h",
+      "patch": "patches/0003-t05c-dma-virtio.patch",
+      "purpose": "T05c：VirtIODevice 增加 x_oslab_dev_id（观察层设备表的数字 id）；事件环里只存数字，设备名留在注册表里，避免在 vCPU/iothread 线程上搬字符串",
+      "pristineCopy": "baseline/include_hw_virtio_virtio.h.orig",
+      "pristineSha256": "16ffad74572727aeec112d888766e0349d1c9a97991b5202f391f1f808c6b947",
+      "patchedSha256": "5224036071c20c5f739afc44a8200b0bef58f714cb9440058e2ff73601094253"
+    },
+    {
+      "path": "hw/block/virtio-blk.c",
+      "patch": "patches/0003-t05c-dma-virtio.patch",
+      "purpose": "T05c：virtio_blk_handle_request() 的 VIRTIO_BLK_T_IN 分支在 block_acct_start 之后发射 block.submit（此刻 LBA/长度/方向已确定）并缓存长度与方向；virtio_blk_req_complete() 在 stb_p 写状态字节之前发射 block.complete（status 就是回写客体的那个字节）。只对发过 submit 的请求发 complete，submit/complete 严格配对。T05e：在 virtio_blk_handle_request() 的提交点把请求登记进 pending 台账、在 virtio_blk_rw_complete() 入口标 hostIoDone、在 virtio_blk_req_complete() 移除，并在 virtio_blk_free_request() 加幂等兜底（设备复位/错误 purge 会直接 free 而不完成）",
+      "pristineCopy": "baseline/hw_block_virtio-blk.c.orig",
+      "pristineSha256": "a2b3d9373e646976bc954601b27fdeb82249def8f397b50418eb9d18a1052171",
+      "patchedSha256": "bf97afc56a511166436cb9071ff23b1f391f217b91682f36aef6589fd4e3b8b7"
+    },
+    {
+      "path": "include/hw/virtio/virtio-blk.h",
+      "patch": "patches/0003-t05c-dma-virtio.patch",
+      "purpose": "T05c：VirtIOBlockReq 增加 x_oslab_tracked/x_oslab_type/x_oslab_len；req 由 virtqueue_alloc_element() 的 g_malloc() 分配、不做零初始化，因此这些字段必须在 virtio_blk_init_request() 里显式赋值",
+      "pristineCopy": "baseline/include_hw_virtio_virtio-blk.h.orig",
+      "pristineSha256": "993c49833bc8150bc16ea805d88d5062deb45d5ef489fa116dc74e67fec415e3",
+      "patchedSha256": "4886b4d2616ec7667b694c95c7565669eb4f6f902a0b028518abcd3f95bf294a"
+    },
+    {
+      "path": "hw/display/vga.c",
+      "patch": "patches/0004-t05d-device-snapshot.patch",
+      "purpose": "T05d：VGACommonState 定义在 hw/display/vga_int.h（私有头）且被内嵌在 PCIVGAState 里，观察层无法从 QOM 对象反查。这里在 vga_common_init() 里登记「QOM 对象 -> VGACommonState」，并提供 x_oslab_vga_snapshot()：只读导出 CRTC/SEQ/GFX/AR 寄存器、start_addr、line_offset、光标状态与显存 backing store 指针（s->vram_ptr），几何参数用 get_offsets()/get_resolution() 现算（与 vga_update_text() 同一套算法）",
+      "pristineCopy": "baseline/hw_display_vga.c.orig",
+      "pristineSha256": "8926d01dcbe6fcc882308ea9ed0cd2164cd807679da7060ca3871e525e021f11",
+      "patchedSha256": "265f7b1b261246df69ddc2c939adbe1b446448076f657bffcbb479b14006fc49"
+    }
+  ],
+  "added": [
+    {
+      "path": "monitor/x-oslab-observer.c",
+      "repoPath": "x-oslab-observer.c",
+      "sha256": "40ef40a75326659eb1a5716f0633f20e0656071b1899b8d246b86aa47aa1e3c6"
+    },
+    {
+      "path": "monitor/x-oslab-observer.h",
+      "repoPath": "x-oslab-observer.h",
+      "sha256": "03a0e59b160c30f0a4e3b771c674a2aae984583b3b67a7733d8aa7dabdf7b692"
+    },
+    {
+      "path": "include/exec/x-oslab-events.h",
+      "repoPath": "x-oslab-events.h",
+      "sha256": "9c680ec969e40efdc5f17e7cb6f4ae3a91badf2e2bd4fc01f30a4ce16463ca89"
+    },
+    {
+      "path": "accel/tcg/x-oslab-events.c",
+      "repoPath": "x-oslab-events.c",
+      "sha256": "82172946f61d3d3d7e5ebdc4e28c54d9463d5e27ca90aaee51e5b30558b8635e"
+    },
+    {
+      "path": "include/hw/x-oslab-devices.h",
+      "repoPath": "x-oslab-devices.h",
+      "sha256": "c144915a98784ef99615c9c79c4f2735057b3af5cdc5b0b93358da2ce97edbac"
+    }
+  ],
+  "patches": [
+    {
+      "path": "patches/0001-register-x-oslab-observer.patch",
+      "sha256": "2a0f898987b923873f0dd4fd62a1f9c655ffc32b3b0204aabfedf04e2c725a88",
+      "subtask": "T05a",
+      "summary": "注册 x-oslab-* 五个 QMP 命令，并把 monitor/x-oslab-observer.c 编进 specific_ss"
+    },
+    {
+      "path": "patches/0002-t05b-event-stream.patch",
+      "sha256": "33c78c61efe2ad11bfc84b0034a45afa3e09e47263730a1ca4fd99db63e0bab2",
+      "subtask": "T05b",
+      "summary": "在翻译期/执行期真实落点上发射八类事件（指令、访存、端口、异常/中断），并加进 per-target 事件环编译单元"
+    },
+    {
+      "path": "patches/0003-t05c-dma-virtio.patch",
+      "sha256": "2e5ae3c73f4ec8c2085a7ad5134b05d32df46c6d2c56099c01b1e0bada39a6de",
+      "subtask": "T05c",
+      "summary": "在 virtqueue 描述符映射处发射设备 DMA 访问权（dma.read/dma.write），在 virtio-blk 请求接受与完成处发射 block.submit/block.complete，两处用同一个 requestId 关联；同时在记录期支持按 kind 收窄事件环"
+    },
+    {
+      "path": "patches/0004-t05d-device-snapshot.patch",
+      "sha256": "a7955ec87ccf95d029c2a67ed124d5d1a64b924310a84c7c82aaf02b5072da6e",
+      "subtask": "T05d",
+      "summary": "只补一类「结构体在设备 .c 文件内部、观察层看不到」的状态：hw/display/vga.c 在 vga_common_init() 里登记 VGA 实例，并导出 CRTC/SEQ/GFX/AR 寄存器、光标、start_addr 与显存 backing store 指针快照。只读字段，不走 MMIO/端口回调。virtqueue 状态改用 QEMU 自带的 x-query-virtio* 标准命令，不重复改 QEMU"
+    },
+    {
+      "path": "patches/0005-t05e-stop-barrier.patch",
+      "sha256": "60f43a49d20eabdd67c684fbb72295519a9d75cfbc016a2e1efdb3a2a97b28c3",
+      "subtask": "T05e",
+      "summary": "用三处真实落点驱动 pending 块请求台账（登记 / hostIoDone / 移除）加一处幂等兜底，并在 virtio_cleanup() 里随设备注销清理；不新增 QMP 命令、不改事件环布局（pendingIo 随 x-oslab-capture 返回，capture.fence 复用既有 kind）"
+    }
+  ],
+  "applyCommand": "patch -p1 --forward < instrumentation/qemu-observer/patches/0001-register-x-oslab-observer.patch && patch -p1 --forward < instrumentation/qemu-observer/patches/0002-t05b-event-stream.patch && patch -p1 --forward < instrumentation/qemu-observer/patches/0003-t05c-dma-virtio.patch && patch -p1 --forward < instrumentation/qemu-observer/patches/0004-t05d-device-snapshot.patch && patch -p1 --forward < instrumentation/qemu-observer/patches/0005-t05e-stop-barrier.patch"
+}

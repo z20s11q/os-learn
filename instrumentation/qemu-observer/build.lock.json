@@ -1,0 +1,398 @@
+{
+  "schema": "oslab.qemu-observer-build/1",
+  "task": "T05a + T05b + T05c + T05d + T05e",
+  "qemuVersion": "8.2.10",
+  "versionSource": "QEMU_VERSION，与 artifacts/build/qemu-source/VERSION 一致",
+  "targets": "x86_64-softmmu",
+  "configure": "--target-list=x86_64-softmmu --enable-tcg --enable-plugins --enable-trace-backends=log --disable-docs --disable-werror --disable-gtk --disable-sdl --disable-vnc --disable-curses --disable-opengl --disable-slirp",
+  "sourceTree": "artifacts/build/qemu-source",
+  "buildDir": "artifacts/build/qemu",
+  "buildCommand": "ninja -C artifacts/build/qemu",
+  "buildScript": "instrumentation/qemu-observer/build.sh",
+  "baseline": "instrumentation/qemu-observer/baseline.json",
+  "binary": {
+    "path": "artifacts/build/qemu/qemu-system-x86_64",
+    "sha256": "9434dbdb099cdc286a09a44948754ee469a8975c01d7352f765f2cec25682e43",
+    "sizeBytes": 103984528,
+    "builtAt": "2026-10-16T04:10:44+08:00"
+  },
+  "commands": [
+    "capabilities",
+    "capture",
+    "read-physical",
+    "events",
+    "release"
+  ],
+  "commandsNotImplemented": {
+    "diskVersions": "T06"
+  },
+  "capabilitiesImplemented": {
+    "deviceSnapshots": "T05d：随 x-oslab-capture 的 devices 字段返回（VGA/i8042/UART/PIC/PIT/APIC/virtio），capabilities 的 devices 表另有一份可自描述的能力清单；补丁 0004 只改了 hw/display/vga.c（VGACommonState 在私有头里、QOM 反查不到），virtqueue 状态复用 QEMU 自带 x-query-virtio-queue-status",
+    "pendingIo": "T05e：随 x-oslab-capture 的 pendingIo 与 frameBoundary 字段返回；capabilities 另有独立的 pendingIo 能力对象（pendingCriterion / barrierObservability / ledgerAnchor / readGate / coverage / resubmitSemantics / fields / forbidden）与 stopBarrier.eventWatermarkIsFence，不新增 QMP 命令"
+  },
+  "eventKinds": {
+    "produced": [
+      "instruction.begin",
+      "instruction.retire",
+      "memory.read",
+      "memory.write",
+      "dma.read",
+      "dma.write",
+      "io.read",
+      "io.write",
+      "interrupt.accept",
+      "exception.raise",
+      "block.submit",
+      "block.complete",
+      "capture.fence"
+    ],
+    "unavailable": [
+      "irq.raise",
+      "irq.lower",
+      "input.accept",
+      "serial.output",
+      "observer.drop"
+    ],
+    "ringCapacity": 65536,
+    "recordKindMask": "T05c 起 x-oslab-events 支持记录期 kind 掩码（switch 的 recordKinds 参数）：只有列出的 kind 入环，未列出的 kind 不占 seq、不入环、不计 dropped；默认全开（recordAllKinds=true），与 T05b 行为一致",
+    "knownGaps": [
+      "128 位访存（INDEX_op_qemu_ld/st_i128 走 gen_helper_ld_i128/st_i128）不产生 memory 事件",
+      "并行 TCG 下的原子 cmpxchg/op helper 不产生 memory 事件（本实验室用 -accel tcg,thread=single，普通访存不受影响）",
+      "没有正常完成的指令不产生 instruction.retire：DISAS_NORETURN（异常、hlt 等）与分支 / DISAS_EOB_*（TB 退出已在指令代码里发射，之后的 op 是死代码）。反过来，in/out/ins/outs 虽然由 translator_io_start 单独占一个 TB，也照常产生 retire",
+      "dma.* 上报的是描述符映射出的访问权，不是逐字节传输采样：设备把 dma_memory_map() 的宿主指针直接解引用（virtio-blk 的 stb_p(&req->in->status)），这类访问不经过 address_space_*，没有地址空间层的插桩点；事件只保证「哪个客体物理区间、哪个方向、属于哪个请求」真实，载荷字节必须由 x-oslab-read-physical 独立核对",
+      "block.submit/block.complete 只覆盖 virtio-blk 的读写请求（VIRTIO_BLK_T_IN/OUT）：请求头不合法、越界、类型不支持的拒绝路径与 flush/discard/zone/GET_ID 不产生 block 事件（因此 submit/complete 严格配对）；dma.* 则覆盖全部 virtio 设备的描述符映射（含非块设备）",
+      "非 virtio 的设备 DMA（IDE、NVMe、vhost-user/vhost 后端）不产生 dma.* 事件：这些设备要么不走 virtqueue_pop，要么 DMA 由宿主进程完成，观察扩展看不到"
+    ]
+  },
+  "deviceSnapshots": {
+    "command": "x-oslab-capture",
+    "field": "devices",
+    "kinds": [
+      "vga",
+      "uart",
+      "i8042",
+      "pic",
+      "apic",
+      "timer",
+      "virtio-blk",
+      "virtio-net",
+      "other"
+    ],
+    "readOnly": true,
+    "patch": "patches/0004-t05d-device-snapshot.patch（只改 hw/display/vga.c）",
+    "knownLimits": [
+      "寄存器区间只按「精确 owner 相等」归属：MemoryRegion 的 owner 必须与被观察对象（或它显式带上的一位父对象：UART 的宿主 ISASerialState/SerialMM、virtio 的传输层 PCI 设备）完全相等才登记。piix4/ISA 总线持有的容器空洞区域不会被摊到每个 ISA 设备上，代价是由容器间接拥有的子区间不会出现",
+      "virtio 队列状态复用 QEMU 自带 qmp_x_query_virtio_queue_status()：该命令的 vhost 分支会调用 vhost_get_vring_base() 向 vhost 后端取值，属于「问后端」而不是纯读，所以 vdev->vhost_started 为真时观察层不调用它，只把队列元数据与 vring 地址标成 unavailable（本实验室不使用 vhost，实际总是可取）",
+      "UART/i8042 的队列内容按环形下标直读（Fifo8 的 data/head/num、PS2Queue 的 rptr/count），绝不调用 fifo8_pop()/ps2_read_data()；但面板给出的是「快照瞬间」的队列，客体在两次快照之间取走的字节不会保留，也不能用来恢复历史",
+      "VGA 的 vramBacking 只在文本模式导出可见字符网格（cols*rows*cell_stride，上限 8192 字节），不做图形模式全帧缓冲导出，因此不能用它验证图形模式画面",
+      "PIT/APIC 的计数器读的是结构体字段与 QEMU_CLOCK_VIRTUAL 换算值（apic_get_current_count 是纯只读函数），不含下一次翻转的亚纳秒相位；APIC 的 MMIO 窗口一律不读，因为那会走 APIC 的 read 回调并改动中断状态"
+    ]
+  },
+  "observationPoints": [
+    "target/i386/cpu.h CPUX86State.segs[6] / cr[5] / efer / gdt / idt（段缓存与扩展状态）",
+    "include/hw/i386/apic.h cpu_get_apic_tpr()（CR8 来自 APIC TPR）",
+    "include/hw/core/cpu.h CPUState.stopped（停止屏障判定）",
+    "include/sysemu/runstate.h runstate_get() / runstate_is_running()（VM 状态）",
+    "system/runstate.c qemu_add_vm_change_state_handler()（VM 代数，判定旧 capture 失效）",
+    "system/memory.c flatview_for_each_range() over address_space_memory（物理区域表）",
+    "include/exec/memory.h memory_access_is_direct()（判定区域能否无副作用直读）",
+    "qapi/qmp-dispatch.c do_qmp_dispatch_bh（命令在 main loop 线程 + BQL 内执行）",
+    "accel/tcg/translator.c translator_loop()（instruction.begin；instruction.retire 在 db->is_jmp 为 DISAS_NEXT/DISAS_TOO_MANY 时发射）",
+    "tcg/tcg-op-ldst.c tcg_gen_qemu_ld/st_i32/i64_int（memory.read/write，每个 ld/st op 一发）",
+    "target/i386/tcg/sysemu/misc_helper.c helper_inb/inw/inl 与 helper_outb/outw/outl（io.read/write；宿主 HMP i/o 走 system/ioport.c，故意不记）",
+    "target/i386/tcg/seg_helper.c do_interrupt_all()（按 is_hw / is_int 分 exception.raise / interrupt.accept）",
+    "hw/virtio/virtio.c virtqueue_split_pop() / virtqueue_packed_pop()（各段映射完成、trace 之前按描述符逐段发射 dma.read/dma.write；split 用 elem->index，packed 用描述符 id 作描述符标识）",
+    "hw/virtio/virtio.c virtio_init() / virtio_cleanup()（设备注册表登记与注销，名字取 QOM canonical path；事件里只存数字 id）",
+    "hw/block/virtio-blk.c virtio_blk_handle_request() 的 VIRTIO_BLK_T_IN 分支（block_acct_start 之后发 block.submit；缓存长度与方向）",
+    "hw/block/virtio-blk.c virtio_blk_req_complete()（stb_p(&req->in->status) 之前发 block.complete，status 就是回写客体的那个字节）",
+    "accel/tcg/x-oslab-events.c（65536 条环 + QemuSpin + 全局递增 seq + dropped 计数；事件由 helper 在 vCPU 线程写入）",
+    "monitor/x-oslab-observer.c x_oslab_events_switch()（只允许 VM 停止时切换 enable/reset，切换后 tb_flush）",
+    "include/hw/char/serial.h SerialState（ier/iir/lcr/divider/mcr/lsr/msr/scr/fcr + thr/tsr/rbr + recv_fifo/xmit_fifo，附 recv_fifo_itl 与 last_xmit_ts）；FIFO 内容按 include/qemu/fifo8.h 的 data/head/num 算环形下标直读，等价于 fifo8_peek() 的语义但不调用任何会取走字节的函数",
+    "include/hw/input/i8042.h ISAKBDState（status/mode/outport/obsrc/obdata/pending/write_cmd/迁移标志与 kbd/mouse 扩展状态）与 include/hw/input/ps2.h PS2Queue（data/rptr/wptr/count，按 (rptr+i)%PS2_BUFFER_SIZE 直读；ps2_read_data() 会推进 rptr，绝不调用）",
+    "include/hw/isa/i8259_internal.h PICCommonState（irr/isr/imr/last_irr/elcr/elcr_mask/ltim/priority_add/irq_base/init_state/read_reg_select/poll/special_mask…）与 include/hw/intc/i8259.h pic_get_output()（纯只读求值：只看 irr/imr/isr/priority_add/special_*，不经过 pic_ioport_read() 的 OCW3/poll 分支，因此不会改写确认语义）",
+    "include/hw/timer/i8254_internal.h PITCommonState（iobase 与每通道 count/latched_count/count_load_time/next_transition_time/mode/rw_mode/bcd/gate/status…）；不触碰 pit_ioport_read()（读 counter 端口本身会锁存计数）",
+    "include/hw/i386/apic_internal.h APICCommonState（apicbase/id/version/tpr/spurious_vec/esr/icr/initial_count/timer_expiry/irr/isr/tmr/lvt…）与 apic_get_current_count()（= initial_count 与 QEMU_CLOCK_VIRTUAL 的纯读换算）；刻意不读 APIC 的 io_memory（apic-msi）MMIO 窗口，避免走 APIC 的 read 回调",
+    "include/hw/virtio/virtio.h VirtIODevice 公开字段与访问器（device_id/status/isr/host_features/guest_features/queue_sel/vhost_started、virtio_get_num_queues()/virtio_get_queue()/virtio_queue_get_desc_size()/avail_size()/used_size()/virtio_queue_get_notification()/virtio_queue_vector()）；VirtQueue 是不完整类型，必须经 virtio_get_queue() 取指针",
+    "hw/virtio/virtio.c qmp_x_query_virtio_queue_status()（QEMU 自带标准命令，签名见 qapi/qapi-commands-virtio.h；观察层直接复用，virtio-qmp.c 与 monitor/ 同属主二进制；vhost_started 为真时不调用）",
+    "hw/display/vga.c x_oslab_vga_register()/x_oslab_vga_snapshot()（VGACommonState 定义在私有头 hw/display/vga_int.h 并被内嵌进 PCIVGAState，QOM 无法反查，所以在 vga_common_init 里按 owner 去重登记；补丁 0004）",
+    "include/exec/memory.h memory_region_owner() 与 flatview_for_each_range() over address_space_memory/address_space_io（寄存器区间归属只做精确 owner 相等，不追祖先/后代）",
+    "include/qom/object.h object_child_foreach_recursive() + object_dynamic_cast() + object_get_canonical_path()（设备往返遍历与稳定命名，与 hw/virtio/virtio-qmp.c 的 query_dev_child 同机制；结果按 rank + deviceId 字典序排序，保证两次快照逐项可比）",
+    "include/qom/object.h Object::parent（QEMU 8.2 全树没有 object_get_parent()，观察层自带只读访问器 x_oslab_object_parent() 读 object_property_add_child() 写入的同一个字段，只取指针、不加引用）",
+    "qapi/qmp-dispatch.c do_qmp_dispatch_bh + monitor/x-oslab-observer.c 的 qemu_mutex_iothread_locked() 入口断言（设备快照与其它 x-oslab-* 一样在 main loop 线程 + BQL 内执行，天然与 vCPU 单步互斥；读取时不加额外锁、不触发任何设备回调）",
+    "monitor/x-oslab-observer.c qmp_x_oslab_capture() 的统一串行化点（T05e）：先取 pending 台账快照 → 再记录 capture.fence → eventWatermark 取 fence 的 seq；执行上下文为 main loop + BQL 且全部 vCPU 已 stopped，因此采集过程与后台完成回调天然互斥",
+    "accel/tcg/x-oslab-events.c x_oslab_event_fence() / x_oslab_block_inflight_submit|host_done|visible|clear_device()（待完成块请求台账）；驱动落点在 hw/block/virtio-blk.c：提交点 x_oslab_block_inflight_submit、BlockCompletionFunc virtio_blk_rw_complete 里 x_oslab_block_inflight_host_done、virtio_blk_req_complete() 的 stb_p(&req->in->status) 之前 x_oslab_block_inflight_visible，另有 virtio_blk_free_request() 幂等兜底与 virtio_cleanup() 整设备清理"
+  ],
+  "builds": [
+    {
+      "at": "2026-10-15T18:10:00+08:00",
+      "binarySha256": "4494bd05d6910c0c6506369c306b4feafba7013068ee3c0fd1a2a838fb2a45cb",
+      "note": "T05a 首版；x-oslab-read-physical 的 invalid-length 拒绝路径会命中 RCU cleanup 断言（见 fixed 字段）"
+    },
+    {
+      "at": "2026-10-15T18:20:00+08:00",
+      "binarySha256": "bea40c93af3331768657864e37b5e36ed6e05d9b4bd67d29a21d440df48ec367",
+      "note": "T05a 修复 RCU 守卫作用域后重建"
+    },
+    {
+      "at": "2026-10-15T19:12:00+08:00",
+      "binarySha256": "d95418c77106566e52a3c7554d057e85b2f1e21510be8706f7830d26a3feb0fd",
+      "note": "T05b 首次加入事件序列并通过冒烟/GDB 探针；探针暴露 io 写入值偏宽与 in/out 缺 retire 两个缺陷"
+    },
+    {
+      "at": "2026-10-15T19:25:00+08:00",
+      "binarySha256": "b55f3a686b2db7893ababf109b5de87108bf0f7c6ab809cf8ce5864228d737ae",
+      "note": "修复两个缺陷并同步 capabilities 观察点文案后重建，为当前锁定二进制（acceptance 47/47）"
+    },
+    {
+      "at": "2026-10-15T20:26:42+08:00",
+      "binarySha256": "28e4c47dcc599c64f8e5ecc19111d3b183ceb90dc25ae0ce5f26a2687fdb4971",
+      "note": "T05c：加入 dma.read/dma.write 与 block.submit/block.complete，加入设备注册表与记录期 kind 掩码（patch 0003）"
+    },
+    {
+      "at": "2026-10-15T20:46:41+08:00",
+      "binarySha256": "9350e81013a53ca80f6e6a21edb24e263b7b9754bd020af934967486f79c112c",
+      "note": "T05c 验收暴露两处缺陷后重建：修 (vq0, 描述符 0) 的 requestId=0 被当成「无关联」而丢字段；补运行期 capabilities.events.knownGaps 的 3 条 T05c 语义边界"
+    },
+    {
+      "at": "2026-10-16T00:20:00+08:00",
+      "binarySha256": "1ac8cf72c31e7cce60f1811eb10d6bfe3aea0d3c530d79d63240fc9153084355",
+      "note": "T05d：x-oslab-capture 增加 devices 只读设备快照（VGA/i8042/UART/PIC/PIT/APIC/virtio），capabilities 增加 devices 能力表；补丁 0004 收缩为 VGA-only（virtqueue 状态复用 x-query-virtio-queue-status），并同步 baseline.json 与 hw/virtio/virtio.c 回到 post-0003；随后把 VGA 的 vramBacking 导出起点改到 startAddr*cellStride（文本模式第一格即屏幕左上角）"
+    },
+    {
+      "at": "2026-10-16T02:50:00+08:00",
+      "binarySha256": "79f7b674cb7e8bba67155edc4da71258fd9634fa98d399683ebfe4ba8aeabbea",
+      "note": "T05e：加入待完成块请求台账（XOslabBlockInflight，512 条 + QemuSpin）、capture.fence 事件、capture 的 frameBoundary / pendingIo / fenceSeq 字段，并把 eventWatermark 对齐到 fence 的 seq；补丁 0005 只在 virtio-blk 的三处真实驱动点与两处幂等清理落点，不新增 QMP 命令、不改事件环布局。上一版 0639d070… 是同一实现但有 fields 遮蔽告警，本版修掉告警后重建"
+    },
+    {
+      "at": "2026-10-16T04:10:44+08:00",
+      "binarySha256": "9434dbdb099cdc286a09a44948754ee469a8975c01d7352f765f2cec25682e43",
+      "note": "T05e 收口：把排查「E09a 限流构造为什么在屏障处不再是 pending」时临时加在 block/block-backend.c（execinfo/drain begin/end/PREADV 打印与 backtrace）与 block/throttle-groups.c（XO-THROTTLE 入口、XO-TGM-RESTART+backtrace、XO-THROTTLE-WAKE）的 XO_DBG 插桩全部还原为上游代码，并把这轮源码复核的结论写进 x-oslab-events.h 的台账文档与运行时 capabilities.pendingIo.barrierObservability（停机动作自身会 drain 块层、放行被限流请求，因此 virtio-blk 的停机屏障处 host-io-pending 不可观测）"
+    }
+  ],
+  "fixed": [
+    {
+      "subtask": "T05a",
+      "symptom": "调用 x-oslab-read-physical 且 length 超限时 QEMU 崩溃: rcu_read_unlock: Assertion 'p_rcu_reader->depth != 0' failed",
+      "cause": "RCU_READ_LOCK_GUARD() 与 done 标签同处一个作用域，goto done 跳过了守卫声明，但 GCC 的 cleanup 属性按作用域退出触发，仍执行了 rcu_read_unlock()",
+      "fix": "把守卫及其后续逻辑放进独立子块，只有真正进入子块的路径才解锁"
+    },
+    {
+      "subtask": "T05b",
+      "symptom": "out dx,al（端口 0x3f8，EAX=0x1337）的 io.write 事件报 size 1 但 value=0x1337，与设备实际收到的单字节 0x37 不符",
+      "cause": "x86 的 out 在翻译期做 gen_op_mov_v_reg(ot, T1, R_EAX) + trunc，传给 helper_outb 的 data 仍带寄存器高位；x_oslab_event_io 直接上报未掩码的 value（内存路径由 TCG helper 掩码，端口路径漏了）",
+      "fix": "x_oslab_event_io 对写入值同样做 x_oslab_mask_value(value, size)，只报设备实际访问的那 size 个字节"
+    },
+    {
+      "subtask": "T05b",
+      "symptom": "4 条 in/out 指令（in al,dx / in ax,dx / out dx,al / out dx,eax）没有产生 instruction.retire，13 条指令只有 8 条 retire",
+      "cause": "retire 发射判据写成 db->is_jmp == DISAS_NEXT，而 x86 对 in/out/ins/outs 调用 translator_io_start()，它会把 DISAS_NEXT 改成 DISAS_TOO_MANY（让 I/O 指令单独占一个 TB）。DISAS_TOO_MANY 只表示「翻译到此结束」，指令本身正常完成",
+      "fix": "判据改为 DISAS_NEXT || DISAS_TOO_MANY；仍然排除 DISAS_NORETURN（异常/hlt）与分支/EOB，保证异常指令不被谎报成正常完成"
+    },
+    {
+      "subtask": "T05b",
+      "symptom": "memory.write 事件缺 size/bytes/value/mmuIndex（回退成只有 kind/pc）",
+      "cause": "两个 store 发射点传 memop_size(orig_oi)，而 orig_oi 是 MemOpIdx((memop << 4) | mmu_idx)，直接按 MO_SIZE 解出来的是 mmu 索引（如 1<<5=32）",
+      "fix": "改为 memop_size(get_memop(orig_oi))，并让 size/value 无条件输出，避免解不出字节时把整条信息吞掉"
+    },
+    {
+      "subtask": "T05c",
+      "symptom": "启动后第一条事件（seq 1，virtqueue 0 的描述符 0）序列化出来没有 requestId，也没有 detail.deviceIndex：{\"kind\":\"dma.read\",\"seq\":\"1\",\"address\":\"0x31a21f8\",\"size\":16,\"deviceId\":\"/machine/peripheral/rootblk/virtio-backend\",\"detail\":{\"flags\":0}}",
+      "cause": "x_oslab_event_json() 用 if (rec->requestId != 0) 判断「这个字段有没有」；而 requestId = (vq_index << 32) | desc_id，virtqueue 0 的描述符 0 算出来恰好是 0，于是最常见的那个请求反而被当成空值丢掉（deviceIndex 同理被跳过）",
+      "fix": "dma.* / block.* 无条件序列化 deviceId / requestId / deviceIndex（requestId 零值是合法取值，不能用 0 表示缺失）；非设备类事件仍按「非 0 才输出」保留"
+    },
+    {
+      "subtask": "T05c",
+      "symptom": "运行期 capabilities.events.knownGaps 只有 3 条（全是 T05b 的访存/retire 缺口），没有任何 T05c 的语义边界说明，而 build.lock.json 里已登记 6 条，两处说法不一致",
+      "cause": "T05c 只往 build.lock.json 与源码注释写了语义边界，忘了同步 x-oslab-observer.c 的 event_gaps（capabilities 是运行时唯一权威出口，文档与它脱节就等于没声明）",
+      "fix": "在 event_gaps 里补 3 条：dma.* 只报描述符映射出的访问权、载荷字节必须另用 x-oslab-read-physical 核对；block.submit/complete 只覆盖 VIRTIO_BLK_T_IN/OUT 且与 dma.* 的覆盖范围不同；非 virtio 设备（IDE/NVMe/vhost）的 DMA 不产生 dma.* 事件。同时把 granularity 扩写到含设备事件粒度"
+    },
+    {
+      "subtask": "T05d",
+      "symptom": "设备快照首版编译不过：object_get_parent() 隐式声明（4 处）、invalid use of undefined type 'struct VirtQueue'、以及注释里 fifo8_peek*/fifo8_pop* 的 */ 提前终止块注释导致 stray '\\215' 与后续 implicit declaration",
+      "cause": "三处对 QEMU 8.2 API 的误判：① 8.2 全树没有 object_get_parent()，include/qom/object.h 也没有声明（qom/object.c 内部一律直接读 Object::parent 字段）；② include/hw/virtio/virtio.h 只有 struct VirtQueue 的前向声明，完整定义在 hw/virtio/virtio.c 内部，所以 &vdev->vq[i] 非法；③ 中文注释里写函数族通配时误用了 */",
+      "fix": "① 在观察层自带只读访问器 x_oslab_object_parent()（读 object_property_add_child() 写入的 Object::parent，只取指针不加引用），替换全部 4 处调用；② 改用 virtio_get_queue(vdev, i) 拿 VirtQueue *，再交给 virtio_queue_get_notification()；③ 注释改写为 fifo8_peek() 与 fifo8_pop()"
+    },
+    {
+      "subtask": "T05e",
+      "symptom": "编译告警：monitor/x-oslab-observer.c:2547:16: warning: declaration of 'fields' shadows a previous local [-Wshadow=compatible-local]",
+      "cause": "pendingIo 能力对象里新建的局部 QList *fields 遮蔽了同一函数上方已有的 QList *fields",
+      "fix": "pendingIo 的局部改名为 pendingFields 并同步其 7 处引用；重建后编译无告警"
+    },
+    {
+      "subtask": "T05e",
+      "symptom": "源码复核发现：virtio_blk_reset()（virtio-blk.c:1329-1352）与 virtio_blk_dma_restart_bh() 的 purge 分支把挂在 s->rq 上的请求直接 virtqueue_detach_element() + virtio_blk_free_request()，既不写状态字节也不发 block.complete；若台账只在完成路径移除，会留下幽灵 pending 条目，且描述符索引被复用后新请求会与幽灵条目撞同一个 requestId",
+      "cause": "requestId = (vq_index << 32) | desc_id，不含代数；描述符索引复用是 virtio 的正常行为，因此台账的生命周期必须以请求对象的销毁为界，而不是以「完成」为界",
+      "fix": "virtio_blk_free_request() 里无条件调用 x_oslab_block_inflight_visible() 清条目（幂等，完成路径已清过也无副作用）；virtio_cleanup() 里再对整设备调 x_oslab_block_inflight_clear_device() 兜底"
+    },
+    {
+      "subtask": "T05e",
+      "symptom": "源码复核发现两处判定若按直觉写就会出错：① 先取事件水位再记录 fence，则 fence 自身落在水位之后，「seq <= watermark」不再等价于「属于这一帧」；② 用「宿主块层是否还在忙」当 pending 判据，会漏掉 hostIoDone=true 那一小段窗口（完成回调已进入、状态字节还没写回客体）",
+      "cause": "fence 既要是这一帧的标记、又要是这一帧的上界，所以它必须排在所有本帧事件之后、并把自己的 seq 交给读取方；而「对客体可见」才是设备状态机意义上的完成，「宿主 I/O 完成」只是它前面一步，两者不是同一件事",
+      "fix": "① 采集顺序固定为「取台账快照 → 记录 capture.fence → eventWatermark = fence 的 seq」；② pending 判据定为「状态字节是否已回写客体」，把「宿主块层是否完成」降级为并列的更细事实 hostIoDone（host-io-pending / host-io-done-awaiting-visibility）"
+    },
+    {
+      "subtask": "T05e",
+      "symptom": "验收脚本 A 组（E09a）按「节流盘上被限流的读请求在 stop 时仍是 pending」来断言，实测必然失败：屏障处台账为空、该请求的 block.complete 早在第一帧 fence 之内就出现了；而宿主侧 HMP 读同一条限流路径却能等满 31 s",
+      "cause": "限流本身是真实生效的（等待时长与 (level - avg/10)/avg 逐条吻合），失效的是构造方式：qmp_stop → vm_state_notify → virtio_vmstate_change → virtio_bus_stop_ioeventfd → virtio_blk_data_plane_stop（hw/block/dataplane/virtio-blk.c，注释「Wait for virtio_blk_dma_restart_bh() and in flight I/O to complete」）→ blk_drain → bdrv_drained_begin → blk_root_drained_begin；后者在 qatomic_fetch_inc(&tgm->io_limits_disabled) == 0 时调 throttle_group_restart_tgm()，timer_del + timer_cb 取消并立即触发节流定时器、qemu_co_queue_next 放行被挂起的请求，随后 blk_drain 的 AIO_WAIT_WHILE(blk->in_flight > 0) 又把它等完。所以停机动作自己就把这一态清掉了，host-io-pending 在 virtio-blk 的停机屏障处不可观测",
+      "fix": "把 A 组改成负向对照（停机屏障处不存在 host-io-pending 条目；该请求在屏障前完成且完成事件落在第一帧 fence 之内），把「屏障处仍有未完成请求」交给 B 组（werror=stop 把请求挂在 s->rq 上）；另加一条不停机的正对照，同一条读实测挂起 45 s，证明限流真实生效。结论同时写进 x-oslab-events.h 的台账文档、运行时 capabilities.pendingIo.barrierObservability 与 build.lock.json.pendingIo.barrierObservability"
+    },
+    {
+      "subtask": "T05e",
+      "symptom": "验收脚本量出的客体读耗时全部只有约 100 ms，与真实被限流挂起十几秒的事实矛盾；客体设备映射表（DEVMAP）也经常解析为空",
+      "cause": "串口控制台会回显写进去的整行命令，而脚本用字面量标记（echo PRIME-DONE / echo DEVMAP-DONE）做 pump() 的同步点，于是 pump 命中的是回显那一行，把「命令还没执行完」当成「已经执行完」",
+      "fix": "标记改为客体端计算：echo PRIME-DONE-$(date +%s) 配 /PRIME-DONE-\\d{6,}/（回显里只剩字面量，不含数字）。DEVMAP / 目标读 / A11 正对照 / B 组写盘同理"
+    },
+    {
+      "subtask": "T05e",
+      "symptom": "验收脚本用 requestId 归属请求，结果把别的设备、别的批次的完成事件也算进来（B6 一度读到 3 条 block.submit / 2 条 block.complete）；收尾阶段 quit 之后脚本还会干等 180 s",
+      "cause": "① requestId = vq<队列>-<描述符> 只在同一设备内唯一：每块 virtio-blk 的顺序请求都会复用描述符 0，三块盘都撞出 vq0-0，所以归属一个请求必须同时比对 deviceId 并用它的 block.submit 的 seq 切出这一次请求的窗口；② QmpClient 没有处理 socket close/error，QEMU 退出后（quit 必断连接）在途命令会一直挂到 180 s 超时",
+      "fix": "① 所有台账/事件归属都改成 deviceId + requestId，并用 submitSeq / fence 水位线切窗口；② QmpClient 增加 close/error → failAll()，把在途命令立刻拒绝；另外 readAll() 的起始水位线用 Number() 转换，避免 BigInt 直接进 JSON.stringify"
+    },
+    {
+      "subtask": "T06",
+      "symptom": "一次性写故障完全不触发：VM 跑满 180 s 仍 state=running、pending 台账 0 条，而客体串口显示两次 dd 都成功（故障静默失效）",
+      "cause": "`-drive file=blkdebug:<conf>:<overlay>,format=qcow2` 把 blkdebug 插在 qcow2 **下面**，它看到的偏移是宿主覆盖层文件偏移（稀疏文件只有几百 KB），而规则里写的 sector=131072 是想命中客体的 64 MiB；blkdebug 的 rule_check() 只比 inject_offset 与本次 io 的偏移区间，两者永远对不上，规则静默不触发",
+      "fix": "启动参数改用嵌套写法把 blkdebug 放到 qcow2 **之上**：file.driver=blkdebug,file.config=…,file.image.driver=qcow2,file.image.file.driver=file,file.image.file.filename=…,if=none,id=rootdisk,werror=stop（用 qemu-io --image-opts、QMP query-named-block-nodes、QEMU HMP qemu-io 三重实证）；此后 sector 才是客体设备扇区偏移，故障按预期在 io-error 上停住 VM"
+    },
+    {
+      "subtask": "T06",
+      "symptom": "全量 RAM 基线的页数是 135136，比 `-m 512` 应有的 131072 多 4096 页（16 MiB）",
+      "cause": "vga.vram（0xfd000000，16 MiB）在 QEMU 里也是一个 RAM 区域，kind 同样是 ram，于是被 normalizeRegions(regions, { kinds: ['ram'] }) 一起收进基线。kind=ram 不等于「系统内存」",
+      "fix": "normalizeRegions 增加 names 过滤，基线/脏页增量只取 pc.ram（MACHINE_RAM_NAMES）；显存仍可按地址物理直读，但不进基线。改完后页数是 131040 = 512 MiB 减去 0xa0000–0xc0000 的 128 KiB VGA 空洞，与 PC 内存映射一致；断言里的期望值也改成这条硬约束，而不是拿返回的区域表推自己"
+    },
+    {
+      "subtask": "T06",
+      "symptom": "注入故障的那笔写恢复并成功后，磁盘版本表里 visible 只有 3 段、没有 0x20000（故障写那一段），pending 也是空的：那笔写从版本表里凭空消失，读它拿到的是基线旧值（fromBase=true）",
+      "cause": "版本表按 requestId 存写记录，而 requestId 是「virtqueue 索引 + 描述符头索引」，会被复用。故障写与紧随其后的第二笔裸写都走描述符 1（vq0-1），后者的 block.submit 直接覆盖了前者的记录，前者那笔**早已对客体可见**的写因此被抹掉",
+      "fix": "版本表拆成「当前还在飞行的写」（writes）与「已完成记录」（finalized，只增不改）：同 requestId 再次提交时，旧记录还没完成就是**重提交**（原地更新，resubmits++），已完成就是**另一笔写**（新建记录）；visibleRanges 从 finalized 派生。载荷同样改为绑定在写记录上（payloadRef），避免两笔同 id 的写互相串字节"
+    },
+    {
+      "subtask": "T06",
+      "symptom": "屏障处取「未完成写请求」的载荷，长度是 12448 字节，而设备报告的 qiov.size 是 4096（skip:vq0-1:length-mismatch:got=12448,want=4096）",
+      "cause": "取载荷时按 requestId 汇总 dma.read 段，窗口上界用帧的 fence、下界用 submitSeq - 1024。dma.* 由 virtqueue_pop() 在「描述符链已映射、请求还没交给设备」时上报，同一 requestId 在会话里被反复 pop（描述符索引复用），于是窗口里混进了这个 id 早先若干次请求的段",
+      "fix": "窗口上界改成该请求**自己的 submit seq**（dma.* 必然早于它），并且只取「从最新一段往回累加、恰好凑够 16 字节请求头 + 载荷长度」的那一串段；凑不出来就如实记 skipped（no-expected-length / no-dma-segments-in-window / segment-sum-mismatch / length-mismatch），绝不用更早的同 id 请求的字节顶上"
+    },
+    {
+      "subtask": "T06",
+      "symptom": "E14f 报「漏页 262」，但 dma.write 派生出的 16 页全都出现在变化页集合里，实际一页没漏",
+      "cause": "missedByEvents(derived, swept) 实现成 swept − derived（扫描发现、事件没覆盖的页）。事件只覆盖设备的 DMA 访问权，CPU 自己写内存不产生事件，所以扫描页数天然远多于事件页数（278 比 16），这个方向几乎永远非空、毫无信息量；函数自身的文档与调用方 memory-reader.crossCheckEvents 写的都是相反方向",
+      "fix": "改成 derived − swept（事件说变过、扫描却没看出变化的页才是漏采），并同步函数文档与 tests/ram.test.mjs 的断言方向"
+    }
+  ],
+  "verification": [
+    {
+      "scope": "T05a 观察者本身",
+      "command": "node instrumentation/qemu-observer/verify-observer.mjs",
+      "result": "40/40 通过",
+      "evidence": "artifacts/verify/t05a-observer.json"
+    },
+    {
+      "scope": "T05b 事件序列（观察者本身）",
+      "command": "node instrumentation/qemu-observer/verify-observer-events.mjs",
+      "result": "48/48 通过（真实 GDB RSP 逐条单步 + HMP/物理读/串口三条独立通道交叉验证；T05e 起 D6/D6b 另核对 capture 的 eventWatermark 就是 capture.fence 的 seq，且这条 fence 真的存在事件环里）",
+      "evidence": "artifacts/verify/t05b-observer-events.json"
+    },
+    {
+      "scope": "T05c DMA/virtio（观察者本身）",
+      "command": "node instrumentation/qemu-observer/verify-observer-dma.mjs",
+      "result": "35/35 通过（真实启动 Linux 内核：TCG 冷启动到 shell 再跑磁盘/内存工作负载；把 dma.read/dma.write/block.submit/block.complete 与客体描述符、实际传输缓冲、LBA、完成状态逐项对上，缓冲字节由 x-oslab-read-physical 与宿主磁盘副本独立核对；T05e 起 D1/D1b 另核对记录期掩码挡下 capture.fence 时如实报 fenceRecorded=false 并把缺口写进 unavailable）",
+      "evidence": "artifacts/verify/t05c-observer-dma.json"
+    },
+    {
+      "scope": "T05d 设备快照（观察者本身）",
+      "command": "node instrumentation/qemu-observer/verify-observer-devices.mjs",
+      "result": "34/34 通过（真实 QEMU + 真实 Linux 客体 + 真实设备：-S 冷启动枚举到 8 个设备（vga/uart/i8042/2×pic/apic/timer/virtio-blk）；只读性证明连续 4 次读面板不消费 UART 接收 FIFO、不确认 PIC/APIC 的 IRQ、不推进 PIT/APIC 虚拟时钟、运行中拒绝冻结（vcpu-running）、恢复运行后客体仍能取走注入字节；VGA 文本网格（80×25、cellStride 4）与注入标记一致且串口不含该标记；virtio 设备与队列字段与 QEMU 自带 x-query-virtio-status / x-query-virtio-queue-status 逐字段一致）",
+      "evidence": "artifacts/verify/t05d-observer-devices.json"
+    },
+    {
+      "scope": "T05e 屏障并发（观察者本身）",
+      "command": "node instrumentation/qemu-observer/verify-observer-barrier.mjs",
+      "result": "31/31 通过（真实 QEMU + 真实 Linux 客体 + 三块真实 virtio-blk）。A 组（E09a，11 项）：节流盘（bps-total=4096）上被限流的 64 KiB 读在 block.submit 之后立刻 stop，屏障处台账不含该请求、它的 block.complete 落在第一帧 fence 之内、五帧采集逐字段相同且帧内不再有任何事件，dd 总耗时 2447 ms 而理论限流等待 31900 ms；同一条读在不停机时实测挂起 45366 ms（正对照，证明限流真实生效，屏障处的「已完成」只能来自停机动作自身的 drain）。B 组（E09b，7 项）：blkdebug 注入一次写错误 + werror=stop 让请求挂在 s->rq 上，query-status=io-error，台账报 hostIoDone=true / state=host-io-done-awaiting-visibility，两次采集逐字段不变、帧内不产生 block.complete，恢复后同一请求对象被重提交（同一个 requestId 两条 block.submit、一条 block.complete、resubmitCount=1）。C 组（7 项）：观察点、锁/线程上下文、台账四类落点、pending 判据与停机屏障可观测性均有源码级依据，且与 capabilities / build.lock.json 三处一致）",
+      "evidence": "artifacts/verify/t05e-observer-barrier.json"
+    },
+    {
+      "scope": "T05a 观察者能力在服务层接线（服务自身）",
+      "command": "node scripts/verify-observer-service.mjs",
+      "result": "23/23 通过（会话启动即探测 x-oslab-*；帧里 CPU 扩展状态与另一条 QMP 连接 + 独立解析的 HMP dump 一致；物理读保留 MMIO 拒绝与快照失效语义并按 4 KiB 上限分片；单步/暂停后重新采集仍与新的 HMP dump 一致）",
+      "evidence": "artifacts/verify/t05a-service.json"
+    },
+    {
+      "scope": "T05b/T05c 事件在服务层接线（服务自身）",
+      "command": "node scripts/verify-observer-events-service.mjs",
+      "result": "29/29 通过（客体事件通道与服务编排通道不互相冒充；epoch/序号/limit/kinds 与 vm-running 拒绝路径原样透出；260 次单步的统一序号、begin/retire 归属、访存与端口形状自洽；E04 的地址/宽度/值与 GDB 线性读逐字节一致；环满后 dropped/oldest/total 关系与 limit 分片续读精确成立；capabilities 覆盖表如实分档）",
+      "evidence": "artifacts/verify/t05b-service.json"
+    },
+    {
+      "scope": "T05e 帧分界与待完成块请求台账在服务层接线（服务自身）",
+      "command": "node scripts/verify-observer-events-service.mjs（N9f–N9h）",
+      "result": "3/3 通过（帧带 fenceSeq/eventWatermark/frameBoundary 且服务侧 eventRange.last 那条记录就是本帧 capture.fence、其 observerFenceSeq 等于帧的 fenceSeq；pendingIo 台账判据为 guest visibility、15 个字段齐全、state 与 hostIoDone 一一对应；帧 coverage 不再列 device.pending-block-io，capabilities.observer_.pendingIo 引观察者原话（含 blk_drain）说明停机屏障处的可观测性，knownGaps 同步写明）",
+      "evidence": "artifacts/verify/t05b-service.json"
+    },
+    {
+      "scope": "T06 内存/分页/队列/磁盘数据服务（服务自身）",
+      "command": "node scripts/verify-t06.mjs",
+      "result": "31/31 通过（真实 QEMU 8.2.10 + 真实 Linux 6.12.112 客体，全程经 HTTP 接口操作真实会话）。E03 分页：断在 start_kernel 后用真实 CR3 走四级页表，链上每一级条目的物理地址都由上一级表基址+索引×8 推出，并与 QEMU 自带的 info mem、gva2gpa 逐位一致；E04 同一物理地址由观察者 read-physical（绑定 captureId）与 GDB 两条通道读出同一段字节，线性读与「先翻译再读物理」也一致。E14 内存：全量 RAM 基线只覆盖 pc.ram —— 512 MiB 减去 0xa0000–0xc0000 的 128 KiB VGA 空洞 = 131040 页 / 536739840 字节（设备侧 vga.vram 的 kind 也是 ram，必须按名字排除），脏页增量按「按页重读比散列」判定（changed=256 页），停止后用 HMP pmemsave 取独立全量 dump，与「基线 + 增量」重建逐字节一致（两侧散列都是 395d442c413eddb7…），另有 dma.write 事件旁证「事件说变过的页扫描都看到了」（派生 16 页、漏页 0）。E09 磁盘：-drive 用嵌套写法把 blkdebug 放在 qcow2 **之上**（sector 因此是客体设备偏移）并配 werror=stop，一次性写错误让 VM 因 io-error 停下，台账里那笔写是 op=write / hostIoDone=true / host-io-done-awaiting-visibility；屏障处从旅客内存取到它的载荷，长度与散列都和宿主侧 probe.bin 的前 4096 字节一致；恢复后同一个请求对象被重提交并完成（resubmitCount=1），版本表里它成为可见写，读它读回的就是写载荷字节（fromBase=false，帧记录/服务读出/宿主对照三方散列一致），而读「对客体可见但本代没采到载荷」的范围明确报 range-not-captured，不返回基线旧值。收尾：VM 还活着时离线校验被拒（control-busy），关闭后同一份覆盖层逐字节比过故障写那一段（checked=1 / mismatches=0 / unverified=4，未校验的正是没采到载荷的范围）；会话关闭后无残留 QEMU/GDB 进程）",
+      "evidence": "artifacts/verify/t06.json"
+    },
+    {
+      "scope": "T07a 布局：从实际 DWARF 生成结构 size/offset/枚举并绑定 build ID（解析器自身）",
+      "command": "node scripts/verify-t07a.mjs",
+      "result": "10/10 通过（对照物是与生成路径无关的第二个实现：生成侧自己按 form 长度走 .debug_info 的 12217480 个 DIE / 1690 个编译单元，对照侧用 GDB 的 sizeof 与 &((T*)0)->f，两边同出 artifacts/build/linux/vmlinux，build ID f5e5edc1…、sha256 e14918275626bf30…、DWARF 4）。V5 sizeof 逐一比过 84 个类型（maple_enode 在 DWARF 里只有前向声明，单列不充数）；V6 抽样 683 个字段字节偏移，其中 91 个是穿过匿名成员摊平出来的，全部一致；V7 位域逐项比过 26 个（task_struct 18 / linux_binprm 5 / signal_struct 2 / thread_struct 1，覆盖 4/4 个含位域的类型），比的是「第几字节第几位」三元组而不是只有字节；V8 枚举值 97 个一致；V4 重跑生成器到临时路径，types 与 source 逐字节相同。本轮修掉两个真实缺陷：多定义对账把 typedef DIE 当成定义，导致 atomic_t 被报成 23/24 不一致（假警报，会淹掉真正的布局分歧），已改成先跟随 typedef/const/volatile 归一成类型定义点再逐份对账，现在 74 个类型对账一致、不一致 0、多定义却无法对账 0；位域核对原先用写死的类型名单，名单里 6 个类型只有 task_struct 真有位域（sock 根本不在产物里），等于零覆盖也算通过，已改成从产物推导并断言每个含位域的类型都真的比到。产物：artifacts/layout/linux-6.12.112-observatory-f5e5edc1c572.json（85 个类型，必需缺失 0，可选缺失 4：kernel_cap_struct、dentry_flags、inode_state_flags、xas_state_flags）",
+      "evidence": "artifacts/verify/t07a.json"
+    },
+    {
+      "scope": "T07b 任务：init_task 任务列表、per-CPU current、选中 task、state、父子、mm、栈、runqueue 摘要（解析器自身）",
+      "command": "node scripts/verify-t07b.mjs",
+      "result": "19/19 通过（真实 QEMU 8.2.10 + 真实 Linux 6.12.112 客体；四个真实停点各跑一遍 GDB 侧独立对照）。对照物是与解析器机制不同的第二套实现：类型与字段偏移由 GDB 自己的 DWARF 解释（gdb.lookup_type 与 &((T*)0)->f），per-CPU 基址取自 CPU 寄存器 %gs，任务链表/子进程链表/线程组由 GDB 自己走；我方 per-CPU 基址取自 __per_cpu_offset[0]，字节全部经服务的线性地址读。V1 readelf / 服务符号表 / 布局产物三方对 init_task 事实一致（0xffffffff81e0a940，符号大小 7296 等于布局里 task_struct），必需类型 54 个缺失 0；V2 三条互不相干的来源（__per_cpu_offset[0]、GDB 的 %gs 基址、停点帧里的 %gs 隐藏基址）算出同一个基址 0xffff88801f400000，两条机制算出的 current 也是同一个地址；V3 停点落在 ext2_file_read_iter 上且 current 就是 lab-read（认领用最小读取，不靠 pid 猜）；V4/V11 各逐字段比对 30 项、不一致 0；V5 47 个任务的节点地址集合与 pid/tgid 集合两边完全相同、无截断无误报环；V6/V6b 父子关系与 children 集合一致（sh pid61 的 children 就是 lab-read；lab-cow pid64 只 fork 出 pid65，real_parent 与 parent 双回指）；V7 线程组一致；V8 THREAD_SIZE 由 __end_init_stack − __start_init_stack 现场算出 16384（不是写死）且停点 rsp 落在 current 的内核栈区间内；V9 runqueue 八项摘要 0 不一致、rq 地址不乘 sizeof(struct rq)、rq.curr 就是 current；V10 状态解码与 sched.h / fs/proc/array.c 现场重解析一致（22 组 (__state, exit_state)、字符表 RSDTtXZPI、fls 0..8191 逐值一致）；V11 僵尸陷阱（__state 已无任何可报告位，只有 exit_state=0x20 才认得出 Z，mm 已被 exit_mmap 之外的内核路径摘掉，do_notify_parent 的 rdi 就是它）；V12 回收态（release_task 的 rdi 就是被回收的任务，它此刻仍在任务链表上，exit_state 已从 ZOMBIE 变 DEAD(0x10)，发起回收的 current 是父进程）；V13 limit 真截断并如实标记、越界 CPU 与非 per-CPU 符号被明确拒绝；V14 KernelTask → ProcessRef 契约；V15 会话关闭后无残留 QEMU/GDB 进程。本轮修掉两个真实缺陷，都属于「看起来像内核或 GDB 出错、其实在工具链」：(1) Node 的 JSON.parse 把超过 2^53 的整数字面量变成双精度数，GDB 侧对照数据里的内核地址因此被就近取整 —— 精确值 0xffffffff81e0a940 被读成 0xffffffff81e0a800（恰好是另一个符号 rootfs_fs_type 的地址，于是整件事看起来像符号解析错乱），0xffff88801f42cc80 被读成 0xffff88801f42d000；症状极具误导性：pid 这类小整数全对、地址全偏几百字节，表现为「pid 集合相同、地址集合不同」，9 项检查因此假失败。已改为带字符串感知的无损读取 parseBigJson（只给字符串之外的 16 位以上整数字面量加引号），并顺带发现旧版落盘的对照文件本身也已被写坏。(2) GDB 的 Python 把 $gs_base 这类寄存器值以有符号形式交回（真值 0xffff88801f400000 变成 -131391115231232），而 Python 的 int 不会按 64 位回绕，per-CPU 地址算成巨大负数后 read_memory 直接抛 MemoryError，对照脚本在写出 tasks/runqueue 之前就中止，留在证据里的症状只是「GDB 侧 0 个任务」；已加 u64() 归一化，并把 init_task 读取包进 try、把未归一的地址记进 probe 字段。另：对照数据与失败时的 GDB 控制台输出现在都落盘到 artifacts/verify/t07b-reference-stop*.json，不再只留在临时目录里跑完即删",
+      "evidence": "artifacts/verify/t07b.json"
+    },
+    {
+      "scope": "T07c 地址空间：选中 mm/VMA、页表、PFN、权限、选中 folio（解析器自身）",
+      "command": "node scripts/verify-t07c.mjs",
+      "result": "28/28 通过（真实 QEMU 8.2.10 + 真实 Linux 6.12.112 客体；四个真实停点：lab-read 读文件（ext2_file_read_iter）、lab-memory munmap、lab-cow 子进程 do_exit（COW 刚发生）、lab-cow 父进程 munmap）。对照物是与解析器机制不同的第二套实现（scripts/t07c-gdb-reference.py）：类型/字段偏移/枚举取值全部来自 GDB 自己的 DWARF 解释（gdb.lookup_type、&((T*)0)->f、sizeof(((T*)0)->f)、gdb.parse_and_eval('PG_lru')），current/mm 取自 CPU 寄存器 %gs + pcpu_hot.current_task（我方走 __per_cpu_offset[0]），页表遍历由参照脚本自己重写（逐级读条目、判 PS、算大页与页内偏移），连直映射偏移都不抄常量而是现场用「mm->pgd 线性地址 − 帧里 CR3 物理地址」解出来、再校验 512 GiB 对齐与落在内核半区；第五条通道是现场重解析内核源码（VMA 是 maple 树不是链表、maple 槽区间与 anon_vma、page_type 四段宏、pageflags 枚举、elf_map/elf_load 的两段式布局、linear_page_index 公式、vmemmap 的 mem_section 遍历）；第六条通道是客体自己那份 ELF（用 debugfs 从 artifacts/rootfs.img 取 /bin/lab 并比 sha256，确认客体执行的与构建产物同一份）。逐项：V1e 布局清单的 5 个结构宽度与 GDB 的 sizeof 逐项一致（page=64/folio=256/mm=1216/vma=160/maple_node=256）；V4a 三条互不相干来源算出同一个 current 与 mm；V4b mm_struct 26 个字段逐字段（按每个字段自己的 DWARF 宽度）与 GDB 一致、&mm->mm_mt 相同；V4c 直映射偏移现场解出 0xffff888000000000 且等于编译期常量；V5/V5b maple 树根形态/ma_flags/height/区间集合/节点地址与类型与 GDB 自己重写的遍历逐项相同，7 条 VMA×9 字段共 84 次比对不一致 0、每条 VMA 的槽区间都等于 [vm_start, vm_end−1]；V6 记账三方一致（total=248 exec=169 stack=33 data=42 = 6+2+34 文件段/BSS/堆，VMA 条数等于 map_count）；V7 每个 PT_LOAD 的文件段恰好是一条挂 vm_file 的 VMA（起点段页首、终点 ELF_PAGEALIGN(p_filesz+页内偏移)、权限三位与段 flags 一致、vm_pgoff=(p_offset−页内偏移)>>12），p_memsz>p_filesz 时紧邻的匿名 BSS 段也是一条不挂文件的 VMA，整段逐页都有 VMA 且权限一致；V8 同一线性地址的页表遍历四方（我们/GDB/服务/QEMU gva2gpa）逐级条目物理地址、原始值、指向物理地址、最终物理地址与页大小全部相同；V9 PFN→struct page 的 vmemmap 基址三路一致（我方按 mem_section 现场解、GDB 用真正的 sizeof(struct mem_section) 解、编译期常量 __VMEMMAP_BASE_L4，section 的 present/has_mem_map 两位都立着）；V9b 页表页的身份：CR3 指的顶层 pgd 页 page_type 是「没有类型」的 0xffffffff（x86_64 的 _pgd_alloc() 只调 __get_free_pages(GFP_PGTABLE_USER,…)、不走 pagetable_pte_ctor()），下三级表页每一页 page_type>>24 都等于源码里的 PGTY_table(0xf2)，且与 GDB 逐页框读出的字段相同；V10 文件页 folio 的 mapping 等于 vm_file->f_mapping、index 等于按 linear_page_index() 现场重解析算出的值、不是匿名页；V11 匿名页两页各翻译到一个物理页、物理字节正是客体写入的 A/B、mapping 带匿名低位指向本 VMA 的 anon_vma、index 等于虚拟页号、两页页框不同；V12a COW 同一时刻（子进程停在 do_exit 第一条指令、exit_mm 还没跑）：同一个 VA 在子/父两侧各一个物理页，子页字节 C、父页字节 A，两页 _mapcount 都是 0（各自只被一个页表项映射；若没发生 COW 这里该是 1=映射两次），mapping 各自指向自己 VMA 的 anon_vma（两个 anon_vma 不是同一个对象），子父 mm_struct 不同，GDB 读的字段相同、子侧页表四方一致、当前 CR3（子进程）翻译出的正是子进程那一页；V12b 父进程那一侧四条通道（我们/GDB/服务/QEMU）给出同一个物理地址 0x2284000，且这个页框与停点三读到的父进程页框是同一个（父进程从 fork 到 munmap 一直握着原来那一页）；V12c COW 的分裂两个方向都闭合；V13 边界逐条正确（空洞报 not-present、mm/vma 为 0 报 null-mm/null-vma、VMA 序号越界与负数报 vma-index-out-of-range、页框号超出 section 总数被拒、负物理地址与直映射偏移落在用户半区都被拒、maxDepth 真截断、index 上限过滤生效，共 8 条抛错断言逐条比 code 与 message）；V14 契约对象诚实（VMA 地址/区间/权限串/来源标签与结构字段一一对应、fileOffset 是字节口径而匿名映射为 null、AddressSpaceRef.pgdPhysical 等于 CR3 里的物理地址、mm->start_code 为 0 被翻成 null）；V15 会话关闭无残留 QEMU/GDB。本轮修掉三个真实缺陷并修正一条判据：(1) **T06 分页解析器的保留位判据过严**（正是 T07c 的四方对照撞出来的）：原实现把 52..63 全当保留位、只对 EFER.NXE=1 与 CR4.PKE=1 豁免，于是在没开 PKU 的客体上，fork 把 COW 页 PTE 写保护时搬进 bit 58 的脏位（_PAGE_BIT_SAVED_DIRTY=_PAGE_BIT_SOFTW5=58，见 arch/x86/include/asm/pgtable_types.h 把 57/58 标成 available for programmer）被当成硬件违规，raw=0x8400000002284025 这样一个正常 PTE 被判成「保留位非 0、翻译失败」，而同一地址我们/GDB/QEMU 三方都说 0x2284000 —— 把一个正在被访问的地址报成坏的。已按 SDM（4 级页表 PTE：51:12 物理地址、58:52 Ignored、62:59 保护键或 Ignored、63 XD）与 QEMU 的实际模型（MAKE_64BIT_MASK(cpu->phys_bits, 52 - cpu->phys_bits)）改成「只把 [maxPhysBits,52) 与 NXE 关闭时的 bit 63 算保留位」，并删掉随之不再需要的 PagingContext.protectionKeys；tests/paging.test.mjs 的保留位用例改成 maxPhysBits=48 + bit 50，并新增「SDM 的忽略位（54/58）不算保留位」的回归用例（单测 147/147 通过、tsc --noEmit 干净，T06 服务层验收已重跑复核）。(2) 参照脚本把 mm_struct 字段一律按 8 字节读，而 mm_users/mm_count 是 4 字节 atomic_t，拼出 863047908327425 这种怪数导致 V4b 假失败；已改成按每个字段自己的 DWARF 宽度读并记录 mmFieldWidths。(3) 验收脚本自身的竞态：断点认领的基线帧号原来在 continue 之后取，会把「刚 continue 就立刻停」的那一次当作基线吞掉，机器卡在停点上、递进去的命令也不执行（表现为停点三连续 8 次 0 命中）；已改成 continue 之前取基线，continue 与 terminal.input 都带重试并检查响应码，且 COW 段落失败不再中断整轮而是如实标记，另把认领失败的诊断（帧数/停止信号数/QMP 停点次数/断点对象 pending 与地址/会话状态/pendingCapture）落进证据。(4) 判据修正：匿名页 _refcount 不能拿 === 1 当「没被共享」的判据 —— 内核 6.12 的 folio_add_lru() 走每 CPU 待入队批次，__folio_batch_add_and_move() 里先 folio_get(folio)，要等批次刷进 LRU（folio_batch_move_lru() 末尾 folios_put()）才还掉，而 PG_lru 也是那时才置上，所以「刚建好映射的页」比「已落到 LRU 的页」多 1 次引用（停点三实测：子进程页 refcount=2 且无 PG_lru，父进程页 refcount=1 且有 PG_lru，各自都等于「映射数 1 + 是否还在批次里」）；是否还被共享要看 _mapcount（实测两页都是 0）。判据已按这条规则改写并写清依据",
+      "evidence": "artifacts/verify/t07c.json"
+    }
+  ],
+  "stopBarrier": {
+    "field": "x-oslab-capture.fenceSeq / x-oslab-capture.frameBoundary（含 pendingBlockRequests、pendingHostIoDone）以及事件里的 capture.fence",
+    "serializationPoint": "全部 vCPU 已 stopped（cs->stopped）+ main loop 的 QMP BH + 持有 BQL。两条推论：客体不可能再发起新请求；宿主块层完成回调也要拿 BQL，不可能插进采集过程。因此「取台账快照 → 记录 fence → 读设备状态」之间没有会改变 pending 集合的事件",
+    "order": "先取 pending 台账快照 → 再记录 capture.fence（value = 此刻 pending 块请求数）→ eventWatermark 取 fence 自己的 seq。于是「seq <= watermark」与「属于这一帧」严格等价，block.complete 不会被误归属到前一帧",
+    "fenceMissing": "采集关闭或 kind 掩码把 capture.fence 排除时，fenceSeq = 0，eventWatermark 退回 x_oslab_event_watermark()，frameBoundary.fenceRecorded = false，读取方按「本帧无 fence」解释",
+    "captureDoesNot": [
+      "不 drain：不把待完成请求做完、不给设备补完成回调、不替客体推进请求状态机",
+      "不推进虚拟时钟（不读 PIT/APIC 计数端口、不触发 timer 到期、不算 APIC current_count 之外的相位）",
+      "不清中断、不确认 PIC/APIC 的 IRQ、不读 APIC 的 MMIO 窗口",
+      "不发 block.complete、不改 virtio 请求的状态字节"
+    ],
+    "patch": "patches/0005-t05e-stop-barrier.patch（只在 virtio-blk 的提交登记点、host 完成回调、状态字节回写可见点，以及 virtio_blk_free_request / virtio_cleanup 两处幂等清理落点；不新增命令、不改事件环布局）"
+  },
+  "pendingIo": {
+    "field": "x-oslab-capture.pendingIo（pendingIo.blockRequests 数组 + count / hostIoDoneCount / ledgerCapacity / ledgerOverflow / notes）",
+    "pendingCriterion": "pending = 状态字节有没有回写客体，即 virtio_blk_req_complete() 里的 stb_p(&req->in->status) 有没有执行；不是「宿主块层还在不在忙」",
+    "barrierObservability": "停机屏障（stop/pause 等任何让全部 vCPU 停止的动作）走 vm_state_notify → virtio_vmstate_change（hw/virtio/virtio.c）→ virtio_bus_stop_ioeventfd → virtio_blk_data_plane_stop（hw/block/dataplane/virtio-blk.c，函数体注释「Wait for virtio_blk_dma_restart_bh() and in flight I/O to complete」）→ blk_drain（block/block-backend.c：bdrv_drained_begin + AIO_WAIT_WHILE(blk->in_flight > 0)）；blk_root_drained_begin 在 qatomic_fetch_inc(&tgm->io_limits_disabled) == 0 时调 throttle_group_restart_tgm（block/throttle-groups.c），后者 timer_del + timer_cb 取消并立即触发节流定时器、qemu_co_queue_next 放行被挂起的请求，此后 throttle_group_schedule_timer 因 io_limits_disabled 直接返回 false。所以对 virtio-blk：停机屏障处 host-io-pending 不可观测，屏障处真正还能读到的是设备层已挂起的请求（host-io-done-awaiting-visibility，例如 werror=stop 把请求挂到 s->rq）；且 blk_drain 的 AIO_WAIT_WHILE 只等宿主 in_flight、不等状态字节回写，两件事在屏障处仍可并存。该结论已写进 x-oslab-events.h 的台账文档与运行时 capabilities.pendingIo.barrierObservability",
+    "states": {
+      "host-io-pending": "hostIoDone = false：宿主块层还在搬数据，客体状态字节肯定还没写",
+      "host-io-done-awaiting-visibility": "hostIoDone = true：宿主完成回调已进入（数据已落到客体内存、或已失败），但状态字节还没写回"
+    },
+    "fields": [
+      "deviceId",
+      "deviceIndex",
+      "requestId",
+      "requestIdRaw",
+      "lba",
+      "byteOffset",
+      "length",
+      "reqType",
+      "op",
+      "outSeg",
+      "inSeg",
+      "hostIoDone",
+      "state",
+      "submitSeq",
+      "hostDoneSeq"
+    ],
+    "ledger": "accel/tcg/x-oslab-events.c 的固定 512 条 XOslabBlockInflight 台账，QemuSpin 保护、数组紧凑（移除用 memmove 前移），容量溢出计入 ledgerOverflow 而非静默丢弃；requestId 与 dma.* / block.* 事件同一个关联 id",
+    "coverage": "只覆盖 virtio-blk 的读写请求（VIRTIO_BLK_T_IN/OUT），与 block.submit / block.complete 同一覆盖范围；其它设备与 virtio-blk 的其它请求类型不登记",
+    "resetHazard": "virtio_blk_reset() 与 virtio_blk_dma_restart_bh() 的 purge 分支对挂在 s->rq 上的请求直接 virtqueue_detach_element() + virtio_blk_free_request()，既不写状态字节也不发 block.complete；virtio_blk_free_request() 里无条件清台账条目、virtio_cleanup() 清整设备条目，避免描述符索引复用后新请求撞上幽灵条目"
+  }
+}

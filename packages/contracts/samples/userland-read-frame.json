@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "sessionId": "sample-t01-userland",
+  "epoch": 1,
+  "frameId": 2,
+  "parentFrameId": 1,
+  "requestId": "sample-userland-1",
+  "captureId": "cap-t01-userland-1",
+  "executionMode": "recorded",
+  "stop": {
+    "reason": "unknown",
+    "rawReason": "内核已完成启动并进入 tty1 shell；本帧记录用户态程序 lab-read 的实际输出",
+    "pc": null,
+    "cpuId": 0,
+    "previousPc": null
+  },
+  "eventRange": {
+    "first": null,
+    "last": null
+  },
+  "coverage": {
+    "memory": "full-ram-delta",
+    "events": "lost",
+    "unavailable": [
+      "cpu.memory-access-events",
+      "device.vga",
+      "device.i8042",
+      "device.virtio-blk.events",
+      "os.processes"
+    ]
+  },
+  "cpu": {
+    "cpuId": 0,
+    "mode": "long-64",
+    "cpl": 3,
+    "rip": null,
+    "rsp": null,
+    "general": [],
+    "segments": {},
+    "control": {
+      "cr0": null,
+      "cr2": null,
+      "cr3": null,
+      "cr4": null,
+      "cr8": null
+    },
+    "efer": null,
+    "eflags": null,
+    "halted": false,
+    "instruction": {
+      "address": null,
+      "bytes": null,
+      "text": null,
+      "length": null,
+      "evidence": "unavailable"
+    },
+    "evidence": "本帧未连接 GDB，只采集了客体终端输出与文件系统内容；CPU 字段全部为 null，避免用「猜一个值」代替真实寄存器。"
+  },
+  "memory": [
+    {
+      "addressSpace": "linear",
+      "address": "0x7ffff7ff6000",
+      "length": 4096,
+      "coverage": "recorded",
+      "blobRef": null,
+      "reason": "lab-memory 输出的匿名映射首地址，仅记录地址，字节未采集"
+    }
+  ],
+  "devices": [],
+  "diskVersions": {
+    "virtio-blk-0": "v1"
+  },
+  "os": null,
+  "source": {
+    "path": "labs/linux-x86_64/lab.c",
+    "fileHash": "d31d41dea0d9704895621f41b622f8d59209ad78952784817e3bcf1e6f08b763",
+    "symbol": "read_file",
+    "line": 25,
+    "column": 1,
+    "module": "user-elf"
+  },
+  "lesson": {
+    "lessonId": "U03-user-program",
+    "stage": "terminal",
+    "title": "用户程序发起文件读取",
+    "reason": "客体执行 lab-read，输出内容与构建时写入的 hello.txt 逐字节一致",
+    "checksPassed": true
+  },
+  "evidence": {
+    "terminal.output": { "kind": "observed", "source": "serial", "captureId": "cap-t01-userland-1", "refs": ["artifacts/logs/t01e-userland.log"] },
+    "file.hello.txt": { "kind": "observed", "source": "guest-shell", "captureId": "cap-t01-userland-1", "refs": ["guest:sha256=700307b9ce25083d541ef278e41b2eff476bbb052d39e14efa2fdd6fe606d4bb"] },
+    "file.probe.bin": { "kind": "observed", "source": "guest-shell", "captureId": "cap-t01-userland-1", "refs": ["guest:sha256=e398d94118190394242b039193a1a3907a13e91a54500b8e53ec236922cd7bdd"] },
+    "kernel.release": { "kind": "observed", "source": "guest-shell", "captureId": "cap-t01-userland-1", "refs": ["guest:uname=6.12.112-observatory"] },
+    "cpu.rip": { "kind": "unavailable", "source": "gdb", "refs": [], "reason": "本帧未连接调试器" },
+    "device.virtio-blk.events": { "kind": "unavailable", "source": "observer", "refs": [], "reason": "标准 QEMU 的 dma_* trace 不覆盖 virtio-blk 的 blk_aio 路径，T05c 需在 virtqueue 层补采" }
+  },
+  "recording": {
+    "reconstructible": false,
+    "checkpointFrameId": 1,
+    "instructionGaps": [
+      { "fromFrameId": 1, "toFrameId": 2, "note": "内核启动全过程未逐条记录指令，只有终端输出与文件内容" }
+    ],
+    "memoryGaps": ["除匿名映射首地址外，未采集该进程内存内容"],
+    "events": "lost",
+    "note": "本帧覆盖标记为 lost：virtio 块 I/O 事件未被采集，完整性验收不通过"
+  },
+  "committedAt": "2026-10-15T17:20:02Z"
+}

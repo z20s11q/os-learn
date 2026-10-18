@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Linux 是怎么启动的 · 一步一步看 CPU 与内存</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="boot/story.css">
+</head>
+<body>
+<div id="viewport">
+  <div id="stage">
+    <header class="top">
+      <div class="brand"><b>Linux 是怎么启动的</b><small>从通电到 shell · 每一步都是一条真实指令</small></div>
+      <ol id="acts"></ol>
+    </header>
+
+    <section class="panel cpu" data-spot="cpu">
+      <div class="cpu-head" data-spot="cpu-head">
+        <h2>CPU<span>中央处理器</span></h2>
+        <div class="pill mode" id="modePill">未通电</div>
+        <div class="pill ring" id="ringPill">—</div>
+        <div class="pill lamp" id="ifPill"><i></i>中断</div>
+      </div>
+      <div class="box fetch" data-spot="fetch" data-anchor="fetch">
+        <div class="box-title">① 取指令：下一条指令在哪里？</div>
+        <div class="formula" id="fetch"></div>
+      </div>
+      <div class="box insn" data-spot="insn" data-anchor="insn">
+        <div class="box-title">② 正在执行</div>
+        <div class="insn-text" id="insn">—</div>
+        <div class="insn-mean" id="insnMean"></div>
+      </div>
+      <div class="box regs" data-spot="regs">
+        <div class="box-title">③ 通用寄存器<small>CPU 手边的小格子，每格存一个数</small></div>
+        <div class="reg-grid" id="regs"></div>
+      </div>
+      <div class="box segs" data-spot="seg">
+        <div class="box-title">段寄存器<small>选择子 · 段起点</small></div>
+        <div class="seg-grid" id="segs"></div>
+      </div>
+      <div class="box ctls" data-spot="ctl">
+        <div class="box-title">控制寄存器<small>决定 CPU 工作在什么模式</small></div>
+        <div class="ctl-grid" id="ctls"></div>
+      </div>
+      <div class="units" id="units" data-spot="units"></div>
+    </section>
+
+    <section class="panel mem" data-spot="mem">
+      <div class="panel-head"><h2>内存<span>每格 1 字节，按地址排列</span></h2><div class="legend" id="memLegend"></div></div>
+      <svg id="memSvg" viewBox="0 0 588 772" preserveAspectRatio="none"></svg>
+    </section>
+
+    <section class="panel code" data-spot="code">
+      <div class="panel-head"><h2>源代码<span id="codeLang">—</span></h2><div class="code-file" id="codeFile"></div></div>
+      <div class="code-body" id="codeBody"><pre id="codeLines"></pre></div>
+    </section>
+
+    <section class="panel focus" data-spot="focus">
+      <div class="panel-head"><h2 id="focusTitle">数据结构</h2></div>
+      <div class="focus-body" id="focusBody"></div>
+    </section>
+
+    <section class="panel dev" data-spot="dev">
+      <div class="devices">
+        <div class="device" id="dev-cdrom" data-anchor="cdrom"><i class="ico disc"></i><b>光盘</b><small>boot.iso</small></div>
+        <div class="device" id="dev-disk" data-anchor="disk"><i class="ico hdd"></i><b>磁盘</b><small>/dev/vda ext2</small></div>
+        <div class="device" id="dev-kbd" data-anchor="kbd"><i class="ico kbd"></i><b>键盘/串口</b><small>你的输入</small></div>
+      </div>
+      <div class="screen" data-anchor="screen">
+        <div class="screen-title" id="screenTitle">显示器</div>
+        <pre id="screen"></pre>
+      </div>
+    </section>
+
+    <footer class="sub">
+      <div class="sub-meta"><span id="actChip"></span><span id="stepChip"></span></div>
+      <div id="caption"></div>
+      <div class="progress"><i id="progressBar"></i></div>
+    </footer>
+    <svg id="flows" viewBox="0 0 1920 1080"></svg>
+  </div>
+</div>
+
+<div id="controls">
+  <button id="prevAct" title="上一章（PageUp）">« 上一章</button>
+  <button id="prevOp" title="上一步（←）">‹ 上一步</button>
+  <button id="play" title="播放 / 暂停（空格）">播放</button>
+  <button id="nextOp" title="下一步（→）">下一步 ›</button>
+  <button id="nextAct" title="下一章（PageDown）">下一章 »</button>
+  <select id="speed" title="速度"><option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option></select>
+  <button id="mute" title="声音（M）">声音：开</button>
+  <input id="seek" type="range" min="0" max="1000" value="0" title="进度">
+</div>
+<script type="module" src="boot/story.js"></script>
+</body>
+</html>

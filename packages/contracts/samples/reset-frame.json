@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "sessionId": "sample-t01-reset",
+  "epoch": 1,
+  "frameId": 0,
+  "parentFrameId": null,
+  "requestId": "sample-reset-1",
+  "captureId": "cap-t01-reset-1",
+  "executionMode": "recorded",
+  "stop": {
+    "reason": "reset",
+    "rawReason": "QEMU 以 -S 启动，vCPU 停在复位后的第一条取指位置",
+    "pc": "0xfffffff0",
+    "cpuId": 0,
+    "previousPc": null
+  },
+  "eventRange": {
+    "first": "1",
+    "last": "2"
+  },
+  "coverage": {
+    "memory": "selected-pages",
+    "events": "filtered",
+    "unavailable": [
+      "cpu.memory-access-events",
+      "device.vga",
+      "device.i8042",
+      "device.virtio-blk",
+      "os.objects"
+    ]
+  },
+  "cpu": {
+    "cpuId": 0,
+    "mode": "real-16",
+    "cpl": 0,
+    "rip": "0xfffffff0",
+    "rsp": "0x0",
+    "general": [
+      { "name": "eax", "width": 32, "value": "0x0" },
+      { "name": "ebx", "width": 32, "value": "0x0" },
+      { "name": "ecx", "width": 32, "value": "0x0" },
+      { "name": "edx", "width": 32, "value": "0x60fb1" },
+      { "name": "esi", "width": 32, "value": "0x0" },
+      { "name": "edi", "width": 32, "value": "0x0" },
+      { "name": "ebp", "width": 32, "value": "0x0" },
+      { "name": "esp", "width": 32, "value": "0x0" }
+    ],
+    "segments": {
+      "cs": { "selector": "0xf000", "base": "0xffff0000", "limit": "0xffff", "attributes": "0x9b00", "usable": true },
+      "ss": { "selector": "0x0", "base": "0x0", "limit": "0xffff", "attributes": "0x9300", "usable": true },
+      "ds": { "selector": "0x0", "base": "0x0", "limit": "0xffff", "attributes": "0x9300", "usable": true },
+      "es": { "selector": "0x0", "base": "0x0", "limit": "0xffff", "attributes": "0x9300", "usable": true },
+      "fs": { "selector": "0x0", "base": "0x0", "limit": "0xffff", "attributes": "0x9300", "usable": true },
+      "gs": { "selector": "0x0", "base": "0x0", "limit": "0xffff", "attributes": "0x9300", "usable": true }
+    },
+    "control": {
+      "cr0": "0x60000010",
+      "cr2": "0x0",
+      "cr3": "0x0",
+      "cr4": "0x0",
+      "cr8": "0x0"
+    },
+    "efer": "0x0",
+    "eflags": "0x2",
+    "halted": false,
+    "instruction": {
+      "address": "0xfffffff0",
+      "bytes": "0xea5be000f0",
+      "text": "ljmp $0xf000:$0xe05b",
+      "length": 5,
+      "evidence": "decoded"
+    },
+    "evidence": "GDB `monitor info registers`: EIP=0000fff0, CS=f000 base=ffff0000 limit=0xffff attr=0x9b00, CR0=60000010, CR3=0, CR4=0, EFER=0；`monitor xp/16xb 0xfffffff0` 得 ea 5b e0 00 f0 30 36 2f 32 33 2f 39 39 00 fc 00。rip 字段是线性地址，由 CS 隐藏基址与 EIP 相加得到；原始 EIP 可从 segments.cs.selector/base 与 event 1 还原。"
+  },
+  "memory": [],
+  "devices": [],
+  "diskVersions": {},
+  "os": null,
+  "source": null,
+  "lesson": {
+    "lessonId": "L00-reset",
+    "stage": "boot",
+    "title": "CPU 复位与第一条固件指令",
+    "reason": "PC 等于复位向量 0xfffffff0，CR0.PE=0 且 EFER.LME=0，处于 16 位实模式",
+    "checksPassed": true
+  },
+  "evidence": {
+    "cpu.rip": { "kind": "observed", "source": "gdb", "captureId": "cap-t01-reset-1", "refs": ["monitor-info-registers#EIP", "event:1"] },
+    "cpu.segments.cs": { "kind": "observed", "source": "gdb", "captureId": "cap-t01-reset-1", "refs": ["monitor-info-registers#CS"] },
+    "cpu.control": { "kind": "observed", "source": "gdb", "captureId": "cap-t01-reset-1", "refs": ["monitor-info-registers#CR0"] },
+    "rom.bytes@0xfffffff0": { "kind": "observed", "source": "gdb", "captureId": "cap-t01-reset-1", "refs": ["monitor-xp#0xfffffff0"], "reason": "仅采集复位向量 16 字节，未采集整页 ROM" },
+    "cpu.instruction": { "kind": "decoded", "source": "disassembler", "captureId": "cap-t01-reset-1", "refs": ["event:1"], "reason": "按 Intel 手册 x86-64 解码，未做电气总线采样" },
+    "device.vga": { "kind": "unavailable", "source": "observer", "refs": [], "reason": "T05d 设备快照尚未实现" },
+    "os.objects": { "kind": "unavailable", "source": "linux-decoder", "refs": [], "reason": "复位时刻尚未进入内核" }
+  },
+  "recording": {
+    "reconstructible": true,
+    "checkpointFrameId": 0,
+    "instructionGaps": [],
+    "memoryGaps": ["0xfffff000-0xffffffff 仅记录了 16 字节复位向量"],
+    "events": "filtered",
+    "note": "本帧为会话起点，事件为按教学点筛选后的区间记录，不是完整指令流"
+  },
+  "committedAt": "2026-10-15T17:20:00Z"
+}

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Linux 内核执行流程动画 · CPU / 内存 / 设备逐跳演示</title>
+<style>/*STYLE*/</style>
+</head>
+<body>
+<header class="top">
+  <div class="brand"><b>Linux 6.12 内核</b><span>执行流程动画</span></div>
+  <nav class="stories" id="stories" aria-label="选择流程"></nav>
+  <div class="ctrl">
+    <span class="grp" title="大步：一个步骤（含多次调用）">
+      <button type="button" id="b-prev" title="大步后退：跳回本步第一跳；已在第一跳时跳到上一步第一跳（←）">« 大步</button>
+      <button type="button" id="b-cprev" title="小步后退：跳到上一跳落地后的状态（Shift+← 或 ,）">‹ 小步</button>
+    </span>
+    <button type="button" id="b-play" class="play" title="播放 / 暂停（空格）">▶</button>
+    <span class="grp">
+      <button type="button" id="b-cnext" title="小步前进：跳到下一跳落地后的状态并暂停（Shift+→ 或 .）">小步 ›</button>
+      <button type="button" id="b-next" title="大步前进：跳到下一步的第一跳并暂停（→）">大步 »</button>
+    </span>
+    <span class="pos" id="pos" title="当前位置：第几步 · 第几跳"></span>
+    <select id="b-speed" title="播放速度">
+      <option value="0.5">0.5×</option><option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.5">1.5×</option><option value="2">2×</option><option value="3">3×</option>
+    </select>
+    <label class="chk" title="每一步讲完后自动暂停"><input type="checkbox" id="b-steppause">每步暂停</label>
+    <span class="clock" id="clock">0:00 / 0:00</span>
+    <button type="button" id="b-view" title="在机器视图与时序图视图之间切换（V）">时序图视图</button>
+    <button type="button" id="b-theme" title="切换明暗">◐</button>
+    <button type="button" id="b-deep" title="查看真实源码、虚实地址与用户/内核态切换">代码与内存</button>
+    <button type="button" id="b-full" title="全屏（F）">全屏</button>
+    <a class="back" href="linux-kernel-architecture.html" title="回到静态全景图与源码">全景图 ↗</a>
+  </div>
+</header>
+<section class="deep" id="deep" aria-label="代码与内存深度视图"></section>
+<div class="tlrow">
+  <div class="ctxpill" id="ctxpill"></div>
+  <div class="tl" id="tl"><div class="tl-segs" id="tl-segs"></div><div class="tl-prog" id="tl-prog"></div><div class="tl-head" id="tl-head"></div></div>
+  <div class="hint">空格 播放/暂停 · ←→ 大步 · Shift+←→ 或 , . 小步 · 1/2/3 切流程 · V 切视图</div>
+</div>
+<main class="stage" id="stage">
+  <div class="lanes" id="lanes"></div>
+  <div class="view" id="view">
+    <div class="body" id="body"></div>
+  </div>
+  <div class="machv" id="mach"></div>
+  <div class="caption" id="caption"></div>
+  <div class="overlay" id="intro"></div>
+  <div class="overlay" id="outro"></div>
+</main>
+<section class="panel">
+  <article class="card" id="card-step"></article>
+  <article class="card" id="card-call"></article>
+  <article class="card map" id="card-map"><h4 class="seqonly">组件地图 <small>本步经过的组件与跳转路径</small></h4><div id="map" class="seqonly"></div><div id="mstate" class="machonly"></div></article>
+</section>
+<script>/*DATA*/</script>
+<script>/*ENGINE*/</script>
+</body>
+</html>

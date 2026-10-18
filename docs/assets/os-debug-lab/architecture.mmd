@@ -1,0 +1,20 @@
+flowchart LR
+  UI["实时调试网页<br/>终端与视图"]
+  SERVER["实验服务<br/>采集与回放"]
+  GDB["GDB / MI<br/>断点与单步"]
+  OBS["QMP 观察扩展<br/>设备与访问"]
+  VM["QEMU 虚拟机<br/>运行 Linux 程序"]
+  DATA["执行证据<br/>寄存器与内存<br/>访问事件"]
+  DECODE["Linux 解析<br/>进程与文件<br/>地址与页表"]
+  LESSON["旁栏说明<br/>语义与原理"]
+  UI -->|调试操作| SERVER
+  SERVER --> GDB
+  SERVER --> OBS
+  GDB --> VM
+  OBS <--> VM
+  VM --> DATA
+  DATA --> DECODE
+  DATA --> SERVER
+  DECODE --> SERVER
+  LESSON --> SERVER
+  SERVER -->|同帧状态| UI

@@ -1,0 +1,64 @@
+{
+  "schema": "oslab.capabilities/1",
+  "probedAt": "2026-10-15",
+  "qemuVersion": "8.2.10",
+  "capabilities": {
+    "kernelFastBoot": {
+      "status": "verified",
+      "evidence": "artifacts/logs/t01b-kernel-fast.log",
+      "command": "qemu-system-x86_64 -kernel bzImage -initrd initramfs.cpio.gz -drive file=<copy of rootfs.img>,format=raw,if=none,id=rootdisk -device virtio-blk-pci,drive=rootdisk -serial stdio"
+    },
+    "isoGrubBoot": {
+      "status": "verified",
+      "evidence": "artifacts/logs/t01d-iso-boot.log, artifacts/build/t01d-rootfs.img",
+      "note": "boot.iso 使用 El Torito BIOS 启动，内含 grub.cfg 的 linux16/initrd16 入口；GRUB 菜单走 console 输出，timeout=0 时直接启动默认项"
+    },
+    "resetVectorReadable": {
+      "status": "verified",
+      "evidence": "GDB 连接 -S 暂停的 QEMU，rip=0xe05b cs=0xf000 基址 0xf0000",
+      "note": "复位点 CS:IP 对应物理地址 0xfe05b"
+    },
+    "gdbHardwareBreakpointAtKernelSymbol": {
+      "status": "verified",
+      "evidence": "start_kernel 硬件断点命中于 init/main.c:875，CR3=0x20d6000，EFER=0xd01",
+      "note": "通过 file build/linux/vmlinux 加载符号；vmlinux-gdb.py 的自动加载需要 GDB auto-load 授权，授权缺失时由 GDB 拒绝加载"
+    },
+    "gdbStepInstruction": {
+      "status": "verified",
+      "evidence": "stepi 从 0xe05b 前进，GDB 读取 EIP"
+    },
+    "physicalMemoryRead": {
+      "status": "verified",
+      "evidence": "GDB monitor xp 与 info mtree 可用；pc.ram 0x0-0x1fffffff，pc.bios 0xfffc0000-0xffffffff",
+      "note": "本次验证覆盖 RAM/ROM 读取；MMIO 读取仍待验证，T05a 读取范围限定为只读 RAM/ROM"
+    },
+    "guestUserlandExecution": {
+      "status": "verified",
+      "evidence": "artifacts/logs/t01e-userland.log",
+      "note": "lab-read, lab-memory, lab-write, lab-fork-exec 在客体内真实运行，sha256 与宿主一致"
+    },
+    "qemuDmaBlockTrace": {
+      "status": "unavailable",
+      "evidence": "artifacts/logs/t01c-dma-trace.log 为空；该次 -trace dma_* 捕获事件数为 0",
+      "note": "virtio-blk 通过 blk_aio 路径提交；dma_blk_io 观测点属于 dma-helpers 路径，virtio 请求采集由 T05c 的 virtqueue 层补丁提供"
+    },
+    "qemuCpuMemoryAccessTrace": {
+      "status": "unavailable",
+      "note": "本次标准 QEMU 8.2 探测的 CPU 访存事件能力为 unavailable；该项采集依赖 T05b 补丁"
+    },
+    "qemuPioMmioTrace": {
+      "status": "unavailable",
+      "note": "PIO/MMIO 统一序号事件由 T05b 补丁提供；本次标准 trace 探测结果为 unavailable"
+    },
+    "deviceSnapshotVga": { "status": "unavailable", "note": "本次探测结果为 unavailable；VGA 快照依赖 T05d 观察扩展" },
+    "deviceSnapshotI8042": { "status": "unavailable", "note": "本次探测结果为 unavailable；I8042 快照依赖 T05d 观察扩展" },
+    "deviceSnapshotVirtio": { "status": "unavailable", "note": "本次探测结果为 unavailable；virtio 快照依赖 T05d 观察扩展" },
+    "stopSnapshotCaptureRelease": { "status": "unavailable", "note": "本次探测结果为 unavailable；停止快照采集与释放依赖 T05a 观察扩展" },
+    "qmpStopEventCorrelation": { "status": "unavailable", "note": "T01 探测中该项未验证；关联验证范围见 T03c" }
+  },
+  "knownGaps": [
+    "DMA 块请求观测需要 virtqueue 层补丁（T05c）",
+    "CPU 访存/PIO/MMIO 统一事件需要 QEMU 补丁（T05b）",
+    "T01 实验使用根盘副本 artifacts/build/*-rootfs.img；artifacts/rootfs.img 作为会话基线镜像"
+  ]
+}

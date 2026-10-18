@@ -1,0 +1,97 @@
+--- a/hw/block/virtio-blk.c
++++ b/hw/block/virtio-blk.c
+@@ -104,6 +104,21 @@
+ 
+ static void virtio_blk_free_request(VirtIOBlockReq *req)
+ {
++    /*
++     * x-oslab（T05e）：请求对象销毁时无条件清掉台账条目。
++     *
++     * 正常路径上 virtio_blk_req_complete() 已经移除了它，这里是幂等的第二道
++     * 保险；真正需要它的是一条真实的删除路径：virtio_blk_reset() 与
++     * virtio_blk_dma_restart_bh() 的 purge 分支对挂在 s->rq 上的请求直接
++     * virtqueue_detach_element() + free，既不写状态字节也不发 block.complete。
++     * 少了这道保险，那个请求会永远留在台账里（pending 数虚高），而且描述符索引
++     * 一旦被复用，新请求会和幽灵条目撞上同一个 requestId。
++     */
++    if (req->dev != NULL) {
++        x_oslab_block_inflight_visible(
++            VIRTIO_DEVICE(req->dev)->x_oslab_dev_id,
++            x_oslab_block_request_id(req));
++    }
+     g_free(req);
+ }
+ 
+@@ -133,6 +148,15 @@
+         x_oslab_event_block_complete(vdev->x_oslab_dev_id,
+                                      x_oslab_block_request_id(req), status,
+                                      &x_oslab_info);
++        /*
++         * x-oslab（T05e）：状态字节即将回写客体，这个请求不再 pending。
++         *
++         * 位置紧挨 block.complete：两者描述同一个瞬间，台账的 pending 判据就是
++         * 「这一行有没有执行过」。放在 if 里面（而不是放在 free_request 那种
++         * 兜底位置）才能保证 pending 的含义是「对客体是否可见」。
++         */
++        x_oslab_block_inflight_visible(vdev->x_oslab_dev_id,
++                                       x_oslab_block_request_id(req));
+     }
+ 
+     stb_p(&req->in->status, status);
+@@ -180,6 +204,25 @@
+     while (next) {
+         VirtIOBlockReq *req = next;
+         next = req->mr_next;
++
++        /*
++         * x-oslab（T05e）：宿主块层的完成回调已经进入 —— 读请求的数据此刻已经
++         * 落到客体内存（写请求已经落盘或已失败），但状态字节还没回写客体，请求
++         * 仍然是 pending（对客体不可见）。
++         *
++         * 位置刻意在 qemu_iovec_destroy() 与 ret 分支之前：这两步都会改变现场
++         * （合并请求的 qiov 被清空；错误动作 STOP 会把请求挂到 s->rq 上、本次
++         * 不再完成），而这里要报的是「回调刚进入」这一刻的事实。
++         *
++         * 注意本实验室把 virtio-blk 留在默认主循环（无 iothread），完成回调也要
++         * 拿 BQL，所以「hostIoDone 为真、状态字节还没写」这个窗口极窄；它是一条
++         * 并列事实，不是 pending 的判据。
++         */
++        if (req->x_oslab_tracked) {
++            x_oslab_block_inflight_host_done(vdev->x_oslab_dev_id,
++                                             x_oslab_block_request_id(req));
++        }
++
+         trace_virtio_blk_rw_complete(vdev, req, ret);
+ 
+         if (req->qiov.nalloc != -1) {
+@@ -1110,6 +1153,16 @@
+             x_oslab_event_block_submit(vdev->x_oslab_dev_id,
+                                        x_oslab_block_request_id(req),
+                                        &x_oslab_info);
++            /*
++             * x-oslab（T05e）：登记进 pending 台账（停止屏障用）。
++             *
++             * 紧跟在 block.submit 记录之后，同一个不 yield 的窗口里：块层的完成
++             * 回调最早也要等下一轮主循环，因此不存在「请求已被设备接受、台账里
++             * 却没有」的可观测窗口。台账的 pending 判据见 x-oslab-events.h。
++             */
++            x_oslab_block_inflight_submit(vdev->x_oslab_dev_id,
++                                          x_oslab_block_request_id(req),
++                                          &x_oslab_info);
+         }
+ 
+         /* merge would exceed maximum number of requests or IO direction
+--- a/hw/virtio/virtio.c
++++ b/hw/virtio/virtio.c
+@@ -3318,6 +3318,11 @@
+ 
+     /* x-oslab（T05c）：注销设备，避免事件里的 deviceId 指向已经消失的设备。 */
+     if (vdev->x_oslab_dev_id != 0) {
++        /*
++         * x-oslab（T05e）：设备消失时它的 pending 台账也必须一起消失，否则
++         * pending 数会永远停在非零，停止屏障的报告就不再是真的。
++         */
++        x_oslab_block_inflight_clear_device(vdev->x_oslab_dev_id);
+         x_oslab_device_unregister(vdev->x_oslab_dev_id);
+         vdev->x_oslab_dev_id = 0;
+     }

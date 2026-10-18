@@ -1,0 +1,302 @@
+--- a/hw/virtio/virtio.c
++++ b/hw/virtio/virtio.c
+@@ -31,6 +31,15 @@
+ #include "hw/virtio/virtio-access.h"
+ #include "sysemu/dma.h"
+ #include "sysemu/runstate.h"
++/*
++ * x-oslab 观察扩展（T05c）：dma.read / dma.write 的发射点。
++ *
++ * 本文件在 specific_virtio_ss 里 per-target 编译；该头文件会拉进 tcg/tcg.h
++ * （tcg/tcg.h 自身不引用任何 TCG_TARGET_* 宏，因此不依赖 tcg-target.h），
++ * 于是 hw/ 代码可以直接包含它。真正的实现只有 TCG 构建才有，其余配置下
++ * 头文件里的接口全部退化成静态内联空实现。
++ */
++#include "exec/x-oslab-events.h"
+ #include "virtio-qmp.h"
+ 
+ #include "standard-headers/linux/virtio_ids.h"
+@@ -1558,6 +1567,58 @@
+     return elem;
+ }
+ 
++/*
++ * x-oslab 观察扩展（T05c）：把一个已经映射好的 virtqueue 元素上报成一组
++ * dma.read / dma.write 事件。
++ *
++ * 为什么落点在这里，而不是 virtqueue_map_desc() 内部或 address_space_*：
++ *   - 只有这里同时知道「描述符头索引」（split 队列是 elem->index，packed 队列
++ *     是描述符 id）和「这次映射出来的各段」。请求关联必须带描述符头索引，设备
++ *     层（virtio-blk）才能用同一个 requestId 把 block.submit / block.complete
++ *     与同一批 dma.* 对上；
++ *   - 设备拿到 dma_memory_map() 返回的宿主指针后是直接解引用的（virtio-blk 的
++ *     stb_p(&req->in->status) 就是如此），这类访问不经过 address_space_*，
++ *     地址空间层没有可插桩的落点。按描述符上报访问权，是唯一覆盖设备全部访问
++ *     路径的观察点。
++ *
++ * 上报的是访问权，不是载荷：这里不读内存内容，也不逐个字节采样，事件只保证
++ * 「哪个客体物理区间、哪个方向、属于哪个请求」是真实的。载荷由读取方用
++ * x-oslab-read-physical 独立核对。
++ *
++ * 方向按 virtio 语义：out（TO_DEVICE）描述符是设备读客体内存，in（FROM_DEVICE）
++ * 描述符是设备写客体内存。sector/长度语义与事件里的 size 一致，都是这段映射的
++ * 字节数；描述符跨内存区时 virtqueue_map_desc() 已经把一段拆成多段，这里逐段各报
++ * 一条，因此各段长度之和等于该次描述符链的总长度。
++ */
++static void x_oslab_virtqueue_report_dma(VirtIODevice *vdev, VirtQueue *vq,
++                                         const VirtQueueElement *elem)
++{
++    uint64_t request_id;
++    unsigned int i;
++
++    /*
++     * 设备没注册（x_oslab_dev_id == 0）时不产生事件：宁可不报，也不报一条
++     * 归属不明的记录。关闭采集时 x_oslab_event_dma() 自己会早退。
++     */
++    if (elem == NULL || vdev->x_oslab_dev_id == 0) {
++        return;
++    }
++
++    request_id = X_OSLAB_REQUEST_ID(vq->queue_index, elem->index);
++    for (i = 0; i < elem->out_num; i++) {
++        /* 单项描述符长度是 32 位（VRingDesc.len / VRingPackedDesc.len），
++         * 映射出的 iov_len 不会超过它，收窄到 uint32_t 不会截断。 */
++        x_oslab_event_dma(false, vdev->x_oslab_dev_id, request_id,
++                          elem->out_addr[i],
++                          (uint32_t)elem->out_sg[i].iov_len);
++    }
++    for (i = 0; i < elem->in_num; i++) {
++        x_oslab_event_dma(true, vdev->x_oslab_dev_id, request_id,
++                          elem->in_addr[i],
++                          (uint32_t)elem->in_sg[i].iov_len);
++    }
++}
++
+ static void *virtqueue_split_pop(VirtQueue *vq, size_t sz)
+ {
+     unsigned int i, head, max;
+@@ -1686,6 +1747,13 @@
+ 
+     vq->inuse++;
+ 
++    /*
++     * x-oslab（T05c）：各段已全部映射好、请求还没交给设备处理，此刻上报设备
++     * 拿到的客体缓冲访问权。位置在 trace 之前，保证 dma.* 一定先于设备层随
++     * 后发出的 block.submit 出现在事件流里（seq 顺序即时间顺序）。
++     */
++    x_oslab_virtqueue_report_dma(vdev, vq, elem);
++
+     trace_virtqueue_pop(vq, elem, elem->in_num, elem->out_num);
+ done:
+     address_space_cache_destroy(&indirect_desc_cache);
+@@ -1823,6 +1891,10 @@
+     vq->shadow_avail_idx = vq->last_avail_idx;
+     vq->shadow_avail_wrap_counter = vq->last_avail_wrap_counter;
+ 
++    /* x-oslab（T05c）：与 split 队列同样的上报点；packed 队列的描述符标识就是
++     * 这里的 id（elem->index），两边共用同一个 requestId 打包规则。 */
++    x_oslab_virtqueue_report_dma(vdev, vq, elem);
++
+     trace_virtqueue_pop(vq, elem, elem->in_num, elem->out_num);
+ done:
+     address_space_cache_destroy(&indirect_desc_cache);
+@@ -3243,6 +3315,12 @@
+ void virtio_cleanup(VirtIODevice *vdev)
+ {
+     qemu_del_vm_change_state_handler(vdev->vmstate);
++
++    /* x-oslab（T05c）：注销设备，避免事件里的 deviceId 指向已经消失的设备。 */
++    if (vdev->x_oslab_dev_id != 0) {
++        x_oslab_device_unregister(vdev->x_oslab_dev_id);
++        vdev->x_oslab_dev_id = 0;
++    }
+ }
+ 
+ static void virtio_vmstate_change(void *opaque, bool running, RunState state)
+@@ -3318,6 +3396,24 @@
+             virtio_vmstate_change, vdev);
+     vdev->device_endian = virtio_default_endian();
+     vdev->use_guest_notifier_mask = true;
++
++    /*
++     * x-oslab 观察扩展（T05c）：登记设备名。
++     *
++     * 名字取 QOM canonical path（例如 /machine/peripheral-anon/device[0]/
++     * virtio-backend），事件环里只存返回的数字 id，观察面板再按 id 反查名字，
++     * 这样 vCPU / iothread 上不会为了写一条事件去搬字符串。
++     * 这里在 realize 路径上、持有 BQL；若设备此刻还没有父对象（个别设备在
++     * 更早的阶段调用 virtio_init），object_get_canonical_path() 返回 NULL，
++     * 退化成用设备类型名注册，不因为拿不到路径就少一次注册。
++     */
++    {
++        char *x_oslab_path = object_get_canonical_path(OBJECT(vdev));
++
++        vdev->x_oslab_dev_id = x_oslab_device_register(
++            x_oslab_path != NULL ? x_oslab_path : vdev->name);
++        g_free(x_oslab_path);
++    }
+ }
+ 
+ /*
+--- a/include/hw/virtio/virtio.h
++++ b/include/hw/virtio/virtio.h
+@@ -165,6 +165,15 @@
+      */
+     EventNotifier config_notifier;
+     bool device_iotlb_enabled;
++    /*
++     * x-oslab 观察扩展：设备注册表里的数字 id（T05c）。
++     *
++     * virtio_init() 在 realize 时登记设备名（QOM canonical path）并放在这里，
++     * virtio_cleanup() 注销。事件环里只存这个数字，名字留在注册表里，避免在
++     * vCPU 线程或 iothread 上搬字符串。0 表示没有注册（例如观察扩展被编译成
++     * 空实现）。
++     */
++    uint32_t x_oslab_dev_id;
+ };
+ 
+ struct VirtioDeviceClass {
+--- a/hw/block/virtio-blk.c
++++ b/hw/block/virtio-blk.c
+@@ -37,6 +37,51 @@
+ #include "hw/virtio/virtio-access.h"
+ #include "hw/virtio/virtio-blk-common.h"
+ #include "qemu/coroutine.h"
++/*
++ * x-oslab 观察扩展（T05c）：block.submit / block.complete 的发射点。
++ *
++ * 本文件在 hw/block/meson.build 里属于 specific_ss，per-target 编译，因此可以
++ * 直接包含这个会拉进 tcg/tcg.h 的头文件（tcg/tcg.h 自身不引用 TCG_TARGET_* 宏）。
++ * 观察扩展关闭时，头文件里的接口全部退化成静态内联空实现，不产生任何事件。
++ */
++#include "exec/x-oslab-events.h"
++
++/*
++ * x-oslab（T05c）：块请求的事件标识。
++ *
++ * 必须与 hw/virtio/virtio.c 里 virtqueue_split_pop() / virtqueue_packed_pop()
++ * 用同一套打包规则——(virtqueue 索引, 描述符标识)——否则 dma.* 无法与
++ * block.submit / block.complete 关联到同一个请求上。
++ */
++static uint64_t x_oslab_block_request_id(const VirtIOBlockReq *req)
++{
++    /*
++     * 用 virtio_get_queue_index() 而不是直接读 req->vq->queue_index：VirtQueue
++     * 在其他编译单元里只有前置声明（完整定义在 hw/virtio/virtio.c），间接取值
++     * 会因为类型不完整而编译不过。
++     */
++    return X_OSLAB_REQUEST_ID(virtio_get_queue_index(req->vq),
++                              req->elem.index);
++}
++
++/*
++ * x-oslab（T05c）：组装块事件字段。
++ *
++ * 长度与方向取提交时缓存的副本：合并请求（MultiReqBuffer）的 qiov 在完成回调
++ * virtio_blk_rw_complete() 里已经被 qemu_iovec_destroy() 清空，完成时现场读会
++ * 得到 0，而事件报的必须是设备当时真正处理的那个请求。
++ * 段数用描述符链的原始段数（elem.out_num / elem.in_num），不是 iov_discard_*
++ * 之后的局部计数：事件描述的是设备从客体内存拿到的全部访问权。
++ * LBA 直接取 req->sector_num：它在 VIRTIO_BLK_T_IN/OUT 分支里赋值之后不再改变。
++ */
++static void x_oslab_block_info(const VirtIOBlockReq *req, XOslabBlockInfo *info)
++{
++    info->lba = (uint64_t)req->sector_num;
++    info->length = req->x_oslab_len;
++    info->reqType = req->x_oslab_type;
++    info->outSeg = req->elem.out_num;
++    info->inSeg = req->elem.in_num;
++}
+ 
+ static void virtio_blk_init_request(VirtIOBlock *s, VirtQueue *vq,
+                                     VirtIOBlockReq *req)
+@@ -47,6 +92,14 @@
+     req->in_len = 0;
+     req->next = NULL;
+     req->mr_next = NULL;
++    /*
++     * x-oslab（T05c）：req 由 virtqueue_alloc_element() 的 g_malloc() 分配，不做
++     * 零初始化，跟踪字段必须显式清掉，否则完成路径可能给一个从未提交过的请求
++     * 发出 block.complete。
++     */
++    req->x_oslab_tracked = false;
++    req->x_oslab_type = 0;
++    req->x_oslab_len = 0;
+ }
+ 
+ static void virtio_blk_free_request(VirtIOBlockReq *req)
+@@ -61,6 +114,27 @@
+ 
+     trace_virtio_blk_req_complete(vdev, req, status);
+ 
++    /*
++     * x-oslab（T05c）：上报块请求完成。
++     *
++     * 位置在真正写状态字节之前，status 就是下面那个 stb_p() 要写的值，因此事件
++     * 与客体最终读到的状态字节一致。
++     *
++     * 只上报被跟踪过的请求（即在 virtio_blk_handle_request() 里发过
++     * block.submit 的读写请求），于是提交/完成严格配对：请求头不合法、越界、
++     * 类型不支持这些「设备还没接受请求」的拒绝路径不产生 block 事件，不会出现
++     * 只有 complete 没有 submit 的记录；flush / discard / zone / GET_ID 等
++     * 非读写路径同样不发事件（它们不搬数据，也不是块读写请求）。
++     */
++    if (req->x_oslab_tracked) {
++        XOslabBlockInfo x_oslab_info;
++
++        x_oslab_block_info(req, &x_oslab_info);
++        x_oslab_event_block_complete(vdev->x_oslab_dev_id,
++                                     x_oslab_block_request_id(req), status,
++                                     &x_oslab_info);
++    }
++
+     stb_p(&req->in->status, status);
+     iov_discard_undo(&req->inhdr_undo);
+     iov_discard_undo(&req->outhdr_undo);
+@@ -1019,6 +1093,25 @@
+         block_acct_start(blk_get_stats(s->blk), &req->acct, req->qiov.size,
+                          is_write ? BLOCK_ACCT_WRITE : BLOCK_ACCT_READ);
+ 
++        /*
++         * x-oslab（T05c）：请求已经通过校验，LBA 与数据长度都确定了，设备接受它。
++         * 此刻上报 block.submit；载荷还没搬（读请求的数据要等完成回调才写进客体
++         * 缓冲）。注意请求随后可能被合并成一次 blk_aio_* 提交
++         * （virtio_blk_submit_multireq），所以 submit 的语义是「virtio-blk 接受了
++         * 这个请求」，而不是「块层已经拿到这次 io」。
++         */
++        req->x_oslab_type = is_write ? VIRTIO_BLK_T_OUT : VIRTIO_BLK_T_IN;
++        req->x_oslab_len = req->qiov.size;
++        req->x_oslab_tracked = true;
++        {
++            XOslabBlockInfo x_oslab_info;
++
++            x_oslab_block_info(req, &x_oslab_info);
++            x_oslab_event_block_submit(vdev->x_oslab_dev_id,
++                                       x_oslab_block_request_id(req),
++                                       &x_oslab_info);
++        }
++
+         /* merge would exceed maximum number of requests or IO direction
+          * changes */
+         if (mrb->num_reqs > 0 && (mrb->num_reqs == VIRTIO_BLK_MAX_MERGE_REQS ||
+--- a/include/hw/virtio/virtio-blk.h
++++ b/include/hw/virtio/virtio-blk.h
+@@ -81,6 +81,18 @@
+     struct VirtIOBlockReq *next;
+     struct VirtIOBlockReq *mr_next;
+     BlockAcctCookie acct;
++    /*
++     * x-oslab 观察扩展（T05c）：块请求的事件归属字段。
++     *
++     * 只有被设备接受的读写请求才会置 x_oslab_tracked，block.complete 只对
++     * 这些请求发事件，submit/complete 因此严格配对；长度和方向在提交时缓存
++     * 下来，因为合并请求的 qiov 会在完成回调里被 qemu_iovec_destroy() 清空。
++     * VirtIOBlockReq 由 virtqueue_alloc_element() 用 g_malloc() 分配，不做
++     * 零初始化，所以这些字段必须在 virtio_blk_init_request() 里显式赋值。
++     */
++    bool x_oslab_tracked;
++    uint32_t x_oslab_type; /* VIRTIO_BLK_T_IN（读盘）/ VIRTIO_BLK_T_OUT（写盘） */
++    uint32_t x_oslab_len;  /* 数据长度（字节，不含请求头与状态字节） */
+ } VirtIOBlockReq;
+ 
+ #define VIRTIO_BLK_MAX_MERGE_REQS 32

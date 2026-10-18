@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" href="data:," />
+<title>Linux Observatory · 可点击讲解</title>
+<link rel="stylesheet" href="slides.css" />
+<style>
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #02060c; }
+  body { margin: 0; }
+  #stage {
+    position: absolute; left: 0; top: 0;
+    transform-origin: top left;
+    zoom: 1 !important;
+    box-shadow: 0 24px 90px rgba(0,0,0,.55);
+  }
+  .main { height: 790px; }
+  .caption, .progress { display: none; }
+  .slide-foot {
+    position: absolute; left: 58px; right: 58px; bottom: 16px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: var(--mono); font-size: 12px; color: #58769a;
+    letter-spacing: .03em;
+  }
+  .slide-foot b { color: #8fa8c7; font-weight: 500; }
+  .slide-foot .keys { display: flex; gap: 12px; }
+  .slide-foot kbd {
+    font-family: var(--mono); font-size: 10px; color: #9eb6d0;
+    border: 1px solid #2b537f; border-radius: 3px; padding: 1px 4px;
+    background: rgba(16,34,58,.6);
+  }
+
+  /* 翻页条 */
+  #deckbar {
+    position: fixed; z-index: 40; left: 0; right: 0; bottom: 0; height: 70px;
+    display: flex; align-items: center; gap: 14px; padding: 0 22px;
+    background: linear-gradient(180deg, rgba(4,10,18,.55), rgba(4,10,18,.96));
+    border-top: 1px solid rgba(43,83,127,.55);
+    backdrop-filter: blur(10px);
+    font-family: var(--sans);
+  }
+  .deck-btn {
+    height: 36px; padding: 0 14px; border-radius: 7px;
+    border: 1px solid rgba(77,163,255,.45); background: rgba(16,34,58,.7);
+    color: #cfe0f2; font-size: 13px; cursor: pointer;
+    transition: background .15s, border-color .15s, opacity .15s;
+    white-space: nowrap;
+  }
+  .deck-btn:hover { background: rgba(77,163,255,.16); border-color: rgba(84,215,232,.65); }
+  .deck-btn:disabled { opacity: .32; cursor: default; }
+  .deck-center { flex: 1; min-width: 0; display: flex; align-items: center; gap: 14px; }
+  .deck-title { font-size: 13px; color: #cfe0f2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 160px; }
+  .deck-title span { color: #58769a; font-family: var(--mono); font-size: 11px; margin-right: 8px; }
+  .deck-progress { flex: 1; height: 4px; background: rgba(43,83,127,.55); border-radius: 4px; overflow: hidden; min-width: 80px; }
+  .deck-progress i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--accent), var(--cyan)); box-shadow: 0 0 12px rgba(84,215,232,.5); transition: width .25s ease; }
+  .deck-count { font-family: var(--mono); font-size: 12px; color: #8fa8c7; white-space: nowrap; }
+
+  /* 左右点击区 */
+  .edge {
+    position: fixed; z-index: 30; top: 50%; width: 54px; height: 132px;
+    transform: translateY(-50%); border: 0; background: transparent; color: #9fc2e6;
+    font-size: 34px; cursor: pointer; opacity: 0; transition: opacity .18s, background .18s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .edge:hover { opacity: .85; background: linear-gradient(90deg, rgba(77,163,255,.14), transparent); }
+  #edgePrev { left: 0; }
+  #edgeNext { right: 0; background: linear-gradient(270deg, rgba(77,163,255,.14), transparent); }
+  #edgeNext:hover { background: linear-gradient(270deg, rgba(77,163,255,.18), transparent); }
+
+  /* 目录 */
+  #overview {
+    position: fixed; z-index: 60; inset: 0 0 70px 0;
+    background: rgba(3,8,15,.94); backdrop-filter: blur(8px);
+    padding: 42px 54px; overflow: auto;
+  }
+  #overview[hidden] { display: none; }
+  .ov-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 22px; }
+  .ov-head h2 { margin: 0; font-size: 28px; font-weight: 600; }
+  .ov-head p { margin: 0; color: #6f8bab; font-size: 13px; }
+  .ov-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 13px; }
+  .ov-card {
+    text-align: left; border: 1px solid rgba(43,83,127,.7); border-radius: 10px;
+    background: linear-gradient(180deg, rgba(16,34,58,.8), rgba(8,17,29,.8));
+    padding: 13px 14px; color: #dce8f8; cursor: pointer;
+    transition: border-color .15s, transform .15s, background .15s;
+  }
+  .ov-card:hover { border-color: var(--cyan); transform: translateY(-2px); background: rgba(24,52,84,.9); }
+  .ov-card.active { border-color: var(--cyan); box-shadow: 0 0 18px rgba(84,215,232,.2); }
+  .ov-num { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: .1em; }
+  .ov-title { margin-top: 7px; font-size: 15px; line-height: 1.45; min-height: 44px; }
+  .ov-tag { margin-top: 7px; font-family: var(--mono); font-size: 10px; color: #6f8bab; }
+
+  @media (max-width: 900px) {
+    .deck-title { display: none; }
+    .ov-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    #overview { padding: 24px; }
+  }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="top">
+    <div class="brand">
+      <div class="brand-mark"></div>
+      <div>
+        <div class="brand-name">Linux Observatory</div>
+        <div class="brand-sub">真实 Linux 6.12.112 · QEMU 8.2.10 · TCG</div>
+      </div>
+    </div>
+    <div class="chapter" id="chapter">S00 / 18 · 总览</div>
+    <div class="top-right">
+      <div>从 <b>CPU 复位</b> 到 <b>linux-lab:/root#</b></div>
+      <div>x86_64 · 512 MiB · SeaBIOS 1.16.3</div>
+    </div>
+  </div>
+
+  <div class="headline">
+    <span class="kicker" id="kicker">BOOT / OVERVIEW</span>
+    <h1 id="title">从按下电源，到终端提示符</h1>
+  </div>
+
+  <div class="main">
+    <div class="viz" id="viz"></div>
+    <aside class="side">
+      <div class="side-card">
+        <h3>本页在做什么</h3>
+        <ul id="bullets"></ul>
+      </div>
+      <div class="side-card">
+        <h3>实测锚点</h3>
+        <div class="facts" id="facts"></div>
+      </div>
+      <div class="side-card concept-card">
+        <h3>本页新增 / 术语</h3>
+        <div class="concept-row" id="newConcepts"></div>
+        <div class="terms-list" id="terms"></div>
+      </div>
+    </aside>
+  </div>
+
+  <div class="slide-foot">
+    <div><b>可点击讲解</b> · 无语音、无字幕 · 点击画面左右两侧也可翻页</div>
+    <div class="keys"><span><kbd>←</kbd> <kbd>→</kbd> 翻页</span><span><kbd>F</kbd> 全屏</span><span><kbd>O</kbd> 目录</span></div>
+  </div>
+</div>
+
+<button class="edge" id="edgePrev" aria-label="上一页">‹</button>
+<button class="edge" id="edgeNext" aria-label="下一页">›</button>
+
+<div id="deckbar">
+  <button class="deck-btn" id="prevBtn">← 上一页</button>
+  <button class="deck-btn" id="nextBtn">下一页 →</button>
+  <div class="deck-center">
+    <div class="deck-title" id="deckTitle"><span>S00</span>从按下电源，到终端提示符</div>
+    <div class="deck-progress"><i id="deckFill"></i></div>
+    <div class="deck-count" id="deckCount">01 / 18</div>
+  </div>
+  <button class="deck-btn" id="overviewBtn">目录 O</button>
+  <button class="deck-btn" id="fsBtn">全屏 F</button>
+</div>
+
+<div id="overview" hidden>
+  <div class="ov-head">
+    <h2>目录</h2>
+    <p>点击任意一页跳转 · Esc 关闭</p>
+  </div>
+  <div class="ov-grid" id="ovGrid"></div>
+</div>
+
+<script src="scenes.js"></script>
+<script>
+  const SCENES = window.SCENES || [];
+  const stage = document.getElementById('stage');
+  const chapter = document.getElementById('chapter');
+  const kicker = document.getElementById('kicker');
+  const title = document.getElementById('title');
+  const viz = document.getElementById('viz');
+  const bullets = document.getElementById('bullets');
+  const facts = document.getElementById('facts');
+  const newConcepts = document.getElementById('newConcepts');
+  const terms = document.getElementById('terms');
+  const deckTitle = document.getElementById('deckTitle');
+  const deckFill = document.getElementById('deckFill');
+  const deckCount = document.getElementById('deckCount');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const edgePrev = document.getElementById('edgePrev');
+  const edgeNext = document.getElementById('edgeNext');
+  const overview = document.getElementById('overview');
+  const ovGrid = document.getElementById('ovGrid');
+  const overviewBtn = document.getElementById('overviewBtn');
+  const fsBtn = document.getElementById('fsBtn');
+
+  let current = -1;
+  let touchStart = null;
+
+  const pad2 = (n) => String(n).padStart(2, '0');
+
+  function indexFromHash() {
+    const m = location.hash.match(/^#s(\d+)$/i);
+    if (!m) return 0;
+    return Math.max(0, Math.min(SCENES.length - 1, Number(m[1]) - 1));
+  }
+
+  function render(index, push) {
+    if (!SCENES.length) return;
+    const i = Math.max(0, Math.min(SCENES.length - 1, index));
+    const s = SCENES[i];
+    current = i;
+
+    chapter.textContent = `S${pad2(i)} / ${SCENES.length} · ${s.tag}`;
+    kicker.textContent = s.kicker;
+    title.textContent = s.title;
+    viz.innerHTML = s.visual;
+    bullets.innerHTML = s.bullets.map((b, k) => `<li style="--i:${k}">${b}</li>`).join('');
+    facts.innerHTML = s.facts.map(([k, v, hi]) => `<div class="fact"><span>${k}</span><b class="${hi ? 'hi' : ''}">${v}</b></div>`).join('');
+    newConcepts.innerHTML = (s.newConcepts || []).map((x, k) => `<span class="concept-pill" style="--i:${k}">新增 · ${x}</span>`).join('');
+    terms.innerHTML = (s.terms || []).map(([en, cn]) => `<div class="term-row"><b>${en}</b><span>${cn}</span></div>`).join('');
+
+    stage.classList.remove('scene-enter');
+    void stage.offsetWidth;
+    stage.classList.add('scene-enter');
+
+    deckTitle.innerHTML = `<span>S${pad2(i)}</span>${s.title}`;
+    deckCount.textContent = `${pad2(i + 1)} / ${SCENES.length}`;
+    deckFill.style.width = `${((i + 1) / SCENES.length) * 100}%`;
+    prevBtn.disabled = i === 0;
+    edgePrev.disabled = i === 0;
+    nextBtn.disabled = i === SCENES.length - 1;
+    edgeNext.disabled = i === SCENES.length - 1;
+    document.title = `${s.title} · Linux Observatory`;
+
+    ovGrid.querySelectorAll('.ov-card').forEach((el) => {
+      el.classList.toggle('active', Number(el.dataset.i) === i);
+    });
+
+    const hash = `#s${pad2(i + 1)}`;
+    if (push) history.pushState({ i }, '', hash);
+    else if (location.hash !== hash) history.replaceState({ i }, '', hash);
+  }
+
+  function go(index, push = true) {
+    const i = Math.max(0, Math.min(SCENES.length - 1, index));
+    if (i === current) return;
+    render(i, push);
+  }
+
+  function next() { go(current + 1, true); }
+  function prev() { go(current - 1, true); }
+
+  function fitStage() {
+    const nav = 70;
+    const pad = 14;
+    const availW = Math.max(320, innerWidth - pad * 2);
+    const availH = Math.max(240, innerHeight - nav - pad * 2);
+    const scale = Math.min(availW / 1920, availH / 1080);
+    stage.style.transform = `scale(${scale})`;
+    stage.style.left = `${Math.max(0, (innerWidth - 1920 * scale) / 2)}px`;
+    stage.style.top = `${Math.max(0, (innerHeight - nav - 1080 * scale) / 2)}px`;
+  }
+
+  function toggleOverview(force) {
+    const show = force !== undefined ? force : overview.hidden;
+    overview.hidden = !show;
+    if (show) {
+      overviewBtn.textContent = '关闭 Esc';
+      ovGrid.querySelector('.ov-card.active')?.scrollIntoView({ block: 'nearest' });
+    } else {
+      overviewBtn.textContent = '目录 O';
+    }
+  }
+
+  function toggleFullscreen() {
+    if (!document.fullscreenElement) document.documentElement.requestFullscreen?.().catch(() => {});
+    else document.exitFullscreen?.().catch(() => {});
+  }
+
+  // 目录卡片
+  SCENES.forEach((s, i) => {
+    const b = document.createElement('button');
+    b.className = 'ov-card';
+    b.dataset.i = String(i);
+    b.innerHTML = `<div class="ov-num">S${pad2(i)} / ${pad2(SCENES.length)}</div>
+      <div class="ov-title">${s.title}</div>
+      <div class="ov-tag">${s.tag} · ${s.kicker.split('/').slice(1).join('/').trim()}</div>`;
+    b.addEventListener('click', () => {
+      render(i, true);
+      toggleOverview(false);
+    });
+    ovGrid.appendChild(b);
+  });
+
+  prevBtn.addEventListener('click', prev);
+  nextBtn.addEventListener('click', next);
+  edgePrev.addEventListener('click', prev);
+  edgeNext.addEventListener('click', next);
+  overviewBtn.addEventListener('click', () => toggleOverview());
+  fsBtn.addEventListener('click', toggleFullscreen);
+
+  stage.addEventListener('click', (e) => {
+    if (e.target.closest('a, button, .side')) return;
+    const r = stage.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width;
+    if (x > 0.82) next();
+    else if (x < 0.18) prev();
+  });
+
+  stage.addEventListener('pointerdown', (e) => {
+    touchStart = e.target.closest('.viz') ? { x: e.clientX, y: e.clientY } : null;
+  });
+  stage.addEventListener('pointerup', (e) => {
+    if (!touchStart) return;
+    const dx = e.clientX - touchStart.x;
+    const dy = e.clientY - touchStart.y;
+    touchStart = null;
+    if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy)) {
+      if (dx < 0) next(); else prev();
+    }
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if (e.target.matches('input, textarea, select')) return;
+    if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') {
+      e.preventDefault(); next();
+    } else if (e.key === 'ArrowLeft' || e.key === 'PageUp' || e.key === 'Backspace') {
+      e.preventDefault(); prev();
+    } else if (e.key === 'Home') {
+      e.preventDefault(); go(0);
+    } else if (e.key === 'End') {
+      e.preventDefault(); go(SCENES.length - 1);
+    } else if (e.key === 'f' || e.key === 'F') {
+      toggleFullscreen();
+    } else if (e.key === 'o' || e.key === 'O') {
+      toggleOverview();
+    } else if (e.key === 'Escape') {
+      if (!overview.hidden) toggleOverview(false);
+    }
+  });
+
+  window.addEventListener('hashchange', () => {
+    const i = indexFromHash();
+    if (i !== current) render(i, false);
+  });
+  window.addEventListener('popstate', () => {
+    const i = indexFromHash();
+    if (i !== current) render(i, false);
+  });
+  window.addEventListener('resize', fitStage);
+  document.addEventListener('fullscreenchange', fitStage);
+
+  fitStage();
+  render(indexFromHash(), false);
+  window.__deck = { go, next, prev, render, get current() { return current; } };
+  window.__ready = true;
+</script>
+</body>
+</html>

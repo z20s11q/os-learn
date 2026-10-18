@@ -1,0 +1,845 @@
+{
+ "voice": "zh-CN-XiaoxiaoNeural",
+ "entries": [
+  {
+   "key": "97a78ce93a8cd9a7",
+   "file": "97a78ce93a8cd9a7.mp3",
+   "duration": 7.15
+  },
+  {
+   "key": "7849241ad4a157a4",
+   "file": "7849241ad4a157a4.mp3",
+   "duration": 6.89
+  },
+  {
+   "key": "241ca247872185a4",
+   "file": "241ca247872185a4.mp3",
+   "duration": 7.34
+  },
+  {
+   "key": "62729f1974f8f41d",
+   "file": "62729f1974f8f41d.mp3",
+   "duration": 7.06
+  },
+  {
+   "key": "ad309a0d177fee2b",
+   "file": "ad309a0d177fee2b.mp3",
+   "duration": 6.65
+  },
+  {
+   "key": "e82b036586b53d9a",
+   "file": "e82b036586b53d9a.mp3",
+   "duration": 7.75
+  },
+  {
+   "key": "672ab5ae8da7c5c1",
+   "file": "672ab5ae8da7c5c1.mp3",
+   "duration": 7.94
+  },
+  {
+   "key": "01e6cb788088d9c7",
+   "file": "01e6cb788088d9c7.mp3",
+   "duration": 9.1
+  },
+  {
+   "key": "53532b10faccff77",
+   "file": "53532b10faccff77.mp3",
+   "duration": 10.9
+  },
+  {
+   "key": "98dfbd5370acfade",
+   "file": "98dfbd5370acfade.mp3",
+   "duration": 9.77
+  },
+  {
+   "key": "152bc371d4e47929",
+   "file": "152bc371d4e47929.mp3",
+   "duration": 10.54
+  },
+  {
+   "key": "045d3052f1c7694a",
+   "file": "045d3052f1c7694a.mp3",
+   "duration": 5.66
+  },
+  {
+   "key": "fd7550f57b0e219c",
+   "file": "fd7550f57b0e219c.mp3",
+   "duration": 4.66
+  },
+  {
+   "key": "459b40593eaec8f6",
+   "file": "459b40593eaec8f6.mp3",
+   "duration": 9.12
+  },
+  {
+   "key": "4d6a3b2d48b4ba49",
+   "file": "4d6a3b2d48b4ba49.mp3",
+   "duration": 8.28
+  },
+  {
+   "key": "51a3f757ece78ade",
+   "file": "51a3f757ece78ade.mp3",
+   "duration": 9.98
+  },
+  {
+   "key": "c321f11c71585857",
+   "file": "c321f11c71585857.mp3",
+   "duration": 9.0
+  },
+  {
+   "key": "b3549dabb1c34fa0",
+   "file": "b3549dabb1c34fa0.mp3",
+   "duration": 5.57
+  },
+  {
+   "key": "002beb70298b722e",
+   "file": "002beb70298b722e.mp3",
+   "duration": 6.0
+  },
+  {
+   "key": "4a7a506abd27eeb1",
+   "file": "4a7a506abd27eeb1.mp3",
+   "duration": 7.27
+  },
+  {
+   "key": "9f2fb445b27a4982",
+   "file": "9f2fb445b27a4982.mp3",
+   "duration": 8.38
+  },
+  {
+   "key": "bee76dea7e7cdf64",
+   "file": "bee76dea7e7cdf64.mp3",
+   "duration": 6.77
+  },
+  {
+   "key": "3f6f21d35e580d1e",
+   "file": "3f6f21d35e580d1e.mp3",
+   "duration": 7.99
+  },
+  {
+   "key": "ac22cf037e291c2e",
+   "file": "ac22cf037e291c2e.mp3",
+   "duration": 4.63
+  },
+  {
+   "key": "7668d5829e41bc0c",
+   "file": "7668d5829e41bc0c.mp3",
+   "duration": 7.61
+  },
+  {
+   "key": "5f675d02a409ccfb",
+   "file": "5f675d02a409ccfb.mp3",
+   "duration": 9.31
+  },
+  {
+   "key": "8d00c378a4054001",
+   "file": "8d00c378a4054001.mp3",
+   "duration": 6.17
+  },
+  {
+   "key": "b52ce055fb37cac4",
+   "file": "b52ce055fb37cac4.mp3",
+   "duration": 11.88
+  },
+  {
+   "key": "6afa8281f9a3ede1",
+   "file": "6afa8281f9a3ede1.mp3",
+   "duration": 9.5
+  },
+  {
+   "key": "a7ed127a2a0bf9a9",
+   "file": "a7ed127a2a0bf9a9.mp3",
+   "duration": 6.48
+  },
+  {
+   "key": "7b89216cedb20d92",
+   "file": "7b89216cedb20d92.mp3",
+   "duration": 6.84
+  },
+  {
+   "key": "19bc018eebf54bd6",
+   "file": "19bc018eebf54bd6.mp3",
+   "duration": 10.46
+  },
+  {
+   "key": "d34d226186bcf8b0",
+   "file": "d34d226186bcf8b0.mp3",
+   "duration": 12.07
+  },
+  {
+   "key": "52378006ecf87eb5",
+   "file": "52378006ecf87eb5.mp3",
+   "duration": 9.26
+  },
+  {
+   "key": "9563b839d7133a55",
+   "file": "9563b839d7133a55.mp3",
+   "duration": 6.58
+  },
+  {
+   "key": "caf31ca735e0ee76",
+   "file": "caf31ca735e0ee76.mp3",
+   "duration": 6.74
+  },
+  {
+   "key": "20de672b3cc22adf",
+   "file": "20de672b3cc22adf.mp3",
+   "duration": 6.84
+  },
+  {
+   "key": "7dd4a9a6c3f5c64e",
+   "file": "7dd4a9a6c3f5c64e.mp3",
+   "duration": 5.45
+  },
+  {
+   "key": "a972bfbebc732087",
+   "file": "a972bfbebc732087.mp3",
+   "duration": 6.02
+  },
+  {
+   "key": "946a0934079db8f5",
+   "file": "946a0934079db8f5.mp3",
+   "duration": 7.94
+  },
+  {
+   "key": "46c710a91042752b",
+   "file": "46c710a91042752b.mp3",
+   "duration": 7.08
+  },
+  {
+   "key": "480993f9ebfe1d12",
+   "file": "480993f9ebfe1d12.mp3",
+   "duration": 7.85
+  },
+  {
+   "key": "97f6c32fb940b58d",
+   "file": "97f6c32fb940b58d.mp3",
+   "duration": 6.17
+  },
+  {
+   "key": "5fce1dfa8082a7b4",
+   "file": "5fce1dfa8082a7b4.mp3",
+   "duration": 5.18
+  },
+  {
+   "key": "d39ca595c17ad751",
+   "file": "d39ca595c17ad751.mp3",
+   "duration": 6.43
+  },
+  {
+   "key": "e38bc89f34bd94c2",
+   "file": "e38bc89f34bd94c2.mp3",
+   "duration": 4.92
+  },
+  {
+   "key": "0639765e940ae5a9",
+   "file": "0639765e940ae5a9.mp3",
+   "duration": 7.39
+  },
+  {
+   "key": "cbf2e0e3aa491cbe",
+   "file": "cbf2e0e3aa491cbe.mp3",
+   "duration": 5.45
+  },
+  {
+   "key": "115749f5e6f69652",
+   "file": "115749f5e6f69652.mp3",
+   "duration": 9.5
+  },
+  {
+   "key": "b8b4fdaacfd742e6",
+   "file": "b8b4fdaacfd742e6.mp3",
+   "duration": 6.62
+  },
+  {
+   "key": "122a5a369c4b122e",
+   "file": "122a5a369c4b122e.mp3",
+   "duration": 6.41
+  },
+  {
+   "key": "68a188407832bbd7",
+   "file": "68a188407832bbd7.mp3",
+   "duration": 5.18
+  },
+  {
+   "key": "7879cadf6336dda9",
+   "file": "7879cadf6336dda9.mp3",
+   "duration": 6.89
+  },
+  {
+   "key": "ebf3493755938959",
+   "file": "ebf3493755938959.mp3",
+   "duration": 7.37
+  },
+  {
+   "key": "6d2469b3500f66ec",
+   "file": "6d2469b3500f66ec.mp3",
+   "duration": 6.55
+  },
+  {
+   "key": "2aff9b4b5c01fa5a",
+   "file": "2aff9b4b5c01fa5a.mp3",
+   "duration": 5.11
+  },
+  {
+   "key": "b33df6f6e3535ebc",
+   "file": "b33df6f6e3535ebc.mp3",
+   "duration": 7.51
+  },
+  {
+   "key": "ae19d9ca0a568d28",
+   "file": "ae19d9ca0a568d28.mp3",
+   "duration": 6.94
+  },
+  {
+   "key": "7aedf49d4ef1911b",
+   "file": "7aedf49d4ef1911b.mp3",
+   "duration": 4.92
+  },
+  {
+   "key": "87ee2e4036b70ba9",
+   "file": "87ee2e4036b70ba9.mp3",
+   "duration": 2.9
+  },
+  {
+   "key": "cd2de6310effb421",
+   "file": "cd2de6310effb421.mp3",
+   "duration": 6.5
+  },
+  {
+   "key": "3936e791cd542914",
+   "file": "3936e791cd542914.mp3",
+   "duration": 6.26
+  },
+  {
+   "key": "4062a2dd59d3b23d",
+   "file": "4062a2dd59d3b23d.mp3",
+   "duration": 7.03
+  },
+  {
+   "key": "dd082d9fc7be0065",
+   "file": "dd082d9fc7be0065.mp3",
+   "duration": 5.47
+  },
+  {
+   "key": "e7b7e1ea48428578",
+   "file": "e7b7e1ea48428578.mp3",
+   "duration": 3.48
+  },
+  {
+   "key": "70a94cb1a142c02d",
+   "file": "70a94cb1a142c02d.mp3",
+   "duration": 5.86
+  },
+  {
+   "key": "739e2296df0a8fbc",
+   "file": "739e2296df0a8fbc.mp3",
+   "duration": 7.22
+  },
+  {
+   "key": "9f22f13876925e8c",
+   "file": "9f22f13876925e8c.mp3",
+   "duration": 9.14
+  },
+  {
+   "key": "2d0eb64181385a5a",
+   "file": "2d0eb64181385a5a.mp3",
+   "duration": 5.04
+  },
+  {
+   "key": "2cdf69154cfd9914",
+   "file": "2cdf69154cfd9914.mp3",
+   "duration": 4.1
+  },
+  {
+   "key": "af5e65d3eb092eb0",
+   "file": "af5e65d3eb092eb0.mp3",
+   "duration": 4.7
+  },
+  {
+   "key": "e3ef9b442c823d2c",
+   "file": "e3ef9b442c823d2c.mp3",
+   "duration": 5.04
+  },
+  {
+   "key": "7e667b7db8856bd5",
+   "file": "7e667b7db8856bd5.mp3",
+   "duration": 8.4
+  },
+  {
+   "key": "c7862b7629d550d2",
+   "file": "c7862b7629d550d2.mp3",
+   "duration": 5.33
+  },
+  {
+   "key": "4174d211d047c21f",
+   "file": "4174d211d047c21f.mp3",
+   "duration": 6.29
+  },
+  {
+   "key": "9f68050ddcda366a",
+   "file": "9f68050ddcda366a.mp3",
+   "duration": 6.14
+  },
+  {
+   "key": "ad85e01669506c20",
+   "file": "ad85e01669506c20.mp3",
+   "duration": 6.62
+  },
+  {
+   "key": "34fc20da00f9c6ae",
+   "file": "34fc20da00f9c6ae.mp3",
+   "duration": 4.63
+  },
+  {
+   "key": "1a1b9c9a4972dc90",
+   "file": "1a1b9c9a4972dc90.mp3",
+   "duration": 7.78
+  },
+  {
+   "key": "be11ed42f7187fda",
+   "file": "be11ed42f7187fda.mp3",
+   "duration": 7.46
+  },
+  {
+   "key": "efa36c601d20436b",
+   "file": "efa36c601d20436b.mp3",
+   "duration": 7.06
+  },
+  {
+   "key": "2abc2bdce76f5d43",
+   "file": "2abc2bdce76f5d43.mp3",
+   "duration": 4.9
+  },
+  {
+   "key": "2ecf00d3d3c3e0fe",
+   "file": "2ecf00d3d3c3e0fe.mp3",
+   "duration": 4.7
+  },
+  {
+   "key": "2093db57850a3d15",
+   "file": "2093db57850a3d15.mp3",
+   "duration": 8.11
+  },
+  {
+   "key": "fe2af3d2aed0d05f",
+   "file": "fe2af3d2aed0d05f.mp3",
+   "duration": 7.2
+  },
+  {
+   "key": "9eb93be74f2ae1d6",
+   "file": "9eb93be74f2ae1d6.mp3",
+   "duration": 7.51
+  },
+  {
+   "key": "52d438139c0a4300",
+   "file": "52d438139c0a4300.mp3",
+   "duration": 5.35
+  },
+  {
+   "key": "80c2afe60ef368e2",
+   "file": "80c2afe60ef368e2.mp3",
+   "duration": 9.91
+  },
+  {
+   "key": "8d1cb15df40671c0",
+   "file": "8d1cb15df40671c0.mp3",
+   "duration": 8.57
+  },
+  {
+   "key": "76fae8b89acf7868",
+   "file": "76fae8b89acf7868.mp3",
+   "duration": 6.77
+  },
+  {
+   "key": "7eb7ab26bc261564",
+   "file": "7eb7ab26bc261564.mp3",
+   "duration": 6.77
+  },
+  {
+   "key": "f01098ec0db10160",
+   "file": "f01098ec0db10160.mp3",
+   "duration": 6.36
+  },
+  {
+   "key": "122d8339ed28d606",
+   "file": "122d8339ed28d606.mp3",
+   "duration": 3.24
+  },
+  {
+   "key": "a98d5cbe96c2e409",
+   "file": "a98d5cbe96c2e409.mp3",
+   "duration": 7.13
+  },
+  {
+   "key": "6baa49dceaca95f8",
+   "file": "6baa49dceaca95f8.mp3",
+   "duration": 6.86
+  },
+  {
+   "key": "716e4c5176a9980e",
+   "file": "716e4c5176a9980e.mp3",
+   "duration": 6.36
+  },
+  {
+   "key": "8eaff0c4e4d7e983",
+   "file": "8eaff0c4e4d7e983.mp3",
+   "duration": 3.82
+  },
+  {
+   "key": "e355fc945f2c56ab",
+   "file": "e355fc945f2c56ab.mp3",
+   "duration": 4.85
+  },
+  {
+   "key": "e4e8d44fc359b5b0",
+   "file": "e4e8d44fc359b5b0.mp3",
+   "duration": 6.31
+  },
+  {
+   "key": "8fcb10586c8a1992",
+   "file": "8fcb10586c8a1992.mp3",
+   "duration": 1.82
+  },
+  {
+   "key": "ae48331f7970078c",
+   "file": "ae48331f7970078c.mp3",
+   "duration": 9.12
+  },
+  {
+   "key": "1978eb0684766a45",
+   "file": "1978eb0684766a45.mp3",
+   "duration": 3.1
+  },
+  {
+   "key": "5c2a40f49534af6a",
+   "file": "5c2a40f49534af6a.mp3",
+   "duration": 7.44
+  },
+  {
+   "key": "86907b16046a8793",
+   "file": "86907b16046a8793.mp3",
+   "duration": 9.31
+  },
+  {
+   "key": "7792aab25c58d643",
+   "file": "7792aab25c58d643.mp3",
+   "duration": 9.12
+  },
+  {
+   "key": "a522578c820d9b58",
+   "file": "a522578c820d9b58.mp3",
+   "duration": 6.46
+  },
+  {
+   "key": "add852fde5d0541f",
+   "file": "add852fde5d0541f.mp3",
+   "duration": 7.94
+  },
+  {
+   "key": "3028e656b0ec4b49",
+   "file": "3028e656b0ec4b49.mp3",
+   "duration": 7.01
+  },
+  {
+   "key": "ff78bd69c1374b1d",
+   "file": "ff78bd69c1374b1d.mp3",
+   "duration": 4.85
+  },
+  {
+   "key": "cd3b4b3dce543938",
+   "file": "cd3b4b3dce543938.mp3",
+   "duration": 9.82
+  },
+  {
+   "key": "da3600e03b097b61",
+   "file": "da3600e03b097b61.mp3",
+   "duration": 10.78
+  },
+  {
+   "key": "24cb61c2d4335064",
+   "file": "24cb61c2d4335064.mp3",
+   "duration": 8.47
+  },
+  {
+   "key": "ffe4a320219925ea",
+   "file": "ffe4a320219925ea.mp3",
+   "duration": 6.6
+  },
+  {
+   "key": "985f2e4f0c3d3e35",
+   "file": "985f2e4f0c3d3e35.mp3",
+   "duration": 9.74
+  },
+  {
+   "key": "702906ca258042ee",
+   "file": "702906ca258042ee.mp3",
+   "duration": 6.58
+  },
+  {
+   "key": "2d08c9218f36f949",
+   "file": "2d08c9218f36f949.mp3",
+   "duration": 5.33
+  },
+  {
+   "key": "08210e9ca03e96d3",
+   "file": "08210e9ca03e96d3.mp3",
+   "duration": 5.18
+  },
+  {
+   "key": "aaef5b5ed615a0fc",
+   "file": "aaef5b5ed615a0fc.mp3",
+   "duration": 8.23
+  },
+  {
+   "key": "60f9bede2ced1da5",
+   "file": "60f9bede2ced1da5.mp3",
+   "duration": 8.95
+  },
+  {
+   "key": "9c9bf83eeef7e3f5",
+   "file": "9c9bf83eeef7e3f5.mp3",
+   "duration": 9.1
+  },
+  {
+   "key": "17cb429320570ecf",
+   "file": "17cb429320570ecf.mp3",
+   "duration": 7.15
+  },
+  {
+   "key": "9b68f5d2a5117bf7",
+   "file": "9b68f5d2a5117bf7.mp3",
+   "duration": 8.52
+  },
+  {
+   "key": "7717d732d2f85ac3",
+   "file": "7717d732d2f85ac3.mp3",
+   "duration": 7.51
+  },
+  {
+   "key": "3bf0daab6bca9504",
+   "file": "3bf0daab6bca9504.mp3",
+   "duration": 11.02
+  },
+  {
+   "key": "33d5f230dda83360",
+   "file": "33d5f230dda83360.mp3",
+   "duration": 7.03
+  },
+  {
+   "key": "98a6d99ea7748a02",
+   "file": "98a6d99ea7748a02.mp3",
+   "duration": 6.94
+  },
+  {
+   "key": "cd242fd2b222fe47",
+   "file": "cd242fd2b222fe47.mp3",
+   "duration": 9.74
+  },
+  {
+   "key": "87f7ed93b84274f1",
+   "file": "87f7ed93b84274f1.mp3",
+   "duration": 7.39
+  },
+  {
+   "key": "c27140adf64cd28d",
+   "file": "c27140adf64cd28d.mp3",
+   "duration": 9.98
+  },
+  {
+   "key": "e7104cf69668999f",
+   "file": "e7104cf69668999f.mp3",
+   "duration": 10.56
+  },
+  {
+   "key": "ef91fe082c56e60f",
+   "file": "ef91fe082c56e60f.mp3",
+   "duration": 9.72
+  },
+  {
+   "key": "20e83aaf0579ea40",
+   "file": "20e83aaf0579ea40.mp3",
+   "duration": 7.8
+  },
+  {
+   "key": "9d2058775bfad7bf",
+   "file": "9d2058775bfad7bf.mp3",
+   "duration": 6.36
+  },
+  {
+   "key": "162755f6797851c6",
+   "file": "162755f6797851c6.mp3",
+   "duration": 3.1
+  },
+  {
+   "key": "7b3bf1c96be8e25c",
+   "file": "7b3bf1c96be8e25c.mp3",
+   "duration": 5.59
+  },
+  {
+   "key": "6aa3f4f7d8576d9b",
+   "file": "6aa3f4f7d8576d9b.mp3",
+   "duration": 8.11
+  },
+  {
+   "key": "8a0638b7bca62f97",
+   "file": "8a0638b7bca62f97.mp3",
+   "duration": 6.82
+  },
+  {
+   "key": "b568298bf1720726",
+   "file": "b568298bf1720726.mp3",
+   "duration": 7.97
+  },
+  {
+   "key": "e6bd84652a06a6d0",
+   "file": "e6bd84652a06a6d0.mp3",
+   "duration": 8.06
+  },
+  {
+   "key": "24ef6efa578a695c",
+   "file": "24ef6efa578a695c.mp3",
+   "duration": 7.37
+  },
+  {
+   "key": "b69155d6de106942",
+   "file": "b69155d6de106942.mp3",
+   "duration": 9.62
+  },
+  {
+   "key": "acabce3d351b4429",
+   "file": "acabce3d351b4429.mp3",
+   "duration": 9.29
+  },
+  {
+   "key": "3bdf3872bc3fb1a1",
+   "file": "3bdf3872bc3fb1a1.mp3",
+   "duration": 8.42
+  },
+  {
+   "key": "1a360a17b0dbe1af",
+   "file": "1a360a17b0dbe1af.mp3",
+   "duration": 5.06
+  },
+  {
+   "key": "4f9c137058be1df2",
+   "file": "4f9c137058be1df2.mp3",
+   "duration": 7.06
+  },
+  {
+   "key": "b99cacb1e44a26c6",
+   "file": "b99cacb1e44a26c6.mp3",
+   "duration": 4.37
+  },
+  {
+   "key": "d69647758c12d6aa",
+   "file": "d69647758c12d6aa.mp3",
+   "duration": 7.58
+  },
+  {
+   "key": "064a10a0b1bf7d4f",
+   "file": "064a10a0b1bf7d4f.mp3",
+   "duration": 8.86
+  },
+  {
+   "key": "8a1cc0cf867d0871",
+   "file": "8a1cc0cf867d0871.mp3",
+   "duration": 6.98
+  },
+  {
+   "key": "936580e3cfdbb12a",
+   "file": "936580e3cfdbb12a.mp3",
+   "duration": 9.31
+  },
+  {
+   "key": "9f412d0270008637",
+   "file": "9f412d0270008637.mp3",
+   "duration": 7.2
+  },
+  {
+   "key": "dfe362e7b640f85a",
+   "file": "dfe362e7b640f85a.mp3",
+   "duration": 8.5
+  },
+  {
+   "key": "317b64170acf6497",
+   "file": "317b64170acf6497.mp3",
+   "duration": 4.49
+  },
+  {
+   "key": "845bd3d5c0279e01",
+   "file": "845bd3d5c0279e01.mp3",
+   "duration": 7.3
+  },
+  {
+   "key": "72cbe86b5b583fad",
+   "file": "72cbe86b5b583fad.mp3",
+   "duration": 8.16
+  },
+  {
+   "key": "914c7a8a93fdab94",
+   "file": "914c7a8a93fdab94.mp3",
+   "duration": 8.02
+  },
+  {
+   "key": "f57bbd9fda503783",
+   "file": "f57bbd9fda503783.mp3",
+   "duration": 8.23
+  },
+  {
+   "key": "7f898192a7ca9878",
+   "file": "7f898192a7ca9878.mp3",
+   "duration": 3.74
+  },
+  {
+   "key": "e5744cfac2e5df98",
+   "file": "e5744cfac2e5df98.mp3",
+   "duration": 6.7
+  },
+  {
+   "key": "17e3f67b7e178c5b",
+   "file": "17e3f67b7e178c5b.mp3",
+   "duration": 3.79
+  },
+  {
+   "key": "abaeccfe01054b21",
+   "file": "abaeccfe01054b21.mp3",
+   "duration": 7.22
+  },
+  {
+   "key": "467c3c888e9af92c",
+   "file": "467c3c888e9af92c.mp3",
+   "duration": 10.78
+  },
+  {
+   "key": "9cd390526498eda5",
+   "file": "9cd390526498eda5.mp3",
+   "duration": 7.92
+  },
+  {
+   "key": "aa1beff15590143b",
+   "file": "aa1beff15590143b.mp3",
+   "duration": 7.44
+  },
+  {
+   "key": "fa628200e4380804",
+   "file": "fa628200e4380804.mp3",
+   "duration": 6.53
+  },
+  {
+   "key": "dee50829603468e0",
+   "file": "dee50829603468e0.mp3",
+   "duration": 4.7
+  },
+  {
+   "key": "561285601e5eea68",
+   "file": "561285601e5eea68.mp3",
+   "duration": 6.24
+  },
+  {
+   "key": "e7e04a77f62fc4dc",
+   "file": "e7e04a77f62fc4dc.mp3",
+   "duration": 8.02
+  }
+ ]
+}

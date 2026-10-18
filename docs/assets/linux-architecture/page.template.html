@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Linux 内核架构 · 用三条完整流程把组件串起来</title>
+<style>/*STYLE*/</style>
+</head>
+<body>
+<header class="hero" style="position:relative">
+  <div class="eyebrow">Linux 6.12.112 · x86_64 · kernel.org stable</div>
+  <h1>Linux 内核架构</h1>
+  <p>先看一张分层总图，再沿三条完整流程逐步走：开机到提示符、敲一条命令到看见输出、系统空闲时的一次时钟循环。每一步标出执行上下文、经过的组件、调用链、教学伪代码、真实源码片段、当时的数据结构和源码行号；同一份流程再从执行上下文、组件、task 状态三个切面各看一遍。</p>
+  <div class="chips">
+    <span>案例：QEMU x86_64 · 静态 BusyBox（musl）· ext4 根 · virtio-blk · PS/2 键盘 · VGA 文本控制台</span>
+    <span>启动参数 <code>root=/dev/vda rootfstype=ext4 console=tty1 init=/sbin/init</code></span>
+    <span>inittab <code>tty1::respawn:-/bin/sh</code></span>
+  </div>
+  <button type="button" id="theme" title="切换明暗">明 / 暗</button>
+</header>
+<nav class="toc" aria-label="页面目录">
+  <a href="#doc">怎么读</a><a href="#overview">总体</a><a href="#pano">全景</a><a href="#lens">切面</a><a href="#states">状态</a><a href="#ideas">设计</a>
+  <a href="#boot">引导</a><a href="#proc">进程</a><a href="#mem">内存</a><a href="#file">文件</a><a href="#block">块 I/O</a><a href="#tty">终端</a><a href="#irq">中断与时钟</a><a href="#code">代码索引</a><a href="linux-kernel-animation.html" title="三条流程逐跳动画：CPU 寄存器与各位、内存布局、设备与总线传输">▶ 动画演示</a>
+</nav>
+<main>
+
+<section id="doc">
+  <div class="section-heading"><div><span class="section-kicker">先读这一段</span><h2>这页怎么读</h2></div><span class="provenance">源码：src/linux-6.12.112（kernel.org 上游 tarball）</span></div>
+  <div class="prose">
+    <p>内核里的组件彼此调用，单看任何一个都很难理解它为什么长这样。这页换个角度：挑三条“每个组件都得出场”的完整流程，把控制流一步步走完，看它们怎么接力。</p>
+    <p><b>全景图</b>是主体。上方选流程、选步骤；左边是时序图（每列一个组件，每段一步），右边是这一步的说明：运行在哪种上下文、哪些 task 的状态变了、调用链（每一跳带源码行号）、此刻相关结构体的字段。每一步的“实现原理”支持<b>对照阅读 / 教学伪代码 / 真实源码</b>；点击调用链中的函数可查看该小步骤的本地源码摘录、真实行号与完整定义。默认开启<b>逐行讲解</b>：每行下方解释操作和本行符号，汇编额外解释指令宽度、源/目标、寄存器及转换目的；可临时关闭，或复制带讲解的完整代码；下面的组件图把这一步的控制流画成带编号的粗线。<b>切面</b>一节把同一批步骤按执行上下文和组件重新排列；<b>状态</b>一节按 task 状态转换排列，任何格子都能点回全景图。</p>
+  </div>
+  <div class="callout warn">口径：调用链是<b>对 6.12.112 源码的静态走读结果</b>，按 x86_64、默认配置（NO_HZ_IDLE、高精度定时器、cpuidle 驱动关闭）核对。每个函数链接的行号由构建脚本对本地源码树解析得出，打开即是该标签上的定义。数据面板里的字段名与源码一致，取值除注明为常量或默认值的以外都是示意。调用链只展示控制流主干，加锁、统计、tracepoint 和错误处理需查完整源码。<b>教学伪代码</b>用于解释机制；<b>真实源码</b>从本地树原样提取，关键片段的省略行数明确标注，可展开完整定义。// 讲解与内核原文分开展示，原文复制只包含内核原文。教学伪代码逐行人工说明；源码讲解结合人工机制术语、本地声明和语法规则生成，命名解读明确标为命名阅读，符号定位待确认时仅说明当前语法角色，类型和实现需查对应作用域。相似符号的声明位置是核对线索，精确类型解析需由编译器完成。硬件、QEMU和用户态阶段按各自的事件说明展示。稳态流程展示条件分支下的观察切面，各CPU的实际执行顺序由当时状态决定。</div>
+</section>
+
+<section id="overview">
+  <div class="section-heading"><div><span class="section-kicker">先看这张图</span><h2>总体：内核分层，以及谁调用谁</h2></div><span class="provenance">点任一方框，右侧显示职责、关键对象、源码，以及它在三条流程里出现的步骤</span></div>
+  <p class="lead">从上往下依次是用户态、进入内核的三扇门（系统调用、异常、中断）、核心子系统、存储栈与终端栈、驱动和设备。绿色实线是同步调用的主路径，红色是中断与软中断驱动的路径，虚线是旁路或异步交接。</p>
+  <div class="ov-wrap">
+    <div class="archify-canvas" id="ov-canvas"></div>
+    <aside id="ov-caption" aria-live="polite"></aside>
+  </div>
+</section>
+
+<section id="pano">
+  <div class="section-heading"><div><span class="section-kicker">再按步骤走一遍</span><h2>全景图：三条流程，每个组件都出场</h2></div><span class="provenance">静态走读 · 行号已对本地 6.12.112 校验</span></div>
+  <div id="pano"></div>
+</section>
+
+<section id="lens">
+  <div class="section-heading"><div><span class="section-kicker">换个切面</span><h2>切面：同一批步骤，按上下文和组件重排</h2></div><span class="provenance">由全景图数据自动生成；格子里的数字是步骤号，点击跳回全景图</span></div>
+  <p class="lead">左表按执行上下文排列，右表按组件排列；数字是流程中的步骤号。</p>
+  <div class="lens-grid">
+    <div id="lens-ctx"></div>
+    <div id="lens-comp"></div>
+  </div>
+</section>
+
+<section id="states">
+  <div class="section-heading"><div><span class="section-kicker">再换一个切面</span><h2>task 状态：谁在什么时候睡下、被谁叫醒</h2></div><span class="provenance">圆圈里的数字是三条流程里出现这种转换的次数</span></div>
+  <p class="lead">调度器只认 task 的状态。等键盘是可被信号打断的浅睡（S），等磁盘页是只有致命信号才能打断的深睡（D），退出后到被父进程收尸之间是僵尸（Z）。点一条箭头，右侧列出每一次发生在哪一步。</p>
+  <div class="state-wrap">
+    <div id="state-svg"></div>
+    <div id="state-list"></div>
+  </div>
+</section>
+
+<section id="ideas">
+  <div class="section-heading"><div><h2>设计理念：每个组件在摆平哪一对矛盾</h2></div><span class="provenance">每一行对应总图上的一块</span></div>
+  <div class="doc-table"><table>
+    <thead><tr><th>组件</th><th>要摆平的矛盾</th><th>核心抽象</th><th>原则</th><th>在流程里看</th></tr></thead>
+    <tbody>
+      <tr><td>引导</td><td>子系统相互依赖，初始化需遵循先后顺序</td><td>initcall 级别、1 号与 2 号</td><td>先建立调度环境，再按依赖初始化，最后把 1 号交给用户态</td><td><button class="stepchip" data-go="boot:5">开6</button><button class="stepchip" data-go="boot:6">开7</button></td></tr>
+      <tr><td>进程</td><td>隔离和共享要同时存在</td><td>task_struct、clone 标志</td><td>可调度的是 task；进程和线程的差别只是共享了哪些资源</td><td><button class="stepchip" data-go="cmd:9">敲10</button><button class="stepchip" data-go="cmd:12">敲13</button></td></tr>
+      <tr><td>调度</td><td>多核公平调度与队列访问的可扩展性</td><td>每 CPU 运行队列、EEVDF</td><td>公平在本队列里算；跨 CPU 发生在唤醒和负载均衡时；切换只在安全点</td><td><button class="stepchip" data-go="cmd:6">敲7</button><button class="stepchip" data-go="tick:4">稳5</button></td></tr>
+      <tr><td>内存</td><td>地址空间大、物理内存小，fork 还要快</td><td>VMA、缺页、写时复制</td><td>映射先成立，物理页等真正访问再给</td><td><button class="stepchip" data-go="boot:12">开13</button><button class="stepchip" data-go="cmd:10">敲11</button></td></tr>
+      <tr><td>中断</td><td>设备要快响应，处理又可能很长</td><td>硬中断 / 软中断 / workqueue</td><td>硬中断只做必须立刻做的，其余逐级推迟到能睡的上下文</td><td><button class="stepchip" data-go="cmd:2">敲3</button><button class="stepchip" data-go="tick:5">稳6</button></td></tr>
+      <tr><td>VFS</td><td>多种文件系统共用同一批系统调用</td><td>dentry、inode、file</td><td>名字、对象、打开实例分开缓存；路径查找先走无锁的 RCU-walk</td><td><button class="stepchip" data-go="cmd:11">敲12</button><button class="stepchip" data-go="cmd:14">敲15</button></td></tr>
+      <tr><td>页缓存</td><td>磁盘慢，进程希望读写像访问内存</td><td>address_space 里的 folio</td><td>读写都先碰缓存；回写异步，并用脏页限额卡住写得太快的进程</td><td><button class="stepchip" data-go="cmd:15">敲16</button><button class="stepchip" data-go="tick:9">稳10</button></td></tr>
+      <tr><td>ext4</td><td>大文件映射要省，崩溃后元数据要一致</td><td>extent、jbd2 事务</td><td>一段区间描述连续块；元数据改动先进日志</td><td><button class="stepchip" data-go="cmd:15">敲16</button><button class="stepchip" data-go="tick:10">稳11</button></td></tr>
+      <tr><td>块层</td><td>文件系统懂文件，设备懂队列，两边速度不同</td><td>bio、request、blk-mq</td><td>提交是进程里的函数调用；完成是中断，再逐层回调唤醒等待者</td><td><button class="stepchip" data-go="cmd:16">敲17</button><button class="stepchip" data-go="cmd:17">敲18</button></td></tr>
+      <tr><td>终端</td><td>字符一个个来，程序想要整行；回显要即时</td><td>flip buffer、n_tty 行规程</td><td>中断侧只收字符；行规程在 kworker 里回显、攒行，整行才唤醒读者</td><td><button class="stepchip" data-go="cmd:4">敲5</button><button class="stepchip" data-go="cmd:5">敲6</button></td></tr>
+    </tbody></table></div>
+</section>
+
+<section id="boot">
+  <div class="section-heading"><div><h2>引导：先能调度，再按依赖点名，最后把 1 号交出去</h2></div><span class="provenance"><a class="src" data-src="init/main.c:start_kernel"></a><a class="src" data-src="init/main.c:kernel_init_freeable"></a></span></div>
+  <div class="prose">
+    <p>CPU 复位后从固件入口执行，引导程序负责将压缩镜像装入内存、解压并交给内核。内核按依赖顺序建立内存分配器、VFS、ext4 和 virtio-blk。</p>
+    <p>所以启动切成两段。<code>start_kernel</code> 在一颗 CPU 上顺序立起内存、中断、时钟、调度和 VFS 缓存，然后 <code>rest_init</code> 拉起 1 号 <code>kernel_init</code> 和 2 号 <code>kthreadd</code>，自己变成 0 号 idle。从这一刻起初始化可以睡眠、可以等磁盘。1 号里 <code>do_initcalls</code> 按级别点名，驱动和文件系统登记自己；<code>console_on_rootfs</code> 在临时根上打开 <code>/dev/console</code> 得到 fd 0/1/2；<code>prepare_namespace</code> 挂上 ext4 根；最后 <code>run_init_process</code> 让同一个 task exec 成 <code>/sbin/init</code>，PID 仍是 1。</p>
+  </div>
+  <div class="doc-table"><table>
+    <thead><tr><th>initcall 级别</th><th>这个案例里登记的东西</th></tr></thead>
+    <tbody>
+      <tr><td>core / postcore</td><td>内存、中断、总线类型这些地基</td></tr>
+      <tr><td>subsys</td><td>PCI、块层、输入核心</td></tr>
+      <tr><td>fs</td><td>VFS 里还需要登记的部分，devtmpfs</td></tr>
+      <tr><td>device（module_init）</td><td>virtio-blk 注册磁盘；ext4 注册文件系统类型；i8042 与 atkbd；VT 的键盘处理器</td></tr>
+      <tr><td>late</td><td>可以更晚的收尸工作</td></tr>
+    </tbody></table></div>
+  <p class="prose muted">级别定义见 <a class="src" data-src="include/linux/init.h:#L290-317"></a>，调用顺序见 <a class="src" data-src="init/main.c:do_initcall_level"></a>。</p>
+</section>
+
+<section id="proc">
+  <div class="section-heading"><div><h2>进程与调度：可运行的是 task，共享什么由 clone 决定</h2></div><span class="provenance"><a class="src" data-src="kernel/fork.c:copy_process"></a><a class="src" data-src="kernel/sched/fair.c:pick_eevdf"></a></span></div>
+  <div class="prose">
+    <p>内核调度和记账的单位是 <code>task_struct</code>，用户态说的“进程”“线程”是它的两种用法。<code>kernel_clone</code> → <code>copy_process</code> 复制 task，clone 标志逐项决定地址空间、文件表、文件系统根、信号、线程组是共享原件还是复制一份。exec 保留 task、换掉 mm；exit 先释放资源变成僵尸，等父进程 <code>wait4</code> 取走退出码才回收。</p>
+    <p>每颗 CPU 一条运行队列。本版本公平类使用 EEVDF：每个实体有 vruntime 和 deadline（vruntime + slice/权重），<code>pick_eevdf</code> 在有资格（lag ≥ 0）的实体里挑 deadline 最早的。tick 和唤醒通过 <code>TIF_NEED_RESCHED</code> 请求重调度，任务切换在系统调用或中断返回、以及内核允许抢占的安全点执行。</p>
+  </div>
+  <div class="doc-table"><table>
+    <thead><tr><th>用户看到的</th><th>clone 上的关键选择</th><th>内核里的结果</th></tr></thead>
+    <tbody>
+      <tr><td>新进程（fork）</td><td><code>SIGCHLD</code></td><td>新 mm，PTE 共享并写保护，写时复制</td></tr>
+      <tr><td>新线程</td><td><code>CLONE_VM | CLONE_FILES | CLONE_SIGHAND | CLONE_THREAD …</code></td><td>同一个 mm，同一个线程组</td></tr>
+      <tr><td>vfork</td><td><code>CLONE_VM | CLONE_VFORK</code></td><td>共享 mm，父进程等子进程 exec 或退出</td></tr>
+    </tbody></table></div>
+</section>
+
+<section id="mem">
+  <div class="section-heading"><div><h2>内存：映射是契约，物理页后来补上</h2></div><span class="provenance"><a class="src" data-src="mm/memory.c:handle_mm_fault"></a><a class="src" data-src="mm/page_alloc.c:__alloc_pages_noprof"></a></span></div>
+  <div class="prose">
+    <p>用户任务通过 <code>mm_struct</code> 管理地址空间，各段 <code>vm_area_struct</code> 由 maple tree 索引。普通按需映射先建立 VMA，物理页由后续访问触发的 <code>handle_mm_fault</code> 准备：匿名访问使用共享零页或新分配的清零页，文件页从页缓存获取（必要时从磁盘读取），写只读共享页时执行写时复制。</p>
+    <p>物理内存有两套分配器：伙伴系统按 2 的幂分配连续页，SLUB 在页上切小对象。空闲页低于 low 水位唤醒 kswapd 后台回收，低于 min 时分配者自己直接回收。</p>
+  </div>
+  <div class="doc-table"><table>
+    <thead><tr><th>缺页种类</th><th>处理函数</th><th>在流程里</th></tr></thead>
+    <tbody>
+      <tr><td>文件页，读</td><td><a class="src" data-src="mm/memory.c:do_read_fault"></a> → <a class="src" data-src="mm/filemap.c:filemap_fault"></a></td><td><button class="stepchip" data-go="boot:12">开13</button><button class="stepchip" data-go="cmd:13">敲14</button></td></tr>
+      <tr><td>写时复制</td><td><a class="src" data-src="mm/memory.c:do_wp_page"></a> → <a class="src" data-src="mm/memory.c:wp_page_copy"></a></td><td><button class="stepchip" data-go="cmd:10">敲11</button></td></tr>
+      <tr><td>匿名页首次访问</td><td><a class="src" data-src="mm/memory.c:do_anonymous_page"></a></td><td>栈和堆的第一次写</td></tr>
+    </tbody></table></div>
+</section>
+
+<section id="file">
+  <div class="section-heading"><div><h2>文件与页缓存：名字、对象、打开实例分开</h2></div><span class="provenance"><a class="src" data-src="fs/namei.c:path_openat"></a><a class="src" data-src="mm/filemap.c:filemap_read"></a></span></div>
+  <div class="prose">
+    <p>路径里的每个分量在 dcache 里找 <code>dentry</code>，dentry 指向 <code>inode</code>，一次 open 得到一个 <code>file</code>（偏移、模式、f_op）。路径查找先在 RCU-walk 下无锁地走，只有遇到需要睡眠的情况（dcache 未命中、要读盘）才退回 ref-walk。</p>
+    <p>文件数据按 folio 缓存在 inode 的 <code>address_space</code>（一棵 xarray）里。read 先查缓存，未命中才预读；write 只弄脏页缓存里的页，回写线程每 5 秒检查一次，把脏了 30 秒以上的页刷下去。ext4 只在映射逻辑块（extent）和处理元数据（目录、inode、位图，经 jbd2 日志）时出现。</p>
+  </div>
+</section>
+
+<section id="block">
+  <div class="section-heading"><div><h2>块 I/O：提交是函数调用，完成是中断</h2></div><span class="provenance"><a class="src" data-src="block/blk-mq.c:blk_mq_submit_bio"></a><a class="src" data-src="drivers/block/virtio_blk.c:virtio_queue_rq"></a></span></div>
+  <div class="prose">
+    <p><code>bio</code> 描述“这些内存页 ↔ 这些扇区”。<code>submit_bio</code> 在提交者的进程上下文里一路调用下去：blk-mq 尝试和 plug 里的请求合并，分配 tag 得到 <code>request</code>，派发到驱动的 <code>queue_rq</code>。virtio-blk 把请求头、数据页、状态字节三段放进 virtqueue，写通知寄存器后立即返回。提交者若要等结果，就睡在 folio 锁或 buffer 锁上。</p>
+    <p>本例设备完成后发 MSI-X 中断：<code>vring_interrupt</code> → <code>virtblk_done</code> → <code>blk_mq_end_request</code> → <code>bio_endio</code> → 文件系统的完成回调 → 解锁页、唤醒等待者。硬中断中的完成回调须遵循原子上下文约束；需要睡眠的后续工作交给进程上下文。</p>
+  </div>
+</section>
+
+<section id="tty">
+  <div class="section-heading"><div><h2>输入与终端：字符一个个来，程序要整行</h2></div><span class="provenance"><a class="src" data-src="drivers/tty/vt/keyboard.c:kbd_event"></a><a class="src" data-src="drivers/tty/n_tty.c:n_tty_receive_char"></a></span></div>
+  <div class="prose">
+    <p>输入分三层：i8042 是 PS/2 控制器驱动，从 0x60 读出字节；atkbd 是键盘协议驱动，把扫描码翻成 KEY_*；输入核心把事件分发给 handler。VT 的 kbd handler 按键盘映射把键码翻成字符，推进 tty1 的 flip buffer。这三层都在硬中断里，到 flip buffer 为止。</p>
+    <p>flip buffer 的 work 由 kworker 执行，把字符交给行规程 n_tty。规范模式（ICANON）下 n_tty 负责回显（ECHO）、退格和 ^U 这样的行编辑、^C 这样的信号字符，直到收到行结束才更新 <code>canon_head</code> 并唤醒睡在 <code>read</code> 上的进程。输出方向反过来：<code>write</code> → <code>n_tty_write</code> 做 OPOST 转换 → <code>con_write</code> 把字符写进屏幕缓冲，前台 VT 的屏幕缓冲就是 VGA 文本显存。</p>
+    <p>“打开终端”本身也是一次 VFS 操作：<code>open("/dev/tty1")</code> 经 <code>chrdev_open</code> 换上 tty 的 f_op，<code>tty_open</code> 找到或建立 tty_struct，会话首进程第一次打开时由 <code>tty_open_proc_set_tty</code> 把它设成控制终端。之后键盘上的 ^C 才知道该把 SIGINT 发给哪个前台进程组。</p>
+  </div>
+</section>
+
+<section id="irq">
+  <div class="section-heading"><div><h2>中断、时钟与软中断：逐级推迟</h2></div><span class="provenance"><a class="src" data-src="kernel/softirq.c:handle_softirqs"></a><a class="src" data-src="kernel/time/tick-sched.c:tick_nohz_handler"></a></span></div>
+  <div class="prose">
+    <p>硬中断负责读取设备寄存器、登记后续工作；软中断在 <code>irq_exit</code> 等路径批量执行，两者均须遵循原子上下文约束。workqueue 和内核线程在进程上下文执行，可以睡眠、获取 mutex。积压的软中断转给 <code>ksoftirqd</code>，让用户任务获得运行机会。</p>
+    <p>时钟是本地 APIC 定时器。高精度模式下周期 tick 只是一个每 CPU 的 hrtimer，CPU 空闲时（NO_HZ_IDLE）可以停掉，直接把 APIC 编程到下一个真正的到期事件。tick 里依次做记账、本地定时器、RCU 静止状态报告和 <code>sched_tick</code>。</p>
+  </div>
+  <div class="doc-table"><table>
+    <thead><tr><th>软中断</th><th>谁 raise</th><th>处理函数</th></tr></thead>
+    <tbody>
+      <tr><td>TIMER_SOFTIRQ</td><td>tick 发现 timer wheel 有到期</td><td><a class="src" data-src="kernel/time/timer.c:run_timer_softirq"></a></td></tr>
+      <tr><td>RCU_SOFTIRQ</td><td><code>rcu_sched_clock_irq</code></td><td><a class="src" data-src="kernel/rcu/tree.c:rcu_core"></a></td></tr>
+      <tr><td>SCHED_SOFTIRQ</td><td><code>sched_balance_trigger</code></td><td><a class="src" data-src="kernel/sched/fair.c:sched_balance_softirq"></a></td></tr>
+      <tr><td>BLOCK_SOFTIRQ</td><td>跨 CPU 的块完成</td><td><a class="src" data-src="block/blk-mq.c:blk_done_softirq"></a></td></tr>
+    </tbody></table></div>
+</section>
+
+<section id="code">
+  <div class="section-heading"><div><h2>代码索引</h2></div><span class="provenance">本页出现的全部函数与结构，按组件排列；“出现在”列点击跳到对应步骤</span></div>
+  <div class="code-tools"><input id="code-q" type="search" placeholder="按函数名、组件、文件过滤，如 n_tty、ext4、fork"><span id="code-count"></span></div>
+  <div class="doc-table" id="code-table" style="max-width:none"></div>
+</section>
+
+</main>
+<footer>Linux 内核源码以 GPL-2.0 发布；本页链接指向 git.kernel.org stable 树的 v6.12.112 标签。页面由 docs/assets/linux-architecture/build.mjs 生成，运行 <code>node build.mjs</code> 重新构建并校验所有源码引用。</footer>
+<script>/*DATA*/</script>
+<script>/*ENGINE*/</script>
+</body>
+</html>

@@ -1,0 +1,1933 @@
+{
+  "schema": "oslab.curriculum/1",
+  "version": "2026-10-17",
+  "profileId": "linux-x86_64",
+  "lessons": [
+    {
+      "id": "L00",
+      "priority": 100,
+      "title": "CPU 复位后的第一条指令",
+      "stage": "boot",
+      "profileId": "linux-x86_64",
+      "trigger": {
+        "address": "0xfffffff0"
+      },
+      "execution": {
+        "runTo": "next-instruction",
+        "interruptPolicy": "disable",
+        "budgetInstructions": 1
+      },
+      "observe": {
+        "registers": [
+          "rip",
+          "cs"
+        ],
+        "memory": [],
+        "devices": [],
+        "coverage": "best-effort"
+      },
+      "focus": {
+        "cpuFields": [
+          "rip",
+          "cs",
+          "cr0"
+        ],
+        "addresses": [
+          "0xfffffff0",
+          "0xffff0"
+        ]
+      },
+      "explain": {
+        "purpose": "观察 CPU 复位后第一条取指：CS 隐藏基址由硬件设定，IP 从 0xfff0 开始。",
+        "io": "CPU 从复位向量取指，随后跳入固件。",
+        "instructions": {
+          "0xfffffff0": "复位向量处的第一条指令；结合地址、反汇编和原始字节核对。",
+          "jmp far": "固件随后用远跳转刷新 CS，进入真正的 16 位初始化代码。"
+        },
+        "concepts": [
+          "复位时使用段缓存中由硬件设定的 CS 基址，与 IP 相加得到取指地址。",
+          "此时的取指来自 ROM/固件映射，观察地址按该阶段的 CPU 模式和物理映射解释。"
+        ],
+        "fieldRefs": [
+          "cpu.linearPc",
+          "cpu.segments.cs",
+          "cpu.instruction.bytes",
+          "cpu.control.cr0"
+        ]
+      },
+      "checks": [
+        {
+          "description": "已进入复位停点",
+          "expect": [
+            {
+              "field": "stop.reason",
+              "equals": "reset"
+            }
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "prompt": "0xfff0 对应哪个物理地址？复位时 CS 隐藏基址由谁设定，如何参与计算？",
+          "evidenceRefs": [
+            "cpu.segments.cs",
+            "cpu.instruction"
+          ]
+        }
+      ],
+      "evidence": [
+        "x-oslab-capture",
+        "rom-bytes"
+      ]
+    },
+    {
+      "id": "L01",
+      "priority": 80,
+      "title": "固件把启动扇区装到 0x7c00",
+      "stage": "boot",
+      "profileId": "linux-x86_64",
+      "trigger": {
+        "addressRange": [
+          "0x7000",
+          "0x10000"
+        ]
+      },
+      "execution": {
+        "runTo": "next-instruction",
+        "interruptPolicy": "defer",
+        "budgetInstructions": 1
+      },
+      "observe": {
+        "registers": [
+          "rip",
+          "cs",
+          "ds"
+        ],
+        "memory": [],
+        "devices": [],
+        "coverage": "best-effort"
+      },
+      "focus": {
+        "cpuFields": [
+          "rip",
+          "cs",
+          "ds"
+        ],
+        "addresses": [
+          "0x7c00",
+          "0x7c1f"
+        ]
+      },
+      "explain": {
+        "purpose": "看固件/引导器在实模式下的装载位置和下一步跳转。",
+        "io": "SeaBIOS 的磁盘服务读取 MBR，把 512 字节装到 0x7c00；控制权交给引导扇区。",
+        "instructions": {
+          "int 0x13": "BIOS 磁盘中断；真实扇区内容由 QEMU 的 IDE 设备提供。",
+          "jmp 0x0000:0x7c00": "固件移交控制权，CS:IP 一起改变。"
+        },
+        "concepts": [
+          "MBR 只有 512 字节并以 0x55aa 结尾，第二阶段引导器在别处。",
+          "GRUB 的实际装载地址从本次运行读取，并用于绑定符号。"
+        ],
+        "fieldRefs": [
+          "cpu.linearPc",
+          "cpu.segments.cs",
+          "memory"
+        ]
+      },
+      "checks": [],
+      "questions": [
+        {
+          "prompt": "0x7c00 处的字节与启动盘 MBR 是否一致？",
+          "evidenceRefs": [
+            "memory",
+            "disk"
+          ]
+        }
+      ],
+      "evidence": [
+        "bios-rom-map",
+        "disk-mbr"
+      ]
+    },
+    {
+      "id": "L02",
+      "priority": 80,
+      "title": "Linux 16 位 setup",
+      "stage": "boot",
+      "profileId": "linux-x86_64",
+      "trigger": {
+        "module": "linux-setup",
+        "symbol": [
+          "main",
+          "go_to_protected_mode",
+          "protected_mode_jump"
+        ]
+      },
+      "execution": {
+        "runTo": "symbol",
+        "target": "go_to_protected_mode",
+        "interruptPolicy": "defer",
+        "budgetInstructions": 100000
+      },
+      "observe": {
+        "registers": [
+          "cr0",
+          "cs",
+          "ds",
+          "esp"
+        ],
+        "memory": [],
+        "devices": [],
+        "coverage": "best-effort"
+      },
+      "focus": {
+        "cpuFields": [
+          "mode",
+          "cr0",
+          "cs",
+          "esp"
+        ],
+        "source": {
+          "module": "linux-setup",
+          "symbol": "main"
+        }
+      },
+      "explain": {
+        "purpose": "GRUB 用 linux16 协议进入 Linux setup；setup 收集 boot_params、内存图并准备进入保护模式。",
+        "io": "setup 读取 boot_params、建立栈和描述符表，最后跳到 protected_mode_jump。",
+        "instructions": {
+          "cli": "进入关键切换前关闭中断。",
+          "lgdt": "装载 setup 的 GDT；描述符表内容应从当前内存读取。",
+          "mov cr0": "置 PE 位进入保护模式；随后的远跳转刷新 CS。"
+        },
+        "concepts": [
+          "16 位 setup 与 32 位解压器是不同模块，符号必须按装载地址绑定。",
+          "boot_params 是真实内存对象，字段值由本次启动决定。"
+        ],
+        "fieldRefs": [
+          "cpu.mode",
+          "cpu.control.cr0",
+          "cpu.segments.cs",
+          "source"
+        ]
+      },
+      "checks": [],
+      "questions": [
+        {
+          "prompt": "CR0.PE 置位前后 CS 的属性有什么变化？",
+          "evidenceRefs": [
+            "cpu.segments.cs",
+            "cpu.control.cr0"
+          ]
+        }
+      ],
+      "evidence": [
+        "setup.elf",
+        "boot_params"
+      ]
+    },
+    {
+      "id": "L03",
+      "priority": 80,
+      "title": "32 位解压入口 startup_32",
+      "stage": "boot",
+      "profileId": "linux-x86_64",
+      "trigger": {
+        "module": "linux-decompressor",
+        "symbol": [
+          "startup_32",
+          "verify_cpu"
+        ]
+      },
+      "execution": {
+        "runTo": "symbol",
+        "target": "startup_32",
+        "interruptPolicy": "defer",
+        "budgetInstructions": 100000
+      },
+      "observe": {
+        "registers": [
+          "cr0",
+          "cr4",
+          "efer"
+        ],
+        "memory": [],
+        "devices": [],
+        "coverage": "best-effort"
+      },
+      "focus": {
+        "cpuFields": [
+          "mode",
+          "cr0",
+          "cr4",
+          "efer"
+        ],
+        "source": {
+          "module": "linux-decompressor",
+          "symbol": "startup_32"
+        }
+      },
+      "explain": {
+        "purpose": "从 16 位 setup 进入 32 位解压器，观察保护模式下的段和页表准备。",
+        "io": "解压器建立临时页表，校验 CPU 特性，然后进入长模式。",
+        "instructions": {
+          "verify_cpu": "检查 CPUID 与长模式所需特性。",
+          "mov cr4": "设置 PAE 等位；必须和 CR0/EFER 一起解释。",
+          "mov cr3": "装载临时页目录，后续进入长模式后还会换成内核页表。"
+        },
+        "concepts": [
+          "startup_32/startup_64 在解压器和主内核里同名，必须按模块区分。",
+          "解压器运行在临时映射下，地址读取需按当前页表和实际装载位置定位。"
+        ],
+        "fieldRefs": [
+          "cpu.mode",
+          "cpu.control.cr3",
+          "cpu.control.cr4",
+          "cpu.efer"
+        ]
+      },
+      "checks": [],
+      "questions": [
+        {
+          "prompt": "此时 CR3 指向的页表属于解压器还是主内核？",
+          "evidenceRefs": [
+            "cpu.control.cr3",
+            "evidence"
+          ]
+        }
+      ],
+      "evidence": [
+        "compressed/vmlinux",
+        "layout"
+      ]
+    },
+    {
+      "id": "L04",
+      "priority": 80,
+      "title": "长模式与解压 startup_64",
+      "stage": "boot",
+      "profileId": "linux-x86_64",
+      "trigger": {
+        "module": "linux-decompressor",
+        "symbol": [
+          "startup_64",
+          "extract_kernel",
+          "decompress_kernel"
+        ]
+      },
+      "execution": {
+        "runTo": "symbol",
+        "target": "extract_kernel",
+        "interruptPolicy": "defer",
+        "budgetInstructions": 200000
+      },
+      "observe": {
+        "registers": [
+          "cr0",
+          "cr3",
+          "cr4",
+          "efer"
+        ],
+        "memory": [],
+        "devices": [],
+        "coverage": "best-effort"
+      },
+      "focus": {
+        "cpuFields": [
+          "mode",
+          "cr0",
+          "cr3",
+          "cr4",
+          "efer"
+        ],
+        "source": {
+          "module": "linux-decompressor",
+          "symbol": "extract_kernel"
+        }
+      },
+      "explain": {
+        "purpose": "进入 64 位长模式，观察解压器的临时映射、压缩输入和输出范围。",
+        "io": "extract_kernel 解析 bzImage 头，解压内核到最终物理地址，再跳到主内核入口。",
+        "instructions": {
+          "EFER.LME": "允许长模式；只有 CR0.PG 同时置位才真正进入。",
+          "jmp *%rax": "跳到解压后的主内核入口，地址由本次装载决定。"
+        },
+        "concepts": [
+          "长模式、分页和段基址是三个不同维度，需结合 CR0/CR4/EFER 和段缓存判断。",
+          "解压器与主内核的符号和页表必须分开记录。"
+        ],
+        "fieldRefs": [
+          "cpu.mode",
+          "cpu.control.cr3",
+          "cpu.efer",
+          "source"
+        ]
+      },
+      "checks": [],
+      "questions": [
+        {
+          "prompt": "EFER.LMA 与 CR0.PG 哪一个先变化？",
+          "evidenceRefs": [
+            "cpu.efer",
+            "cpu.control.cr0"
+          ]
+        }
+      ],
+      "evidence": [
+        "compressed/vmlinux",
+        "bzImage-header"
+      ]
+    },
+    {
+      "id": "L05",
+      "priority": 90,
+      "title": "主内核 start_kernel",
+      "stage": "boot",
+      "profileId": "linux-x86_64",
+      "trigger": {
+        "module": "linux-kernel",
+        "symbol": [
+          "start_kernel",
+          "x86_64_start_kernel",
+          "x86_64_start_reservations"
+        ]
+      },
+      "execution": {
+        "runTo": "symbol",
+        "target": "start_kernel",
+        "interruptPolicy": "defer",
+        "budgetInstructions": 2000000
+      },
+      "observe": {
+        "registers": [
+          "rip",
+          "rsp",
+          "cr3"
+        ],
+        "memory": [],
+        "devices": [],
+        "coverage": "best-effort"
+      },
+      "focus": {
+        "cpuFields": [
+          "rip",
+          "rsp",
+          "cr3"
+        ],
+        "source": {
+          "module": "linux-kernel",
+          "symbol": "start_kernel"
+        }
+      },
+      "explain": {
+        "purpose": "主内核已经解压并建立高地址映射，从架构相关入口进入通用的 start_kernel。",
+        "io": "start_kernel 初始化架构、内存、调度、中断、VFS，最后调用 rest_init。",
+        "instructions": {
+          "call x86_64_start_kernel": "从 head_64.S 进入 C 代码。",
+          "call start_kernel": "架构初始化完成后进入通用内核初始化。"
+        },
+        "concepts": [
+          "内核链接地址在高半区，物理地址需要页表翻译；恒等映射只存在于早期阶段。",
+          "源码位置来自与本次内核产物匹配的 vmlinux ELF。"
+        ],
+        "fieldRefs": [
+          "cpu.rip",
+          "cpu.rsp",
+          "cpu.control.cr3",
+          "source",
+          "os.kernelRelease"
+        ]
+      },
+      "checks": [
+        {
+          "description": "已进入 64 位内核",
+          "expect": [
+            {
+              "field": "cpu.mode",
+              "equals": "long-64"
+            }
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "prompt": "当前 RIP 的线性地址如何翻译成物理地址？",
+          "evidenceRefs": [
+            "evidence.cpu.paging",
+            "cpu.control.cr3"
+          ]
+        }
+      ],
+      "evidence": [
+        "vmlinux",
+        "System.map",
+        "layout"
+      ]
+    },
+    {
+      "id": "L06",
+      "priority": 85,
+      "title": "创建 PID 1 并执行 initramfs /init",
+      "stage": "boot",
+      "profileId": "linux-x86_64",
+      "trigger": {
+        "module": "linux-kernel",
+        "symbol": [
+          "rest_init",
+          "kernel_init",
+          "kernel_init_freeable",
+          "bprm_execve"
+        ]
+      },
+      "execution": {
+        "runTo": "symbol",
+        "target": "kernel_init",
+        "interruptPolicy": "defer",
+        "budgetInstructions": 2000000
+      },
+      "observe": {
+        "registers": [
+          "rip",
+          "rsp"
+        ],
+        "memory": [],
+        "devices": [],
+        "coverage": "best-effort"
+      },
+      "focus": {
+        "cpuFields": [
+          "rip",
+          "rsp"
+        ],
+        "source": {
+          "module": "linux-kernel",
+          "symbol": "kernel_init"
+        }
+      },
+      "explain": {
+        "purpose": "rest_init 创建 kernel_init 线程；它最终执行 initramfs 的 /init，成为 PID 1。",
+        "io": "kernel_init 完成剩余初始化，打开 /dev/console，执行 /init。",
+        "instructions": {
+          "kernel_thread": "创建内核线程，后面由调度器运行。",
+          "run_init_process": "execve 用户态 /init；返回值只会在失败时出现。"
+        },
+        "concepts": [
+          "PID 1 的身份由 task_struct 的 pid 字段确认，用户程序由 exec 装载。",
+          "initramfs 的 /init 是真实用户程序，切换根目录前就已运行。"
+        ],
+        "fieldRefs": [
+          "os.current.pid",
+          "os.current.comm",
+          "os.selected",
+          "source"
+        ]
+      },
+      "checks": [],
+      "questions": [
+        {
+          "prompt": "当前 current 的 pid/comm 是什么？与 init_task 有何不同？",
+          "evidenceRefs": [
+            "os.current",
+            "os.initTaskAddress"
+          ]
+        }
+      ],
+      "evidence": [
+        "vmlinux",
+        "initramfs"
+      ]
+    },
+    {
+      "id": "L07",
+      "priority": 85,
+      "title": "挂载 virtio ext2 并 switch_root",
+      "stage": "boot",
+      "profileId": "linux-x86_64",
+      "trigger": {
+        "module": "linux-kernel",
+        "symbol": [
+          "mount_bdev",
+          "ext2_fill_super",
+          "path_mount"
+        ]
+      },
+      "execution": {
+        "runTo": "symbol",
+        "target": "ext2_fill_super",
+        "interruptPolicy": "defer",
+        "budgetInstructions": 1000000
+      },
+      "observe": {
+        "registers": [
+          "rip"
+        ],
+        "memory": [],
+        "devices": [
+          "virtio-blk-0"
+        ],
+        "coverage": "best-effort"
+      },
+      "focus": {
+        "cpuFields": [
+          "rip"
+        ],
+        "deviceId": "virtio-blk-0",
+        "source": {
+          "module": "linux-kernel",
+          "symbol": "ext2_fill_super"
+        }
+      },
+      "explain": {
+        "purpose": "initramfs 的 /init 打开 /dev/vda，读取 ext2 超级块并挂载，再 switch_root 到真实根盘。",
+        "io": "/init 执行 mount -t ext2 /dev/vda /newroot；成功后用 switch_root 切换根目录并执行 /sbin/init。",
+        "instructions": {
+          "ext2_fill_super": "读取超级块、校验 magic/feature、初始化 ext2 的 super_block。",
+          "switch_root": "改变根目录和当前工作目录，exec 新根上的 init。"
+        },
+        "concepts": [
+          "initramfs 文件由内存提供；挂载后的 /data 文件来自 virtio 根盘，冷缓存读取会发起块 I/O。",
+          "virtio-blk 的 feature/queue 协商结果必须来自设备快照。"
+        ],
+        "fieldRefs": [
+          "devices",
+          "diskVersions",
+          "os.files",
+          "source"
+        ]
+      },
+      "checks": [],
+      "questions": [
+        {
+          "prompt": "根盘挂载前后的根目录对象分别来自哪里？",
+          "evidenceRefs": [
+            "os.files",
+            "devices",
+            "diskVersions"
+          ]
+        }
+      ],
+      "evidence": [
+        "rootfs.img",
+        "ext2-superblock",
+        "virtqueue"
+      ]
+    },
+    {
+      "id": "U01",
+      "priority": 60,
+      "title": "shell 等待输入",
+      "stage": "terminal",
+      "profileId": "linux-x86_64",
+      "trigger": {
+        "comm": [
+          "sh",
+          "ash",
+          "busybox"
+        ],
+        "module": "linux-kernel"
+      },
+      "execution": {
+        "runTo": "next-instruction",
+        "interruptPolicy": "allow",
+        "budgetInstructions": 1
+      },
+      "observe": {
+        "registers": [
+          "rip",
+          "rsp"
+        ],
+        "memory": [],
+        "devices": [
+          "i8042",
+          "uart"
+        ],
+        "coverage": "best-effort"
+      },
+      "focus": {
+        "cpuFields": [
+          "rip",
+          "rsp"
+        ],
+        "deviceId": "i8042"
+      },
+      "explain": {
+        "purpose": "结合本次停止位置、任务状态和等待对象，定位 shell 在 tty1 等待命令的路径。",
+        "io": "shell 读 tty；输入条件待满足时进入睡眠，按 TTY 模式等待输入或超时唤醒。",
+        "instructions": {
+          "schedule": "任务阻塞后由调度器选择可运行任务；运行队列为空时选择 idle。",
+          "read": "TTY 的读取路径取决于 termios 模式（规范/非规范）。"
+        },
+        "concepts": [
+          "TTY 等待路径中的睡眠状态和等待对象，需结合任务状态与等待队列核对。",
+          "PS/2 键盘和串口是两条独立输入通路。"
+        ],
+        "fieldRefs": [
+          "os.current",
+          "os.processes",
+          "devices",
+          "cpu.rip"
+        ]
+      },
+      "checks": [],
+      "questions": [
+        {
+          "prompt": "当前 sleep 的任务在等哪个对象？",
+          "evidenceRefs": [
+            "os.current",
+            "devices"
+          ]
+        }
+      ],
+      "evidence": [
+        "os.objects",
+        "device.i8042"
+      ]
+    },
+    {
+      "id": "U02",
+      "priority": 65,
+      "title": "按键从 PS/2 到 TTY 回显",
+      "stage": "terminal",
+      "profileId": "linux-x86_64",
+      "trigger": {
+        "module": "linux-kernel",
+        "symbol": [
+          "i8042_interrupt",
+          "kbd_event",
+          "tty_insert_flip_string_and_push_buffer",
+          "__vt_event_queue"
+        ]
+      },
+      "execution": {
+        "runTo": "symbol",
+        "target": "i8042_interrupt",
+        "interruptPolicy": "allow",
+        "budgetInstructions": 100000
+      },
+      "observe": {
+        "registers": [
+          "rip",
+          "rsp"
+        ],
+        "memory": [],
+        "devices": [
+          "i8042",
+          "pic",
+          "apic",
+          "vga"
+        ],
+        "coverage": "best-effort"
+      },
+      "focus": {
+        "cpuFields": [
+          "rip",
+          "rsp"
+        ],
+        "deviceId": "i8042"
+      },
+      "explain": {
+        "purpose": "真实按键经过 i8042、IRQ、Linux input、VT/TTY 缓冲，最后回显到 VGA。",
+        "io": "键盘控制器产生扫描码和中断；驱动读数据端口并交给 input 层。",
+        "instructions": {
+          "in $0x60": "驱动读取键盘数据端口并取走数据；面板展示观察者保存的快照。",
+          "iretq": "中断返回，恢复到被中断的任务。"
+        },
+        "concepts": [
+          "中断 IRQ 拉起、控制器接受、CPU 进入 handler 是三个不同阶段。",
+          "设备快照通过直接读取内部状态生成，保留 FIFO 内容与中断状态。"
+        ],
+        "fieldRefs": [
+          "devices",
+          "cpu.rip",
+          "cpu.rsp",
+          "events"
+        ]
+      },
+      "checks": [],
+      "questions": [
+        {
+          "prompt": "按下的字符在哪一步进入 TTY 缓冲？",
+          "evidenceRefs": [
+            "events",
+            "devices",
+            "source"
+          ]
+        }
+      ],
+      "evidence": [
+        "device.i8042",
+        "events.irq",
+        "vga"
+      ]
+    },
+    {
+      "id": "U03",
+      "priority": 70,
+      "title": "用户程序 read 进入系统调用",
+      "stage": "user",
+      "profileId": "linux-x86_64",
+      "trigger": {
+        "module": "linux-kernel",
+        "symbol": [
+          "entry_SYSCALL_64",
+          "do_syscall_64",
+          "__x64_sys_read",
+          "ksys_read",
+          "vfs_read"
+        ]
+      },
+      "execution": {
+        "runTo": "symbol",
+        "target": "ksys_read",
+        "interruptPolicy": "allow",
+        "budgetInstructions": 200000
+      },
+      "observe": {
+        "registers": [
+          "rip",
+          "rsp",
+          "rax",
+          "rdi",
+          "rsi",
+          "rdx"
+        ],
+        "memory": [],
+        "devices": [],
+        "coverage": "best-effort"
+      },
+      "focus": {
+        "cpuFields": [
+          "rip",
+          "rsp",
+          "rax",
+          "rdi",
+          "rsi",
+          "rdx"
+        ],
+        "source": {
+          "module": "linux-kernel",
+          "symbol": "ksys_read"
+        }
+      },
+      "explain": {
+        "purpose": "从用户态 syscall 指令进入内核，观察 pt_regs 参数和返回值路径。",
+        "io": "用户程序传 fd/buffer/count；内核返回读到的字节数或负 errno。",
+        "instructions": {
+          "syscall": "保存返回地址和 RFLAGS，切换到内核入口。",
+          "swapgs": "交换当前 GS 基址与 IA32_KERNEL_GS_BASE，切换用户/内核 GS 上下文。",
+          "sysretq": "返回用户态并恢复 RIP/RFLAGS。"
+        },
+        "concepts": [
+          "用户栈和内核栈是两套栈，分别结合执行阶段、RSP 与 pt_regs 定位。",
+          "系统调用号与参数来自本次实际执行的寄存器快照。"
+        ],
+        "fieldRefs": [
+          "cpu.general",
+          "cpu.rsp",
+          "os.current",
+          "os.files",
+          "source"
+        ]
+      },
+      "checks": [],
+      "questions": [
+        {
+          "prompt": "read 的 fd 和 count 分别来自哪个寄存器？",
+          "evidenceRefs": [
+            "cpu.general",
+            "source"
+          ]
+        }
+      ],
+      "evidence": [
+        "os.current",
+        "os.files",
+        "gdb"
+      ]
+    },
+    {
+      "id": "P01",
+      "priority": 70,
+      "title": "fork/exec/wait：进程生命周期",
+      "stage": "process",
+      "profileId": "linux-x86_64",
+      "trigger": {
+        "module": "linux-kernel",
+        "symbol": [
+          "kernel_clone",
+          "copy_process",
+          "__do_sys_clone",
+          "bprm_execve",
+          "do_wait",
+          "do_exit"
+        ]
+      },
+      "execution": {
+        "runTo": "symbol",
+        "target": "copy_process",
+        "interruptPolicy": "allow",
+        "budgetInstructions": 500000
+      },
+      "observe": {
+        "registers": [
+          "rip",
+          "rsp",
+          "rdi"
+        ],
+        "memory": [],
+        "devices": [],
+        "coverage": "best-effort"
+      },
+      "focus": {
+        "cpuFields": [
+          "rip",
+          "rsp",
+          "rdi"
+        ],
+        "source": {
+          "module": "linux-kernel",
+          "symbol": "copy_process"
+        }
+      },
+      "explain": {
+        "purpose": "fork 复制 task_struct/mm/文件表；exec 换掉 mm 和用户 ELF；wait 回收子进程。",
+        "io": "copy_process 创建子任务；execve 装载新 ELF；父进程在 wait 中睡眠直到子进程 exit。",
+        "instructions": {
+          "copy_process": "分配 task_struct，复制/共享资源，设置 pid 和父子关系。",
+          "execve": "替换用户地址空间，exec 前 mm 的世代标识随替换失效。",
+          "do_exit": "释放资源并唤醒等待的父进程。"
+        },
+        "concepts": [
+          "子进程在 exec 前 comm 可能沿用父进程名字，身份需结合 pid、父子关系与 exec 阶段判断。",
+          "zombie 是已退出且等待父进程回收的 task_struct。"
+        ],
+        "fieldRefs": [
+          "os.processes",
+          "os.current",
+          "os.selected",
+          "os.files",
+          "cpu.general"
+        ]
+      },
+      "checks": [],
+      "questions": [
+        {
+          "prompt": "fork 后子进程的 mm 与父进程是同一份还是复制？",
+          "evidenceRefs": [
+            "os.processes",
+            "os.addressSpace"
+          ]
+        }
+      ],
+      "evidence": [
+        "os.objects",
+        "vmlinux"
+      ]
+    },
+    {
+      "id": "P02",
+      "priority": 65,
+      "title": "调度器切换任务",
+      "stage": "process",
+      "profileId": "linux-x86_64",
+      "trigger": {
+        "module": "linux-kernel",
+        "symbol": [
+          "__schedule",
+          "schedule",
+          "pick_next_task_fair",
+          "finish_task_switch"
+        ]
+      },
+      "execution": {
+        "runTo": "symbol",
+        "target": "__schedule",
+        "interruptPolicy": "allow",
+        "budgetInstructions": 2000000
+      },
+      "observe": {
+        "registers": [
+          "rip",
+          "rsp"
+        ],
+        "memory": [],
+        "devices": [],
+        "coverage": "best-effort"
+      },
+      "focus": {
+        "cpuFields": [
+          "rip",
+          "rsp"
+        ],
+        "source": {
+          "module": "linux-kernel",
+          "symbol": "__schedule"
+        }
+      },
+      "explain": {
+        "purpose": "观察 Linux 6.12 实际调度路径：运行队列、current 切换、上下文保存。",
+        "io": "__schedule 选择下一个任务并 context_switch；返回时 current 已变化。",
+        "instructions": {
+          "context_switch": "切换地址空间和寄存器上下文。",
+          "finish_task_switch": "清理上一个任务并完成切换后的收尾。"
+        },
+        "concepts": [
+          "调度选择由本次内核的运行队列状态与调度策略决定。",
+          "单步会抑制部分中断，需在允许事件推进的模式下观察调度。"
+        ],
+        "fieldRefs": [
+          "os.current",
+          "os.processes",
+          "cpu.rip",
+          "cpu.rsp"
+        ]
+      },
+      "checks": [],
+      "questions": [
+        {
+          "prompt": "切换前后 current 的 pid/comm 各是什么？",
+          "evidenceRefs": [
+            "os.current",
+            "os.processes"
+          ]
+        }
+      ],
+      "evidence": [
+        "os.objects",
+        "gdb"
+      ]
+    },
+    {
+      "id": "P03",
+      "priority": 60,
+      "title": "管道与阻塞唤醒",
+      "stage": "process",
+      "profileId": "linux-x86_64",
+      "trigger": {
+        "module": "linux-kernel",
+        "symbol": [
+          "pipe_read",
+          "pipe_write",
+          "pipe_wait_readable",
+          "pipe_wait_writable",
+          "__wake_up"
+        ]
+      },
+      "execution": {
+        "runTo": "symbol",
+        "target": "pipe_write",
+        "interruptPolicy": "allow",
+        "budgetInstructions": 500000
+      },
+      "observe": {
+        "registers": [
+          "rip",
+          "rsp"
+        ],
+        "memory": [],
+        "devices": [],
+        "coverage": "best-effort"
+      },
+      "focus": {
+        "cpuFields": [
+          "rip",
+          "rsp"
+        ],
+        "source": {
+          "module": "linux-kernel",
+          "symbol": "pipe_write"
+        }
+      },
+      "explain": {
+        "purpose": "`cat /data/hello.txt | wc -c` 的 pipe 缓冲、生产/消费、阻塞和唤醒。",
+        "io": "写端把数据放入 pipe 缓冲区；缓冲满则睡眠；读端取走数据并唤醒写端。",
+        "instructions": {
+          "pipe_write": "复制用户数据到 pipe 的 ring buffer，必要时等待空间。",
+          "wake_up_interruptible": "唤醒在 pipe 等待队列里的任务。"
+        },
+        "concepts": [
+          "pipe 通过内核内存中的环形缓冲区传递数据，状态由 pipe inode 和等待队列管理。",
+          "两个进程共享 pipe inode，但 fd 和缓冲区状态各自可查。"
+        ],
+        "fieldRefs": [
+          "os.files",
+          "os.processes",
+          "os.current",
+          "source"
+        ]
+      },
+      "checks": [],
+      "questions": [
+        {
+          "prompt": "pipe 的读端和写端分别由哪个进程持有？",
+          "evidenceRefs": [
+            "os.processes",
+            "os.files"
+          ]
+        }
+      ],
+      "evidence": [
+        "os.files",
+        "vmlinux"
+      ]
+    },
+    {
+      "id": "P04",
+      "priority": 60,
+      "title": "信号、退出与回收",
+      "stage": "process",
+      "profileId": "linux-x86_64",
+      "trigger": {
+        "module": "linux-kernel",
+        "symbol": [
+          "get_signal",
+          "arch_do_signal_or_restart",
+          "do_exit",
+          "do_group_exit",
+          "release_task",
+          "do_wait"
+        ]
+      },
+      "execution": {
+        "runTo": "symbol",
+        "target": "get_signal",
+        "interruptPolicy": "allow",
+        "budgetInstructions": 500000
+      },
+      "observe": {
+        "registers": [
+          "rip",
+          "rsp"
+        ],
+        "memory": [],
+        "devices": [],
+        "coverage": "best-effort"
+      },
+      "focus": {
+        "cpuFields": [
+          "rip",
+          "rsp"
+        ],
+        "source": {
+          "module": "linux-kernel",
+          "symbol": "get_signal"
+        }
+      },
+      "explain": {
+        "purpose": "SIGTERM 的 pending/delivery、默认动作、exit 和父进程回收。",
+        "io": "信号被挂到 pending 集合；返回用户态前处理；默认终止进程；父进程 wait 回收。",
+        "instructions": {
+          "get_signal": "取出 pending 信号并决定默认动作或用户 handler。",
+          "do_exit": "退出并留下退出码，等待父进程回收。"
+        },
+        "concepts": [
+          "zombie 是等待父进程回收的 task_struct。",
+          "pending 信号在返回用户态路径中处理，按信号动作执行 handler 或终止任务。"
+        ],
+        "fieldRefs": [
+          "os.processes",
+          "os.current",
+          "os.selected",
+          "source"
+        ]
+      },
+      "checks": [],
+      "questions": [
+        {
+          "prompt": "信号是在内核态哪一步被处理的？",
+          "evidenceRefs": [
+            "source",
+            "os.current"
+          ]
+        }
+      ],
+      "evidence": [
+        "os.objects",
+        "vmlinux"
+      ]
+    },
+    {
+      "id": "M01",
+      "priority": 70,
+      "title": "匿名映射的第一次写入（缺页）",
+      "stage": "memory",
+      "profileId": "linux-x86_64",
+      "trigger": {
+        "module": "linux-kernel",
+        "symbol": [
+          "__handle_mm_fault",
+          "handle_mm_fault",
+          "do_user_addr_fault",
+          "exc_page_fault"
+        ]
+      },
+      "execution": {
+        "runTo": "symbol",
+        "target": "do_anonymous_page",
+        "interruptPolicy": "allow",
+        "budgetInstructions": 300000
+      },
+      "observe": {
+        "registers": [
+          "rip",
+          "rsp",
+          "cr2",
+          "cr3"
+        ],
+        "memory": [],
+        "devices": [],
+        "coverage": "best-effort"
+      },
+      "focus": {
+        "cpuFields": [
+          "rip",
+          "rsp",
+          "cr2",
+          "cr3"
+        ],
+        "source": {
+          "module": "linux-kernel",
+          "symbol": "do_anonymous_page"
+        }
+      },
+      "explain": {
+        "purpose": "本实验的匿名 mmap 建立 VMA；首次写入触发缺页处理，分配可写物理页并建立映射。",
+        "io": "缺页入口读 CR2 得到 fault 地址，检查 VMA 权限，分配页并填 PTE。",
+        "instructions": {
+          "mov %cr2": "从 CR2 读取硬件记录的 fault 地址。",
+          "set_pte": "把物理页框号和权限写进页表。"
+        },
+        "concepts": [
+          "VMA 描述虚拟地址范围，物理页分配与 PTE 建立需结合后续缺页处理核对。",
+          "页表项权限和 VMA 权限要分别核对。"
+        ],
+        "fieldRefs": [
+          "cpu.control.cr2",
+          "cpu.control.cr3",
+          "os.addressSpace.vmas",
+          "os.folios",
+          "source"
+        ]
+      },
+      "checks": [],
+      "questions": [
+        {
+          "prompt": "fault 地址在 VMA 范围内吗？此时 PTE 存在吗？",
+          "evidenceRefs": [
+            "cpu.control.cr2",
+            "os.addressSpace.vmas",
+            "evidence.cpu.paging"
+          ]
+        }
+      ],
+      "evidence": [
+        "os.addressSpace",
+        "page-walker"
+      ]
+    },
+    {
+      "id": "M02",
+      "priority": 70,
+      "title": "写时复制 wp_page_copy",
+      "stage": "memory",
+      "profileId": "linux-x86_64",
+      "trigger": {
+        "module": "linux-kernel",
+        "symbol": [
+          "do_wp_page",
+          "__do_fault",
+          "do_user_addr_fault"
+        ]
+      },
+      "execution": {
+        "runTo": "symbol",
+        "target": "wp_page_copy",
+        "interruptPolicy": "allow",
+        "budgetInstructions": 300000
+      },
+      "observe": {
+        "registers": [
+          "rip",
+          "cr2",
+          "cr3"
+        ],
+        "memory": [],
+        "devices": [],
+        "coverage": "best-effort"
+      },
+      "focus": {
+        "cpuFields": [
+          "rip",
+          "cr2",
+          "cr3"
+        ],
+        "source": {
+          "module": "linux-kernel",
+          "symbol": "wp_page_copy"
+        }
+      },
+      "explain": {
+        "purpose": "fork 后父子共享只读页；子进程写入触发 COW，分配新页并复制内容。",
+        "io": "写保护 fault 检测到共享页，分配新页、复制字节、更新子进程 PTE。",
+        "instructions": {
+          "wp_page_copy": "分配新页并复制源页内容。",
+          "flush_tlb_page": "更新 PTE 后刷新 TLB，保证下一次访问看到新映射。"
+        },
+        "concepts": [
+          "COW 页的 PTE 是只读且可能带软件脏位；权限解释必须按实际 PTE 位。",
+          "父子 PFN 在复制前相同、复制后不同，字节内容可验证。"
+        ],
+        "fieldRefs": [
+          "cpu.control.cr2",
+          "os.processes",
+          "os.addressSpace",
+          "os.folios",
+          "evidence.cpu.paging"
+        ]
+      },
+      "checks": [],
+      "questions": [
+        {
+          "prompt": "复制前后父子 PTE 指向的 PFN 是否相同？",
+          "evidenceRefs": [
+            "evidence.cpu.paging",
+            "os.addressSpace"
+          ]
+        }
+      ],
+      "evidence": [
+        "page-walker",
+        "os.objects"
+      ]
+    },
+    {
+      "id": "M03",
+      "priority": 55,
+      "title": "malloc/free 与 brk/mmap",
+      "stage": "memory",
+      "profileId": "linux-x86_64",
+      "trigger": {
+        "module": "linux-kernel",
+        "symbol": [
+          "do_brk_flags",
+          "do_mmap",
+          "vm_mmap_pgoff",
+          "__x64_sys_brk",
+          "__x64_sys_mmap"
+        ]
+      },
+      "execution": {
+        "runTo": "symbol",
+        "target": "do_mmap",
+        "interruptPolicy": "allow",
+        "budgetInstructions": 300000
+      },
+      "observe": {
+        "registers": [
+          "rip",
+          "rsp",
+          "rdi",
+          "rsi",
+          "rdx"
+        ],
+        "memory": [],
+        "devices": [],
+        "coverage": "best-effort"
+      },
+      "focus": {
+        "cpuFields": [
+          "rip",
+          "rdi",
+          "rsi",
+          "rdx"
+        ],
+        "source": {
+          "module": "linux-kernel",
+          "symbol": "do_mmap"
+        }
+      },
+      "explain": {
+        "purpose": "解释 libc 分配器与系统调用的关系：malloc 可复用分配器已有空间或通过 brk/mmap 扩展；free 可保留空间供复用或触发归还。",
+        "io": "brk 调整堆顶；mmap 建立新 VMA；实际物理页在首次访问时分配。",
+        "instructions": {
+          "do_mmap": "创建 VMA 并入 Maple Tree，设置权限和文件偏移。",
+          "brk": "调整 mm->brk，可能扩展现有 VMA。"
+        },
+        "concepts": [
+          "malloc 的分配来源需结合分配器状态与本次 brk/mmap 调用记录判断。",
+          "free 后 VMA 可能保留，物理页回收是另一层。"
+        ],
+        "fieldRefs": [
+          "cpu.general",
+          "os.addressSpace",
+          "os.folios",
+          "source"
+        ]
+      },
+      "checks": [],
+      "questions": [
+        {
+          "prompt": "这次断点前实际发生了什么系统调用？",
+          "evidenceRefs": [
+            "source",
+            "os.addressSpace"
+          ]
+        }
+      ],
+      "evidence": [
+        "os.addressSpace",
+        "vmlinux"
+      ]
+    },
+    {
+      "id": "M04",
+      "priority": 60,
+      "title": "文件映射与缺页",
+      "stage": "memory",
+      "profileId": "linux-x86_64",
+      "trigger": {
+        "module": "linux-kernel",
+        "symbol": [
+          "filemap_fault",
+          "filemap_read_folio",
+          "filemap_map_pages",
+          "do_user_addr_fault"
+        ]
+      },
+      "execution": {
+        "runTo": "symbol",
+        "target": "filemap_fault",
+        "interruptPolicy": "allow",
+        "budgetInstructions": 300000
+      },
+      "observe": {
+        "registers": [
+          "rip",
+          "cr2",
+          "cr3"
+        ],
+        "memory": [],
+        "devices": [],
+        "coverage": "best-effort"
+      },
+      "focus": {
+        "cpuFields": [
+          "rip",
+          "cr2",
+          "cr3"
+        ],
+        "source": {
+          "module": "linux-kernel",
+          "symbol": "filemap_fault"
+        }
+      },
+      "explain": {
+        "purpose": "MAP_PRIVATE 与 MAP_SHARED 的文件页缺页、页缓存、私有 COW 和共享脏页。",
+        "io": "文件映射缺页从 page cache 取页；冷缓存要发块 I/O；私有写触发 COW，共享写标记 dirty。",
+        "instructions": {
+          "filemap_fault": "按文件偏移查页缓存，缺页时发读请求。",
+          "do_wp_page": "私有映射写入时复制页。"
+        },
+        "concepts": [
+          "文件页缓存与磁盘内容是两个层次；读取可由缓存满足，块请求需按实际事件确认。",
+          "MAP_SHARED 的脏页需要 msync/回写才落盘。"
+        ],
+        "fieldRefs": [
+          "cpu.control.cr2",
+          "os.files",
+          "os.folios",
+          "devices",
+          "source"
+        ]
+      },
+      "checks": [],
+      "questions": [
+        {
+          "prompt": "这次缺页是否真的产生了磁盘请求？",
+          "evidenceRefs": [
+            "os.folios",
+            "events",
+            "devices"
+          ]
+        }
+      ],
+      "evidence": [
+        "os.files",
+        "os.folios",
+        "virtqueue"
+      ]
+    },
+    {
+      "id": "M05",
+      "priority": 65,
+      "title": "非法访问与 SIGSEGV",
+      "stage": "memory",
+      "profileId": "linux-x86_64",
+      "trigger": {
+        "module": "linux-kernel",
+        "symbol": [
+          "bad_area_nosemaphore",
+          "__bad_area_nosemaphore",
+          "do_user_addr_fault",
+          "exc_page_fault"
+        ]
+      },
+      "execution": {
+        "runTo": "symbol",
+        "target": "__bad_area_nosemaphore",
+        "interruptPolicy": "allow",
+        "budgetInstructions": 300000
+      },
+      "observe": {
+        "registers": [
+          "rip",
+          "cr2",
+          "rsp"
+        ],
+        "memory": [],
+        "devices": [],
+        "coverage": "best-effort"
+      },
+      "focus": {
+        "cpuFields": [
+          "rip",
+          "cr2",
+          "rsp"
+        ],
+        "source": {
+          "module": "linux-kernel",
+          "symbol": "__bad_area_nosemaphore"
+        }
+      },
+      "explain": {
+        "purpose": "访问禁止页时的 fault 地址/错误码、VMA 权限和 SIGSEGV 投递。",
+        "io": "缺页处理发现地址位于 VMA 范围外或访问权限校验失败，进入 bad area 并发送 SIGSEGV。",
+        "instructions": {
+          "mov %cr2": "硬件给出 fault 地址。",
+          "force_sig_fault": "构造 SIGSEGV，返回用户态时处理。"
+        },
+        "concepts": [
+          "fault 错误码区分 present/写/用户态，需与 CR2 地址和 VMA 权限一起解释。",
+          "受控异常按实际停止原因匹配课程，并展示异常路径的证据。"
+        ],
+        "fieldRefs": [
+          "cpu.control.cr2",
+          "cpu.general",
+          "os.processes",
+          "source"
+        ]
+      },
+      "checks": [],
+      "questions": [
+        {
+          "prompt": "fault 地址与各 VMA 范围有何关系？访问类型与 VMA 权限如何校验？",
+          "evidenceRefs": [
+            "cpu.control.cr2",
+            "os.addressSpace.vmas"
+          ]
+        }
+      ],
+      "evidence": [
+        "os.addressSpace",
+        "gdb"
+      ]
+    },
+    {
+      "id": "F01",
+      "priority": 65,
+      "title": "路径查找与打开文件",
+      "stage": "file",
+      "profileId": "linux-x86_64",
+      "trigger": {
+        "module": "linux-kernel",
+        "symbol": [
+          "path_openat",
+          "do_filp_open",
+          "do_sys_openat2",
+          "__x64_sys_openat",
+          "vfs_open",
+          "ext2_lookup"
+        ]
+      },
+      "execution": {
+        "runTo": "symbol",
+        "target": "path_openat",
+        "interruptPolicy": "allow",
+        "budgetInstructions": 300000
+      },
+      "observe": {
+        "registers": [
+          "rip",
+          "rsp",
+          "rdi",
+          "rsi"
+        ],
+        "memory": [],
+        "devices": [],
+        "coverage": "best-effort"
+      },
+      "focus": {
+        "cpuFields": [
+          "rip",
+          "rdi",
+          "rsi"
+        ],
+        "source": {
+          "module": "linux-kernel",
+          "symbol": "path_openat"
+        }
+      },
+      "explain": {
+        "purpose": "openat 如何把路径解析成 dentry/inode/file，并安装到 fd 表。",
+        "io": "路径逐段穿过 mount/dentry 缓存；缺失时调用 ext2_lookup 读目录项；最后分配 file 和 fd。",
+        "instructions": {
+          "path_openat": "建立路径查找上下文并逐段解析。",
+          "vfs_open": "用 inode 的 file_operations 打开文件。"
+        },
+        "concepts": [
+          "路径查找可由 dentry 缓存满足；磁盘目录读取需结合实际块请求确认。",
+          "fd 表、file、dentry、inode 是不同层的对象。"
+        ],
+        "fieldRefs": [
+          "os.files",
+          "os.addressSpace",
+          "source",
+          "devices"
+        ]
+      },
+      "checks": [],
+      "questions": [
+        {
+          "prompt": "当前打开的 fd 对应哪个 inode 和路径？",
+          "evidenceRefs": [
+            "os.files"
+          ]
+        }
+      ],
+      "evidence": [
+        "os.files",
+        "ext2"
+      ]
+    },
+    {
+      "id": "F02",
+      "priority": 75,
+      "title": "冷读与热读：ext2 文件读取",
+      "stage": "file",
+      "profileId": "linux-x86_64",
+      "trigger": {
+        "module": "linux-kernel",
+        "symbol": [
+          "ext2_file_read_iter",
+          "filemap_read",
+          "generic_file_read_iter",
+          "vfs_read",
+          "ksys_read",
+          "virtblk_add_req"
+        ]
+      },
+      "execution": {
+        "runTo": "symbol",
+        "target": "ext2_file_read_iter",
+        "interruptPolicy": "allow",
+        "budgetInstructions": 500000
+      },
+      "observe": {
+        "registers": [
+          "rip",
+          "rsp"
+        ],
+        "memory": [],
+        "devices": [
+          "virtio-blk-0"
+        ],
+        "coverage": "best-effort"
+      },
+      "focus": {
+        "cpuFields": [
+          "rip",
+          "rsp"
+        ],
+        "deviceId": "virtio-blk-0",
+        "source": {
+          "module": "linux-kernel",
+          "symbol": "ext2_file_read_iter"
+        }
+      },
+      "explain": {
+        "purpose": "跟随一次真实 read：VFS → ext2 → page cache → bio/request → virtio 队列 → 设备完成。",
+        "io": "缓存未命中时分配 folio 并提交块请求；完成后把字节复制到用户缓冲。",
+        "instructions": {
+          "filemap_read": "查页缓存，决定命中还是发 I/O。",
+          "virtblk_add_req": "把请求映射成 virtqueue 描述符链。"
+        },
+        "concepts": [
+          "read 与磁盘请求的对应关系需结合缓存、预读、合并与拆分的实际事件解释。",
+          "第二次读取可能完全命中缓存，数据来源需由本帧缓存状态和实际 I/O 事件确认。"
+        ],
+        "fieldRefs": [
+          "os.files",
+          "os.folios",
+          "devices",
+          "events",
+          "diskVersions",
+          "source"
+        ]
+      },
+      "checks": [],
+      "questions": [
+        {
+          "prompt": "这次 read 的数据是由缓存还是磁盘提供的？",
+          "evidenceRefs": [
+            "os.folios",
+            "events",
+            "devices"
+          ]
+        }
+      ],
+      "evidence": [
+        "virtqueue",
+        "ext2",
+        "os.files"
+      ]
+    },
+    {
+      "id": "F03",
+      "priority": 70,
+      "title": "写入与 fsync",
+      "stage": "file",
+      "profileId": "linux-x86_64",
+      "trigger": {
+        "module": "linux-kernel",
+        "symbol": [
+          "ext2_file_write_iter",
+          "generic_file_write_iter",
+          "vfs_write",
+          "ksys_write",
+          "file_write_and_wait_range",
+          "vfs_fsync_range",
+          "ext2_fsync"
+        ]
+      },
+      "execution": {
+        "runTo": "symbol",
+        "target": "file_write_and_wait_range",
+        "interruptPolicy": "allow",
+        "budgetInstructions": 500000
+      },
+      "observe": {
+        "registers": [
+          "rip",
+          "rsp"
+        ],
+        "memory": [],
+        "devices": [
+          "virtio-blk-0"
+        ],
+        "coverage": "best-effort"
+      },
+      "focus": {
+        "cpuFields": [
+          "rip",
+          "rsp"
+        ],
+        "deviceId": "virtio-blk-0",
+        "source": {
+          "module": "linux-kernel",
+          "symbol": "file_write_and_wait_range"
+        }
+      },
+      "explain": {
+        "purpose": "从用户缓冲到页缓存脏页、writeback、virtio 块请求，直到 fsync 返回。",
+        "io": "write 先改页缓存并返回；fsync 触发回写并等待完成。",
+        "instructions": {
+          "file_write_and_wait_range": "等待文件范围上的回写完成。",
+          "ext2_fsync": "同步文件数据、inode 和必要元数据，并等待回写完成。"
+        },
+        "concepts": [
+          "write 返回表示本次写入完成；持久化状态需结合回写完成事件与 fsync 同步点确认。",
+          "本实验按 ext2 的数据和元数据回写路径展示同步过程。"
+        ],
+        "fieldRefs": [
+          "os.files",
+          "os.folios",
+          "devices",
+          "diskVersions",
+          "events"
+        ]
+      },
+      "checks": [],
+      "questions": [
+        {
+          "prompt": "fsync 返回前，页缓存和磁盘版本各是什么状态？",
+          "evidenceRefs": [
+            "os.folios",
+            "diskVersions",
+            "events"
+          ]
+        }
+      ],
+      "evidence": [
+        "disk-version",
+        "os.folios",
+        "virtqueue"
+      ]
+    },
+    {
+      "id": "F04",
+      "priority": 60,
+      "title": "dup、独立打开与 unlink",
+      "stage": "file",
+      "profileId": "linux-x86_64",
+      "trigger": {
+        "module": "linux-kernel",
+        "symbol": [
+          "do_dup2",
+          "ksys_dup3",
+          "__x64_sys_dup3",
+          "__x64_sys_dup2",
+          "do_unlinkat",
+          "__x64_sys_unlinkat",
+          "vfs_unlink",
+          "ext2_unlink"
+        ]
+      },
+      "execution": {
+        "runTo": "symbol",
+        "target": "do_unlinkat",
+        "interruptPolicy": "allow",
+        "budgetInstructions": 300000
+      },
+      "observe": {
+        "registers": [
+          "rip",
+          "rsp"
+        ],
+        "memory": [],
+        "devices": [],
+        "coverage": "best-effort"
+      },
+      "focus": {
+        "cpuFields": [
+          "rip",
+          "rsp"
+        ],
+        "source": {
+          "module": "linux-kernel",
+          "symbol": "do_unlinkat"
+        }
+      },
+      "explain": {
+        "purpose": "fd→file→inode 的共享关系：dup 共享偏移，独立 open 各有偏移；unlink 后已打开文件仍可读。",
+        "io": "dup 复制 file 指针并增加引用；unlink 删除目录项并减少链接数。",
+        "instructions": {
+          "do_dup2": "把同一个 file 指针安装到新 fd。",
+          "vfs_unlink": "删除目录项；inode 可能在最后一个引用关闭后才释放。"
+        },
+        "concepts": [
+          "dup 得到的 fd 共享 struct file 及其文件偏移，inode 由该 file 引用。",
+          "目录项删除与已打开文件生命周期是两件事。"
+        ],
+        "fieldRefs": [
+          "os.files",
+          "os.processes",
+          "diskVersions",
+          "source"
+        ]
+      },
+      "checks": [],
+      "questions": [
+        {
+          "prompt": "两个 fd 是否指向同一个 struct file？offset 是否共享？",
+          "evidenceRefs": [
+            "os.files"
+          ]
+        }
+      ],
+      "evidence": [
+        "os.files",
+        "ext2"
+      ]
+    },
+    {
+      "id": "H01",
+      "priority": 60,
+      "title": "时钟、磁盘与中断",
+      "stage": "hardware",
+      "profileId": "linux-x86_64",
+      "trigger": {
+        "module": "linux-kernel",
+        "symbol": [
+          "common_interrupt",
+          "__common_interrupt",
+          "irq_enter",
+          "virtblk_done"
+        ]
+      },
+      "execution": {
+        "runTo": "symbol",
+        "target": "virtblk_done",
+        "interruptPolicy": "allow",
+        "budgetInstructions": 200000
+      },
+      "observe": {
+        "registers": [
+          "rip",
+          "rsp"
+        ],
+        "memory": [],
+        "devices": [
+          "pic",
+          "apic",
+          "timer",
+          "virtio-blk-0"
+        ],
+        "coverage": "best-effort"
+      },
+      "focus": {
+        "cpuFields": [
+          "rip",
+          "rsp"
+        ],
+        "deviceId": "virtio-blk-0"
+      },
+      "explain": {
+        "purpose": "真实 IRQ 的 pending→accept→handler 链路，以及时钟/磁盘中断的区别。",
+        "io": "设备拉起 IRQ，PIC/APIC 路由到 CPU，CPU 进入 handler；磁盘完成回调随后唤醒等待者。",
+        "instructions": {
+          "common_interrupt": "保存现场并进入中断处理。",
+          "virtblk_done": "扫描 used 环并完成块请求。"
+        },
+        "concepts": [
+          "中断拉起、控制器处理、CPU 接受是不同阶段。",
+          "单步默认抑制中断服务，观察中断要用允许事件推进的模式。"
+        ],
+        "fieldRefs": [
+          "devices",
+          "events",
+          "cpu.rip",
+          "cpu.rsp",
+          "source"
+        ]
+      },
+      "checks": [],
+      "questions": [
+        {
+          "prompt": "这次中断的向量和对应设备是什么？",
+          "evidenceRefs": [
+            "devices",
+            "events",
+            "source"
+          ]
+        }
+      ],
+      "evidence": [
+        "device.pic",
+        "device.apic",
+        "virtqueue",
+        "events"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,313 @@
+--- a/accel/tcg/translator.c
++++ b/accel/tcg/translator.c
+@@ -14,6 +14,7 @@
+ #include "exec/translator.h"
+ #include "exec/plugin-gen.h"
+ #include "tcg/tcg-op-common.h"
++#include "exec/x-oslab-events.h"
+ #include "internal-target.h"
+ 
+ static void set_can_do_io(DisasContextBase *db, bool val)
+@@ -130,6 +131,7 @@
+     uint32_t cflags = tb_cflags(tb);
+     TCGOp *icount_start_insn;
+     bool plugin_enabled;
++    vaddr insn_pc;
+ 
+     /* Initialize DisasContext */
+     db->tb = tb;
+@@ -164,6 +166,17 @@
+         }
+ 
+         /*
++         * T05b observer: remember the PC of the instruction we are about to
++         * translate and record that it was *attempted*.  db->pc_next is the
++         * instruction address here; translate_insn() advances it below.
++         *
++         * The matching instruction.retire is emitted only for the
++         * fall-through case, see the comment after translate_insn().
++         */
++        insn_pc = db->pc_next;
++        x_oslab_tcg_insn_begin(insn_pc);
++
++        /*
+          * Disassemble one instruction.  The translate_insn hook should
+          * update db->pc_next and db->is_jmp to indicate what should be
+          * done next -- either exiting this loop or locate the start of
+@@ -176,6 +189,37 @@
+         ops->translate_insn(db, cpu);
+ 
+         /*
++         * T05b observer: emit instruction.retire whenever the instruction
++         * reached its normal completion path, i.e. when the only reason
++         * translation stops is that the TB has to end here.
++         *
++         *  - DISAS_NEXT    : plain fall-through.
++         *  - DISAS_TOO_MANY: "stop translating after this instruction".
++         *    x86 sets it from translator_io_start() for every in/out/ins/
++         *    outs instruction, so the port access is the last thing in the
++         *    TB.  The instruction itself did complete, and the op emitted
++         *    right here is still reachable at run time: dropping it would
++         *    silently under-report real I/O instructions.
++         *
++         * Every other outcome is deliberately left without a retire:
++         *  - DISAS_NORETURN: the instruction raised (ud2, hlt, #GP from
++         *    check_io, ...) or otherwise does not complete.  The raise has
++         *    already been emitted; claiming retire there would report an
++         *    instruction that raised as normally completed.
++         *  - branches (DISAS_JUMP) and the DISAS_EOB_* markers have already
++         *    emitted their exit, so any op appended here is dead code, and
++         *    the 'rep' string loops rejoin the completion path instead.
++         *
++         * The instruction length is taken from pc_next (the translator is
++         * the only place that knows it, and it is a translation-time
++         * constant).
++         */
++        if (db->is_jmp == DISAS_NEXT || db->is_jmp == DISAS_TOO_MANY) {
++            x_oslab_tcg_insn_retire(insn_pc,
++                                    (uint32_t)(db->pc_next - insn_pc));
++        }
++
++        /*
+          * We can't instrument after instructions that change control
+          * flow although this only really affects post-load operations.
+          *
+--- a/accel/tcg/tcg-runtime.h
++++ b/accel/tcg/tcg-runtime.h
+@@ -323,3 +323,15 @@
+ DEF_HELPER_FLAGS_4(gvec_leus64, TCG_CALL_NO_RWG, void, ptr, ptr, i64, i32)
+ 
+ DEF_HELPER_FLAGS_5(gvec_bitsel, TCG_CALL_NO_RWG, void, ptr, ptr, ptr, ptr, i32)
++
++/*
++ * x-oslab observer (T05b): record one machine event from generated code.
++ *   a    = linear PC (instruction.begin/retire) or linear address (memory.*)
++ *   b    = the value read from / written to memory
++ *   meta = kind | size | address space | mmu index | sign  (translate-time)
++ *
++ * flags == 0 on purpose: the helper writes observer state (its own ring), so
++ * TCG must not assume it is side-effect free and must not optimize across it.
++ * It does not read or write the CPUArchState.
++ */
++DEF_HELPER_FLAGS_3(x_oslab_event, 0, void, i64, i64, i32)
+--- a/accel/tcg/meson.build
++++ b/accel/tcg/meson.build
+@@ -10,6 +10,7 @@
+   'tcg-runtime.c',
+   'translate-all.c',
+   'translator.c',
++  'x-oslab-events.c',
+ ))
+ tcg_ss.add(when: 'CONFIG_USER_ONLY', if_true: files('user-exec.c'))
+ tcg_ss.add(when: 'CONFIG_SYSTEM_ONLY', if_false: files('user-exec-stub.c'))
+--- a/tcg/tcg-op-ldst.c
++++ b/tcg/tcg-op-ldst.c
+@@ -29,6 +29,8 @@
+ #include "tcg/tcg-mo.h"
+ #include "exec/translation-block.h"
+ #include "exec/plugin-gen.h"
++#include "exec/memopidx.h"
++#include "exec/x-oslab-events.h"
+ #include "tcg-internal.h"
+ 
+ 
+@@ -180,7 +182,7 @@
+ {
+     MemOp orig_memop;
+     MemOpIdx orig_oi, oi;
+-    TCGv_i64 copy_addr;
++    TCGv_i64 copy_addr, x_copy_addr;
+     TCGOpcode opc;
+ 
+     tcg_gen_req_mo(TCG_MO_LD_LD | TCG_MO_ST_LD);
+@@ -197,6 +199,7 @@
+     }
+ 
+     copy_addr = plugin_maybe_preserve_addr(addr);
++    x_copy_addr = x_oslab_tcg_preserve_addr(addr);
+     if (tcg_ctx->addr_type == TCG_TYPE_I32) {
+         opc = INDEX_op_qemu_ld_a32_i32;
+     } else {
+@@ -204,6 +207,9 @@
+     }
+     gen_ldst(opc, tcgv_i32_temp(val), NULL, addr, oi);
+     plugin_gen_mem_callbacks(copy_addr, addr, orig_oi, QEMU_PLUGIN_MEM_R);
++    x_oslab_tcg_mem(x_copy_addr, tcgv_i32_temp(val), false, false,
++                    memop_size(orig_memop), get_mmuidx(orig_oi),
++                    (orig_memop & MO_SIGN) != 0);
+ 
+     if ((orig_memop ^ memop) & MO_BSWAP) {
+         switch (orig_memop & MO_SIZE) {
+@@ -234,6 +240,7 @@
+ {
+     TCGv_i32 swap = NULL;
+     MemOpIdx orig_oi, oi;
++    TCGv_i64 x_copy_addr;
+     TCGOpcode opc;
+ 
+     tcg_gen_req_mo(TCG_MO_LD_ST | TCG_MO_ST_ST);
+@@ -270,8 +277,13 @@
+             opc = INDEX_op_qemu_st_a64_i32;
+         }
+     }
++    x_copy_addr = x_oslab_tcg_preserve_addr(addr);
+     gen_ldst(opc, tcgv_i32_temp(val), NULL, addr, oi);
+     plugin_gen_mem_callbacks(NULL, addr, orig_oi, QEMU_PLUGIN_MEM_W);
++    /* orig_oi 是 MemOpIdx((memop << 4) | idx)，必须先 get_memop 再取宽度，
++     * 直接 memop_size(orig_oi) 解出来的是 mmu 索引。 */
++    x_oslab_tcg_mem(x_copy_addr, tcgv_i32_temp(val), false, true,
++                    memop_size(get_memop(orig_oi)), get_mmuidx(orig_oi), false);
+ 
+     if (swap) {
+         tcg_temp_free_i32(swap);
+@@ -291,7 +303,7 @@
+ {
+     MemOp orig_memop;
+     MemOpIdx orig_oi, oi;
+-    TCGv_i64 copy_addr;
++    TCGv_i64 copy_addr, x_copy_addr;
+     TCGOpcode opc;
+ 
+     if (TCG_TARGET_REG_BITS == 32 && (memop & MO_SIZE) < MO_64) {
+@@ -318,6 +330,7 @@
+     }
+ 
+     copy_addr = plugin_maybe_preserve_addr(addr);
++    x_copy_addr = x_oslab_tcg_preserve_addr(addr);
+     if (tcg_ctx->addr_type == TCG_TYPE_I32) {
+         opc = INDEX_op_qemu_ld_a32_i64;
+     } else {
+@@ -325,6 +338,9 @@
+     }
+     gen_ldst_i64(opc, val, addr, oi);
+     plugin_gen_mem_callbacks(copy_addr, addr, orig_oi, QEMU_PLUGIN_MEM_R);
++    x_oslab_tcg_mem(x_copy_addr, tcgv_i64_temp(val), true, false,
++                    memop_size(orig_memop), get_mmuidx(orig_oi),
++                    (orig_memop & MO_SIGN) != 0);
+ 
+     if ((orig_memop ^ memop) & MO_BSWAP) {
+         int flags = (orig_memop & MO_SIGN
+@@ -359,6 +375,7 @@
+ {
+     TCGv_i64 swap = NULL;
+     MemOpIdx orig_oi, oi;
++    TCGv_i64 x_copy_addr;
+     TCGOpcode opc;
+ 
+     if (TCG_TARGET_REG_BITS == 32 && (memop & MO_SIZE) < MO_64) {
+@@ -395,8 +412,12 @@
+     } else {
+         opc = INDEX_op_qemu_st_a64_i64;
+     }
++    x_copy_addr = x_oslab_tcg_preserve_addr(addr);
+     gen_ldst_i64(opc, val, addr, oi);
+     plugin_gen_mem_callbacks(NULL, addr, orig_oi, QEMU_PLUGIN_MEM_W);
++    /* 同 i32 store：orig_oi 是 MemOpIdx，宽度要先 get_memop 再解。 */
++    x_oslab_tcg_mem(x_copy_addr, tcgv_i64_temp(val), true, true,
++                    memop_size(get_memop(orig_oi)), get_mmuidx(orig_oi), false);
+ 
+     if (swap) {
+         tcg_temp_free_i64(swap);
+--- a/target/i386/tcg/sysemu/misc_helper.c
++++ b/target/i386/tcg/sysemu/misc_helper.c
+@@ -24,42 +24,64 @@
+ #include "exec/cpu_ldst.h"
+ #include "exec/address-spaces.h"
+ #include "exec/exec-all.h"
++#include "exec/x-oslab-events.h"
+ #include "tcg/helper-tcg.h"
+ 
++/*
++ * T05b observer: the x86 port I/O instructions (in/out) reach the device
++ * model through these helpers, i.e. through address_space_* on
++ * address_space_io.  They deliberately do NOT go through
++ * system/ioport.c:cpu_inb()/cpu_outb(), which is the host-side probe path
++ * used by the HMP 'i'/'o' commands, qtest and the monitor.  Hooking only
++ * here keeps the guest event stream free of host probes, and lets the
++ * acceptance script use HMP 'i'/'o' as an independent cross-check channel.
++ */
+ void helper_outb(CPUX86State *env, uint32_t port, uint32_t data)
+ {
+     address_space_stb(&address_space_io, port, data,
+                       cpu_get_mem_attrs(env), NULL);
++    x_oslab_event_io(false, port, data, 1);
+ }
+ 
+ target_ulong helper_inb(CPUX86State *env, uint32_t port)
+ {
+-    return address_space_ldub(&address_space_io, port,
+-                              cpu_get_mem_attrs(env), NULL);
++    target_ulong val = address_space_ldub(&address_space_io, port,
++                                          cpu_get_mem_attrs(env), NULL);
++
++    x_oslab_event_io(true, port, val, 1);
++    return val;
+ }
+ 
+ void helper_outw(CPUX86State *env, uint32_t port, uint32_t data)
+ {
+     address_space_stw(&address_space_io, port, data,
+                       cpu_get_mem_attrs(env), NULL);
++    x_oslab_event_io(false, port, data, 2);
+ }
+ 
+ target_ulong helper_inw(CPUX86State *env, uint32_t port)
+ {
+-    return address_space_lduw(&address_space_io, port,
+-                              cpu_get_mem_attrs(env), NULL);
++    target_ulong val = address_space_lduw(&address_space_io, port,
++                                          cpu_get_mem_attrs(env), NULL);
++
++    x_oslab_event_io(true, port, val, 2);
++    return val;
+ }
+ 
+ void helper_outl(CPUX86State *env, uint32_t port, uint32_t data)
+ {
+     address_space_stl(&address_space_io, port, data,
+                       cpu_get_mem_attrs(env), NULL);
++    x_oslab_event_io(false, port, data, 4);
+ }
+ 
+ target_ulong helper_inl(CPUX86State *env, uint32_t port)
+ {
+-    return address_space_ldl(&address_space_io, port,
+-                             cpu_get_mem_attrs(env), NULL);
++    target_ulong val = address_space_ldl(&address_space_io, port,
++                                         cpu_get_mem_attrs(env), NULL);
++
++    x_oslab_event_io(true, port, val, 4);
++    return val;
+ }
+ 
+ target_ulong helper_read_crN(CPUX86State *env, int reg)
+--- a/target/i386/tcg/seg_helper.c
++++ b/target/i386/tcg/seg_helper.c
+@@ -25,6 +25,7 @@
+ #include "exec/exec-all.h"
+ #include "exec/cpu_ldst.h"
+ #include "exec/log.h"
++#include "exec/x-oslab-events.h"
+ #include "helper-tcg.h"
+ #include "seg_helper.h"
+ 
+@@ -1085,6 +1086,19 @@
+ {
+     CPUX86State *env = &cpu->env;
+ 
++    /*
++     * T05b observer: this is the single funnel through which x86 system
++     * emulation delivers control to an interrupt/exception handler:
++     *   is_int == 1          : software interrupt from INT n / INT3 / INTO
++     *   is_hw  == 1          : accepted hardware interrupt (IRQ, NMI)
++     *   is_int == is_hw == 0 : synchronous exception (#UD, #GP, #PF, #MC, ...)
++     * intno is reported exactly as delivered; it is not renumbered.  The
++     * event is emitted before the delivery work so that it is observable
++     * even if delivery itself goes wrong.
++     */
++    x_oslab_event_interrupt((uint32_t)intno, (uint32_t)error_code,
++                            (uint64_t)next_eip, is_int != 0, is_hw != 0);
++
+     if (qemu_loglevel_mask(CPU_LOG_INT)) {
+         if ((env->cr[0] & CR0_PE_MASK)) {
+             static int count;
