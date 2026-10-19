@@ -40,7 +40,7 @@
         <div class="seg-grid" id="segs"></div>
       </div>
       <div class="box ctls" data-spot="ctl">
-        <div class="box-title">控制寄存器<small>决定 CPU 工作在什么模式</small></div>
+        <div class="box-title">控制与表寄存器<small>模式开关、页表与描述符表的位置</small></div>
         <div class="ctl-grid" id="ctls"></div>
       </div>
       <div class="units" id="units" data-spot="units"></div>
@@ -52,8 +52,9 @@
     </section>
 
     <section class="panel code" data-spot="code">
-      <div class="panel-head"><h2>源代码<span id="codeLang">—</span></h2><div class="code-file" id="codeFile"></div></div>
+      <div class="panel-head"><h2><span id="codeTitle">源代码</span><span id="codeLang">—</span></h2><div class="code-file" id="codeFile"></div></div>
       <div class="code-body" id="codeBody"><pre id="codeLines"></pre></div>
+      <div id="mechanism" hidden></div>
     </section>
 
     <section class="panel focus" data-spot="focus">
@@ -73,8 +74,10 @@
       </div>
     </section>
 
+    <section id="descriptorLesson" hidden aria-label="从零理解段表与中断表"></section>
+
     <footer class="sub">
-      <div class="sub-meta"><span id="actChip"></span><span id="stepChip"></span></div>
+      <div class="sub-meta"><span id="actChip"></span><span id="stepChip"></span><span id="narrationNote" hidden>本步图解 · 暂无配音</span></div>
       <div id="caption"></div>
       <div class="progress"><i id="progressBar"></i></div>
     </footer>

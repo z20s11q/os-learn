@@ -134,7 +134,7 @@ if (fs.existsSync(manifestPath)) {
   timing = tts.map(t => {
     const local = byId.get(t.id);
     const entry = local?.sourceText === t.sourceText ? local : byKey.get(t.key);
-    return entry ? { file: entry.file, audio: entry.duration } : null;
+    return entry ? { id: t.id, file: entry.file, audio: entry.duration } : null;
   });
 }
 fs.writeFileSync(path.join(outDir, 'story-timing.js'),

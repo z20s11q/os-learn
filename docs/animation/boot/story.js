@@ -1,6 +1,7 @@
 import { ACTS } from './story-data.js';
 import { CODE } from './story-code.js';
 import { TIMING } from './story-timing.js';
+import { renderDescriptorLesson } from './descriptor-basics.js';
 import { annotateHtml } from '../panorama-glossary.js';
 
 const $ = id => document.getElementById(id);
@@ -15,10 +16,12 @@ if (VIDEO) document.body.classList.add('video');
 
 /* ---------- timeline ---------- */
 const OPS = [];
-ACTS.forEach((act, ai) => act.ops.forEach((op, oi) => OPS.push({ ...op, act: ai, inAct: oi })));
+ACTS.forEach((act, ai) => act.ops.forEach((op, oi) => OPS.push({ ...op, act: ai, inAct: oi, narrationId: `${act.id}-${oi}` })));
 const LEAD = 0.5;
-OPS.forEach((op, i) => {
-  const t = TIMING?.[i];
+// Bind narration to a stable chapter/step identity; inserted chapters must not shift audio.
+const audioById = new Map((TIMING || []).filter(t => t?.id).map(t => [t.id, t]));
+OPS.forEach(op => {
+  const t = audioById.get(op.narrationId);
   op.audio = t?.file ? `boot/audio/${t.file}` : null;
   const est = Math.max(3.4, (op.tts || op.say).length * 0.21 + 1.1);
   op.dur = t ? Math.max(t.audio + 0.95, 2.8) : est;
@@ -33,7 +36,7 @@ const actStart = ACTS.map((_, ai) => OPS.find(o => o.act === ai).start);
 /* ---------- state ---------- */
 const REGS = ['rax', 'rbx', 'rcx', 'rdx', 'rsi', 'rdi', 'rbp', 'rsp'];
 const MB = 0x100000;
-const ACT_VIEW = { primer: [0, 0x40000], kpt: 64 * MB, sched: 64 * MB, intro: 0x100000000, reset: 0x100000000, bios: MB, grub: MB, setup: MB, pm: MB, paging: 64 * MB, decomp: 64 * MB, khead: 64 * MB, startk: 512 * MB, init: 64 * MB, root: 64 * MB, shell: 64 * MB, key: 64 * MB };
+const ACT_VIEW = { descriptors: [0, 0x70000], primer: [0, 0x40000], kpt: 64 * MB, sched: 64 * MB, intro: 0x100000000, reset: 0x100000000, bios: MB, grub: MB, setup: MB, pm: MB, paging: 64 * MB, decomp: 64 * MB, khead: 64 * MB, startk: 512 * MB, init: 64 * MB, root: 64 * MB, shell: 64 * MB, key: 64 * MB };
 const INIT = { view: 0x100000000, viewAct: -1, bytes: {}, mode: 'off', cpl: 0, regs: {}, rip: null, seg: {}, ctl: {}, if: null, mem: {}, memOrder: 0, vm: {}, paging: false, screen: { title: '显示器', lines: [] }, focus: null, code: null, insn: null };
 function reduce(prev, op) {
   const s = op.reset ? { ...structuredClone(INIT), screen: structuredClone(prev.screen), view: prev.view, viewAct: prev.viewAct } : structuredClone(prev);
@@ -105,7 +108,8 @@ function physSp(s) {
   const sp = big(s.regs.rsp);
   if (sp == null || s.mode === 'off') return null;
   if (s.mode === 'real' || s.mode === 'prot16') { const b = big(s.seg.ss?.base); return b != null ? b + sp : null; }
-  return translate(s, sp);
+  const base = s.mode === 'long' ? 0n : (big(s.seg.ss?.base) ?? 0n);
+  return translate(s, base + sp);
 }
 
 /* ---------- static DOM ---------- */
@@ -124,7 +128,7 @@ $('regs').innerHTML = REGS.map(r => `<div class="reg" data-anchor="reg.${r}" id=
 $('segs').innerHTML = Object.keys(SEG_ZH).map(r => `<div class="seg" data-anchor="seg.${r}" id="s-${r}"><div class="nm"><b>${r.toUpperCase()}</b><small>${SEG_ZH[r]}</small></div><div class="v"></div></div>`).join('');
 $('ctls').innerHTML = CTL.map(c => `<div class="ctl" data-anchor="ctl.${c.id}" id="c-${c.id}"><div class="nm"><b>${c.id.toUpperCase()}</b><small>${c.zh}</small></div><div class="v"></div><div class="bits"></div></div>`).join('');
 $('units').innerHTML = UNITS.map(([id, zh, en]) => `<div class="unit ${id}" data-anchor="${id}" id="u-${id}">${zh}<small>${en}</small></div>`).join('');
-$('acts').innerHTML = ACTS.map((a, i) => `<li data-act="${i}"><small>${String(i).padStart(2, '0')}</small>${esc(a.title)}</li>`).join('');
+$('acts').innerHTML = ACTS.map((a, i) => `<li data-act="${i}" title="${esc(a.title)}"><small>${String(i).padStart(2, '0')}</small>${esc(a.title)}</li>`).join('');
 $('ifPill').dataset.anchor = 'ctl.if';
 $('modePill').dataset.anchor = 'mode';
 
@@ -210,6 +214,20 @@ function render(t) {
   for (const [i, f] of (op.flow || []).entries()) if (local > FLOW.t0 + i * FLOW.gap + FLOW.dur - 0.05) hits.add(f.to);
 
   renderTop(op, k, t);
+  const wasBasic = stage.classList.contains('basic-mode');
+  stage.classList.toggle('basic-mode', !!op.lesson);
+  document.body.classList.toggle('basic-view', !!op.lesson);
+  $('descriptorLesson').hidden = !op.lesson;
+  if (op.lesson) {
+    stage.classList.remove('descriptor-mode');
+    if (!wasBasic && !VIDEO) { playing = false; stopAt = null; updatePlay(); }
+    renderDescriptorLesson($('descriptorLesson'), op, index => {
+      const first = OPS.findIndex(o => o.act === op.act);
+      t = OPS[clamp(first + index, 0, OPS.length - 1)].start + 0.6;
+      playing = false; stopAt = null; audioOp = -1; updatePlay(); render(t);
+    });
+    return;
+  }
   renderCpu(S, prev, cur, op, committed, g, hits, local);
   renderMemory(S, prev, cur, op, local, hits, g);
   renderCode(cur, prev, op, local);
@@ -226,8 +244,9 @@ function renderTop(op, k, t) {
   }
   $('actChip').textContent = `第 ${op.act} 章 · ${ACTS[op.act].title}`;
   $('stepChip').textContent = `第 ${op.inAct + 1} / ${ACTS[op.act].ops.length} 步`;
-  if (lastCaptionOp !== k) { $('caption').innerHTML = gloss(op.say); lastCaptionOp = k; }
-  $('caption').style.opacity = String(clamp((t - op.start) / 0.25, 0.15, 1));
+  $('narrationNote').hidden = !(op.mechanism || op.lesson) || !!op.audio;
+  if (lastCaptionOp !== k) { $('caption').innerHTML = op.lesson ? esc(op.say) : gloss(op.say); lastCaptionOp = k; }
+  $('caption').style.opacity = op.lesson ? '1' : String(clamp((t - op.start) / 0.25, 0.15, 1));
   $('progressBar').style.width = `${(t / TOTAL) * 100}%`;
   if (!VIDEO) $('seek').value = String(Math.round((t / TOTAL) * 1000));
 }
@@ -303,7 +322,9 @@ function renderCpu(S, prev, cur, op, committed, g, hits, local) {
     ve.textContent = text;
     ve.className = `v ${v == null ? 'none' : ''} ${text.length > 12 ? 'long' : ''}`;
     const b = big(v) ?? 0n;
-    el.querySelector('.bits').innerHTML = c.bits.map(([n, bit, zh]) => `<span class="bit ${(b >> BigInt(bit)) & 1n ? 'on' : ''}">${n}<small>${zh}</small></span>`).join('');
+    const limit = S.ctl[`${c.id}Limit`];
+    el.querySelector('.bits').innerHTML = c.bits.map(([n, bit, zh]) => `<span class="bit ${(b >> BigInt(bit)) & 1n ? 'on' : ''}">${n}<small>${zh}</small></span>`).join('')
+      + (limit != null ? `<span class="table-limit">limit ${esc(hex(limit))}</span>` : '');
     el.classList.remove('hit', 'changed');
     if (changed) setGlow(el, true, g, 'changed'); else setGlow(el, hits.has(`ctl.${c.id}`), g || 0.8, 'hit');
   }
@@ -509,6 +530,29 @@ function lineIndex(code, line) {
   return code.lines.findIndex(l => !l.gap && norm(l.t).includes(norm(line)));
 }
 function renderCode(cur, prev, op, local) {
+  const m = op.mechanism;
+  stage.classList.toggle('descriptor-mode', !!m?.assembly);
+  $('codeBody').hidden = !!m;
+  $('mechanism').hidden = !m;
+  $('codeTitle').textContent = m ? '汇编与机制' : '源代码';
+  if (m) {
+    const a = m.assembly;
+    const assembly = a ? `<div class="assembly-phase">${esc(a.phase)}<small>黄行：本步重点</small></div><div class="lesson-assembly">${a.lines.map(l => {
+      if (l.gap) return '<div class="assembly-gap">⋯</div>';
+      const instruction = l.t.split(';')[0].trim();
+      const active = a.active.some(match => instruction.includes(match));
+      const text = l.t.replace(/\s+;/, '  ;');
+      return `<div class="cl ${active ? 'cur' : ''}"><span class="n">${l.n}</span><span class="t">${highlightCode(text, true) || ' '}</span></div>`;
+    }).join('')}</div><div class="assembly-result"><div><b>本步输入</b>${esc(a.before)}</div><div><b>本步结果</b>${esc(a.after)}</div></div><div class="assembly-hint">${esc(a.hint)}</div>` : '';
+    $('codeLang').textContent = m.title;
+    $('codeFile').textContent = '';
+    const key = `${op.act}:${op.inAct}`;
+    if ($('mechanism').dataset.step !== key) {
+      $('mechanism').dataset.step = key;
+      $('mechanism').innerHTML = `<div class="mechanism-scope">教学示例 · 32 位保护模式 · 分页关闭<a href="boot/descriptor-example.asm" download>下载完整 .asm</a></div>${assembly}<div class="mechanism-chain">${m.nodes.map(([name, text], i) => `${i ? '<div class="mechanism-arrow">↓</div>' : ''}<div class="mechanism-node ${i === m.active ? 'active' : ''}"><b>${esc(name)}</b><span>${esc(text)}</span></div>`).join('')}</div><div class="mechanism-formula">${esc(m.formula)}</div><div class="mechanism-note">${esc(m.note)}</div>`;
+    }
+    return;
+  }
   const c = cur.code;
   if (!c) { $('codeLines').innerHTML = '<div class="code-empty">CPU 还没开始执行任何代码</div>'; $('codeLines').style.transform = ''; $('codeFile').textContent = ''; $('codeLang').textContent = '—'; codeId = null; return; }
   const code = CODE[c.id];

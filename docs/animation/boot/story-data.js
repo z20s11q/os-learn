@@ -4,6 +4,8 @@
  * 实测串口 dmesg / /proc/iomem，以及构建产物的符号表；未实测的中间值按指令语义推出。
  */
 
+import { DESCRIPTOR_ACT } from './descriptor-basics.js';
+
 const L = 'src/linux-6.12.112/';
 const SB = 'artifacts/build/qemu-source/roms/seabios/src/';
 
@@ -301,6 +303,9 @@ export const ACTS = [
     ],
   },
   {
+    ...DESCRIPTOR_ACT,
+  },
+  {
     id: 'reset', title: '通电：第一条指令',
     ops: [
       {
@@ -547,14 +552,14 @@ export const ACTS = [
         set: { idtr: '0x0' }, hit: ['ctl.idtr'],
       },
       {
-        say: '装入“全局描述符表” GDT：定义代码段和数据段，都从 0 开始、覆盖 4 GB',
-        code: 'lx-gdt', line: 'asm volatile("lgdtl %0" : : "m" (gdt));', insn: 'lgdtl gdt', mean: 'GDTR ← GDT 的地址',
+        say: 'Linux 把普通代码段和数据段都设为从 0 开始、覆盖 4 GB，这叫“平坦分段”：偏移加 0 就是线性地址；后续由分页管理映射和内存权限',
+        code: 'lx-gdt', line: 'asm volatile("lgdtl %0" : : "m" (gdt));', insn: 'lgdtl gdt', mean: 'GDTR 记住表；平坦段让普通偏移直接成为线性地址',
         set: { gdtr: '0x94310', rip: '0x1566', rax: '0x94310' }, hit: ['ctl.gdtr'], flow: [{ from: 'mem.setup', to: 'ctl.gdtr', label: 'GDT' }],
         focus: {
-          kind: 'table', title: '全局描述符表 GDT（setup 建的）', head: ['编号', '段', '起点', '大小'], rows: [
-            ['0x10', '代码段 CS', '0', '4 GB'],
-            ['0x18', '数据段 DS', '0', '4 GB'],
-            ['0x20', '任务段 TSS', '4096', '104 B'],
+          kind: 'table', title: 'setup GDT：只列出使用的描述符', head: ['选择子', '用途', '起点', '大小'], rows: [
+            ['0x10', '32 位代码段', '0x0', '4 GB'],
+            ['0x18', '32 位数据 / 栈段', '0x0', '4 GB'],
+            ['0x20', '启动用 TSS', '0x1000', '104 B'],
           ],
         },
       },
@@ -672,19 +677,29 @@ export const ACTS = [
         set: { rsp: '0x7313f8', rax: '0x100200' }, flow: [{ from: 'cpu', to: 'mem.zkernel', label: '压栈' }],
       },
       {
-        say: '64 位第 5 步：写 CR0，PG = 1，分页正式开启！CPU 自动把 EFER 的 LMA 置 1',
+        say: '64 位第 5 步：CR0.PG 置 1，分页开启，CPU 把 EFER.LMA 置 1，激活长模式环境。当前 CS 仍选 32 位代码，所以暂时在兼容子模式执行',
         code: 'lx-startup32', line: 'movl	%eax, %cr0', insn: 'movl $0x80050033,%eax ; movl %eax,%cr0', mean: 'CR0 ← 0x80050033（PG = 1）',
         set: { rax: '0x80050033', cr0: '0x80050033', efer: '0x500', rip: '0x100120' }, mode: 'compat', paging: true,
         vm: [map('ident')], unit: 'mmu', flow: [{ from: 'reg.rax', to: 'ctl.cr0', label: 'PG' }], hit: ['ctl.efer', 'mode', 'vm'],
+        focus: { kind: 'table', title: '长模式环境已经开启，代码仍是 32 位', head: ['条件', '此刻的作用'], rows: [
+          ['PG = 1', '分页已经生效'],
+          ['LMA = 1', '长模式环境已经激活'],
+          ['当前 CS.L = 0', '仍执行 32 位兼容代码'],
+        ] },
       },
       {
-        say: '从现在起，CPU 用的每个地址都要先经过 MMU（地址翻译单元）查页表，再去访问内存',
+        say: '从现在起，普通内存访问要经过分页地址翻译，再访问物理内存。CPU 会缓存翻译结果；命中 TLB 缓存时，无须重新遍历页表',
         unit: 'mmu', hit: ['vm', 'fetch'], flow: [{ from: 'ctl.cr3', to: 'mem.pt0', label: '查表' }],
       },
       {
-        say: 'lret：从栈里弹出 CS 和入口地址。CPU 进入 64 位长模式！',
-        code: 'lx-startup32', line: 'lret', insn: 'lret', mean: 'CS ← 0x10，RIP ← 0x100200',
+        say: 'lret 从栈里取出选择子 0x10 和入口。CPU 按选择子读取 GDT，装载 L = 1 的代码段，开始执行 64 位代码：GDT 此时仍在决定代码的执行模式',
+        code: 'lx-startup32', line: 'lret', insn: 'lret', mean: 'CS ← 0x10（L = 1），RIP ← 0x100200',
         set: { rip: '0x100200', rsp: '0x731400' }, mode: 'long', seg: { cs: ['0x10', '0x0'] }, flow: [{ from: 'mem.zkernel', to: 'reg.rip', label: '出栈' }], hit: ['mode'],
+        focus: { kind: 'table', title: '64 位执行仍然需要代码段属性', head: ['信息', 'CPU 据此做什么'], rows: [
+          ['CS 选择子 0x10', '找到 GDT 中的代码描述符'],
+          ['代码属性 L = 1、D = 0', '按 64 位代码执行'],
+          ['入口 0x100200', '开始取下一条指令'],
+        ] },
       },
     ],
   },
@@ -692,9 +707,14 @@ export const ACTS = [
     id: 'decomp', title: '解压内核',
     ops: [
       {
-        say: '64 位下段寄存器基本不再参与寻址，DS、ES、SS 清零',
-        code: 'lx-startup64z', line: 'movl	%eax, %ds', insn: 'xorl %eax,%eax ; movl %eax,%ds …', mean: 'DS = ES = SS ← 0',
+        say: '64 位代码下，硬件把 CS、DS、ES、SS 的地址基址视为 0，并忽略这些段的界限；普通内存保护由分页承担。FS、GS 的基址仍可参与寻址',
+        code: 'lx-startup64z', line: 'movl	%eax, %ds', insn: 'xorl %eax,%eax ; movl %eax,%ds …', mean: '本步把 DS、ES、SS 清零；GDT 和 FS / GS 仍有用途',
         set: { rax: '0x0' }, seg: { ds: ['0x0', '0x0'], es: ['0x0', '0x0'], ss: ['0x0', '0x0'] },
+        focus: { kind: 'table', title: '64 位中的地址计算与保护', head: ['情况', '实际用法'], rows: [
+          ['CS / DS / ES / SS', '地址基址视为 0；段界限被忽略'],
+          ['FS / GS', '基址 + 偏移，再经过分页翻译'],
+          ['每页的映射与访问权限', '由页表和当前权限级控制'],
+        ] },
       },
       {
         say: '把压缩内核整个复制到 0x20AA000：从后往前，一次 8 字节',
@@ -768,9 +788,14 @@ export const ACTS = [
         focus: { kind: 'walk', title: '一次地址翻译（MMU 查 4 级页表）', va: '0xffffffff81031f08', idx: [511, 510, 8], off: '0x031f08', pa: '0x1031f08' },
       },
       {
-        say: '用高地址重新装入 GDT 和 IDT，设置 GS 寄存器的基址：以后用它找“每个 CPU 自己的数据”',
-        code: 'lx-common64', line: 'lgdt	(%rsp)', insn: 'lgdt ; wrmsr(GS_BASE)', mean: 'GDTR ← 内核 GDT（虚拟地址）',
+        say: '64 位内核仍装入 GDT 和 IDT：GDT 保存代码模式、权限与 TSS 等描述符；IDT 保存异常和中断入口。另设 GS 基址，用来找每个 CPU 自己的数据',
+        code: 'lx-common64', line: 'lgdt	(%rsp)', insn: 'lgdt ; wrmsr(GS_BASE)', mean: 'GDTR ← 内核 GDT；GS 基址用于每 CPU 数据寻址',
         set: { cr4: '0xb0', gdtr: '0xffffffff82033000', idtr: '0xffffffff81e05000' }, hit: ['ctl.gdtr', 'ctl.idtr', 'ctl.cr4'],
+        focus: { kind: 'table', title: '传统段范围淡出后，保留了哪些用途？', head: ['机制', '64 位 Linux 中的用途'], rows: [
+          ['GDT 代码描述符', '64 位 / 兼容代码、内核 / 用户权限'],
+          ['GDT 中的 TSS 描述符', '找到提供特权切换栈与 IST 栈的 TSS'],
+          ['FS / GS 的专用基址', 'FS：线程数据；GS：每 CPU 数据'],
+        ] },
       },
       {
         say: '在 EFER 里再打开两个开关：SCE 允许 syscall 指令，NXE 允许把内存页标成“禁止执行”',
@@ -1018,15 +1043,25 @@ export const ACTS = [
         vm: [map('utext'), map('ustack')], hit: ['vm'],
       },
       {
-        say: 'CPU 切到用户态（Ring 3）：CS = 0x33，权限变低，不能再碰内核的东西',
-        code: 'ix-init', line: '#!/bin/sh', insn: 'sysretq / iretq', mean: '返回用户态：CS ← 0x33',
+        say: 'CPU 切到用户态（Ring 3），CS = 0x33，当前权限级变为 3。用户程序能访问哪些内存，由页表中的用户 / 内核等权限位控制，不再靠代码段圈出一小块范围',
+        code: 'ix-init', line: '#!/bin/sh', insn: 'sysretq / iretq', mean: 'CS ← 0x33，CPL ← 3；访存同时接受页表权限检查',
         cpl: 3, seg: { cs: ['0x33', '0x0'] }, set: { rip: '0x57c509', rsp: '0x7fffffffebc8', rax: '0x5' }, hit: ['mode', 'seg.cs'],
+        focus: { kind: 'table', title: '代码段权限与内存页权限各管什么？', head: ['信息', '作用'], rows: [
+          ['CS = 0x33，当前 CPL = 3', '以用户权限执行指令'],
+          ['页表 U/S = 内核专用', '用户态不能访问这一页'],
+          ['页表可写位、禁止执行位', '分别限制写入、执行'],
+        ] },
       },
       {
         say: '第一次取 0x57C509 处的指令：页表里这一页还是空的，CPU 触发“缺页异常”（14 号），出错地址记在 CR2',
         tts: '第一次取这条指令时，页表里这一页还是空的。CPU 触发缺页异常，把出错的地址记下来，跳进内核',
         code: 'lx-pf', line: 'address = cpu_feature_enabled(X86_FEATURE_FRED) ? fred_event_data(regs) : read_cr2();', insn: '#PF → IDT[14] → exc_page_fault', mean: 'CR2 = 0x57C509，跳进内核处理',
         cpl: 0, seg: { cs: ['0x10', '0x0'] }, set: { rip: '0xffffffff81801330' }, unit: 'mmu', flow: [{ from: 'ctl.idtr', to: 'insn', label: 'IDT[14]' }],
+        focus: { kind: 'table', title: '64 位缺页异常：分页与两张表接起来', head: ['步骤', 'CPU 做什么'], rows: [
+          ['缺页异常，向量 14', 'IDTR 定位 IDT；每个门占 16 字节'],
+          ['IDT[14] 的门', '给出内核代码选择子和处理入口'],
+          ['从用户态进入内核', '换到 TSS 指定的内核栈并保存现场'],
+        ] },
       },
       {
         say: '内核分配一个 4 KB 物理页，把 /init 文件对应的内容读进去，填进页表，再回到用户态重新执行这条指令',
@@ -1048,8 +1083,8 @@ export const ACTS = [
         code: 'ix-init', line: '/bin/mount -t devtmpfs devtmpfs /dev',
       },
       {
-        say: '每次 mount 都是一次“系统调用”：用户程序执行 syscall 指令，CPU 跳进内核',
-        code: 'lx-syscall', line: 'SYM_CODE_START(entry_SYSCALL_64)', insn: 'syscall', mean: 'CPL 3 → 0，RIP ← 内核入口',
+        say: 'mount 通过系统调用请求内核服务。64 位 syscall 使用专门寄存器配置的入口，不查 IDT；进入后由内核入口代码切换工作栈、处理请求',
+        code: 'lx-syscall', line: 'SYM_CODE_START(entry_SYSCALL_64)', insn: 'syscall', mean: 'CPL 3 → 0，RIP ← 专用寄存器配置的入口（不查 IDT）',
         cpl: 0, seg: { cs: ['0x10', '0x0'] }, set: { rip: '0xffffffff81800080' }, hit: ['mode', 'seg.cs'],
       },
       {
